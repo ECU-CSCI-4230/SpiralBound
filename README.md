@@ -1,1 +1,2 @@
-# < Text Editor App Name > 
+# SpiralBound
+## An Open Source Digital Notebook and Planner
