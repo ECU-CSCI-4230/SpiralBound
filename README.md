@@ -1,1 +1,1 @@
-# Snorlax
+# < Text Editor App Name > 
