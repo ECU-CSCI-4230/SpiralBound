@@ -2,7 +2,7 @@
 
 ## What is SpiralBound?
 
-SpiralBound is an open source digital notebook and planner. It takes aspects of note taking, study tools, and calender applications all combined into one seemless application.
+SpiralBound is an open source digital notebook and planner. It combines aspects from note taking and calender applications. On top of this it incorporates study tools to aid you in your learning process.
 
 ## Features
 
