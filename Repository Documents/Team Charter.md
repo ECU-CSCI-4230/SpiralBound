@@ -52,4 +52,4 @@
 
 9. **What methods will be used to keep the team on track?**
 
-   During meetings we will discuss who is doing well and who is not. We plan on holding each other accountable. Any other discussion will be on Discord. 
+   During meetings we will discuss who is doing well and who is not. We plan on holding each other accountable. Any other discussion will be on Discord.
