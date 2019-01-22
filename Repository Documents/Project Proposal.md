@@ -25,8 +25,7 @@ SpiralBound is an open source digital notebook and planner. It combines aspects 
 ## Tool Chain
 
 - Python 3
-  - Tkinter
-  - NLTK
+- Qt 5.12.0
 - Visual Studio Code
 - Github
   - Commit every two weeks
