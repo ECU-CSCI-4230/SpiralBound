@@ -11,6 +11,7 @@ SpiralBound is an open source digital notebook and planner. It combines aspects 
 - Rich-text editor
   - Different “books” for courses
   - Different “pages” for different dates
+  - Uses markdown for text editing
 - Calendar/Planner
   - Notifications
   - Auto-add events, meetings, homework, etc
