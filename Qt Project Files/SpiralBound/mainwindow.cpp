@@ -209,7 +209,7 @@ void MainWindow::on_action_export_triggered()
 
 }
 
-// Author: Tyler Rogers
+// Author: Tyler Rogers (cirkuitbreaker)
 // Init date: 29.01.2019
 // Last Updated:
 void MainWindow::on_action_quit_triggered()
