@@ -79,7 +79,7 @@
      <height>22</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menutest">
+   <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>File</string>
     </property>
@@ -134,7 +134,7 @@
     <addaction name="actionAbout"/>
     <addaction name="actionAbout_Qt"/>
    </widget>
-   <addaction name="menutest"/>
+   <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
    <addaction name="menuFormat"/>
    <addaction name="menuView"/>
