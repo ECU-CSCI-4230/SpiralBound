@@ -1,5 +1,13 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QFile>
+#include <QFileDialog>
+#include <QTextStream>
+#include <QMessageBox>
+#include <QFontDialog>
+#include <QFont>
+#include <QColorDialog>
+#include <QColor>
 
 // Constructor
 MainWindow::MainWindow(QWidget *parent) :
@@ -16,9 +24,48 @@ MainWindow::~MainWindow()
 }
 
 // Actions
+
+
+void MainWindow::on_action_open_triggered()
+{
+
+}
+
+
+void MainWindow::on_action_test_triggered()
+{
+
+}
+
+
+void MainWindow::on_action_save_triggered()
+{
+
+}
+
+void MainWindow::on_action_about_triggered()
+{
+
+}
+
+void MainWindow::on_action_aboutQt_triggered()
+{
+
+}
+
+void MainWindow::on_action_crashCourse_triggered()
+{
+
+}
+
+void MainWindow::on_action_print_triggered()
+{
+
+}
+
 void MainWindow::on_action_new_triggered()
 {
-    qInfo("action_new triggered");
+
 }
 
 void MainWindow::on_action_openRecent_triggered()
@@ -81,7 +128,7 @@ void MainWindow::on_action_taskList_triggered()
 
 }
 
-void MainWindow::on_action_Preferences_triggered()
+void MainWindow::on_action_preferences_triggered()
 {
 
 }
@@ -91,12 +138,12 @@ void MainWindow::on_action_printPreview_triggered()
 
 }
 
-void MainWindow::on_action_Export_triggered()
+void MainWindow::on_action_export_triggered()
 {
 
 }
 
-void MainWindow::on_action_Quit_triggered()
+void MainWindow::on_action_quit_triggered()
 {
-    close();
+
 }

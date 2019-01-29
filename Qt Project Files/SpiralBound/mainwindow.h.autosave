@@ -16,10 +16,24 @@ public:
     ~MainWindow();
 
 private slots:
+
+
+    void on_action_open_triggered();
+
+    void on_action_test_triggered();
+
+    void on_action_save_triggered();
+    
+    void on_action_about_triggered();
+    
+    void on_action_aboutQt_triggered();
+    
+    void on_action_crashCourse_triggered();
+    
+    void on_action_print_triggered();
+    
     void on_action_new_triggered();
-
-    void on_actionQuit_triggered();
-
+    
     void on_action_openRecent_triggered();
     
     void on_action_saveAs_triggered();
@@ -34,8 +48,15 @@ private slots:
     
     void on_action_strikethrough_triggered();
     
+    void on_action_indent_triggered();
+    
+    void on_action_unindent_triggered();
+    
+    void on_action_bulletedList_triggered();
+    
 private:
     Ui::MainWindow *ui;
+    QString file_path_;
 };
 
 #endif // MAINWINDOW_H

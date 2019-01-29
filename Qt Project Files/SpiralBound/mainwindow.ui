@@ -76,7 +76,7 @@
      <x>0</x>
      <y>0</y>
      <width>936</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -90,18 +90,18 @@
     <addaction name="action_save"/>
     <addaction name="action_saveAs"/>
     <addaction name="separator"/>
-    <addaction name="actionPrint_Preview"/>
+    <addaction name="action_printPreview"/>
     <addaction name="action_print"/>
     <addaction name="separator"/>
-    <addaction name="actionExport"/>
+    <addaction name="action_export"/>
     <addaction name="separator"/>
-    <addaction name="actionQuit"/>
+    <addaction name="action_quit"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
      <string>Edit</string>
     </property>
-    <addaction name="actionTest"/>
+    <addaction name="action_test"/>
    </widget>
    <widget class="QMenu" name="menuFormat">
     <property name="title">
@@ -129,7 +129,7 @@
     <property name="title">
      <string>Settings</string>
     </property>
-    <addaction name="action_Preferences"/>
+    <addaction name="action_preferences"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -160,7 +160,7 @@
     <string>Open</string>
    </property>
   </action>
-  <action name="actionTest">
+  <action name="action_test">
    <property name="text">
     <string>Test</string>
    </property>
@@ -255,22 +255,22 @@
     <string>Task List</string>
    </property>
   </action>
-  <action name="action_Preferences">
+  <action name="action_preferences">
    <property name="text">
     <string>Preferences</string>
    </property>
   </action>
-  <action name="actionPrint_Preview">
+  <action name="action_printPreview">
    <property name="text">
     <string>Print Preview</string>
    </property>
   </action>
-  <action name="actionExport">
+  <action name="action_export">
    <property name="text">
     <string>Export</string>
    </property>
   </action>
-  <action name="actionQuit">
+  <action name="action_quit">
    <property name="text">
     <string>Quit</string>
    </property>
