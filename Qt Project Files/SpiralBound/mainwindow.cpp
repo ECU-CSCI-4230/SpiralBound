@@ -14,3 +14,9 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+// Actions
+void MainWindow::on_action_new_triggered()
+{
+    qInfo("action_new triggered");
+}
