@@ -76,7 +76,7 @@
      <x>0</x>
      <y>0</y>
      <width>936</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -90,7 +90,12 @@
     <addaction name="action_save"/>
     <addaction name="action_saveAs"/>
     <addaction name="separator"/>
+    <addaction name="actionPrint_Preview"/>
     <addaction name="action_print"/>
+    <addaction name="separator"/>
+    <addaction name="actionExport"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuit"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
@@ -253,6 +258,21 @@
   <action name="action_Preferences">
    <property name="text">
     <string>Preferences</string>
+   </property>
+  </action>
+  <action name="actionPrint_Preview">
+   <property name="text">
+    <string>Print Preview</string>
+   </property>
+  </action>
+  <action name="actionExport">
+   <property name="text">
+    <string>Export</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
    </property>
   </action>
  </widget>
