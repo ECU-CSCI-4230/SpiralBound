@@ -24,7 +24,7 @@ MainWindow::~MainWindow()
 }
 
 //-----------------------------------------------------------+
-// Actions                                                   |
+//                       Actions                             |
 //-----------------------------------------------------------+
 
 // Author:
@@ -61,7 +61,7 @@ void MainWindow::on_action_about_triggered()
 
 // Author: Tyler Rogers
 // Init date: 29.01.2019
-// Last Updated:
+// Last Updated: 29.01.2019
 void MainWindow::on_action_aboutQt_triggered()
 {
     QApplication::aboutQt();
