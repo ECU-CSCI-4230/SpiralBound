@@ -34,6 +34,8 @@ HEADERS += \
 FORMS += \
         mainwindow.ui
 
+RC_FILE = SpiralBound.rc
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
