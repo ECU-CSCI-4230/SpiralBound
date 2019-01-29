@@ -13,8 +13,9 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-
+// Author: Nicholas Ellis
+// Init date: 01-29-2019
+// Last Updated: 01-29-2019
 void MainWindow::on_pushButton_3_clicked()
 {
     // Print to Console
