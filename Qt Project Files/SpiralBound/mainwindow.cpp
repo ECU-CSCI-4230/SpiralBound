@@ -20,3 +20,8 @@ void MainWindow::on_action_new_triggered()
 {
     qInfo("action_new triggered");
 }
+
+void MainWindow::on_actionQuit_triggered()
+{
+    close();
+}

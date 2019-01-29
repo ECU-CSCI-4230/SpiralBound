@@ -48,6 +48,9 @@ public:
     QAction *action_numberedList;
     QAction *action_taskList;
     QAction *action_Preferences;
+    QAction *actionPrint_Preview;
+    QAction *actionExport;
+    QAction *actionQuit;
     QWidget *centralWidget;
     QTabWidget *tabWidget;
     QWidget *tab;
@@ -111,6 +114,12 @@ public:
         action_taskList->setObjectName(QString::fromUtf8("action_taskList"));
         action_Preferences = new QAction(MainWindow);
         action_Preferences->setObjectName(QString::fromUtf8("action_Preferences"));
+        actionPrint_Preview = new QAction(MainWindow);
+        actionPrint_Preview->setObjectName(QString::fromUtf8("actionPrint_Preview"));
+        actionExport = new QAction(MainWindow);
+        actionExport->setObjectName(QString::fromUtf8("actionExport"));
+        actionQuit = new QAction(MainWindow);
+        actionQuit->setObjectName(QString::fromUtf8("actionQuit"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         tabWidget = new QTabWidget(centralWidget);
@@ -135,7 +144,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 936, 22));
+        menuBar->setGeometry(QRect(0, 0, 936, 21));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuEdit = new QMenu(menuBar);
@@ -169,7 +178,12 @@ public:
         menuFile->addAction(action_save);
         menuFile->addAction(action_saveAs);
         menuFile->addSeparator();
+        menuFile->addAction(actionPrint_Preview);
         menuFile->addAction(action_print);
+        menuFile->addSeparator();
+        menuFile->addAction(actionExport);
+        menuFile->addSeparator();
+        menuFile->addAction(actionQuit);
         menuEdit->addAction(actionTest);
         menuFormat->addAction(action_bold);
         menuFormat->addAction(action_italic);
@@ -220,6 +234,9 @@ public:
         action_numberedList->setText(QApplication::translate("MainWindow", "Numbered List", nullptr));
         action_taskList->setText(QApplication::translate("MainWindow", "Task List", nullptr));
         action_Preferences->setText(QApplication::translate("MainWindow", "Preferences", nullptr));
+        actionPrint_Preview->setText(QApplication::translate("MainWindow", "Print Preview", nullptr));
+        actionExport->setText(QApplication::translate("MainWindow", "Export", nullptr));
+        actionQuit->setText(QApplication::translate("MainWindow", "Quit", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "TextEditor", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Calendar", nullptr));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
