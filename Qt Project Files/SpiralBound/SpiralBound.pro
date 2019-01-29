@@ -34,7 +34,10 @@ HEADERS += \
 FORMS += \
         mainwindow.ui
 
+# Windows Program Icon
 RC_FILE = SpiralBound.rc
+# MacOS Program Icon
+ICON = icon.icns
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
