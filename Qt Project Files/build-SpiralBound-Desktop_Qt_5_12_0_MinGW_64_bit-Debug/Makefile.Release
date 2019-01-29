@@ -460,7 +460,22 @@ release/mainwindow.o: ../SpiralBound/mainwindow.cpp ../SpiralBound/mainwindow.h 
 		C:/Qt/5.12.0/mingw73_64/include/QtGui/qtouchdevice.h \
 		C:/Qt/5.12.0/mingw73_64/include/QtWidgets/qtabwidget.h \
 		C:/Qt/5.12.0/mingw73_64/include/QtGui/qicon.h \
-		ui_mainwindow.h
+		ui_mainwindow.h \
+		C:/Qt/5.12.0/mingw73_64/include/QtCore/QFile \
+		C:/Qt/5.12.0/mingw73_64/include/QtWidgets/QFileDialog \
+		C:/Qt/5.12.0/mingw73_64/include/QtWidgets/qfiledialog.h \
+		C:/Qt/5.12.0/mingw73_64/include/QtCore/qdir.h \
+		C:/Qt/5.12.0/mingw73_64/include/QtCore/qfileinfo.h \
+		C:/Qt/5.12.0/mingw73_64/include/QtWidgets/qdialog.h \
+		C:/Qt/5.12.0/mingw73_64/include/QtCore/QTextStream \
+		C:/Qt/5.12.0/mingw73_64/include/QtWidgets/QMessageBox \
+		C:/Qt/5.12.0/mingw73_64/include/QtWidgets/qmessagebox.h \
+		C:/Qt/5.12.0/mingw73_64/include/QtWidgets/QFontDialog \
+		C:/Qt/5.12.0/mingw73_64/include/QtWidgets/qfontdialog.h \
+		C:/Qt/5.12.0/mingw73_64/include/QtGui/QFont \
+		C:/Qt/5.12.0/mingw73_64/include/QtWidgets/QColorDialog \
+		C:/Qt/5.12.0/mingw73_64/include/QtWidgets/qcolordialog.h \
+		C:/Qt/5.12.0/mingw73_64/include/QtGui/QColor
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o ..\SpiralBound\mainwindow.cpp
 
 release/moc_mainwindow.o: release/moc_mainwindow.cpp 
