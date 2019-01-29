@@ -79,7 +79,7 @@ public:
         tab_2->setObjectName(QString::fromUtf8("tab_2"));
         calendarWidget = new QCalendarWidget(tab_2);
         calendarWidget->setObjectName(QString::fromUtf8("calendarWidget"));
-        calendarWidget->setGeometry(QRect(0, 0, 511, 331));
+        calendarWidget->setGeometry(QRect(0, 0, 641, 331));
         tabWidget->addTab(tab_2, QString());
         horizontalLayoutWidget = new QWidget(centralWidget);
         horizontalLayoutWidget->setObjectName(QString::fromUtf8("horizontalLayoutWidget"));
@@ -128,7 +128,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
