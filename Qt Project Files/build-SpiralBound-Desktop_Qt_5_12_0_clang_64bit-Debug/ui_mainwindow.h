@@ -53,7 +53,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(838, 596);
+        MainWindow->resize(936, 642);
         actionstes = new QAction(MainWindow);
         actionstes->setObjectName(QString::fromUtf8("actionstes"));
         actionTest = new QAction(MainWindow);
@@ -83,7 +83,7 @@ public:
         tabWidget->addTab(tab_2, QString());
         horizontalLayoutWidget = new QWidget(centralWidget);
         horizontalLayoutWidget->setObjectName(QString::fromUtf8("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(0, 0, 831, 31));
+        horizontalLayoutWidget->setGeometry(QRect(0, 0, 931, 26));
         horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
@@ -107,7 +107,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 838, 22));
+        menuBar->setGeometry(QRect(0, 0, 936, 22));
         menutest = new QMenu(menuBar);
         menutest->setObjectName(QString::fromUtf8("menutest"));
         menuEdit = new QMenu(menuBar);
