@@ -206,6 +206,7 @@ DIST          = /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/spec_pre.pr
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/qt_config.prf \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/macx-clang/qmake.conf \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/spec_post.prf \
+		../SpiralBound/.qmake.stash \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/exclusive_builds.prf \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/mac/sdk.prf \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/toolchain.prf \
@@ -407,6 +408,7 @@ Makefile: ../SpiralBound/SpiralBound.pro /Users/nickellis/Qt/5.12.0/clang_64/mks
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/qt_config.prf \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/macx-clang/qmake.conf \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/exclusive_builds.prf \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/mac/sdk.prf \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/toolchain.prf \
@@ -590,6 +592,7 @@ Makefile: ../SpiralBound/SpiralBound.pro /Users/nickellis/Qt/5.12.0/clang_64/mks
 /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/qt_config.prf:
 /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/macx-clang/qmake.conf:
 /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/exclusive_builds.prf:
 /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/mac/sdk.prf:
 /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/toolchain.prf:
@@ -637,12 +640,17 @@ SpiralBound.app/Contents/Resources/empty.lproj:
 SpiralBound.app/Contents/Info.plist: 
 	@test -d SpiralBound.app/Contents || mkdir -p SpiralBound.app/Contents
 	@$(DEL_FILE) SpiralBound.app/Contents/Info.plist
-	@sed -e "s,@SHORT_VERSION@,1.0,g" -e "s,\$${QMAKE_SHORT_VERSION},1.0,g" -e "s,@FULL_VERSION@,1.0.0,g" -e "s,\$${QMAKE_FULL_VERSION},1.0.0,g" -e "s,@TYPEINFO@,????,g" -e "s,\$${QMAKE_PKGINFO_TYPEINFO},????,g" -e "s,@BUNDLEIDENTIFIER@,https---www.linkedin.com-in-nickellis9-.SpiralBound,g" -e "s,\$${PRODUCT_BUNDLE_IDENTIFIER},https---www.linkedin.com-in-nickellis9-.SpiralBound,g" -e "s,\$${MACOSX_DEPLOYMENT_TARGET},10.12,g" -e "s,\$${IPHONEOS_DEPLOYMENT_TARGET},,g" -e "s,\$${TVOS_DEPLOYMENT_TARGET},,g" -e "s,\$${WATCHOS_DEPLOYMENT_TARGET},,g" -e "s,@ICON@,,g" -e "s,\$${ASSETCATALOG_COMPILER_APPICON_NAME},,g" -e "s,@EXECUTABLE@,SpiralBound,g" -e "s,@LIBRARY@,SpiralBound,g" -e "s,\$${EXECUTABLE_NAME},SpiralBound,g" -e "s,@TYPEINFO@,????,g" -e "s,\$${QMAKE_PKGINFO_TYPEINFO},????,g" /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/macx-clang/Info.plist.app >SpiralBound.app/Contents/Info.plist
+	@sed -e "s,@SHORT_VERSION@,1.0,g" -e "s,\$${QMAKE_SHORT_VERSION},1.0,g" -e "s,@FULL_VERSION@,1.0.0,g" -e "s,\$${QMAKE_FULL_VERSION},1.0.0,g" -e "s,@TYPEINFO@,????,g" -e "s,\$${QMAKE_PKGINFO_TYPEINFO},????,g" -e "s,@BUNDLEIDENTIFIER@,https---www.linkedin.com-in-nickellis9-.SpiralBound,g" -e "s,\$${PRODUCT_BUNDLE_IDENTIFIER},https---www.linkedin.com-in-nickellis9-.SpiralBound,g" -e "s,\$${MACOSX_DEPLOYMENT_TARGET},10.12,g" -e "s,\$${IPHONEOS_DEPLOYMENT_TARGET},,g" -e "s,\$${TVOS_DEPLOYMENT_TARGET},,g" -e "s,\$${WATCHOS_DEPLOYMENT_TARGET},,g" -e "s,@ICON@,SpiralBound.rc,g" -e "s,\$${ASSETCATALOG_COMPILER_APPICON_NAME},SpiralBound.rc,g" -e "s,@EXECUTABLE@,SpiralBound,g" -e "s,@LIBRARY@,SpiralBound,g" -e "s,\$${EXECUTABLE_NAME},SpiralBound,g" -e "s,@TYPEINFO@,????,g" -e "s,\$${QMAKE_PKGINFO_TYPEINFO},????,g" /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/macx-clang/Info.plist.app >SpiralBound.app/Contents/Info.plist
+SpiralBound.app/Contents/Resources/SpiralBound.rc: ../SpiralBound/SpiralBound.rc
+	@test -d SpiralBound.app/Contents/Resources/ || mkdir -p SpiralBound.app/Contents/Resources/
+	@$(DEL_FILE) SpiralBound.app/Contents/Resources/SpiralBound.rc
+	@$(COPY_FILE) ../SpiralBound/SpiralBound.rc SpiralBound.app/Contents/Resources/SpiralBound.rc
 
 all: Makefile \
 		SpiralBound.app/Contents/PkgInfo \
 		SpiralBound.app/Contents/Resources/empty.lproj \
-		SpiralBound.app/Contents/Info.plist SpiralBound.app/Contents/MacOS/SpiralBound
+		SpiralBound.app/Contents/Info.plist \
+		SpiralBound.app/Contents/Resources/SpiralBound.rc SpiralBound.app/Contents/MacOS/SpiralBound
 
 dist: distdir FORCE
 	(cd `dirname $(DISTDIR)` && $(TAR) $(DISTNAME).tar $(DISTNAME) && $(COMPRESS) $(DISTNAME).tar) && $(MOVE) `dirname $(DISTDIR)`/$(DISTNAME).tar.gz . && $(DEL_FILE) -r $(DISTDIR)
@@ -663,6 +671,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r SpiralBound.app
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
