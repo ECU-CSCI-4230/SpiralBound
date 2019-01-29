@@ -1,0 +1,41 @@
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
+
+#include <QMainWindow>
+
+namespace Ui {
+class MainWindow;
+}
+
+class MainWindow : public QMainWindow
+{
+    Q_OBJECT
+
+public:
+    explicit MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
+
+private slots:
+    void on_action_new_triggered();
+
+    void on_actionQuit_triggered();
+
+    void on_action_openRecent_triggered();
+    
+    void on_action_saveAs_triggered();
+    
+    void on_action_bold_triggered();
+    
+    void on_action_italic_triggered();
+    
+    void on_action_underline_triggered();
+    
+    void on_action_comment_triggered();
+    
+    void on_action_strikethrough_triggered();
+    
+private:
+    Ui::MainWindow *ui;
+};
+
+#endif // MAINWINDOW_H
