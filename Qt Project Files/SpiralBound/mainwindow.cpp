@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "aboutspiralbound.h"
 #include <QFile>
 #include <QFileDialog>
 #include <QTextStream>
@@ -51,12 +52,14 @@ void MainWindow::on_action_save_triggered()
 
 }
 
-// Author:
-// Init date:
-// Last Updated:
+// Author: Nicholas Ellis
+// Init date: 29.01.2019
+// Last Updated: 29.01.2019
 void MainWindow::on_action_about_triggered()
 {
-
+    AboutSpiralBound dialogWindow;
+    dialogWindow.setModal(true);
+    dialogWindow.exec();
 }
 
 // Author: Tyler Rogers
