@@ -51,10 +51,14 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../SpiralBound/main.cpp \
-		../SpiralBound/mainwindow.cpp moc_mainwindow.cpp
+		../SpiralBound/mainwindow.cpp \
+		../SpiralBound/aboutspiralbound.cpp moc_mainwindow.cpp \
+		moc_aboutspiralbound.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
-		moc_mainwindow.o
+		aboutspiralbound.o \
+		moc_mainwindow.o \
+		moc_aboutspiralbound.o
 DIST          = /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/spec_pre.prf \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/qdevice.pri \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/device_config.prf \
@@ -234,8 +238,10 @@ DIST          = /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/spec_pre.pr
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/exceptions.prf \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/yacc.prf \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/lex.prf \
-		../SpiralBound/SpiralBound.pro ../SpiralBound/mainwindow.h ../SpiralBound/main.cpp \
-		../SpiralBound/mainwindow.cpp
+		../SpiralBound/SpiralBound.pro ../SpiralBound/mainwindow.h \
+		../SpiralBound/aboutspiralbound.h ../SpiralBound/main.cpp \
+		../SpiralBound/mainwindow.cpp \
+		../SpiralBound/aboutspiralbound.cpp
 QMAKE_TARGET  = SpiralBound
 DESTDIR       = 
 TARGET        = SpiralBound.app/Contents/MacOS/SpiralBound
@@ -253,7 +259,7 @@ include /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/mac/sdk.mk
 first: all
 ####### Build rules
 
-SpiralBound.app/Contents/MacOS/SpiralBound: ui_mainwindow.h $(OBJECTS)  
+SpiralBound.app/Contents/MacOS/SpiralBound: ui_mainwindow.h ui_aboutspiralbound.h $(OBJECTS)  
 	@test -d SpiralBound.app/Contents/MacOS/ || mkdir -p SpiralBound.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -640,17 +646,12 @@ SpiralBound.app/Contents/Resources/empty.lproj:
 SpiralBound.app/Contents/Info.plist: 
 	@test -d SpiralBound.app/Contents || mkdir -p SpiralBound.app/Contents
 	@$(DEL_FILE) SpiralBound.app/Contents/Info.plist
-	@sed -e "s,@SHORT_VERSION@,1.0,g" -e "s,\$${QMAKE_SHORT_VERSION},1.0,g" -e "s,@FULL_VERSION@,1.0.0,g" -e "s,\$${QMAKE_FULL_VERSION},1.0.0,g" -e "s,@TYPEINFO@,????,g" -e "s,\$${QMAKE_PKGINFO_TYPEINFO},????,g" -e "s,@BUNDLEIDENTIFIER@,https---www.linkedin.com-in-nickellis9-.SpiralBound,g" -e "s,\$${PRODUCT_BUNDLE_IDENTIFIER},https---www.linkedin.com-in-nickellis9-.SpiralBound,g" -e "s,\$${MACOSX_DEPLOYMENT_TARGET},10.12,g" -e "s,\$${IPHONEOS_DEPLOYMENT_TARGET},,g" -e "s,\$${TVOS_DEPLOYMENT_TARGET},,g" -e "s,\$${WATCHOS_DEPLOYMENT_TARGET},,g" -e "s,@ICON@,SpiralBound.rc,g" -e "s,\$${ASSETCATALOG_COMPILER_APPICON_NAME},SpiralBound.rc,g" -e "s,@EXECUTABLE@,SpiralBound,g" -e "s,@LIBRARY@,SpiralBound,g" -e "s,\$${EXECUTABLE_NAME},SpiralBound,g" -e "s,@TYPEINFO@,????,g" -e "s,\$${QMAKE_PKGINFO_TYPEINFO},????,g" /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/macx-clang/Info.plist.app >SpiralBound.app/Contents/Info.plist
-SpiralBound.app/Contents/Resources/SpiralBound.rc: ../SpiralBound/SpiralBound.rc
-	@test -d SpiralBound.app/Contents/Resources/ || mkdir -p SpiralBound.app/Contents/Resources/
-	@$(DEL_FILE) SpiralBound.app/Contents/Resources/SpiralBound.rc
-	@$(COPY_FILE) ../SpiralBound/SpiralBound.rc SpiralBound.app/Contents/Resources/SpiralBound.rc
+	@sed -e "s,@SHORT_VERSION@,1.0,g" -e "s,\$${QMAKE_SHORT_VERSION},1.0,g" -e "s,@FULL_VERSION@,1.0.0,g" -e "s,\$${QMAKE_FULL_VERSION},1.0.0,g" -e "s,@TYPEINFO@,????,g" -e "s,\$${QMAKE_PKGINFO_TYPEINFO},????,g" -e "s,@BUNDLEIDENTIFIER@,https---www.linkedin.com-in-nickellis9-.SpiralBound,g" -e "s,\$${PRODUCT_BUNDLE_IDENTIFIER},https---www.linkedin.com-in-nickellis9-.SpiralBound,g" -e "s,\$${MACOSX_DEPLOYMENT_TARGET},10.12,g" -e "s,\$${IPHONEOS_DEPLOYMENT_TARGET},,g" -e "s,\$${TVOS_DEPLOYMENT_TARGET},,g" -e "s,\$${WATCHOS_DEPLOYMENT_TARGET},,g" -e "s,@ICON@,,g" -e "s,\$${ASSETCATALOG_COMPILER_APPICON_NAME},,g" -e "s,@EXECUTABLE@,SpiralBound,g" -e "s,@LIBRARY@,SpiralBound,g" -e "s,\$${EXECUTABLE_NAME},SpiralBound,g" -e "s,@TYPEINFO@,????,g" -e "s,\$${QMAKE_PKGINFO_TYPEINFO},????,g" /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/macx-clang/Info.plist.app >SpiralBound.app/Contents/Info.plist
 
 all: Makefile \
 		SpiralBound.app/Contents/PkgInfo \
 		SpiralBound.app/Contents/Resources/empty.lproj \
-		SpiralBound.app/Contents/Info.plist \
-		SpiralBound.app/Contents/Resources/SpiralBound.rc SpiralBound.app/Contents/MacOS/SpiralBound
+		SpiralBound.app/Contents/Info.plist SpiralBound.app/Contents/MacOS/SpiralBound
 
 dist: distdir FORCE
 	(cd `dirname $(DISTDIR)` && $(TAR) $(DISTNAME).tar $(DISTNAME) && $(COMPRESS) $(DISTNAME).tar) && $(MOVE) `dirname $(DISTDIR)`/$(DISTNAME).tar.gz . && $(DEL_FILE) -r $(DISTDIR)
@@ -659,9 +660,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../SpiralBound/mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../SpiralBound/main.cpp ../SpiralBound/mainwindow.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../SpiralBound/mainwindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../SpiralBound/mainwindow.h ../SpiralBound/aboutspiralbound.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../SpiralBound/main.cpp ../SpiralBound/mainwindow.cpp ../SpiralBound/aboutspiralbound.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../SpiralBound/mainwindow.ui ../SpiralBound/aboutspiralbound.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -693,9 +694,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk -mmacosx-version-min=10.12 -Wall -W -dM -E -o moc_predefs.h /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_aboutspiralbound.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_aboutspiralbound.cpp
 moc_mainwindow.cpp: /Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../SpiralBound/mainwindow.h \
@@ -703,16 +704,27 @@ moc_mainwindow.cpp: /Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/
 		/Users/nickellis/Qt/5.12.0/clang_64/bin/moc
 	/Users/nickellis/Qt/5.12.0/clang_64/bin/moc $(DEFINES) --include '/Users/nickellis/Documents/Classes/CSCI_4230/Project/Snorlax/Qt Project Files/build-SpiralBound-Desktop_Qt_5_12_0_clang_64bit-Debug/moc_predefs.h' -I/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/macx-clang -I'/Users/nickellis/Documents/Classes/CSCI_4230/Project/Snorlax/Qt Project Files/SpiralBound' -I/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/nickellis/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers -I/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/nickellis/Qt/5.12.0/clang_64/lib ../SpiralBound/mainwindow.h -o moc_mainwindow.cpp
 
+moc_aboutspiralbound.cpp: /Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../SpiralBound/aboutspiralbound.h \
+		moc_predefs.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/bin/moc
+	/Users/nickellis/Qt/5.12.0/clang_64/bin/moc $(DEFINES) --include '/Users/nickellis/Documents/Classes/CSCI_4230/Project/Snorlax/Qt Project Files/build-SpiralBound-Desktop_Qt_5_12_0_clang_64bit-Debug/moc_predefs.h' -I/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/macx-clang -I'/Users/nickellis/Documents/Classes/CSCI_4230/Project/Snorlax/Qt Project Files/SpiralBound' -I/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/nickellis/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers -I/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/nickellis/Qt/5.12.0/clang_64/lib ../SpiralBound/aboutspiralbound.h -o moc_aboutspiralbound.cpp
+
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h
+compiler_uic_make_all: ui_mainwindow.h ui_aboutspiralbound.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h
+	-$(DEL_FILE) ui_mainwindow.h ui_aboutspiralbound.h
 ui_mainwindow.h: ../SpiralBound/mainwindow.ui \
 		/Users/nickellis/Qt/5.12.0/clang_64/bin/uic
 	/Users/nickellis/Qt/5.12.0/clang_64/bin/uic ../SpiralBound/mainwindow.ui -o ui_mainwindow.h
+
+ui_aboutspiralbound.h: ../SpiralBound/aboutspiralbound.ui \
+		/Users/nickellis/Qt/5.12.0/clang_64/bin/uic
+	/Users/nickellis/Qt/5.12.0/clang_64/bin/uic ../SpiralBound/aboutspiralbound.ui -o ui_aboutspiralbound.h
 
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
@@ -755,8 +767,17 @@ mainwindow.o: ../SpiralBound/mainwindow.cpp ../SpiralBound/mainwindow.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qcolor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../SpiralBound/mainwindow.cpp
 
+aboutspiralbound.o: ../SpiralBound/aboutspiralbound.cpp ../SpiralBound/aboutspiralbound.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		ui_aboutspiralbound.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o aboutspiralbound.o ../SpiralBound/aboutspiralbound.cpp
+
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
+
+moc_aboutspiralbound.o: moc_aboutspiralbound.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_aboutspiralbound.o moc_aboutspiralbound.cpp
 
 ####### Install
 
