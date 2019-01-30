@@ -31,7 +31,7 @@ public:
         AboutSpiralBound->resize(402, 259);
         pushButton_ok = new QPushButton(AboutSpiralBound);
         pushButton_ok->setObjectName(QString::fromUtf8("pushButton_ok"));
-        pushButton_ok->setGeometry(QRect(160, 230, 80, 24));
+        pushButton_ok->setGeometry(QRect(180, 230, 91, 24));
         textBrowser = new QTextBrowser(AboutSpiralBound);
         textBrowser->setObjectName(QString::fromUtf8("textBrowser"));
         textBrowser->setGeometry(QRect(70, 20, 311, 191));
