@@ -10,6 +10,7 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCalendarWidget>
@@ -72,6 +73,9 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->resize(936, 642);
+        QIcon icon;
+        icon.addFile(QString::fromUtf8("SpiralBoundIcon.icns"), QSize(), QIcon::Normal, QIcon::Off);
+        MainWindow->setWindowIcon(icon);
         action_open = new QAction(MainWindow);
         action_open->setObjectName(QString::fromUtf8("action_open"));
         action_test = new QAction(MainWindow);
