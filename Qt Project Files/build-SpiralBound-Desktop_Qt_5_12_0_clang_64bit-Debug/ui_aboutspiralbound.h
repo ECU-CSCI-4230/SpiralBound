@@ -10,6 +10,7 @@
 #define UI_ABOUTSPIRALBOUND_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QLabel>
@@ -28,11 +29,14 @@ public:
     {
         if (AboutSpiralBound->objectName().isEmpty())
             AboutSpiralBound->setObjectName(QString::fromUtf8("AboutSpiralBound"));
-        AboutSpiralBound->resize(350, 200);
+        AboutSpiralBound->resize(360, 200);
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/SpiralBound/images/icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        AboutSpiralBound->setWindowIcon(icon);
         AboutSpiralBound->setModal(false);
         pushButton_ok = new QPushButton(AboutSpiralBound);
         pushButton_ok->setObjectName(QString::fromUtf8("pushButton_ok"));
-        pushButton_ok->setGeometry(QRect(180, 160, 91, 24));
+        pushButton_ok->setGeometry(QRect(175, 160, 91, 24));
         label_logo = new QLabel(AboutSpiralBound);
         label_logo->setObjectName(QString::fromUtf8("label_logo"));
         label_logo->setGeometry(QRect(20, 20, 71, 61));
@@ -47,6 +51,7 @@ public:
         font.setPointSize(24);
         label->setFont(font);
         label->setTextFormat(Qt::RichText);
+        label->setScaledContents(true);
         label->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         label->setWordWrap(true);
 
@@ -60,7 +65,7 @@ public:
         AboutSpiralBound->setWindowTitle(QApplication::translate("AboutSpiralBound", "About SpiralBound", nullptr));
         pushButton_ok->setText(QApplication::translate("AboutSpiralBound", "Ok", nullptr));
         label_logo->setText(QString());
-        label->setText(QApplication::translate("AboutSpiralBound", "<html><head/><body><p>About Spiral Bound</p><p><span style=\" font-size:12pt;\">SpiralBound is an open source digital notebook and planner. It combines aspects from note taking and calendar applications. On top of this it incorporates study tools to aid you in your learning process.</span></p></body></html>", nullptr));
+        label->setText(QApplication::translate("AboutSpiralBound", "<html><head/><body><p><span style=\" font-size:18pt;\">About Spiral Bound</span></p><p><span style=\" font-size:12pt;\">SpiralBound is an open source digital notebook and planner. It combines aspects from note taking and calendar applications. On top of this it incorporates study tools to aid you in your learning process.</span></p></body></html>", nullptr));
     } // retranslateUi
 
 };
