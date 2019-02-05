@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>About SpiralBound</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="spiralbound.qrc">
+    <normaloff>:/SpiralBound/images/icon.png</normaloff>:/SpiralBound/images/icon.png</iconset>
+  </property>
   <property name="modal">
    <bool>false</bool>
   </property>
