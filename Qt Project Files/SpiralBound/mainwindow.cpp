@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "aboutspiralbound.h"
-#include "addcalendarevent.h""
+#include "addcalendarevent.h"
 #include <QFile>
 #include <QFileDialog>
 #include <QTextStream>

@@ -14,6 +14,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCalendarWidget>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
@@ -64,6 +65,7 @@ public:
     QPushButton *pushButton_addEvent;
     QPushButton *pushButton_deleteEvent;
     QPushButton *pushButton_editEvent;
+    QLabel *label;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuEdit;
@@ -153,7 +155,10 @@ public:
         listWidget = new QListWidget(tab_2);
         new QListWidgetItem(listWidget);
         listWidget->setObjectName(QString::fromUtf8("listWidget"));
-        listWidget->setGeometry(QRect(510, 0, 411, 411));
+        listWidget->setGeometry(QRect(510, 50, 411, 361));
+        QFont font;
+        font.setPointSize(18);
+        listWidget->setFont(font);
         pushButton_addEvent = new QPushButton(tab_2);
         pushButton_addEvent->setObjectName(QString::fromUtf8("pushButton_addEvent"));
         pushButton_addEvent->setGeometry(QRect(510, 420, 131, 28));
@@ -163,11 +168,18 @@ public:
         pushButton_editEvent = new QPushButton(tab_2);
         pushButton_editEvent->setObjectName(QString::fromUtf8("pushButton_editEvent"));
         pushButton_editEvent->setGeometry(QRect(790, 420, 131, 28));
+        label = new QLabel(tab_2);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(510, 10, 411, 31));
+        QFont font1;
+        font1.setPointSize(24);
+        label->setFont(font1);
+        label->setAlignment(Qt::AlignCenter);
         tabWidget->addTab(tab_2, QString());
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 936, 26));
+        menuBar->setGeometry(QRect(0, 0, 936, 22));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuEdit = new QMenu(menuBar);
@@ -271,6 +283,7 @@ public:
         pushButton_addEvent->setText(QApplication::translate("MainWindow", "Add", nullptr));
         pushButton_deleteEvent->setText(QApplication::translate("MainWindow", "Delete", nullptr));
         pushButton_editEvent->setText(QApplication::translate("MainWindow", "Edit", nullptr));
+        label->setText(QApplication::translate("MainWindow", "Events List", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Calendar", nullptr));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
         menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", nullptr));
