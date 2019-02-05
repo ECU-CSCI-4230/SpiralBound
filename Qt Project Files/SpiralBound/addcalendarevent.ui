@@ -75,7 +75,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="label_eventDate_2">
    <property name="geometry">
     <rect>
      <x>100</x>
@@ -88,7 +88,7 @@
     <string>Ex: MM/DD/YYYY</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_eventDate_2">
+  <widget class="QLabel" name="label_eventTime">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -101,7 +101,7 @@
     <string>Event Time</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_eventDate_2">
+  <widget class="QLineEdit" name="lineEdit_eventTime">
    <property name="geometry">
     <rect>
      <x>100</x>
@@ -111,7 +111,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="label_eventTime_2">
    <property name="geometry">
     <rect>
      <x>100</x>
@@ -124,7 +124,7 @@
     <string>Ex: HH:MM</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_3">
+  <widget class="QLabel" name="label_eventName_2">
    <property name="geometry">
     <rect>
      <x>100</x>

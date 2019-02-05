@@ -15,6 +15,9 @@ public:
     explicit addcalendarevent(QWidget *parent = nullptr);
     ~addcalendarevent();
 
+private slots:
+    void on_buttonBox_accepted();
+
 private:
     Ui::addcalendarevent *ui;
 };

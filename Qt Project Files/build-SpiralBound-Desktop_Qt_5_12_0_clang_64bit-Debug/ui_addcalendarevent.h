@@ -26,11 +26,11 @@ public:
     QLabel *label_eventName;
     QLabel *label_eventDate;
     QLineEdit *lineEdit_eventDate;
-    QLabel *label;
     QLabel *label_eventDate_2;
-    QLineEdit *lineEdit_eventDate_2;
-    QLabel *label_2;
-    QLabel *label_3;
+    QLabel *label_eventTime;
+    QLineEdit *lineEdit_eventTime;
+    QLabel *label_eventTime_2;
+    QLabel *label_eventName_2;
 
     void setupUi(QDialog *addcalendarevent)
     {
@@ -54,21 +54,21 @@ public:
         lineEdit_eventDate = new QLineEdit(addcalendarevent);
         lineEdit_eventDate->setObjectName(QString::fromUtf8("lineEdit_eventDate"));
         lineEdit_eventDate->setGeometry(QRect(100, 70, 331, 24));
-        label = new QLabel(addcalendarevent);
-        label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(100, 100, 111, 20));
         label_eventDate_2 = new QLabel(addcalendarevent);
         label_eventDate_2->setObjectName(QString::fromUtf8("label_eventDate_2"));
-        label_eventDate_2->setGeometry(QRect(20, 130, 80, 20));
-        lineEdit_eventDate_2 = new QLineEdit(addcalendarevent);
-        lineEdit_eventDate_2->setObjectName(QString::fromUtf8("lineEdit_eventDate_2"));
-        lineEdit_eventDate_2->setGeometry(QRect(100, 130, 331, 24));
-        label_2 = new QLabel(addcalendarevent);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setGeometry(QRect(100, 160, 111, 20));
-        label_3 = new QLabel(addcalendarevent);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-        label_3->setGeometry(QRect(100, 40, 111, 20));
+        label_eventDate_2->setGeometry(QRect(100, 100, 111, 20));
+        label_eventTime = new QLabel(addcalendarevent);
+        label_eventTime->setObjectName(QString::fromUtf8("label_eventTime"));
+        label_eventTime->setGeometry(QRect(20, 130, 80, 20));
+        lineEdit_eventTime = new QLineEdit(addcalendarevent);
+        lineEdit_eventTime->setObjectName(QString::fromUtf8("lineEdit_eventTime"));
+        lineEdit_eventTime->setGeometry(QRect(100, 130, 331, 24));
+        label_eventTime_2 = new QLabel(addcalendarevent);
+        label_eventTime_2->setObjectName(QString::fromUtf8("label_eventTime_2"));
+        label_eventTime_2->setGeometry(QRect(100, 160, 111, 20));
+        label_eventName_2 = new QLabel(addcalendarevent);
+        label_eventName_2->setObjectName(QString::fromUtf8("label_eventName_2"));
+        label_eventName_2->setGeometry(QRect(100, 40, 111, 20));
 
         retranslateUi(addcalendarevent);
         QObject::connect(buttonBox, SIGNAL(accepted()), addcalendarevent, SLOT(accept()));
@@ -82,10 +82,10 @@ public:
         addcalendarevent->setWindowTitle(QApplication::translate("addcalendarevent", "Dialog", nullptr));
         label_eventName->setText(QApplication::translate("addcalendarevent", "Event Name", nullptr));
         label_eventDate->setText(QApplication::translate("addcalendarevent", "Event Date", nullptr));
-        label->setText(QApplication::translate("addcalendarevent", "Ex: MM/DD/YYYY", nullptr));
-        label_eventDate_2->setText(QApplication::translate("addcalendarevent", "Event Time", nullptr));
-        label_2->setText(QApplication::translate("addcalendarevent", "Ex: HH:MM", nullptr));
-        label_3->setText(QApplication::translate("addcalendarevent", "Ex: Homework 1", nullptr));
+        label_eventDate_2->setText(QApplication::translate("addcalendarevent", "Ex: MM/DD/YYYY", nullptr));
+        label_eventTime->setText(QApplication::translate("addcalendarevent", "Event Time", nullptr));
+        label_eventTime_2->setText(QApplication::translate("addcalendarevent", "Ex: HH:MM", nullptr));
+        label_eventName_2->setText(QApplication::translate("addcalendarevent", "Ex: Homework 1", nullptr));
     } // retranslateUi
 
 };

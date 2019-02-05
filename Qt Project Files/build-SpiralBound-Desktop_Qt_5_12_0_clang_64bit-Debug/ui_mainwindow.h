@@ -170,12 +170,12 @@ public:
         pushButton_editEvent->setGeometry(QRect(790, 420, 131, 28));
         label = new QLabel(tab_2);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(510, 10, 411, 31));
+        label->setGeometry(QRect(510, 10, 411, 41));
         QFont font1;
         font1.setPointSize(24);
         label->setFont(font1);
         label->setTextFormat(Qt::AutoText);
-        label->setAlignment(Qt::AlignCenter);
+        label->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
         tabWidget->addTab(tab_2, QString());
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);

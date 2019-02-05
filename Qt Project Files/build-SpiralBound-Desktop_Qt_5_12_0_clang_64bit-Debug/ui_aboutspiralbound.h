@@ -47,6 +47,7 @@ public:
         font.setPointSize(24);
         label->setFont(font);
         label->setTextFormat(Qt::RichText);
+        label->setScaledContents(true);
         label->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         label->setWordWrap(true);
 
