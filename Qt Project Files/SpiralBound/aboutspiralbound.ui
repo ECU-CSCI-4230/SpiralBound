@@ -19,7 +19,7 @@
   <widget class="QPushButton" name="pushButton_ok">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>175</x>
      <y>160</y>
      <width>91</width>
      <height>24</height>
@@ -73,6 +73,9 @@
    </property>
    <property name="textFormat">
     <enum>Qt::RichText</enum>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
    </property>
    <property name="alignment">
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
