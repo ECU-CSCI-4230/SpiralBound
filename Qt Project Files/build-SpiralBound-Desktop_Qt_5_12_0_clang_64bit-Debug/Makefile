@@ -780,7 +780,23 @@ mainwindow.o: ../SpiralBound/mainwindow.cpp ../SpiralBound/mainwindow.h \
 		../SpiralBound/aboutspiralbound.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
-		../SpiralBound/addcalendarevent.h
+		../SpiralBound/addcalendarevent.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QFile \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QFontDialog \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qfontdialog.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QFont \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qfont.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QColorDialog \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qcolordialog.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QColor \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qcolor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../SpiralBound/mainwindow.cpp
 
 aboutspiralbound.o: ../SpiralBound/aboutspiralbound.cpp ../SpiralBound/aboutspiralbound.h \
@@ -792,7 +808,9 @@ aboutspiralbound.o: ../SpiralBound/aboutspiralbound.cpp ../SpiralBound/aboutspir
 addcalendarevent.o: ../SpiralBound/addcalendarevent.cpp ../SpiralBound/addcalendarevent.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
-		ui_addcalendarevent.h
+		ui_addcalendarevent.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qtextstream.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o addcalendarevent.o ../SpiralBound/addcalendarevent.cpp
 
 qrc_spiralbound.o: qrc_spiralbound.cpp 

@@ -157,7 +157,7 @@ public:
         listWidget->setObjectName(QString::fromUtf8("listWidget"));
         listWidget->setGeometry(QRect(510, 50, 411, 361));
         QFont font;
-        font.setPointSize(18);
+        font.setPointSize(12);
         listWidget->setFont(font);
         pushButton_addEvent = new QPushButton(tab_2);
         pushButton_addEvent->setObjectName(QString::fromUtf8("pushButton_addEvent"));
@@ -278,7 +278,7 @@ public:
         const bool __sortingEnabled = listWidget->isSortingEnabled();
         listWidget->setSortingEnabled(false);
         QListWidgetItem *___qlistwidgetitem = listWidget->item(0);
-        ___qlistwidgetitem->setText(QApplication::translate("MainWindow", "display day here", nullptr));
+        ___qlistwidgetitem->setText(QApplication::translate("MainWindow", "<EVENT NAME> <EVENT DATE> <EVENT TIME>", nullptr));
         listWidget->setSortingEnabled(__sortingEnabled);
 
         pushButton_addEvent->setText(QApplication::translate("MainWindow", "Add", nullptr));

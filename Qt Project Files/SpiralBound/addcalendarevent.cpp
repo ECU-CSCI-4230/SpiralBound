@@ -27,11 +27,22 @@ bool checkTime(QString eventTime)
     if(!eventTime.isEmpty())
     {
         // length
-
-        // slashes
-
-        // ##/##/####
+        if(eventTime.length() == 5)
+        {
+            // collon
+            if(eventTime.at(2) == ":")
+            {
+                // ##:##
+                if(eventTime.at(0).isDigit() && eventTime.at(1).isDigit() &&
+                        eventTime.at(3).isDigit() && eventTime.at(4).isDigit())
+                {
+                    return true;
+                }
+            }
+        }
     }
+
+    return false;
 }
 
 // Author: Nicholas, Cam, Jamie
@@ -73,15 +84,21 @@ void addcalendarevent::on_buttonBox_accepted()
     QString eventName = ui->lineEdit_eventName->text();
     QString eventDate = ui->lineEdit_eventDate->text();
     QString eventTime = ui->lineEdit_eventTime->text();
+
     // print q string to console
-    // std::cout << eventName.toStdString() << std::endl;
-    // std::cout << eventDate.toStdString() << std::endl;
-    // std::cout << eventTime.toStdString() << std::endl;
+    std::cout << eventName.toStdString() << std::endl;
+    std::cout << eventDate.toStdString() << std::endl;
+    std::cout << eventTime.toStdString() << std::endl;
 
     // Check Date and Time
     if(checkDate(eventDate) == true)
     {
-        qInfo("Dis works");
+        qInfo("checkDate works");
+    }
+
+    if(checkTime(eventTime) == true)
+    {
+        qInfo("checkTime works");
     }
 
     // Concat. 3 strings together
