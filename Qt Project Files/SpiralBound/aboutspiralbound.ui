@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>350</width>
+    <width>360</width>
     <height>200</height>
    </rect>
   </property>
@@ -73,7 +73,7 @@
     </font>
    </property>
    <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;About Spiral Bound&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;SpiralBound is an open source digital notebook and planner. It combines aspects from note taking and calendar applications. On top of this it incorporates study tools to aid you in your learning process.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;About Spiral Bound&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;SpiralBound is an open source digital notebook and planner. It combines aspects from note taking and calendar applications. On top of this it incorporates study tools to aid you in your learning process.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="textFormat">
     <enum>Qt::RichText</enum>
