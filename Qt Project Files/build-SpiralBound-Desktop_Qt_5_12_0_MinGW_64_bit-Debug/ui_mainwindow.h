@@ -17,9 +17,9 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
-#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
 
@@ -55,7 +55,7 @@ public:
     QWidget *centralWidget;
     QTabWidget *tabWidget;
     QWidget *tab;
-    QTextEdit *textEdit;
+    QPlainTextEdit *plainTextEdit;
     QWidget *tab_2;
     QCalendarWidget *calendarWidget;
     QMenuBar *menuBar;
@@ -135,9 +135,9 @@ public:
         tabWidget->setDocumentMode(false);
         tab = new QWidget();
         tab->setObjectName(QString::fromUtf8("tab"));
-        textEdit = new QTextEdit(tab);
-        textEdit->setObjectName(QString::fromUtf8("textEdit"));
-        textEdit->setGeometry(QRect(0, 10, 831, 501));
+        plainTextEdit = new QPlainTextEdit(tab);
+        plainTextEdit->setObjectName(QString::fromUtf8("plainTextEdit"));
+        plainTextEdit->setGeometry(QRect(0, 10, 831, 501));
         tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QString::fromUtf8("tab_2"));
@@ -148,7 +148,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 936, 22));
+        menuBar->setGeometry(QRect(0, 0, 936, 21));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuEdit = new QMenu(menuBar);

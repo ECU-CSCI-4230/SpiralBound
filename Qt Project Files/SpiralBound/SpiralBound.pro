@@ -27,11 +27,13 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    aboutspiralbound.cpp
+    aboutspiralbound.cpp \
+    markdowneditor.cpp
 
 HEADERS += \
         mainwindow.h \
-    aboutspiralbound.h
+    aboutspiralbound.h \
+    markdowneditor.h
 
 FORMS += \
         mainwindow.ui \
