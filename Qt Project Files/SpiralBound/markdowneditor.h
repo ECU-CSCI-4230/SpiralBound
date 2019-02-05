@@ -32,7 +32,8 @@ public slots:
     void insertNumeral();
     void insertTask();
 
+private:
+    void addMarkupFormatting(const QString& markup);
 };
-
 
 #endif // MARKDOWNEDITOR_H

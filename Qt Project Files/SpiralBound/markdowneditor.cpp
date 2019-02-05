@@ -4,13 +4,29 @@ MarkdownEditor::MarkdownEditor()
 {
 }
 
-void MarkdownEditor::bold(){}
+//fuck me sideways
+void MarkdownEditor::addMarkupFormatting(const QString &markup){}
 
-void MarkdownEditor::italic(){}
+void MarkdownEditor::bold()
+{
+    addMarkupFormatting("**");
+}
 
-void MarkdownEditor::underline(){}
+void MarkdownEditor::italic()
+{
+    addMarkupFormatting("*");
+}
 
-void MarkdownEditor::strikethough(){}
+// A reminder that underline is not standard in markdown
+void MarkdownEditor::underline()
+{
+    addMarkupFormatting("__");
+}
+
+void MarkdownEditor::strikethough()
+{
+    addMarkupFormatting("~~");
+}
 
 void MarkdownEditor::makeComment(){}
 
