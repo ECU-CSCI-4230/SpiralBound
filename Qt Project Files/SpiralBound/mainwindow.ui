@@ -136,7 +136,7 @@
         <x>510</x>
         <y>10</y>
         <width>411</width>
-        <height>31</height>
+        <height>41</height>
        </rect>
       </property>
       <property name="font">
@@ -147,8 +147,11 @@
       <property name="text">
        <string>Events List</string>
       </property>
+      <property name="textFormat">
+       <enum>Qt::AutoText</enum>
+      </property>
       <property name="alignment">
-       <set>Qt::AlignCenter</set>
+       <set>Qt::AlignHCenter|Qt::AlignTop</set>
       </property>
      </widget>
     </widget>

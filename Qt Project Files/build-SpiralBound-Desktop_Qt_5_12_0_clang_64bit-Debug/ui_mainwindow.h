@@ -174,6 +174,7 @@ public:
         QFont font1;
         font1.setPointSize(24);
         label->setFont(font1);
+        label->setTextFormat(Qt::AutoText);
         label->setAlignment(Qt::AlignCenter);
         tabWidget->addTab(tab_2, QString());
         MainWindow->setCentralWidget(centralWidget);
