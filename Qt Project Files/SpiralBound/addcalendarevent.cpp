@@ -43,11 +43,24 @@ bool checkDate(QString eventDate)
     if(!eventDate.isEmpty())
     {
         // length
-
-        // slashes
-
-        // ##/##/####
+        if(eventDate.length() == 10)
+        {
+            // slashes
+            if(eventDate.at(2) == "/" && eventDate.at(5) == "/")
+            {
+                // ##/##/####
+                if(eventDate.at(0).isDigit() && eventDate.at(1).isDigit() &&
+                        eventDate.at(3).isDigit() && eventDate.at(4).isDigit() &&
+                            eventDate.at(6).isDigit() && eventDate.at(7).isDigit() &&
+                                eventDate.at(8).isDigit() && eventDate.at(9).isDigit())
+                {
+                    return true;
+                }
+            }
+        }
     }
+
+    return false;
 
 }
 
@@ -61,11 +74,15 @@ void addcalendarevent::on_buttonBox_accepted()
     QString eventDate = ui->lineEdit_eventDate->text();
     QString eventTime = ui->lineEdit_eventTime->text();
     // print q string to console
-    std::cout << eventName.toStdString() << std::endl;
-    std::cout << eventDate.toStdString() << std::endl;
-    std::cout << eventTime.toStdString() << std::endl;
+    // std::cout << eventName.toStdString() << std::endl;
+    // std::cout << eventDate.toStdString() << std::endl;
+    // std::cout << eventTime.toStdString() << std::endl;
 
     // Check Date and Time
+    if(checkDate(eventDate) == true)
+    {
+        qInfo("Dis works");
+    }
 
     // Concat. 3 strings together
 
