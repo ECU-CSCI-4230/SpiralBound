@@ -25,7 +25,7 @@ MainWindow::~MainWindow()
 }
 
 //-----------------------------------------------------------+
-//                       Actions                             |
+//                    Menu Bar Buttons                       |
 //-----------------------------------------------------------+
 
 // Author:
@@ -221,3 +221,42 @@ void MainWindow::on_action_quit_triggered()
 {
     QApplication::quit();
 }
+
+//-----------------------------------------------------------+
+//               Calendar Buttons                            |
+//-----------------------------------------------------------+
+
+// Author:
+// Init date:
+// Last Updated:
+void MainWindow::on_pushButton_addEvent_clicked()
+{
+
+}
+
+// Author:
+// Init date:
+// Last Updated:
+void MainWindow::on_pushButton_deleteEvent_clicked()
+{
+
+}
+
+// Author:
+// Init date:
+// Last Updated:
+void MainWindow::on_pushButton_editEvent_clicked()
+{
+
+}
+
+
+
+
+
+
+
+
+
+
+

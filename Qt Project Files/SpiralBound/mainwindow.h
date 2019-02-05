@@ -16,6 +16,7 @@ public:
     ~MainWindow();
 
 private slots:
+    // Menu Bar Buttons
     void on_action_open_triggered();
     void on_action_test_triggered();
     void on_action_save_triggered();
@@ -40,6 +41,11 @@ private slots:
     void on_action_printPreview_triggered();
     void on_action_export_triggered();
     void on_action_quit_triggered();
+
+    // Calendar Buttons
+    void on_pushButton_addEvent_clicked();
+    void on_pushButton_deleteEvent_clicked();
+    void on_pushButton_editEvent_clicked();
 
 private:
     Ui::MainWindow *ui;
