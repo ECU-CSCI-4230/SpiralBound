@@ -14,9 +14,11 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCalendarWidget>
+#include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTextEdit>
@@ -58,6 +60,10 @@ public:
     QTextEdit *textEdit;
     QWidget *tab_2;
     QCalendarWidget *calendarWidget;
+    QListWidget *listWidget;
+    QPushButton *pushButton_addEvent;
+    QPushButton *pushButton_deleteEvent;
+    QPushButton *pushButton_editEvent;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuEdit;
@@ -129,7 +135,7 @@ public:
         tabWidget = new QTabWidget(centralWidget);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
         tabWidget->setEnabled(true);
-        tabWidget->setGeometry(QRect(0, 10, 831, 521));
+        tabWidget->setGeometry(QRect(0, 10, 931, 561));
         tabWidget->setTabPosition(QTabWidget::North);
         tabWidget->setElideMode(Qt::ElideNone);
         tabWidget->setDocumentMode(false);
@@ -143,12 +149,25 @@ public:
         tab_2->setObjectName(QString::fromUtf8("tab_2"));
         calendarWidget = new QCalendarWidget(tab_2);
         calendarWidget->setObjectName(QString::fromUtf8("calendarWidget"));
-        calendarWidget->setGeometry(QRect(0, 0, 641, 331));
+        calendarWidget->setGeometry(QRect(0, 0, 501, 531));
+        listWidget = new QListWidget(tab_2);
+        new QListWidgetItem(listWidget);
+        listWidget->setObjectName(QString::fromUtf8("listWidget"));
+        listWidget->setGeometry(QRect(510, 0, 411, 411));
+        pushButton_addEvent = new QPushButton(tab_2);
+        pushButton_addEvent->setObjectName(QString::fromUtf8("pushButton_addEvent"));
+        pushButton_addEvent->setGeometry(QRect(510, 420, 131, 28));
+        pushButton_deleteEvent = new QPushButton(tab_2);
+        pushButton_deleteEvent->setObjectName(QString::fromUtf8("pushButton_deleteEvent"));
+        pushButton_deleteEvent->setGeometry(QRect(650, 420, 131, 28));
+        pushButton_editEvent = new QPushButton(tab_2);
+        pushButton_editEvent->setObjectName(QString::fromUtf8("pushButton_editEvent"));
+        pushButton_editEvent->setGeometry(QRect(790, 420, 131, 28));
         tabWidget->addTab(tab_2, QString());
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 936, 22));
+        menuBar->setGeometry(QRect(0, 0, 936, 26));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuEdit = new QMenu(menuBar);
@@ -208,7 +227,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -242,6 +261,16 @@ public:
         action_export->setText(QApplication::translate("MainWindow", "Export", nullptr));
         action_quit->setText(QApplication::translate("MainWindow", "Quit", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "TextEditor", nullptr));
+
+        const bool __sortingEnabled = listWidget->isSortingEnabled();
+        listWidget->setSortingEnabled(false);
+        QListWidgetItem *___qlistwidgetitem = listWidget->item(0);
+        ___qlistwidgetitem->setText(QApplication::translate("MainWindow", "display day here", nullptr));
+        listWidget->setSortingEnabled(__sortingEnabled);
+
+        pushButton_addEvent->setText(QApplication::translate("MainWindow", "Add", nullptr));
+        pushButton_deleteEvent->setText(QApplication::translate("MainWindow", "Delete", nullptr));
+        pushButton_editEvent->setText(QApplication::translate("MainWindow", "Edit", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Calendar", nullptr));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
         menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", nullptr));

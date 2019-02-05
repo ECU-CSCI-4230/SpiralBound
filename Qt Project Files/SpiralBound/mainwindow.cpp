@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "aboutspiralbound.h"
+#include "addcalendarevent.h""
 #include <QFile>
 #include <QFileDialog>
 #include <QTextStream>
@@ -226,12 +227,14 @@ void MainWindow::on_action_quit_triggered()
 //               Calendar Buttons                            |
 //-----------------------------------------------------------+
 
-// Author:
-// Init date:
-// Last Updated:
+// Author: Nicholas, Cam, Jamie
+// Init date: 05.02.2019
+// Last Updated: 05.02.2019
 void MainWindow::on_pushButton_addEvent_clicked()
 {
-
+    addcalendarevent dialogWindow;
+    dialogWindow.setModal(true);
+    dialogWindow.exec();
 }
 
 // Author:
