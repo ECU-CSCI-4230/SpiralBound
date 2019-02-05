@@ -52,11 +52,13 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../SpiralBound/main.cpp \
 		../SpiralBound/mainwindow.cpp \
-		../SpiralBound/aboutspiralbound.cpp moc_mainwindow.cpp \
+		../SpiralBound/aboutspiralbound.cpp qrc_spiralbound.cpp \
+		moc_mainwindow.cpp \
 		moc_aboutspiralbound.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		aboutspiralbound.o \
+		qrc_spiralbound.o \
 		moc_mainwindow.o \
 		moc_aboutspiralbound.o
 DIST          = /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/spec_pre.prf \
@@ -443,6 +445,7 @@ Makefile: ../SpiralBound/SpiralBound.pro /Users/nickellis/Qt/5.12.0/clang_64/mks
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/yacc.prf \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/lex.prf \
 		../SpiralBound/SpiralBound.pro \
+		../SpiralBound/spiralbound.qrc \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/QtWidgets.prl \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtGui.framework/QtGui.prl \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/QtCore.prl
@@ -627,6 +630,7 @@ Makefile: ../SpiralBound/SpiralBound.pro /Users/nickellis/Qt/5.12.0/clang_64/mks
 /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/yacc.prf:
 /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/lex.prf:
 ../SpiralBound/SpiralBound.pro:
+../SpiralBound/spiralbound.qrc:
 /Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/QtWidgets.prl:
 /Users/nickellis/Qt/5.12.0/clang_64/lib/QtGui.framework/QtGui.prl:
 /Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/QtCore.prl:
@@ -659,6 +663,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../SpiralBound/spiralbound.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../SpiralBound/mainwindow.h ../SpiralBound/aboutspiralbound.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../SpiralBound/main.cpp ../SpiralBound/mainwindow.cpp ../SpiralBound/aboutspiralbound.cpp $(DISTDIR)/
@@ -686,8 +691,14 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_spiralbound.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_spiralbound.cpp
+qrc_spiralbound.cpp: ../SpiralBound/spiralbound.qrc \
+		/Users/nickellis/Qt/5.12.0/clang_64/bin/rcc \
+		../SpiralBound/images/icon.png
+	/Users/nickellis/Qt/5.12.0/clang_64/bin/rcc -name spiralbound ../SpiralBound/spiralbound.qrc -o qrc_spiralbound.cpp
+
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
@@ -734,7 +745,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -749,6 +760,9 @@ mainwindow.o: ../SpiralBound/mainwindow.cpp ../SpiralBound/mainwindow.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		ui_mainwindow.h \
+		../SpiralBound/aboutspiralbound.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QFile \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
@@ -772,6 +786,9 @@ aboutspiralbound.o: ../SpiralBound/aboutspiralbound.cpp ../SpiralBound/aboutspir
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		ui_aboutspiralbound.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o aboutspiralbound.o ../SpiralBound/aboutspiralbound.cpp
+
+qrc_spiralbound.o: qrc_spiralbound.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_spiralbound.o qrc_spiralbound.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
