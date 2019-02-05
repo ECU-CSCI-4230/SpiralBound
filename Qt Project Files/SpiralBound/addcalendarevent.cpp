@@ -18,6 +18,22 @@ addcalendarevent::~addcalendarevent()
     delete ui;
 }
 
+// Author: Cam
+// Init date: 05.02.2019
+// Last Updated: 05.02.2019
+bool checkName(QString eventName)
+{
+    // Make sure eventName is not empty.
+    if(eventName.isEmpty())
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
 // Author: Nicholas, Cam, Jamie
 // Init date: 05.02.2019
 // Last Updated: 05.02.2019
