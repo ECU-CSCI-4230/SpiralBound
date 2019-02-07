@@ -1,5 +1,5 @@
 // Author: Camby Abell
-// Init date: 07.02.2019
+// Init Date: 07.02.2019
 // Last Updates: 07.02.2019
 
 // Event object containing three (!!) fields:
