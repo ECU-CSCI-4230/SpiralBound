@@ -61,7 +61,7 @@ public:
     QTextEdit *textEdit;
     QWidget *tab_2;
     QCalendarWidget *calendarWidget;
-    QListWidget *listWidget;
+    QListWidget *listWidget_eventList;
     QPushButton *pushButton_addEvent;
     QPushButton *pushButton_deleteEvent;
     QPushButton *pushButton_editEvent;
@@ -152,13 +152,13 @@ public:
         calendarWidget = new QCalendarWidget(tab_2);
         calendarWidget->setObjectName(QString::fromUtf8("calendarWidget"));
         calendarWidget->setGeometry(QRect(0, 0, 501, 531));
-        listWidget = new QListWidget(tab_2);
-        new QListWidgetItem(listWidget);
-        listWidget->setObjectName(QString::fromUtf8("listWidget"));
-        listWidget->setGeometry(QRect(510, 50, 411, 361));
+        listWidget_eventList = new QListWidget(tab_2);
+        new QListWidgetItem(listWidget_eventList);
+        listWidget_eventList->setObjectName(QString::fromUtf8("listWidget_eventList"));
+        listWidget_eventList->setGeometry(QRect(510, 50, 411, 361));
         QFont font;
         font.setPointSize(12);
-        listWidget->setFont(font);
+        listWidget_eventList->setFont(font);
         pushButton_addEvent = new QPushButton(tab_2);
         pushButton_addEvent->setObjectName(QString::fromUtf8("pushButton_addEvent"));
         pushButton_addEvent->setGeometry(QRect(510, 420, 131, 28));
@@ -275,11 +275,11 @@ public:
         action_quit->setText(QApplication::translate("MainWindow", "Quit", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "TextEditor", nullptr));
 
-        const bool __sortingEnabled = listWidget->isSortingEnabled();
-        listWidget->setSortingEnabled(false);
-        QListWidgetItem *___qlistwidgetitem = listWidget->item(0);
+        const bool __sortingEnabled = listWidget_eventList->isSortingEnabled();
+        listWidget_eventList->setSortingEnabled(false);
+        QListWidgetItem *___qlistwidgetitem = listWidget_eventList->item(0);
         ___qlistwidgetitem->setText(QApplication::translate("MainWindow", "<EVENT NAME> <EVENT DATE> <EVENT TIME>", nullptr));
-        listWidget->setSortingEnabled(__sortingEnabled);
+        listWidget_eventList->setSortingEnabled(__sortingEnabled);
 
         pushButton_addEvent->setText(QApplication::translate("MainWindow", "Add", nullptr));
         pushButton_deleteEvent->setText(QApplication::translate("MainWindow", "Delete", nullptr));
