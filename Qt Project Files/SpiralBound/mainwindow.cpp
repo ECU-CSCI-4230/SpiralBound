@@ -238,6 +238,14 @@ void MainWindow::on_pushButton_addEvent_clicked()
     dialogWindow.exec();
 }
 
+// Author:
+// Init date:
+// Last Updated:
+void MainWindow::on_pushButton_editEvent_clicked()
+{
+
+}
+
 // Author: Jamie, Nicholas
 // Init date: 07.02.2019
 // Last Updated: 07.02.20119
@@ -247,16 +255,6 @@ void MainWindow::on_pushButton_deleteEvent_clicked()
     dialogWindow.setModal(true);
     dialogWindow.exec();
 }
-
-// Author:
-// Init date:
-// Last Updated:
-void MainWindow::on_pushButton_editEvent_clicked()
-{
-
-}
-
-
 
 
 
