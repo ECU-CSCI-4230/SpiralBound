@@ -164,10 +164,10 @@ public:
         pushButton_addEvent->setGeometry(QRect(510, 420, 131, 28));
         pushButton_deleteEvent = new QPushButton(tab_2);
         pushButton_deleteEvent->setObjectName(QString::fromUtf8("pushButton_deleteEvent"));
-        pushButton_deleteEvent->setGeometry(QRect(650, 420, 131, 28));
+        pushButton_deleteEvent->setGeometry(QRect(790, 420, 131, 28));
         pushButton_editEvent = new QPushButton(tab_2);
         pushButton_editEvent->setObjectName(QString::fromUtf8("pushButton_editEvent"));
-        pushButton_editEvent->setGeometry(QRect(790, 420, 131, 28));
+        pushButton_editEvent->setGeometry(QRect(650, 420, 131, 28));
         label = new QLabel(tab_2);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(510, 10, 411, 41));
