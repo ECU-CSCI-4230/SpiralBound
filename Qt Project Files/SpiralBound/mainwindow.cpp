@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "aboutspiralbound.h"
 #include "addcalendarevent.h"
+#include "deletecalendarevent.h"
 #include <QFile>
 #include <QFileDialog>
 #include <QTextStream>
@@ -237,12 +238,14 @@ void MainWindow::on_pushButton_addEvent_clicked()
     dialogWindow.exec();
 }
 
-// Author:
-// Init date:
-// Last Updated:
+// Author: Jamie, Nicholas
+// Init date: 07.02.2019
+// Last Updated: 07.02.20119
 void MainWindow::on_pushButton_deleteEvent_clicked()
 {
-
+    deletecalendarevent dialogWindow;
+    dialogWindow.setModal(true);
+    dialogWindow.exec();
 }
 
 // Author:

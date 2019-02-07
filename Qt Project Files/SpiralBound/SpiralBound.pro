@@ -28,17 +28,20 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     aboutspiralbound.cpp \
-    addcalendarevent.cpp
+    addcalendarevent.cpp \
+    deletecalendarevent.cpp
 
 HEADERS += \
         mainwindow.h \
     aboutspiralbound.h \
-    addcalendarevent.h
+    addcalendarevent.h \
+    deletecalendarevent.h
 
 FORMS += \
         mainwindow.ui \
     aboutspiralbound.ui \
-    addcalendarevent.ui
+    addcalendarevent.ui \
+    deletecalendarevent.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
