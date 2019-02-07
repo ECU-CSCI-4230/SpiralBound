@@ -15,6 +15,9 @@ public:
     explicit deletecalendarevent(QWidget *parent = nullptr);
     ~deletecalendarevent();
 
+private slots:
+    void on_buttonBox_accepted();
+
 private:
     Ui::deletecalendarevent *ui;
 };

@@ -107,7 +107,7 @@
      <widget class="QPushButton" name="pushButton_deleteEvent">
       <property name="geometry">
        <rect>
-        <x>650</x>
+        <x>790</x>
         <y>420</y>
         <width>131</width>
         <height>28</height>
@@ -120,7 +120,7 @@
      <widget class="QPushButton" name="pushButton_editEvent">
       <property name="geometry">
        <rect>
-        <x>790</x>
+        <x>650</x>
         <y>420</y>
         <width>131</width>
         <height>28</height>
