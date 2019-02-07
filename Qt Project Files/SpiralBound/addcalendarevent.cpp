@@ -86,9 +86,7 @@ bool checkDate(QString eventDate)
             }
         }
     }
-
     return false;
-
 }
 
 // Author: Nicholas, Cam, Jamie
