@@ -87,7 +87,32 @@
       </property>
       <item>
        <property name="text">
-        <string>&lt;EVENT NAME&gt; &lt;EVENT DATE&gt; &lt;EVENT TIME&gt;</string>
+        <string>Event0</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Event1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Event2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Event3</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Event4</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Event5</string>
        </property>
       </item>
      </widget>
@@ -152,6 +177,19 @@
       </property>
       <property name="alignment">
        <set>Qt::AlignHCenter|Qt::AlignTop</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_printEventList">
+      <property name="geometry">
+       <rect>
+        <x>650</x>
+        <y>460</y>
+        <width>131</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Print (Debug)</string>
       </property>
      </widget>
     </widget>

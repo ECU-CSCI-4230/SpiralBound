@@ -11,6 +11,8 @@
 #include <QFont>
 #include <QColorDialog>
 #include <QColor>
+#include <QListWidget>
+#include <QtDebug>
 
 //================
 // Author:
@@ -231,7 +233,7 @@ void MainWindow::on_action_quit_triggered()
 }
 
 //-----------------------------------------------------------+
-//               Calendar Buttons                            |
+//                   Calendar Tab                            |
 //-----------------------------------------------------------+
 
 // Author: Nicholas, Cam, Jamie
@@ -260,4 +262,30 @@ void MainWindow::on_pushButton_deleteEvent_clicked()
     deletecalendarevent dialogWindow;
     dialogWindow.setModal(true);
     dialogWindow.exec();
+}
+
+// Author: Nicholas
+// Init Date: 09.02.2019
+// Last Updated: 09.02.20119
+void MainWindow::on_listWidget_eventList_itemClicked(QListWidgetItem *item)
+{
+    qDebug() << "eventList: clicked" << item->text();
+
+    if(item->checkState() == Qt::Checked)
+    {
+        item->setTextColor(Qt::red);
+    }
+}
+
+// Author: Nicholas
+// Init Date: 09.02.2019
+// Last Updated: 09.02.20119
+void MainWindow::on_pushButton_printEventList_clicked()
+{
+    qDebug("eventList:");
+    for(int i = 0; i < ui->listWidget_eventList->count(); i++)
+    {
+        QListWidgetItem* item = ui->listWidget_eventList->item(i);
+        qDebug() << item->text();
+    }
 }

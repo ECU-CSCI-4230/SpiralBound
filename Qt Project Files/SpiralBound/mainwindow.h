@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QListWidget>
 
 namespace Ui {
 class MainWindow;
@@ -46,6 +47,9 @@ private slots:
     void on_pushButton_addEvent_clicked();
     void on_pushButton_deleteEvent_clicked();
     void on_pushButton_editEvent_clicked();
+    void on_listWidget_eventList_itemClicked(QListWidgetItem *item);
+
+    void on_pushButton_printEventList_clicked();
 
 private:
     Ui::MainWindow *ui;
