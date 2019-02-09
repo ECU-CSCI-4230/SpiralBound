@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include <QApplication>
+#include <thewidgetitem.h>
 
 int main(int argc, char *argv[])
 {

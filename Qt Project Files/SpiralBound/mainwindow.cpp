@@ -9,6 +9,10 @@
 #include <QFont>
 #include <QColorDialog>
 #include <QColor>
+#include <qlistwidget.h>
+#include <QListWidget>
+#include <QListWidget>
+#include <thewidgetitem.h>
 
 // Constructor
 MainWindow::MainWindow(QWidget *parent) :
@@ -16,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
 }
 
 // Destructor
@@ -221,3 +226,11 @@ void MainWindow::on_action_quit_triggered()
 {
     QApplication::quit();
 }
+
+
+void MainWindow::on_pushButton_clicked()
+{
+
+}
+
+

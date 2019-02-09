@@ -27,11 +27,22 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    aboutspiralbound.cpp
+    aboutspiralbound.cpp \
+    book.cpp \
+    section.cpp \
+    page.cpp \
+    linkedlist.cpp \
+    block.cpp
 
 HEADERS += \
         mainwindow.h \
-    aboutspiralbound.h
+    aboutspiralbound.h \
+    thewidgetitem.h \
+    book.h \
+    section.h \
+    page.h \
+    linkedlist.h \
+    block.h
 
 FORMS += \
         mainwindow.ui \

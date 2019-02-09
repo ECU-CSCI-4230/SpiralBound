@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#include <qlistwidget.h>
+#include <QListWidget>
 #include <QMainWindow>
 
 namespace Ui {
@@ -41,9 +42,15 @@ private slots:
     void on_action_export_triggered();
     void on_action_quit_triggered();
 
+    void on_listWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     QString file_path_;
+    Ui::MainWindow *ListWidget;
+
 };
 
 #endif // MAINWINDOW_H

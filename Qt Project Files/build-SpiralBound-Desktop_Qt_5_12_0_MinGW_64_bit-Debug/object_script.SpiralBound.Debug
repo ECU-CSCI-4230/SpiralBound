@@ -1,0 +1,11 @@
+debug/main.o
+debug/mainwindow.o
+debug/aboutspiralbound.o
+debug/book.o
+debug/section.o
+debug/page.o
+debug/linkedlist.o
+debug/block.o
+debug/moc_mainwindow.o
+debug/moc_aboutspiralbound.o
+debug/moc_thewidgetitem.o
