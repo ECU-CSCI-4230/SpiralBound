@@ -11,8 +11,11 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QDateTimeEdit>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 
 QT_BEGIN_NAMESPACE
 
@@ -20,17 +23,33 @@ class Ui_editcalendarevent
 {
 public:
     QDialogButtonBox *buttonBox;
+    QDateTimeEdit *dateTimeEdit;
+    QLabel *label_eventDate;
+    QLabel *label_eventName;
+    QLineEdit *lineEdit_eventName;
 
     void setupUi(QDialog *editcalendarevent)
     {
         if (editcalendarevent->objectName().isEmpty())
             editcalendarevent->setObjectName(QString::fromUtf8("editcalendarevent"));
-        editcalendarevent->resize(400, 300);
+        editcalendarevent->resize(447, 160);
         buttonBox = new QDialogButtonBox(editcalendarevent);
         buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
-        buttonBox->setGeometry(QRect(30, 240, 341, 32));
+        buttonBox->setGeometry(QRect(90, 120, 341, 32));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
+        dateTimeEdit = new QDateTimeEdit(editcalendarevent);
+        dateTimeEdit->setObjectName(QString::fromUtf8("dateTimeEdit"));
+        dateTimeEdit->setGeometry(QRect(130, 70, 301, 25));
+        label_eventDate = new QLabel(editcalendarevent);
+        label_eventDate->setObjectName(QString::fromUtf8("label_eventDate"));
+        label_eventDate->setGeometry(QRect(20, 70, 111, 20));
+        label_eventName = new QLabel(editcalendarevent);
+        label_eventName->setObjectName(QString::fromUtf8("label_eventName"));
+        label_eventName->setGeometry(QRect(20, 20, 80, 20));
+        lineEdit_eventName = new QLineEdit(editcalendarevent);
+        lineEdit_eventName->setObjectName(QString::fromUtf8("lineEdit_eventName"));
+        lineEdit_eventName->setGeometry(QRect(100, 20, 331, 24));
 
         retranslateUi(editcalendarevent);
         QObject::connect(buttonBox, SIGNAL(accepted()), editcalendarevent, SLOT(accept()));
@@ -41,7 +60,9 @@ public:
 
     void retranslateUi(QDialog *editcalendarevent)
     {
-        editcalendarevent->setWindowTitle(QApplication::translate("editcalendarevent", "Dialog", nullptr));
+        editcalendarevent->setWindowTitle(QApplication::translate("editcalendarevent", "Edit Event", nullptr));
+        label_eventDate->setText(QApplication::translate("editcalendarevent", "Event Date/Time", nullptr));
+        label_eventName->setText(QApplication::translate("editcalendarevent", "Event Name", nullptr));
     } // retranslateUi
 
 };

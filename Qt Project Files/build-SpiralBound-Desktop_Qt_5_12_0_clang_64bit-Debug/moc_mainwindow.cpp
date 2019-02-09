@@ -171,7 +171,7 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 30,   31,
+    0x80000000 | 30, 0x80000000 | 30,   31,
     QMetaType::Void,
 
        0        // eod
@@ -210,7 +210,8 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 24: _t->on_pushButton_addEvent_clicked(); break;
         case 25: _t->on_pushButton_deleteEvent_clicked(); break;
         case 26: _t->on_pushButton_editEvent_clicked(); break;
-        case 27: _t->on_listWidget_eventList_itemClicked((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
+        case 27: { QListWidgetItem* _r = _t->on_listWidget_eventList_itemClicked((*reinterpret_cast< QListWidgetItem*(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< QListWidgetItem**>(_a[0]) = std::move(_r); }  break;
         case 28: _t->on_pushButton_printEventList_clicked(); break;
         default: ;
         }

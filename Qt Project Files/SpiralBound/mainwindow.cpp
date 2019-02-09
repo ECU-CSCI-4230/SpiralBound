@@ -252,7 +252,6 @@ void MainWindow::on_pushButton_addEvent_clicked()
 // Last Updated: 09.02.20119
 void MainWindow::on_pushButton_editEvent_clicked()
 {
-    // TODO: Create edit dialog window
     editcalendarevent dialogWindow;
     dialogWindow.setModal(true);
     dialogWindow.exec();
@@ -274,16 +273,11 @@ void MainWindow::on_pushButton_deleteEvent_clicked()
 // Author: Nicholas
 // Init Date: 09.02.2019
 // Last Updated: 09.02.20119
-void MainWindow::on_listWidget_eventList_itemClicked(QListWidgetItem *item)
+QListWidgetItem* MainWindow::on_listWidget_eventList_itemClicked(QListWidgetItem *item)
 {
     qDebug() << "eventList: clicked" << item->text();
 
-    if(item->checkState() == Qt::Checked)
-    {
-        item->setTextColor(Qt::red);
-    }
-    // TODO: Change method to return item selected when called by
-    //       on_pushButton_editEvent_clicked method
+    return item;
 }
 
 // Author: Nicholas
