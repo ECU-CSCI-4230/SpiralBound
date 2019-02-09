@@ -15,6 +15,9 @@ public:
     explicit editcalendarevent(QWidget *parent = nullptr);
     ~editcalendarevent();
 
+private slots:
+    void on_buttonBox_accepted();
+
 private:
     Ui::editcalendarevent *ui;
 };
