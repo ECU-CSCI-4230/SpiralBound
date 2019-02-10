@@ -868,7 +868,11 @@ deletecalendarevent.o: ../SpiralBound/deletecalendarevent.cpp ../SpiralBound/del
 editcalendarevent.o: ../SpiralBound/editcalendarevent.cpp ../SpiralBound/editcalendarevent.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
-		ui_editcalendarevent.h
+		ui_editcalendarevent.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o editcalendarevent.o ../SpiralBound/editcalendarevent.cpp
 
 qrc_spiralbound.o: qrc_spiralbound.cpp 

@@ -286,6 +286,7 @@ QListWidgetItem* MainWindow::on_listWidget_eventList_itemClicked(QListWidgetItem
 void MainWindow::on_pushButton_printEventList_clicked()
 {
     qDebug("eventList:");
+
     for(int i = 0; i < ui->listWidget_eventList->count(); i++)
     {
         QListWidgetItem* item = ui->listWidget_eventList->item(i);
