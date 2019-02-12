@@ -1,0 +1,16 @@
+release/aboutspiralbound.o
+release/main.o
+release/mainwindow.o
+release/markdowneditor.o
+release/autolink.o
+release/buffer.o
+release/houdini_href_e.o
+release/houdini_html_e.o
+release/html.o
+release/html_smartypants.o
+release/markdown.o
+release/stack.o
+release/qrc_spiralbound.o
+release/moc_mainwindow.o
+release/moc_aboutspiralbound.o
+release/moc_markdowneditor.o

@@ -25,14 +25,32 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
     aboutspiralbound.cpp \
-    markdowneditor.cpp
+    main.cpp \
+    mainwindow.cpp \
+    markdowneditor.cpp \
+    sundown/autolink.c \
+    sundown/buffer.c \
+    sundown/houdini_href_e.c \
+    sundown/houdini_html_e.c \
+    sundown/html.c \
+    sundown/html_smartypants.c \
+    sundown/markdown.c \
+    sundown/stack.c
 
 HEADERS += \
         mainwindow.h \
     aboutspiralbound.h \
+    markdowneditor.h \
+    sundown/autolink.h \
+    sundown/buffer.h \
+    sundown/houdini.h \
+    sundown/html.h \
+    sundown/html_blocks.h \
+    sundown/markdown.h \
+    sundown/stack.h \
+    aboutspiralbound.h \
+    mainwindow.h \
     markdowneditor.h
 
 FORMS += \
@@ -46,3 +64,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     spiralbound.qrc
+
+DISTFILES += \
+    sundown/COPYING \
+    sundown/README

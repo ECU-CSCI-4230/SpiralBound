@@ -48,12 +48,6 @@ void MarkdownEditor::italic()
     addMarkupFormatting("*");
 }
 
-// A reminder that underline is not standard in markdown
-void MarkdownEditor::underline()
-{
-    addMarkupFormatting("__");
-}
-
 void MarkdownEditor::strikethough()
 {
     addMarkupFormatting("~~");

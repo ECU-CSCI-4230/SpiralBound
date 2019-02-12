@@ -1,0 +1,16 @@
+debug/aboutspiralbound.o
+debug/main.o
+debug/mainwindow.o
+debug/markdowneditor.o
+debug/autolink.o
+debug/buffer.o
+debug/houdini_href_e.o
+debug/houdini_html_e.o
+debug/html.o
+debug/html_smartypants.o
+debug/markdown.o
+debug/stack.o
+debug/qrc_spiralbound.o
+debug/moc_mainwindow.o
+debug/moc_aboutspiralbound.o
+debug/moc_markdowneditor.o
