@@ -22,7 +22,7 @@ editcalendarevent::~editcalendarevent()
 
 // Author: Nicholas, Cam
 // Init Date: 09.02.2019
-// Last Updated: 09.02.20119
+// Last Updated: 09.02.2019
 void editcalendarevent::on_buttonBox_accepted()
 {
     // Qstrings

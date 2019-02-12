@@ -258,6 +258,7 @@ void MainWindow::on_pushButton_editEvent_clicked()
 
     // TODO: Call on_listWidget_eventList_itemClicked() to get
     //       current item clicked
+
 }
 
 // Author: Jamie, Nicholas
@@ -273,11 +274,11 @@ void MainWindow::on_pushButton_deleteEvent_clicked()
 // Author: Nicholas
 // Init Date: 09.02.2019
 // Last Updated: 09.02.20119
-QListWidgetItem* MainWindow::on_listWidget_eventList_itemClicked(QListWidgetItem *item)
+QString MainWindow::on_listWidget_eventList_itemClicked(QListWidgetItem *item)
 {
     qDebug() << "eventList: clicked" << item->text();
 
-    return item;
+    return item->text();
 }
 
 // Author: Nicholas
