@@ -29,26 +29,26 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     markdowneditor.cpp \
-    sundown/autolink.c \
-    sundown/buffer.c \
-    sundown/houdini_href_e.c \
-    sundown/houdini_html_e.c \
-    sundown/html.c \
-    sundown/html_smartypants.c \
-    sundown/markdown.c \
-    sundown/stack.c
+    hoedown/autolink.c \
+    hoedown/buffer.c \
+    hoedown/document.c \
+    hoedown/escape.c \
+    hoedown/html.c \
+    hoedown/html_blocks.c \
+    hoedown/html_smartypants.c \
+    hoedown/stack.c \
+    hoedown/version.c
 
 HEADERS += \
-        mainwindow.h \
-    aboutspiralbound.h \
+    mainwindow.h \
     markdowneditor.h \
-    sundown/autolink.h \
-    sundown/buffer.h \
-    sundown/houdini.h \
-    sundown/html.h \
-    sundown/html_blocks.h \
-    sundown/markdown.h \
-    sundown/stack.h \
+    hoedown/autolink.h \
+    hoedown/buffer.h \
+    hoedown/document.h \
+    hoedown/escape.h \
+    hoedown/html.h \
+    hoedown/stack.h \
+    hoedown/version.h \
     aboutspiralbound.h \
     mainwindow.h \
     markdowneditor.h
@@ -66,5 +66,4 @@ RESOURCES += \
     spiralbound.qrc
 
 DISTFILES += \
-    sundown/COPYING \
-    sundown/README
+    hoedown/LICENSE
