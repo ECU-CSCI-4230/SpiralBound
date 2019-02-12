@@ -8,6 +8,7 @@
 #include <QTextCursor>
 #include <QRegularExpression>
 
+
 /**
  * @brief The MarkdownEditor class
  * Markdown editor with basic shortcut keys

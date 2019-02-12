@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "markdowneditor.h"
+
 namespace Ui {
 class MainWindow;
 }

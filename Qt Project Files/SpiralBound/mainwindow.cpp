@@ -115,7 +115,7 @@ void MainWindow::on_action_saveAs_triggered()
 // Last Updated:
 void MainWindow::on_action_bold_triggered()
 {
-
+  //MarkdownEditor::bold()
 }
 
 // Author:
