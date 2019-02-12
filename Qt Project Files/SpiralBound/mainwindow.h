@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QListWidget>
+#include <editcalendarevent.h>
 
 namespace Ui {
 class MainWindow;
@@ -47,12 +48,17 @@ private slots:
     void on_pushButton_addEvent_clicked();
     void on_pushButton_deleteEvent_clicked();
     void on_pushButton_editEvent_clicked();
-    QString on_listWidget_eventList_itemClicked(QListWidgetItem *item);
+    void on_listWidget_eventList_itemClicked(QListWidgetItem *item);
     void on_pushButton_printEventList_clicked();
+
+signals:
+    void sendData(QListWidgetItem *);
 
 private:
     Ui::MainWindow *ui;
     QString file_path_;
+
+    editcalendarevent *editWindow;
 };
 
 #endif // MAINWINDOW_H

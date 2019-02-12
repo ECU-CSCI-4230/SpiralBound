@@ -1,10 +1,14 @@
 #include "editcalendarevent.h"
 #include "ui_editcalendarevent.h"
+#include "mainwindow.h"
 #include <QTextStream>
 #include <QMessageBox>
 #include <iostream>
 #include <string.h>
 #include <stdlib.h>
+#include <QListWidget>
+#include <QtDebug>
+#include <QItemSelectionModel>
 
 editcalendarevent::editcalendarevent(QWidget *parent) :
     QDialog(parent),
@@ -18,7 +22,18 @@ editcalendarevent::~editcalendarevent()
     delete ui;
 }
 
+// Author: Nicholas
+// Init Date: 12.02.2019
+// Last Updated: 12.02.2019
+void editcalendarevent::receiveData(QListWidgetItem * item)
+{
+    //TODO: check if item clicked before edit
 
+    qDebug() << "editcalendarevent: Item " << item->text();
+    ui->lineEdit_eventName->setText(item->text());
+    //ui->dateTimeEdit->setDateTime()
+
+}
 
 // Author: Nicholas, Cam
 // Init Date: 09.02.2019

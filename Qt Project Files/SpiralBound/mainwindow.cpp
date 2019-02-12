@@ -14,6 +14,7 @@
 #include <QColor>
 #include <QListWidget>
 #include <QtDebug>
+#include <QItemSelectionModel>
 
 //================
 // Author:
@@ -249,15 +250,30 @@ void MainWindow::on_pushButton_addEvent_clicked()
 
 // Author: Nicholas
 // Init Date: 09.02.2019
-// Last Updated: 09.02.20119
+// Last Updated: 12.02.20119
 void MainWindow::on_pushButton_editEvent_clicked()
 {
-    editcalendarevent dialogWindow;
-    dialogWindow.setModal(true);
-    dialogWindow.exec();
+    if(ui->listWidget_eventList->currentItem() == nullptr)
+    {
+        QMessageBox messageBox;
+        messageBox.critical(nullptr,"Error","Select event to edit, please try again.");
+        messageBox.setFixedSize(500,200);
+    }
+    else
+    {
+         qDebug() << "mainwindow: Sending item from listWidget_eventList to editcalendarevent";
 
-    // TODO: Call on_listWidget_eventList_itemClicked() to get
-    //       current item clicked
+        // Builds editcalendarevent GUI
+        editWindow = new editcalendarevent(this);
+        editWindow->setModal(true);
+        editWindow->show();
+
+        // Connect mainwindow to editcalendarevent window
+        connect(this, SIGNAL(sendData(QListWidgetItem *)), editWindow, SLOT(receiveData(QListWidgetItem *)));
+
+        QListWidgetItem *item = ui->listWidget_eventList->currentItem();
+        emit sendData(item);
+    }
 
 }
 
@@ -269,16 +285,15 @@ void MainWindow::on_pushButton_deleteEvent_clicked()
     deletecalendarevent dialogWindow;
     dialogWindow.setModal(true);
     dialogWindow.exec();
+
 }
 
 // Author: Nicholas
 // Init Date: 09.02.2019
-// Last Updated: 09.02.20119
-QString MainWindow::on_listWidget_eventList_itemClicked(QListWidgetItem *item)
+// Last Updated: 12.02.20119
+void MainWindow::on_listWidget_eventList_itemClicked(QListWidgetItem *item)
 {
-    qDebug() << "eventList: clicked" << item->text();
-
-    return item->text();
+    qDebug() << "mainwindow: Clicked" << item->text();
 }
 
 // Author: Nicholas
@@ -286,7 +301,7 @@ QString MainWindow::on_listWidget_eventList_itemClicked(QListWidgetItem *item)
 // Last Updated: 09.02.20119
 void MainWindow::on_pushButton_printEventList_clicked()
 {
-    qDebug("eventList:");
+    qDebug("mainwindow: listWidget_eventList:");
 
     for(int i = 0; i < ui->listWidget_eventList->count(); i++)
     {
