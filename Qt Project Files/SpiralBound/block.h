@@ -4,17 +4,18 @@
 
 class Block
 {
-public:
-    Block();
-    Type getType();
-    QString getContent();
-    void setType(Type p);
-    void setContent(QString con);
+    public:
+        const short TYPE_TEXT = 0, TYPE_CODE = 1;
 
-private:
-    QString content;
-    // Type
+        Block();
+        short getType();
+        QString getContent();
+        void setType(short p);
+        void setContent(QString con);
 
+    private:
+        QString content;
+        short type;
 };
 
 #endif // BLOCK_H

@@ -1,76 +1,51 @@
 #include "section.h"
 
+// Author:       Ketu Patel, Matthew Morgan
+// Init date:    02-02-2019
+// Last Updated: 02-12-2019
 Section::Section(QString nm, QString ds)
 {
     secName = nm;
-    desc= ds;
-    Section* next;
+    desc = ds;
+    pages = new list<Page*>();
 }
 
-// Author: Ketu Patel
-// Init date: 02/02/2019
-// Last Updated:
-QString Section::getSecName()
-{
-    return secName;
-}
+// Author:       Ketu Patel
+// Init date:    02-02-2019
+// Last Updated: 02-02-2019
+QString Section::getSecName() { return secName; }
 
-// Author: Ketu Patel
-// Init date: 02/02/2019
-// Last Updated:
-QString Section::getDesc()
-{
-    return desc;
-}
+// Author:       Ketu Patel
+// Init date:    02-02-2019
+// Last Updated: 02-02-2019
+QString Section::getDesc() { return desc; }
 
-// Author:
-// Init date:
-// Last Updated:
-Page *Section::getPage(Page pg)
-{
+// Author:       Ketu Patel
+// Init date:    02-02-2019
+// Last Updated: 02-02-2019
+void Section::setName(QString nm) { secName = nm; }
 
-}
+// Author:       Ketu Patel
+// Init date:    02-02-2019
+// Last Updated: 02-02-2019
+void Section::setDesc(QString dc) { desc = dc; }
 
-// Author:
-// Init date:
-// Last Updated:
-void Section::addPage(QString nm)
-{
+// Author:       Ketu Patel, Matthew Morgan
+// Init date:    02-02-2019
+// Last Updated: 02-12-2019
+Page* Section::getPage(int index) {}
 
-}
+// Author:       Ketu Patel
+// Init date:    02-02-2019
+// Last Updated: 02-02-2019
+void Section::addPage(QString nm) {}
 
-// Author:
-// Init date:
-// Last Updated:
-void Section::removePage(Page pg)
-{
+// Author:       Ketu Patel, Matthew Morgan
+// Init date:    02-02-2019
+// Last Updated: 02-12-2019
+void Section::removePage(int index) {}
 
-}
-
-// Author: Ketu Patel
-// Init date: 02/02/2019
-// Last Updated:
-void Section::renameSec(QString s)
-{
-    secName = s;
-}
-
-// Author: Ketu Patel
-// Init date: 02/02/2019
-// Last Updated:
-void Section::setName(QString nm)
-{
-    secName = nm;
-}
-
-// Author: Ketu Patel
-// Init date: 02/02/2019
-// Last Updated:
-void Section::setDesc(QString dc)
-{
-    desc = dc;
-}
-
-
-
-
+// Author:       Matthew Morgan
+// Init date:    02-12-2019
+// Last Updated: 02-12-2019
+int Section::numPages() {}

@@ -1,71 +1,39 @@
 #include "page.h"
 
+// Author:       Ketu Patel
+// Init date:    02-02-2019
+// Last Updated: 02-02-2019
 Page::Page()
 {
     pageName = "default";
-
 }
 
-// Author:
-// Init date:
-// Last Updated:
-Page* next(){
+// Author:       Ketu Patel
+// Init date:    02-02-2019
+// Last Updated: 02-02-2019
+QString Page::getPageName() { return pageName; }
 
-}
+// Author:       Ketu Patel
+// Init date:    02-02-2019
+// Last Updated: 02-02-2019
+QDate Page::getDate() { return date; }
 
-// Author: Ketu Patel
-// Init date: 02/02/2019
-// Last Updated:
-QString Page::getPageName()
-{
-    return pageName;
-}
+// Author:       Ketu Patel
+// Init date:    02-02-2019
+// Last Updated: 02-02-2019
+void Page::setPgName(QString nm) { pageName = nm; }
 
-// Author: Ketu Patel
-// Init date: 02/02/2019
-// Last Updated:
-QDate Page::getDate()
-{
-    return date;
-}
+// Author:       Ketu Patel
+// Init date:    02-02-2019
+// Last Updated: 02-02-2019
+Block* Page::getBlock(int index) {}
 
-// Author:
-// Init date:
-// Last Updated:
-Block Page::getBlock()
-{
+// Author:       Ketu Patel, Matthew Morgan
+// Init date:    02-02-2019
+// Last Updated: 02-12-2019
+void Page::addBlock(short type) {}
 
-}
-
-// Author: Ketu Patel
-// Init date: 02/02/2019
-// Last Updated:
-void Page::setPgName(QString nm)
-{
-    pageName = nm;
-}
-
-// Author: Ketu Patel
-// Init date: 02/02/2019
-// Last Updated:
-void Page::renamePg(QString nm)
-{
-    pageName = nm;
-}
-
-// Author:
-// Init date:
-// Last Updated:
-void Page::addBlock()
-{
-
-}
-
-// Author:
-// Init date:
-// Last Updated:
-void Page::removeBlock(int i)
-{
-
-}
-
+// Author:       Ketu Patel
+// Init date:    02-02-2019
+// Last Updated: 02-02-2019
+void Page::removeBlock(int index) {}

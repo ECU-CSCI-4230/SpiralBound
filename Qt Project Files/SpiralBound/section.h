@@ -1,38 +1,42 @@
 #ifndef SECTION_H
 #define SECTION_H
 #include <QStringRef>
-#include <linkedlist.h>
 #include <page.h>
+#include <list>
+
+using namespace std;
 
 class Section
 {
-public:
-    Section(QString sc, QString ds);
-    Section * next(){
-        return nxt;
-    }
-
-     Section(){
-         secName = "Default";
-         desc = "Default";
+    public:
+        Section(QString sc, QString ds);
+        Section() {
+            secName = "Default";
+            desc = "Default";
         }
 
-    QString getSecName();
-    QString getDesc();
-    Page* getPage(Page pg);
-    void addPage(QString nm);
-    void removePage(Page pg);
-    void renameSec(QString s);
-    void setName(QString nm);
-    void setDesc(QString dc);
+        QString getSecName();
+        QString getDesc();
+        void setName(QString nm);
+        void setDesc(QString dc);
 
+        /** getPage(index) returns the page at the given index in the list
+          * of pages for the section. */
+        Page* getPage(int index);
 
-private:
-    QString secName;
-    QString desc;
-    Section* nxt;
-    Page* pge;
+        /** addPage(nm) adds a page with the given name to the list of pages. */
+        void addPage(QString nm);
 
+        /** removePage(index) removes the specified page in the list of pages. */
+        void removePage(int index);
+
+        /** numPages() returns the number of pages in this section. */
+        int numPages();
+
+    private:
+        QString secName;
+        QString desc;
+        list<Page*>* pages;
 };
 
 #endif // SECTION_H
