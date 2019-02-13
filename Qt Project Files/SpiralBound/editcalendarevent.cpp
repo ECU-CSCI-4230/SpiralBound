@@ -27,11 +27,9 @@ editcalendarevent::~editcalendarevent()
 // Last Updated: 12.02.2019
 void editcalendarevent::receiveData(QListWidgetItem * item)
 {
-    //TODO: check if item clicked before edit
-
     qDebug() << "editcalendarevent: Item received" << item->text();
     ui->lineEdit_eventName->setText(item->text());
-    //ui->dateTimeEdit->setDateTime()
+    //TODO: ui->dateTimeEdit->setDateTime()
 
 }
 
