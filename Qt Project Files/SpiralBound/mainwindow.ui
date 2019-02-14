@@ -71,7 +71,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QListWidget" name="listWidget_eventList">
+     <widget class="QTableWidget" name="tableWidget_eventList">
       <property name="geometry">
        <rect>
         <x>510</x>
@@ -85,36 +85,27 @@
         <pointsize>12</pointsize>
        </font>
       </property>
-      <item>
+      <attribute name="horizontalHeaderCascadingSectionResizes">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>136</number>
+      </attribute>
+      <column>
        <property name="text">
-        <string>Event0</string>
+        <string>Date</string>
        </property>
-      </item>
-      <item>
+      </column>
+      <column>
        <property name="text">
-        <string>Event1 </string>
+        <string>Name</string>
        </property>
-      </item>
-      <item>
+      </column>
+      <column>
        <property name="text">
-        <string>Event2</string>
+        <string>Time</string>
        </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Event3</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Event4</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Event5</string>
-       </property>
-      </item>
+      </column>
      </widget>
      <widget class="QPushButton" name="pushButton_addEvent">
       <property name="geometry">

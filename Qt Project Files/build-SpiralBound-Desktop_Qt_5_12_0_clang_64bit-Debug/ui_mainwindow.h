@@ -14,14 +14,15 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCalendarWidget>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
@@ -61,7 +62,7 @@ public:
     QTextEdit *textEdit;
     QWidget *tab_2;
     QCalendarWidget *calendarWidget;
-    QListWidget *listWidget_eventList;
+    QTableWidget *tableWidget_eventList;
     QPushButton *pushButton_addEvent;
     QPushButton *pushButton_deleteEvent;
     QPushButton *pushButton_editEvent;
@@ -153,18 +154,22 @@ public:
         calendarWidget = new QCalendarWidget(tab_2);
         calendarWidget->setObjectName(QString::fromUtf8("calendarWidget"));
         calendarWidget->setGeometry(QRect(0, 0, 501, 531));
-        listWidget_eventList = new QListWidget(tab_2);
-        new QListWidgetItem(listWidget_eventList);
-        new QListWidgetItem(listWidget_eventList);
-        new QListWidgetItem(listWidget_eventList);
-        new QListWidgetItem(listWidget_eventList);
-        new QListWidgetItem(listWidget_eventList);
-        new QListWidgetItem(listWidget_eventList);
-        listWidget_eventList->setObjectName(QString::fromUtf8("listWidget_eventList"));
-        listWidget_eventList->setGeometry(QRect(510, 50, 411, 361));
+        tableWidget_eventList = new QTableWidget(tab_2);
+        if (tableWidget_eventList->columnCount() < 3)
+            tableWidget_eventList->setColumnCount(3);
+        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        tableWidget_eventList->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+        tableWidget_eventList->setHorizontalHeaderItem(1, __qtablewidgetitem1);
+        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        tableWidget_eventList->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+        tableWidget_eventList->setObjectName(QString::fromUtf8("tableWidget_eventList"));
+        tableWidget_eventList->setGeometry(QRect(510, 50, 411, 361));
         QFont font;
         font.setPointSize(12);
-        listWidget_eventList->setFont(font);
+        tableWidget_eventList->setFont(font);
+        tableWidget_eventList->horizontalHeader()->setCascadingSectionResizes(false);
+        tableWidget_eventList->horizontalHeader()->setDefaultSectionSize(136);
         pushButton_addEvent = new QPushButton(tab_2);
         pushButton_addEvent->setObjectName(QString::fromUtf8("pushButton_addEvent"));
         pushButton_addEvent->setGeometry(QRect(510, 420, 131, 28));
@@ -283,23 +288,12 @@ public:
         action_export->setText(QApplication::translate("MainWindow", "Export", nullptr));
         action_quit->setText(QApplication::translate("MainWindow", "Quit", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "TextEditor", nullptr));
-
-        const bool __sortingEnabled = listWidget_eventList->isSortingEnabled();
-        listWidget_eventList->setSortingEnabled(false);
-        QListWidgetItem *___qlistwidgetitem = listWidget_eventList->item(0);
-        ___qlistwidgetitem->setText(QApplication::translate("MainWindow", "Event0 02/20/2019 12:00 PM", nullptr));
-        QListWidgetItem *___qlistwidgetitem1 = listWidget_eventList->item(1);
-        ___qlistwidgetitem1->setText(QApplication::translate("MainWindow", "Event1 03/20/2019 12:00 PM", nullptr));
-        QListWidgetItem *___qlistwidgetitem2 = listWidget_eventList->item(2);
-        ___qlistwidgetitem2->setText(QApplication::translate("MainWindow", "Event2 04/20/2019 12:00 PM", nullptr));
-        QListWidgetItem *___qlistwidgetitem3 = listWidget_eventList->item(3);
-        ___qlistwidgetitem3->setText(QApplication::translate("MainWindow", "Event3 05/20/2019 12:00 PM", nullptr));
-        QListWidgetItem *___qlistwidgetitem4 = listWidget_eventList->item(4);
-        ___qlistwidgetitem4->setText(QApplication::translate("MainWindow", "Event4 06/20/2019 12:00 PM", nullptr));
-        QListWidgetItem *___qlistwidgetitem5 = listWidget_eventList->item(5);
-        ___qlistwidgetitem5->setText(QApplication::translate("MainWindow", "Event5 07/20/2019 12:00 PM", nullptr));
-        listWidget_eventList->setSortingEnabled(__sortingEnabled);
-
+        QTableWidgetItem *___qtablewidgetitem = tableWidget_eventList->horizontalHeaderItem(0);
+        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "Date", nullptr));
+        QTableWidgetItem *___qtablewidgetitem1 = tableWidget_eventList->horizontalHeaderItem(1);
+        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "Name", nullptr));
+        QTableWidgetItem *___qtablewidgetitem2 = tableWidget_eventList->horizontalHeaderItem(2);
+        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "Time", nullptr));
         pushButton_addEvent->setText(QApplication::translate("MainWindow", "Add", nullptr));
         pushButton_deleteEvent->setText(QApplication::translate("MainWindow", "Delete", nullptr));
         pushButton_editEvent->setText(QApplication::translate("MainWindow", "Edit", nullptr));

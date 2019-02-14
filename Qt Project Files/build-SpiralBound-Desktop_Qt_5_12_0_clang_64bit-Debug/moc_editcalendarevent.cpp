@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_editcalendarevent_t {
     QByteArrayData data[5];
-    char stringdata0[70];
+    char stringdata0[71];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,11 +35,11 @@ QT_MOC_LITERAL(0, 0, 17), // "editcalendarevent"
 QT_MOC_LITERAL(1, 18, 21), // "on_buttonBox_accepted"
 QT_MOC_LITERAL(2, 40, 0), // ""
 QT_MOC_LITERAL(3, 41, 11), // "receiveData"
-QT_MOC_LITERAL(4, 53, 16) // "QListWidgetItem*"
+QT_MOC_LITERAL(4, 53, 17) // "QTableWidgetItem*"
 
     },
     "editcalendarevent\0on_buttonBox_accepted\0"
-    "\0receiveData\0QListWidgetItem*"
+    "\0receiveData\0QTableWidgetItem*"
 };
 #undef QT_MOC_LITERAL
 
@@ -74,7 +74,7 @@ void editcalendarevent::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->on_buttonBox_accepted(); break;
-        case 1: _t->receiveData((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
+        case 1: _t->receiveData((*reinterpret_cast< QTableWidgetItem*(*)>(_a[1]))); break;
         default: ;
         }
     }

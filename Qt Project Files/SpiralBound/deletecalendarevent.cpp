@@ -20,3 +20,4 @@ void deletecalendarevent::on_buttonBox_accepted()
 {
 
 }
+

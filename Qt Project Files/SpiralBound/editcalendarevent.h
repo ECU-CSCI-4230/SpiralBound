@@ -2,7 +2,7 @@
 #define EDITCALENDAREVENT_H
 
 #include <QDialog>
-#include <QListWidget>
+#include <QTableWidget>
 
 
 namespace Ui {
@@ -19,7 +19,7 @@ public:
 
 private slots:
     void on_buttonBox_accepted();
-    void receiveData(QListWidgetItem *);
+    void receiveData(QTableWidgetItem *);
 
 private:
     Ui::editcalendarevent *ui;

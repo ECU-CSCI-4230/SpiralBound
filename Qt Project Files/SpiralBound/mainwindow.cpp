@@ -12,9 +12,9 @@
 #include <QFont>
 #include <QColorDialog>
 #include <QColor>
-#include <QListWidget>
 #include <QtDebug>
 #include <QItemSelectionModel>
+#include <QTableWidget>
 
 //================
 // Author:
@@ -255,7 +255,7 @@ void MainWindow::on_pushButton_addEvent_clicked()
 void MainWindow::on_pushButton_editEvent_clicked()
 {
     // If user did not select an event from the event list
-    if(ui->listWidget_eventList->currentItem() == nullptr)
+    if(ui->tableWidget_eventList->currentItem() == nullptr)
     {
         QMessageBox messageBox;
         messageBox.critical(nullptr,"Error","Select event to edit, please try again.");
@@ -271,10 +271,10 @@ void MainWindow::on_pushButton_editEvent_clicked()
         editWindow->show();
 
         // Connect mainwindow to editcalendarevent window
-        connect(this, SIGNAL(sendData(QListWidgetItem *)), editWindow, SLOT(receiveData(QListWidgetItem *)));
+        connect(this, SIGNAL(sendData(QTableWidgetItem *)), editWindow, SLOT(receiveData(QTableWidgetItem *)));
 
         // Send selected item to editcalendarevent window
-        QListWidgetItem *item = ui->listWidget_eventList->currentItem();
+        QTableWidgetItem *item = ui->tableWidget_eventList->currentItem();
         emit sendData(item);
     }
 }
@@ -288,16 +288,20 @@ void MainWindow::on_pushButton_deleteEvent_clicked()
     deletecalendarevent dialogWindow;
     dialogWindow.setModal(true);
     dialogWindow.exec();
+
+    // receive 1 from deletecalendarevent.cpp
+
 }
 
 // Author: Nicholas
 // Init Date: 09.02.2019
 // Last Updated: 12.02.20119
-void MainWindow::on_listWidget_eventList_itemClicked(QListWidgetItem *item)
+/* void MainWindow::on_listWidget_eventList_itemClicked(QTableWidgetItem *item)
 {
     // Print current item clicked in event list
     qDebug() << "mainwindow: Clicked" << item->text();
 }
+*/
 
 // Author: Nicholas
 // Init Date: 09.02.2019
@@ -307,9 +311,4 @@ void MainWindow::on_pushButton_printEventList_clicked()
     qDebug("mainwindow: listWidget_eventList:");
 
     // Print all items in event list
-    for(int i = 0; i < ui->listWidget_eventList->count(); i++)
-    {
-        QListWidgetItem* item = ui->listWidget_eventList->item(i);
-        qDebug() << item->text();
-    }
 }
