@@ -87,32 +87,32 @@
       </property>
       <item>
        <property name="text">
-        <string>Event0 02/20/2019 12:00 PM</string>
+        <string>Event0</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Event1 03/20/2019 12:00 PM</string>
+        <string>Event1 </string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Event2 04/20/2019 12:00 PM</string>
+        <string>Event2</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Event3 05/20/2019 12:00 PM</string>
+        <string>Event3</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Event4 06/20/2019 12:00 PM</string>
+        <string>Event4</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Event5 07/20/2019 12:00 PM</string>
+        <string>Event5</string>
        </property>
       </item>
      </widget>
