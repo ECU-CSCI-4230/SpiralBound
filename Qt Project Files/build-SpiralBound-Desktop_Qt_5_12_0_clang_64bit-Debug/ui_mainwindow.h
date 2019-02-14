@@ -287,17 +287,17 @@ public:
         const bool __sortingEnabled = listWidget_eventList->isSortingEnabled();
         listWidget_eventList->setSortingEnabled(false);
         QListWidgetItem *___qlistwidgetitem = listWidget_eventList->item(0);
-        ___qlistwidgetitem->setText(QApplication::translate("MainWindow", "Event0", nullptr));
+        ___qlistwidgetitem->setText(QApplication::translate("MainWindow", "Event0 02/20/2019 12:00 PM", nullptr));
         QListWidgetItem *___qlistwidgetitem1 = listWidget_eventList->item(1);
-        ___qlistwidgetitem1->setText(QApplication::translate("MainWindow", "Event1", nullptr));
+        ___qlistwidgetitem1->setText(QApplication::translate("MainWindow", "Event1 03/20/2019 12:00 PM", nullptr));
         QListWidgetItem *___qlistwidgetitem2 = listWidget_eventList->item(2);
-        ___qlistwidgetitem2->setText(QApplication::translate("MainWindow", "Event2", nullptr));
+        ___qlistwidgetitem2->setText(QApplication::translate("MainWindow", "Event2 04/20/2019 12:00 PM", nullptr));
         QListWidgetItem *___qlistwidgetitem3 = listWidget_eventList->item(3);
-        ___qlistwidgetitem3->setText(QApplication::translate("MainWindow", "Event3", nullptr));
+        ___qlistwidgetitem3->setText(QApplication::translate("MainWindow", "Event3 05/20/2019 12:00 PM", nullptr));
         QListWidgetItem *___qlistwidgetitem4 = listWidget_eventList->item(4);
-        ___qlistwidgetitem4->setText(QApplication::translate("MainWindow", "Event4", nullptr));
+        ___qlistwidgetitem4->setText(QApplication::translate("MainWindow", "Event4 06/20/2019 12:00 PM", nullptr));
         QListWidgetItem *___qlistwidgetitem5 = listWidget_eventList->item(5);
-        ___qlistwidgetitem5->setText(QApplication::translate("MainWindow", "Event5", nullptr));
+        ___qlistwidgetitem5->setText(QApplication::translate("MainWindow", "Event5 07/20/2019 12:00 PM", nullptr));
         listWidget_eventList->setSortingEnabled(__sortingEnabled);
 
         pushButton_addEvent->setText(QApplication::translate("MainWindow", "Add", nullptr));

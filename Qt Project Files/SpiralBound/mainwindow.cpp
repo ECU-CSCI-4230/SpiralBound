@@ -243,6 +243,7 @@ void MainWindow::on_action_quit_triggered()
 // Last Updated: 05.02.2019
 void MainWindow::on_pushButton_addEvent_clicked()
 {
+    // Builds addcalendarevent GUI/window
     addcalendarevent dialogWindow;
     dialogWindow.setModal(true);
     dialogWindow.exec();
@@ -250,9 +251,10 @@ void MainWindow::on_pushButton_addEvent_clicked()
 
 // Author: Nicholas
 // Init Date: 09.02.2019
-// Last Updated: 12.02.20119
+// Last Updated: 14.02.20119
 void MainWindow::on_pushButton_editEvent_clicked()
 {
+    // If user did not select an event from the event list
     if(ui->listWidget_eventList->currentItem() == nullptr)
     {
         QMessageBox messageBox;
@@ -263,7 +265,7 @@ void MainWindow::on_pushButton_editEvent_clicked()
     {
          qDebug() << "mainwindow: Sending item from listWidget_eventList to editcalendarevent";
 
-        // Builds editcalendarevent GUI
+        // Builds editcalendarevent GUI/window
         editWindow = new editcalendarevent(this);
         editWindow->setModal(true);
         editWindow->show();
@@ -271,10 +273,10 @@ void MainWindow::on_pushButton_editEvent_clicked()
         // Connect mainwindow to editcalendarevent window
         connect(this, SIGNAL(sendData(QListWidgetItem *)), editWindow, SLOT(receiveData(QListWidgetItem *)));
 
+        // Send selected item to editcalendarevent window
         QListWidgetItem *item = ui->listWidget_eventList->currentItem();
         emit sendData(item);
     }
-
 }
 
 // Author: Jamie, Nicholas
@@ -282,10 +284,10 @@ void MainWindow::on_pushButton_editEvent_clicked()
 // Last Updated: 07.02.20119
 void MainWindow::on_pushButton_deleteEvent_clicked()
 {
+    // Builds deletecalendarevent GUI/window
     deletecalendarevent dialogWindow;
     dialogWindow.setModal(true);
     dialogWindow.exec();
-
 }
 
 // Author: Nicholas
@@ -293,6 +295,7 @@ void MainWindow::on_pushButton_deleteEvent_clicked()
 // Last Updated: 12.02.20119
 void MainWindow::on_listWidget_eventList_itemClicked(QListWidgetItem *item)
 {
+    // Print current item clicked in event list
     qDebug() << "mainwindow: Clicked" << item->text();
 }
 
@@ -303,6 +306,7 @@ void MainWindow::on_pushButton_printEventList_clicked()
 {
     qDebug("mainwindow: listWidget_eventList:");
 
+    // Print all items in event list
     for(int i = 0; i < ui->listWidget_eventList->count(); i++)
     {
         QListWidgetItem* item = ui->listWidget_eventList->item(i);

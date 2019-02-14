@@ -10,8 +10,15 @@
     <height>160</height>
    </rect>
   </property>
+  <property name="acceptDrops">
+   <bool>false</bool>
+  </property>
   <property name="windowTitle">
    <string>Edit Event</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="spiralbound.qrc">
+    <normaloff>:/SpiralBound/images/icon.png</normaloff>:/SpiralBound/images/icon.png</iconset>
   </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
@@ -79,7 +86,9 @@
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="spiralbound.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

@@ -61,6 +61,7 @@ public:
     void retranslateUi(QDialog *editcalendarevent)
     {
         editcalendarevent->setWindowTitle(QApplication::translate("editcalendarevent", "Edit Event", nullptr));
+        dateTimeEdit->setDisplayFormat(QApplication::translate("editcalendarevent", "MM/dd/yyyy hh:mm AP", nullptr));
         label_eventDate->setText(QApplication::translate("editcalendarevent", "Event Date/Time", nullptr));
         label_eventName->setText(QApplication::translate("editcalendarevent", "Event Name", nullptr));
     } // retranslateUi
