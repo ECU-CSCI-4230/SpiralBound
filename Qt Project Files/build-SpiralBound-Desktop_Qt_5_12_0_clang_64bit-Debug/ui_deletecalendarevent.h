@@ -10,6 +10,7 @@
 #define UI_DELETECALENDAREVENT_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
@@ -28,6 +29,9 @@ public:
         if (deletecalendarevent->objectName().isEmpty())
             deletecalendarevent->setObjectName(QString::fromUtf8("deletecalendarevent"));
         deletecalendarevent->resize(400, 106);
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/SpiralBound/images/icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        deletecalendarevent->setWindowIcon(icon);
         buttonBox = new QDialogButtonBox(deletecalendarevent);
         buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
         buttonBox->setGeometry(QRect(30, 70, 341, 32));

@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Delete Event</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="spiralbound.qrc">
+    <normaloff>:/SpiralBound/images/icon.png</normaloff>:/SpiralBound/images/icon.png</iconset>
+  </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
@@ -43,7 +47,9 @@
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="spiralbound.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

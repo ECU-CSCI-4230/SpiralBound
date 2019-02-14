@@ -10,6 +10,7 @@
 #define UI_ABOUTSPIRALBOUND_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QLabel>
@@ -29,6 +30,9 @@ public:
         if (AboutSpiralBound->objectName().isEmpty())
             AboutSpiralBound->setObjectName(QString::fromUtf8("AboutSpiralBound"));
         AboutSpiralBound->resize(350, 200);
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/SpiralBound/images/icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        AboutSpiralBound->setWindowIcon(icon);
         AboutSpiralBound->setModal(false);
         pushButton_ok = new QPushButton(AboutSpiralBound);
         pushButton_ok->setObjectName(QString::fromUtf8("pushButton_ok"));

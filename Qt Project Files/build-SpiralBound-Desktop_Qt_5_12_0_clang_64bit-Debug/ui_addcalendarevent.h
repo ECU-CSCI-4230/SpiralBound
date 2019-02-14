@@ -10,6 +10,7 @@
 #define UI_ADDCALENDAREVENT_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDateTimeEdit>
 #include <QtWidgets/QDialog>
@@ -33,6 +34,9 @@ public:
         if (addcalendarevent->objectName().isEmpty())
             addcalendarevent->setObjectName(QString::fromUtf8("addcalendarevent"));
         addcalendarevent->resize(447, 160);
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/SpiralBound/images/icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        addcalendarevent->setWindowIcon(icon);
         buttonBox = new QDialogButtonBox(addcalendarevent);
         buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
         buttonBox->setGeometry(QRect(90, 120, 341, 32));
