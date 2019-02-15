@@ -4,7 +4,6 @@ release/aboutspiralbound.o
 release/book.o
 release/section.o
 release/page.o
-release/linkedlist.o
 release/block.o
 release/moc_mainwindow.o
 release/moc_aboutspiralbound.o

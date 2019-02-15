@@ -1,6 +1,6 @@
 #include "block.h"
 
-Block::Block() {}
+Block::Block() { type = TYPE_TEXT; content = ""; }
 
 // Author:       Matthew Morgan
 // Init date:    02-12-2019
@@ -15,7 +15,9 @@ QString Block::getContent() { return content; }
 // Author:       Matthew Morgan
 // Init date:    02-12-2019
 // Last Updated: 02-12-2019
-void Block::setType(short p) {}
+void Block::setType(short p) {
+    type = p;
+}
 
 // Author:       Matthew Morgan
 // Init date:    02-12-2019

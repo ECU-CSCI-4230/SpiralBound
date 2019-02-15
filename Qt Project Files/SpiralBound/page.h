@@ -12,6 +12,7 @@ class Page
 {
     public:
         Page();
+        Page(QString pg);
         QString getPageName();
         QDate getDate();
         void setPgName(QString nm);

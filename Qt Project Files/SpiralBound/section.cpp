@@ -33,19 +33,37 @@ void Section::setDesc(QString dc) { desc = dc; }
 // Author:       Ketu Patel, Matthew Morgan
 // Init date:    02-02-2019
 // Last Updated: 02-12-2019
-Page* Section::getPage(int index) {}
+Page* Section::getPage(int index) {
+
+    if (index < 0 || index > (int)pages->size()-1) { return nullptr; }
+
+    auto it = pages->begin();
+    advance(it, index);
+    return *it;
+}
 
 // Author:       Ketu Patel
 // Init date:    02-02-2019
 // Last Updated: 02-02-2019
-void Section::addPage(QString nm) {}
+void Section::addPage(QString nm) {
+    pages->push_back(new Page(nm));
+}
 
 // Author:       Ketu Patel, Matthew Morgan
 // Init date:    02-02-2019
 // Last Updated: 02-12-2019
-void Section::removePage(int index) {}
+void Section::removePage(int index) {
+
+    if (index < 0 || index > (int) pages->size()-1) { return; }
+
+    auto it = pages->begin();
+    advance(it, index);
+    pages->erase(it);
+}
 
 // Author:       Matthew Morgan
 // Init date:    02-12-2019
 // Last Updated: 02-12-2019
-int Section::numPages() {}
+int Section::numPages() {
+    return (int) pages->size();
+}

@@ -31,7 +31,6 @@ SOURCES += \
     book.cpp \
     section.cpp \
     page.cpp \
-    linkedlist.cpp \
     block.cpp
 
 HEADERS += \
@@ -41,7 +40,6 @@ HEADERS += \
     book.h \
     section.h \
     page.h \
-    linkedlist.h \
     block.h
 
 FORMS += \

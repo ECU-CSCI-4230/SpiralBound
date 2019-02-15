@@ -13,6 +13,7 @@
 #include <QListWidget>
 #include <QListWidget>
 #include <thewidgetitem.h>
+#include <book.h>
 
 // Constructor
 MainWindow::MainWindow(QWidget *parent) :
@@ -230,7 +231,12 @@ void MainWindow::on_action_quit_triggered()
 
 void MainWindow::on_pushButton_clicked()
 {
+    Book *s = new Book("KiddingBook", "AuthorKid");
+    s->addSection("Route", "k2");
 
+    QString l = s->getName();
+
+  qDebug("abc" + l.toLatin1() + "def");
 }
 
 

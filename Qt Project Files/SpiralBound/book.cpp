@@ -1,6 +1,7 @@
 #include "book.h"
 #include <section.h>
 #include <list>
+#include <map>
 
 using namespace std;
 
@@ -43,19 +44,38 @@ void Book::setName(QString nm){ bookName = nm; };
 // Author:       Matthew Morgan
 // Init date:    02-12-2019
 // Last Updated: 02-12-2019
-int Book::numSections() {}
+int Book::numSections() {
+
+    return (int)bookList->size();
+}
 
 // Author:       Ketu Patel
 // Init date:    02-02-2019
 // Last Updated: 02-12-2019
-Section* Book::getSection(int index) {}
+Section* Book::getSection(int index) {
+    if (index < 0 || index > (int)bookList->size()-1) { return nullptr; }
+
+    auto it = bookList->begin();
+    advance(it, index);
+    return *it;
+}
 
 // Author:       Ketu Patel
 // Init date:    02-02-2019
 // Last Updated: 02-12-2019
-void Book:: removeSection(int index) {}
+void Book:: removeSection(int index) {
+    if (index < 0 || index > (int)bookList->size()-1) { return; }
+
+    auto it = bookList->begin();
+    advance(it, index);
+    bookList->erase(it);
+}
 
 // Author:       Ketu Patel
 // Init date:    02-02-2019
 // Last Updated: 02-12-2019
-void Book::addSection(QString name, QString desc) {}
+void Book::addSection(QString name, QString desc) {
+    bookList->push_back(new Section(name, desc));
+}
+
+
