@@ -54,6 +54,9 @@ private slots:
     // Receive addcalendarevent data to mainwindow
     void receiveAddData(QString, QString);
 
+    // Stretch tableWidget_eventList headers to fit window
+    void stretchTableHeaders();
+
 private:
     Ui::MainWindow *ui;
     QString file_path_;

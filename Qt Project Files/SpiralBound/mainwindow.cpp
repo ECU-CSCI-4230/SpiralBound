@@ -325,3 +325,16 @@ void MainWindow::on_pushButton_printEventList_clicked()
 
     // Print all items in event list
 }
+
+
+void MainWindow::stretchTableHeaders()
+{
+    // Stretches the horizontal header of tableWidget_eventList
+    QHeaderView* header = ui->tableWidget_eventList->horizontalHeader();
+    header->setSectionResizeMode(QHeaderView::Stretch);
+}
+
+
+
+
+
