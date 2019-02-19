@@ -82,7 +82,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(936, 642);
+        MainWindow->resize(943, 642);
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/SpiralBound/images/icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         MainWindow->setWindowIcon(icon);
@@ -139,7 +139,7 @@ public:
         tabWidget = new QTabWidget(centralWidget);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
         tabWidget->setEnabled(true);
-        tabWidget->setGeometry(QRect(0, 10, 931, 561));
+        tabWidget->setGeometry(QRect(0, 10, 941, 561));
         tabWidget->setTabPosition(QTabWidget::North);
         tabWidget->setElideMode(Qt::ElideNone);
         tabWidget->setDocumentMode(false);
@@ -165,11 +165,23 @@ public:
         tableWidget_eventList->setHorizontalHeaderItem(2, __qtablewidgetitem2);
         tableWidget_eventList->setObjectName(QString::fromUtf8("tableWidget_eventList"));
         tableWidget_eventList->setGeometry(QRect(510, 50, 411, 361));
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(tableWidget_eventList->sizePolicy().hasHeightForWidth());
+        tableWidget_eventList->setSizePolicy(sizePolicy);
         QFont font;
         font.setPointSize(12);
         tableWidget_eventList->setFont(font);
+        tableWidget_eventList->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        tableWidget_eventList->setSizeAdjustPolicy(QAbstractScrollArea::AdjustIgnored);
+        tableWidget_eventList->setAutoScrollMargin(16);
+        tableWidget_eventList->setShowGrid(true);
+        tableWidget_eventList->setGridStyle(Qt::DotLine);
+        tableWidget_eventList->setSortingEnabled(true);
         tableWidget_eventList->horizontalHeader()->setCascadingSectionResizes(false);
         tableWidget_eventList->horizontalHeader()->setDefaultSectionSize(136);
+        tableWidget_eventList->horizontalHeader()->setMinimumSectionSize(5);
         pushButton_addEvent = new QPushButton(tab_2);
         pushButton_addEvent->setObjectName(QString::fromUtf8("pushButton_addEvent"));
         pushButton_addEvent->setGeometry(QRect(510, 420, 131, 28));
@@ -194,7 +206,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 936, 22));
+        menuBar->setGeometry(QRect(0, 0, 943, 22));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuEdit = new QMenu(menuBar);

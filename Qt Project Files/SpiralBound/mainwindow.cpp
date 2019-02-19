@@ -250,8 +250,12 @@ void MainWindow::receiveAddData(QString eventName, QString eventDateTime)
     QString date = datetime[0];
     QString time = datetime[1].append(" ").append(datetime[2]);
 
-    // TODO: add eventName and eventDateTime to the top of the table
-    qDebug() << date << time;
+    // Create row
+    ui->tableWidget_eventList->insertRow (ui->tableWidget_eventList->rowCount() );
+    // Populate row
+    ui->tableWidget_eventList->setItem(ui->tableWidget_eventList->rowCount()-1, 0, new QTableWidgetItem(date));
+    ui->tableWidget_eventList->setItem(ui->tableWidget_eventList->rowCount()-1, 1, new QTableWidgetItem(eventName));
+    ui->tableWidget_eventList->setItem(ui->tableWidget_eventList->rowCount()-1, 2, new QTableWidgetItem(time));
 }
 
 // Author: Nicholas, Cam, Jamie

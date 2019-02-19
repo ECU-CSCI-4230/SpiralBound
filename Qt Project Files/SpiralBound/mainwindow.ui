@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>936</width>
+    <width>943</width>
     <height>642</height>
    </rect>
   </property>
@@ -26,7 +26,7 @@
      <rect>
       <x>0</x>
       <y>10</y>
-      <width>931</width>
+      <width>941</width>
       <height>561</height>
      </rect>
     </property>
@@ -80,16 +80,43 @@
         <height>361</height>
        </rect>
       </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <pointsize>12</pointsize>
        </font>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="sizeAdjustPolicy">
+       <enum>QAbstractScrollArea::AdjustIgnored</enum>
+      </property>
+      <property name="autoScrollMargin">
+       <number>16</number>
+      </property>
+      <property name="showGrid">
+       <bool>true</bool>
+      </property>
+      <property name="gridStyle">
+       <enum>Qt::DotLine</enum>
+      </property>
+      <property name="sortingEnabled">
+       <bool>true</bool>
       </property>
       <attribute name="horizontalHeaderCascadingSectionResizes">
        <bool>false</bool>
       </attribute>
       <attribute name="horizontalHeaderDefaultSectionSize">
        <number>136</number>
+      </attribute>
+      <attribute name="horizontalHeaderMinimumSectionSize">
+       <number>5</number>
       </attribute>
       <column>
        <property name="text">
@@ -191,7 +218,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>936</width>
+     <width>943</width>
      <height>22</height>
     </rect>
    </property>
