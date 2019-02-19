@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[32];
-    char stringdata0[854];
+    QByteArrayData data[31];
+    char stringdata0[842];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,42 +32,40 @@ struct qt_meta_stringdata_MainWindow_t {
 static const qt_meta_stringdata_MainWindow_t qt_meta_stringdata_MainWindow = {
     {
 QT_MOC_LITERAL(0, 0, 10), // "MainWindow"
-QT_MOC_LITERAL(1, 11, 8), // "sendData"
-QT_MOC_LITERAL(2, 20, 0), // ""
-QT_MOC_LITERAL(3, 21, 17), // "QTableWidgetItem*"
-QT_MOC_LITERAL(4, 39, 24), // "on_action_open_triggered"
-QT_MOC_LITERAL(5, 64, 24), // "on_action_test_triggered"
-QT_MOC_LITERAL(6, 89, 24), // "on_action_save_triggered"
-QT_MOC_LITERAL(7, 114, 25), // "on_action_about_triggered"
-QT_MOC_LITERAL(8, 140, 27), // "on_action_aboutQt_triggered"
-QT_MOC_LITERAL(9, 168, 31), // "on_action_crashCourse_triggered"
-QT_MOC_LITERAL(10, 200, 25), // "on_action_print_triggered"
-QT_MOC_LITERAL(11, 226, 23), // "on_action_new_triggered"
-QT_MOC_LITERAL(12, 250, 30), // "on_action_openRecent_triggered"
-QT_MOC_LITERAL(13, 281, 26), // "on_action_saveAs_triggered"
-QT_MOC_LITERAL(14, 308, 24), // "on_action_bold_triggered"
-QT_MOC_LITERAL(15, 333, 26), // "on_action_italic_triggered"
-QT_MOC_LITERAL(16, 360, 29), // "on_action_underline_triggered"
-QT_MOC_LITERAL(17, 390, 27), // "on_action_comment_triggered"
-QT_MOC_LITERAL(18, 418, 33), // "on_action_strikethrough_trigg..."
-QT_MOC_LITERAL(19, 452, 26), // "on_action_indent_triggered"
-QT_MOC_LITERAL(20, 479, 28), // "on_action_unindent_triggered"
-QT_MOC_LITERAL(21, 508, 32), // "on_action_bulletedList_triggered"
-QT_MOC_LITERAL(22, 541, 32), // "on_action_numberedList_triggered"
-QT_MOC_LITERAL(23, 574, 28), // "on_action_taskList_triggered"
-QT_MOC_LITERAL(24, 603, 31), // "on_action_preferences_triggered"
-QT_MOC_LITERAL(25, 635, 32), // "on_action_printPreview_triggered"
-QT_MOC_LITERAL(26, 668, 26), // "on_action_export_triggered"
-QT_MOC_LITERAL(27, 695, 24), // "on_action_quit_triggered"
-QT_MOC_LITERAL(28, 720, 30), // "on_pushButton_addEvent_clicked"
-QT_MOC_LITERAL(29, 751, 33), // "on_pushButton_deleteEvent_cli..."
-QT_MOC_LITERAL(30, 785, 31), // "on_pushButton_editEvent_clicked"
-QT_MOC_LITERAL(31, 817, 36) // "on_pushButton_printEventList_..."
+QT_MOC_LITERAL(1, 11, 24), // "on_action_open_triggered"
+QT_MOC_LITERAL(2, 36, 0), // ""
+QT_MOC_LITERAL(3, 37, 24), // "on_action_test_triggered"
+QT_MOC_LITERAL(4, 62, 24), // "on_action_save_triggered"
+QT_MOC_LITERAL(5, 87, 25), // "on_action_about_triggered"
+QT_MOC_LITERAL(6, 113, 27), // "on_action_aboutQt_triggered"
+QT_MOC_LITERAL(7, 141, 31), // "on_action_crashCourse_triggered"
+QT_MOC_LITERAL(8, 173, 25), // "on_action_print_triggered"
+QT_MOC_LITERAL(9, 199, 23), // "on_action_new_triggered"
+QT_MOC_LITERAL(10, 223, 30), // "on_action_openRecent_triggered"
+QT_MOC_LITERAL(11, 254, 26), // "on_action_saveAs_triggered"
+QT_MOC_LITERAL(12, 281, 24), // "on_action_bold_triggered"
+QT_MOC_LITERAL(13, 306, 26), // "on_action_italic_triggered"
+QT_MOC_LITERAL(14, 333, 29), // "on_action_underline_triggered"
+QT_MOC_LITERAL(15, 363, 27), // "on_action_comment_triggered"
+QT_MOC_LITERAL(16, 391, 33), // "on_action_strikethrough_trigg..."
+QT_MOC_LITERAL(17, 425, 26), // "on_action_indent_triggered"
+QT_MOC_LITERAL(18, 452, 28), // "on_action_unindent_triggered"
+QT_MOC_LITERAL(19, 481, 32), // "on_action_bulletedList_triggered"
+QT_MOC_LITERAL(20, 514, 32), // "on_action_numberedList_triggered"
+QT_MOC_LITERAL(21, 547, 28), // "on_action_taskList_triggered"
+QT_MOC_LITERAL(22, 576, 31), // "on_action_preferences_triggered"
+QT_MOC_LITERAL(23, 608, 32), // "on_action_printPreview_triggered"
+QT_MOC_LITERAL(24, 641, 26), // "on_action_export_triggered"
+QT_MOC_LITERAL(25, 668, 24), // "on_action_quit_triggered"
+QT_MOC_LITERAL(26, 693, 30), // "on_pushButton_addEvent_clicked"
+QT_MOC_LITERAL(27, 724, 33), // "on_pushButton_deleteEvent_cli..."
+QT_MOC_LITERAL(28, 758, 31), // "on_pushButton_editEvent_clicked"
+QT_MOC_LITERAL(29, 790, 36), // "on_pushButton_printEventList_..."
+QT_MOC_LITERAL(30, 827, 14) // "receiveAddData"
 
     },
-    "MainWindow\0sendData\0\0QTableWidgetItem*\0"
-    "on_action_open_triggered\0"
-    "on_action_test_triggered\0"
+    "MainWindow\0on_action_open_triggered\0"
+    "\0on_action_test_triggered\0"
     "on_action_save_triggered\0"
     "on_action_about_triggered\0"
     "on_action_aboutQt_triggered\0"
@@ -93,7 +91,8 @@ QT_MOC_LITERAL(31, 817, 36) // "on_pushButton_printEventList_..."
     "on_pushButton_addEvent_clicked\0"
     "on_pushButton_deleteEvent_clicked\0"
     "on_pushButton_editEvent_clicked\0"
-    "on_pushButton_printEventList_clicked"
+    "on_pushButton_printEventList_clicked\0"
+    "receiveAddData"
 };
 #undef QT_MOC_LITERAL
 
@@ -108,43 +107,38 @@ static const uint qt_meta_data_MainWindow[] = {
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       1,       // signalCount
-
- // signals: name, argc, parameters, tag, flags
-       1,    1,  159,    2, 0x06 /* Public */,
+       0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       4,    0,  162,    2, 0x08 /* Private */,
-       5,    0,  163,    2, 0x08 /* Private */,
-       6,    0,  164,    2, 0x08 /* Private */,
-       7,    0,  165,    2, 0x08 /* Private */,
-       8,    0,  166,    2, 0x08 /* Private */,
-       9,    0,  167,    2, 0x08 /* Private */,
-      10,    0,  168,    2, 0x08 /* Private */,
-      11,    0,  169,    2, 0x08 /* Private */,
-      12,    0,  170,    2, 0x08 /* Private */,
-      13,    0,  171,    2, 0x08 /* Private */,
-      14,    0,  172,    2, 0x08 /* Private */,
-      15,    0,  173,    2, 0x08 /* Private */,
-      16,    0,  174,    2, 0x08 /* Private */,
-      17,    0,  175,    2, 0x08 /* Private */,
-      18,    0,  176,    2, 0x08 /* Private */,
-      19,    0,  177,    2, 0x08 /* Private */,
-      20,    0,  178,    2, 0x08 /* Private */,
-      21,    0,  179,    2, 0x08 /* Private */,
-      22,    0,  180,    2, 0x08 /* Private */,
-      23,    0,  181,    2, 0x08 /* Private */,
-      24,    0,  182,    2, 0x08 /* Private */,
-      25,    0,  183,    2, 0x08 /* Private */,
-      26,    0,  184,    2, 0x08 /* Private */,
-      27,    0,  185,    2, 0x08 /* Private */,
-      28,    0,  186,    2, 0x08 /* Private */,
-      29,    0,  187,    2, 0x08 /* Private */,
-      30,    0,  188,    2, 0x08 /* Private */,
-      31,    0,  189,    2, 0x08 /* Private */,
-
- // signals: parameters
-    QMetaType::Void, 0x80000000 | 3,    2,
+       1,    0,  159,    2, 0x08 /* Private */,
+       3,    0,  160,    2, 0x08 /* Private */,
+       4,    0,  161,    2, 0x08 /* Private */,
+       5,    0,  162,    2, 0x08 /* Private */,
+       6,    0,  163,    2, 0x08 /* Private */,
+       7,    0,  164,    2, 0x08 /* Private */,
+       8,    0,  165,    2, 0x08 /* Private */,
+       9,    0,  166,    2, 0x08 /* Private */,
+      10,    0,  167,    2, 0x08 /* Private */,
+      11,    0,  168,    2, 0x08 /* Private */,
+      12,    0,  169,    2, 0x08 /* Private */,
+      13,    0,  170,    2, 0x08 /* Private */,
+      14,    0,  171,    2, 0x08 /* Private */,
+      15,    0,  172,    2, 0x08 /* Private */,
+      16,    0,  173,    2, 0x08 /* Private */,
+      17,    0,  174,    2, 0x08 /* Private */,
+      18,    0,  175,    2, 0x08 /* Private */,
+      19,    0,  176,    2, 0x08 /* Private */,
+      20,    0,  177,    2, 0x08 /* Private */,
+      21,    0,  178,    2, 0x08 /* Private */,
+      22,    0,  179,    2, 0x08 /* Private */,
+      23,    0,  180,    2, 0x08 /* Private */,
+      24,    0,  181,    2, 0x08 /* Private */,
+      25,    0,  182,    2, 0x08 /* Private */,
+      26,    0,  183,    2, 0x08 /* Private */,
+      27,    0,  184,    2, 0x08 /* Private */,
+      28,    0,  185,    2, 0x08 /* Private */,
+      29,    0,  186,    2, 0x08 /* Private */,
+      30,    2,  187,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -175,6 +169,7 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString,    2,    2,
 
        0        // eod
 };
@@ -185,45 +180,36 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         MainWindow *_t = static_cast<MainWindow *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->sendData((*reinterpret_cast< QTableWidgetItem*(*)>(_a[1]))); break;
-        case 1: _t->on_action_open_triggered(); break;
-        case 2: _t->on_action_test_triggered(); break;
-        case 3: _t->on_action_save_triggered(); break;
-        case 4: _t->on_action_about_triggered(); break;
-        case 5: _t->on_action_aboutQt_triggered(); break;
-        case 6: _t->on_action_crashCourse_triggered(); break;
-        case 7: _t->on_action_print_triggered(); break;
-        case 8: _t->on_action_new_triggered(); break;
-        case 9: _t->on_action_openRecent_triggered(); break;
-        case 10: _t->on_action_saveAs_triggered(); break;
-        case 11: _t->on_action_bold_triggered(); break;
-        case 12: _t->on_action_italic_triggered(); break;
-        case 13: _t->on_action_underline_triggered(); break;
-        case 14: _t->on_action_comment_triggered(); break;
-        case 15: _t->on_action_strikethrough_triggered(); break;
-        case 16: _t->on_action_indent_triggered(); break;
-        case 17: _t->on_action_unindent_triggered(); break;
-        case 18: _t->on_action_bulletedList_triggered(); break;
-        case 19: _t->on_action_numberedList_triggered(); break;
-        case 20: _t->on_action_taskList_triggered(); break;
-        case 21: _t->on_action_preferences_triggered(); break;
-        case 22: _t->on_action_printPreview_triggered(); break;
-        case 23: _t->on_action_export_triggered(); break;
-        case 24: _t->on_action_quit_triggered(); break;
-        case 25: _t->on_pushButton_addEvent_clicked(); break;
-        case 26: _t->on_pushButton_deleteEvent_clicked(); break;
-        case 27: _t->on_pushButton_editEvent_clicked(); break;
-        case 28: _t->on_pushButton_printEventList_clicked(); break;
+        case 0: _t->on_action_open_triggered(); break;
+        case 1: _t->on_action_test_triggered(); break;
+        case 2: _t->on_action_save_triggered(); break;
+        case 3: _t->on_action_about_triggered(); break;
+        case 4: _t->on_action_aboutQt_triggered(); break;
+        case 5: _t->on_action_crashCourse_triggered(); break;
+        case 6: _t->on_action_print_triggered(); break;
+        case 7: _t->on_action_new_triggered(); break;
+        case 8: _t->on_action_openRecent_triggered(); break;
+        case 9: _t->on_action_saveAs_triggered(); break;
+        case 10: _t->on_action_bold_triggered(); break;
+        case 11: _t->on_action_italic_triggered(); break;
+        case 12: _t->on_action_underline_triggered(); break;
+        case 13: _t->on_action_comment_triggered(); break;
+        case 14: _t->on_action_strikethrough_triggered(); break;
+        case 15: _t->on_action_indent_triggered(); break;
+        case 16: _t->on_action_unindent_triggered(); break;
+        case 17: _t->on_action_bulletedList_triggered(); break;
+        case 18: _t->on_action_numberedList_triggered(); break;
+        case 19: _t->on_action_taskList_triggered(); break;
+        case 20: _t->on_action_preferences_triggered(); break;
+        case 21: _t->on_action_printPreview_triggered(); break;
+        case 22: _t->on_action_export_triggered(); break;
+        case 23: _t->on_action_quit_triggered(); break;
+        case 24: _t->on_pushButton_addEvent_clicked(); break;
+        case 25: _t->on_pushButton_deleteEvent_clicked(); break;
+        case 26: _t->on_pushButton_editEvent_clicked(); break;
+        case 27: _t->on_pushButton_printEventList_clicked(); break;
+        case 28: _t->receiveAddData((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
         default: ;
-        }
-    } else if (_c == QMetaObject::IndexOfMethod) {
-        int *result = reinterpret_cast<int *>(_a[0]);
-        {
-            using _t = void (MainWindow::*)(QTableWidgetItem * );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&MainWindow::sendData)) {
-                *result = 0;
-                return;
-            }
         }
     }
 }
@@ -266,13 +252,6 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 29;
     }
     return _id;
-}
-
-// SIGNAL 0
-void MainWindow::sendData(QTableWidgetItem * _t1)
-{
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
-    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

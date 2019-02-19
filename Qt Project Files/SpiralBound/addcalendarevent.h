@@ -18,6 +18,11 @@ public:
 private slots:
     void on_buttonBox_accepted();
 
+signals:
+    // Send addcalendarevent data to mainwindow
+    void sendAddData(QString, QString);
+
+
 private:
     Ui::addcalendarevent *ui;
 };

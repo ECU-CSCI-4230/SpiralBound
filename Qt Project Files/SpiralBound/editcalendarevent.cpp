@@ -22,18 +22,6 @@ editcalendarevent::~editcalendarevent()
     delete ui;
 }
 
-// Author: Nicholas
-// Init Date: 12.02.2019
-// Last Updated: 12.02.2019
-void editcalendarevent::receiveData(QTableWidgetItem *item)
-{
-    qDebug() << "editcalendarevent: Item received" << item->text();
-
-    ui->lineEdit_eventName->setText(item->text());
-    //TODO: ui->dateTimeEdit->setDateTime()
-
-}
-
 // Author: Nicholas, Cam
 // Init Date: 09.02.2019
 // Last Updated: 09.02.2019
@@ -54,8 +42,7 @@ void editcalendarevent::on_buttonBox_accepted()
     else //if eventName is empty, display warning message.
     {
         QMessageBox messageBox;
-        messageBox.critical(nullptr,"Error","Name of event cannot be empty,"
-                                            " please try again.");
+        messageBox.critical(nullptr,"Error","Name of event cannot be empty, please try again.");
         messageBox.setFixedSize(500,200);
     }
 

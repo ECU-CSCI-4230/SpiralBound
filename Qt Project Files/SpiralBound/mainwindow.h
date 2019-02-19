@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QTableWidget>
 #include <editcalendarevent.h>
+#include <addcalendarevent.h>
 
 namespace Ui {
 class MainWindow;
@@ -48,16 +49,16 @@ private slots:
     void on_pushButton_addEvent_clicked();
     void on_pushButton_deleteEvent_clicked();
     void on_pushButton_editEvent_clicked();
-    //void on_listWidget_eventList_itemClicked(QTableWidget *item);
     void on_pushButton_printEventList_clicked();
 
-signals:
-    void sendData(QTableWidgetItem *);
+    // Receive addcalendarevent data to mainwindow
+    void receiveAddData(QString, QString);
 
 private:
     Ui::MainWindow *ui;
     QString file_path_;
 
+    addcalendarevent *addWindow;
     editcalendarevent *editWindow;
 };
 

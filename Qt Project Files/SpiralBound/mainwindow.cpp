@@ -238,18 +238,37 @@ void MainWindow::on_action_quit_triggered()
 //                   Calendar Tab                            |
 //-----------------------------------------------------------+
 
+// Author: Nicholas
+// Init Date: 19.02.2019
+// Last Updated: 19.02.2019
+void MainWindow::receiveAddData(QString eventName, QString eventDateTime)
+{
+    qDebug() << "mainwindow: Received data from addwindow" << eventName << eventDateTime;
+}
+
 // Author: Nicholas, Cam, Jamie
 // Init Date: 05.02.2019
 // Last Updated: 05.02.2019
 void MainWindow::on_pushButton_addEvent_clicked()
 {
-    // Builds addcalendarevent GUI/window
-    addcalendarevent dialogWindow;
-    dialogWindow.setModal(true);
-    dialogWindow.exec();
+    qDebug() << "mainwindow: Sending item from tableWidget_eventList to addcalendarevent";
+
+   // Builds addcalendarevent GUI/window
+   addWindow = new addcalendarevent(this);
+   addWindow->setModal(true);
+   addWindow->show();
+
+   int row = 0;
+   ui->tableWidget_eventList->setItem(row, 0, new QTableWidgetItem("Date")); // Date
+   ui->tableWidget_eventList->setItem(row, 0, new QTableWidgetItem("Name")); // Name
+   ui->tableWidget_eventList->setItem(row, 0, new QTableWidgetItem("Time")); // Time
+
+   connect(addWindow, SIGNAL(sendAddData(QString, QString)), this, SLOT(receiveAddData(QString, QString)));
+
+
 }
 
-// Author: Nicholas
+// Author: Nicholasƒ
 // Init Date: 09.02.2019
 // Last Updated: 14.02.20119
 void MainWindow::on_pushButton_editEvent_clicked()
@@ -263,7 +282,7 @@ void MainWindow::on_pushButton_editEvent_clicked()
     }
     else
     {
-         qDebug() << "mainwindow: Sending item from listWidget_eventList to editcalendarevent";
+         qDebug() << "mainwindow: Sending item from tableWidget_eventList to editcalendarevent";
 
         // Builds editcalendarevent GUI/window
         editWindow = new editcalendarevent(this);
@@ -271,11 +290,11 @@ void MainWindow::on_pushButton_editEvent_clicked()
         editWindow->show();
 
         // Connect mainwindow to editcalendarevent window
-        connect(this, SIGNAL(sendData(QTableWidgetItem *)), editWindow, SLOT(receiveData(QTableWidgetItem *)));
+        //connect(this, SIGNAL(sendData(QTableWidgetItem *)), editWindow, SLOT(receiveData(QTableWidgetItem *)));
 
         // Send selected item to editcalendarevent window
-        QTableWidgetItem *item = ui->tableWidget_eventList->currentItem();
-        emit sendData(item);
+        //QTableWidgetItem *item = ui->tableWidget_eventList->currentItem();
+        //emit sendData(item);
     }
 }
 
@@ -288,27 +307,14 @@ void MainWindow::on_pushButton_deleteEvent_clicked()
     deletecalendarevent dialogWindow;
     dialogWindow.setModal(true);
     dialogWindow.exec();
-
-    // receive 1 from deletecalendarevent.cpp
-
 }
-
-// Author: Nicholas
-// Init Date: 09.02.2019
-// Last Updated: 12.02.20119
-/* void MainWindow::on_listWidget_eventList_itemClicked(QTableWidgetItem *item)
-{
-    // Print current item clicked in event list
-    qDebug() << "mainwindow: Clicked" << item->text();
-}
-*/
 
 // Author: Nicholas
 // Init Date: 09.02.2019
 // Last Updated: 09.02.20119
 void MainWindow::on_pushButton_printEventList_clicked()
 {
-    qDebug("mainwindow: listWidget_eventList:");
+    qDebug("mainwindow: tableWidget_eventList:");
 
     // Print all items in event list
 }

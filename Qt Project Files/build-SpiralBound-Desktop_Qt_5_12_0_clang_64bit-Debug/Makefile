@@ -728,11 +728,12 @@ compiler_moc_header_clean:
 	-$(DEL_FILE) moc_mainwindow.cpp moc_aboutspiralbound.cpp moc_addcalendarevent.cpp moc_deletecalendarevent.cpp moc_editcalendarevent.cpp
 moc_mainwindow.cpp: /Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QListWidget \
-		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qlistwidget.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QTableWidget \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qtablewidget.h \
 		../SpiralBound/editcalendarevent.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../SpiralBound/addcalendarevent.h \
 		../SpiralBound/mainwindow.h \
 		moc_predefs.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/bin/moc
@@ -761,8 +762,8 @@ moc_deletecalendarevent.cpp: /Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.f
 
 moc_editcalendarevent.cpp: /Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
-		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QListWidget \
-		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qlistwidget.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QTableWidget \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qtablewidget.h \
 		../SpiralBound/editcalendarevent.h \
 		moc_predefs.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/bin/moc
@@ -810,11 +811,12 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 main.o: ../SpiralBound/main.cpp ../SpiralBound/mainwindow.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QListWidget \
-		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qlistwidget.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QTableWidget \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qtablewidget.h \
 		../SpiralBound/editcalendarevent.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../SpiralBound/addcalendarevent.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../SpiralBound/main.cpp
@@ -822,14 +824,14 @@ main.o: ../SpiralBound/main.cpp ../SpiralBound/mainwindow.h \
 mainwindow.o: ../SpiralBound/mainwindow.cpp ../SpiralBound/mainwindow.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QListWidget \
-		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qlistwidget.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QTableWidget \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qtablewidget.h \
 		../SpiralBound/editcalendarevent.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../SpiralBound/addcalendarevent.h \
 		ui_mainwindow.h \
 		../SpiralBound/aboutspiralbound.h \
-		../SpiralBound/addcalendarevent.h \
 		../SpiralBound/deletecalendarevent.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QFile \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qfile.h \
@@ -863,6 +865,12 @@ addcalendarevent.o: ../SpiralBound/addcalendarevent.cpp ../SpiralBound/addcalend
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		ui_addcalendarevent.h \
+		../SpiralBound/mainwindow.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QTableWidget \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qtablewidget.h \
+		../SpiralBound/editcalendarevent.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QTextStream \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
@@ -878,16 +886,19 @@ deletecalendarevent.o: ../SpiralBound/deletecalendarevent.cpp ../SpiralBound/del
 editcalendarevent.o: ../SpiralBound/editcalendarevent.cpp ../SpiralBound/editcalendarevent.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
-		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QListWidget \
-		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qlistwidget.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QTableWidget \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qtablewidget.h \
 		ui_editcalendarevent.h \
 		../SpiralBound/mainwindow.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../SpiralBound/addcalendarevent.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QTextStream \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QListWidget \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qlistwidget.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QtDebug \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QItemSelectionModel \
