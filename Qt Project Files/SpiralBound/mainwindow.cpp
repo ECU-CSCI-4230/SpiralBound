@@ -244,11 +244,19 @@ void MainWindow::on_action_quit_triggered()
 void MainWindow::receiveAddData(QString eventName, QString eventDateTime)
 {
     qDebug() << "mainwindow: Received data from addwindow" << eventName << eventDateTime;
+
+    // Seperate date from time
+    QStringList datetime = eventDateTime.split(" ");
+    QString date = datetime[0];
+    QString time = datetime[1].append(" ").append(datetime[2]);
+
+    // TODO: add eventName and eventDateTime to the top of the table
+    qDebug() << date << time;
 }
 
 // Author: Nicholas, Cam, Jamie
 // Init Date: 05.02.2019
-// Last Updated: 05.02.2019
+// Last Updated: 19.02.2019
 void MainWindow::on_pushButton_addEvent_clicked()
 {
     qDebug() << "mainwindow: Sending item from tableWidget_eventList to addcalendarevent";
@@ -258,17 +266,12 @@ void MainWindow::on_pushButton_addEvent_clicked()
    addWindow->setModal(true);
    addWindow->show();
 
-   int row = 0;
-   ui->tableWidget_eventList->setItem(row, 0, new QTableWidgetItem("Date")); // Date
-   ui->tableWidget_eventList->setItem(row, 0, new QTableWidgetItem("Name")); // Name
-   ui->tableWidget_eventList->setItem(row, 0, new QTableWidgetItem("Time")); // Time
-
+    // Connect mainwindow to addeventwindow
    connect(addWindow, SIGNAL(sendAddData(QString, QString)), this, SLOT(receiveAddData(QString, QString)));
-
 
 }
 
-// Author: Nicholasƒ
+// Author: Nicholas
 // Init Date: 09.02.2019
 // Last Updated: 14.02.20119
 void MainWindow::on_pushButton_editEvent_clicked()
@@ -290,7 +293,7 @@ void MainWindow::on_pushButton_editEvent_clicked()
         editWindow->show();
 
         // Connect mainwindow to editcalendarevent window
-        //connect(this, SIGNAL(sendData(QTableWidgetItem *)), editWindow, SLOT(receiveData(QTableWidgetItem *)));
+        //connect(this, SIGNAL(sendEditData(QTableWidgetItem *)), editWindow, SLOT(receiveEditData(QTableWidgetItem *)));
 
         // Send selected item to editcalendarevent window
         //QTableWidgetItem *item = ui->tableWidget_eventList->currentItem();
