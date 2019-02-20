@@ -30,6 +30,11 @@ public:
         if (AboutSpiralBound->objectName().isEmpty())
             AboutSpiralBound->setObjectName(QString::fromUtf8("AboutSpiralBound"));
         AboutSpiralBound->resize(350, 200);
+        QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(AboutSpiralBound->sizePolicy().hasHeightForWidth());
+        AboutSpiralBound->setSizePolicy(sizePolicy);
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/SpiralBound/images/icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         AboutSpiralBound->setWindowIcon(icon);

@@ -270,7 +270,7 @@ void MainWindow::on_pushButton_addEvent_clicked()
    addWindow->setModal(true);
    addWindow->show();
 
-    // Connect mainwindow to addeventwindow
+   // Connect mainwindow to addeventwindow
    connect(addWindow, SIGNAL(sendAddData(QString, QString)), this, SLOT(receiveAddData(QString, QString)));
 
 }
@@ -305,15 +305,41 @@ void MainWindow::on_pushButton_editEvent_clicked()
     }
 }
 
+void MainWindow::receiveDeleteData(bool response)
+{
+   if(response == true)
+   {
+       // Delete item from table
+       ui->tableWidget_eventList->removeRow(ui->tableWidget_eventList->currentItem()->row());
+   }
+}
+
 // Author: Jamie, Nicholas
 // Init Date: 07.02.2019
-// Last Updated: 07.02.20119
+// Last Updated: 12.02.20119
 void MainWindow::on_pushButton_deleteEvent_clicked()
 {
-    // Builds deletecalendarevent GUI/window
-    deletecalendarevent dialogWindow;
-    dialogWindow.setModal(true);
-    dialogWindow.exec();
+    // Get current selected row
+    QTableWidgetItem *item = ui->tableWidget_eventList->currentItem();
+
+    if(item == nullptr)
+        {
+            QMessageBox messageBox;
+            messageBox.critical(nullptr,"Error","Select event to edit, please try again.");
+            messageBox.setFixedSize(500,200);
+        }
+        else
+        {
+             qDebug() << "mainwindow: Deleting item from tableWidget_eventList";
+
+            // Builds deletecalendarevent GUI/window
+            deleteWindow = new deletecalendarevent(this);
+            deleteWindow->setModal(true);
+            deleteWindow->show();
+
+            // Connect mainwindow to addeventwindow
+            connect(deleteWindow, SIGNAL(sendDeleteData(bool)), this, SLOT(receiveDeleteData(bool)));
+        }
 }
 
 // Author: Nicholas

@@ -18,6 +18,10 @@ public:
 private slots:
     void on_buttonBox_accepted();
 
+signals:
+    // Send deletecalendarevent data to mainwindow
+    void sendDeleteData(bool);
+
 private:
     Ui::deletecalendarevent *ui;
 };

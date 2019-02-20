@@ -5,6 +5,7 @@
 #include <QTableWidget>
 #include <editcalendarevent.h>
 #include <addcalendarevent.h>
+#include <deletecalendarevent.h>
 
 namespace Ui {
 class MainWindow;
@@ -53,6 +54,8 @@ private slots:
 
     // Receive addcalendarevent data to mainwindow
     void receiveAddData(QString, QString);
+    // Receive deletecalendarevent data to mainwindow
+    void receiveDeleteData(bool);
 
     // Stretch tableWidget_eventList headers to fit window
     void stretchTableHeaders();
@@ -61,6 +64,7 @@ private:
     Ui::MainWindow *ui;
     QString file_path_;
 
+    deletecalendarevent *deleteWindow;
     addcalendarevent *addWindow;
     editcalendarevent *editWindow;
 };
