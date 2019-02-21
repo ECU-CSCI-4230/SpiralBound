@@ -17,6 +17,7 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
@@ -75,6 +76,12 @@ public:
     QWidget *tab_3;
     QGridLayout *gridLayout_5;
     QLabel *label_2;
+    QPushButton *pushButton_3;
+    QPushButton *pushButton_2;
+    QPushButton *pushButton;
+    QLabel *label_3;
+    QListWidget *listWidget;
+    QTableWidget *tableWidget;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuEdit;
@@ -251,11 +258,49 @@ public:
         label_2 = new QLabel(tab_3);
         label_2->setObjectName(QString::fromUtf8("label_2"));
 
-        gridLayout_5->addWidget(label_2, 0, 0, 1, 1);
+        gridLayout_5->addWidget(label_2, 0, 1, 1, 1);
+
+        pushButton_3 = new QPushButton(tab_3);
+        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
+
+        gridLayout_5->addWidget(pushButton_3, 4, 0, 1, 1);
+
+        pushButton_2 = new QPushButton(tab_3);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+
+        gridLayout_5->addWidget(pushButton_2, 3, 0, 1, 1);
+
+        pushButton = new QPushButton(tab_3);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+
+        gridLayout_5->addWidget(pushButton, 2, 0, 1, 1);
+
+        label_3 = new QLabel(tab_3);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+
+        gridLayout_5->addWidget(label_3, 0, 0, 1, 1);
+
+        listWidget = new QListWidget(tab_3);
+        listWidget->setObjectName(QString::fromUtf8("listWidget"));
+
+        gridLayout_5->addWidget(listWidget, 1, 0, 1, 1);
+
+        tableWidget = new QTableWidget(tab_3);
+        if (tableWidget->columnCount() < 2)
+            tableWidget->setColumnCount(2);
+        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem3);
+        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem4);
+        tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
+        tableWidget->setColumnCount(2);
+        tableWidget->horizontalHeader()->setProperty("showSortIndicator", QVariant(false));
+
+        gridLayout_5->addWidget(tableWidget, 1, 1, 3, 1);
 
         tabWidget->addTab(tab_3, QString());
 
-        gridLayout->addWidget(tabWidget, 0, 0, 1, 1);
+        gridLayout->addWidget(tabWidget, 0, 1, 1, 1);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
@@ -366,7 +411,15 @@ public:
         pushButton_deleteEvent->setText(QApplication::translate("MainWindow", "Delete", nullptr));
         pushButton_printEventList->setText(QApplication::translate("MainWindow", "Print (Debug)", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Calendar", nullptr));
-        label_2->setText(QApplication::translate("MainWindow", "TextLabel", nullptr));
+        label_2->setText(QApplication::translate("MainWindow", "Cards", nullptr));
+        pushButton_3->setText(QApplication::translate("MainWindow", "Study", nullptr));
+        pushButton_2->setText(QApplication::translate("MainWindow", "Delete", nullptr));
+        pushButton->setText(QApplication::translate("MainWindow", "Add", nullptr));
+        label_3->setText(QApplication::translate("MainWindow", "Decks", nullptr));
+        QTableWidgetItem *___qtablewidgetitem3 = tableWidget->horizontalHeaderItem(0);
+        ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "Title", nullptr));
+        QTableWidgetItem *___qtablewidgetitem4 = tableWidget->horizontalHeaderItem(1);
+        ___qtablewidgetitem4->setText(QApplication::translate("MainWindow", "Body", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Flash Cards", nullptr));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
         menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", nullptr));
