@@ -181,48 +181,57 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_5">
         <item row="0" column="1">
-         <widget class="QLabel" name="label_2">
+         <widget class="QLabel" name="label_cards">
           <property name="text">
            <string>Cards</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>
         <item row="4" column="0">
-         <widget class="QPushButton" name="pushButton_3">
+         <widget class="QPushButton" name="pushButton_studyDeck">
           <property name="text">
            <string>Study</string>
           </property>
          </widget>
         </item>
         <item row="3" column="0">
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="pushButton_deleteDeck">
           <property name="text">
            <string>Delete</string>
           </property>
          </widget>
         </item>
         <item row="2" column="0">
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="pushButton_addDeck">
           <property name="text">
            <string>Add</string>
           </property>
          </widget>
         </item>
         <item row="0" column="0">
-         <widget class="QLabel" name="label_3">
+         <widget class="QLabel" name="label_decks">
           <property name="text">
            <string>Decks</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>
         <item row="1" column="0">
-         <widget class="QListWidget" name="listWidget"/>
+         <widget class="QListWidget" name="listWidget_deckList"/>
         </item>
         <item row="1" column="1" rowspan="3">
-         <widget class="QTableWidget" name="tableWidget">
+         <widget class="QTableWidget" name="tableWidget_cardsTable">
           <property name="columnCount">
            <number>2</number>
           </property>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>220</number>
+          </attribute>
           <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
            <bool>false</bool>
           </attribute>
