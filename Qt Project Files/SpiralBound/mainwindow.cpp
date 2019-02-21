@@ -305,10 +305,15 @@ void MainWindow::on_pushButton_editEvent_clicked()
     }
 }
 
+// Author: Nicholas
+// Init Date: 09.02.2019
+// Last Updated: 19.02.20119
 void MainWindow::receiveDeleteData(bool response)
 {
    if(response == true)
    {
+       qDebug() << "mainwindow: Deleting item from tableWidget_eventList";
+
        // Delete item from table
        ui->tableWidget_eventList->removeRow(ui->tableWidget_eventList->currentItem()->row());
    }
@@ -316,7 +321,7 @@ void MainWindow::receiveDeleteData(bool response)
 
 // Author: Jamie, Nicholas
 // Init Date: 07.02.2019
-// Last Updated: 12.02.20119
+// Last Updated: 19.02.20119
 void MainWindow::on_pushButton_deleteEvent_clicked()
 {
     // Get current selected row
@@ -330,8 +335,6 @@ void MainWindow::on_pushButton_deleteEvent_clicked()
         }
         else
         {
-             qDebug() << "mainwindow: Deleting item from tableWidget_eventList";
-
             // Builds deletecalendarevent GUI/window
             deleteWindow = new deletecalendarevent(this);
             deleteWindow->setModal(true);
@@ -350,6 +353,8 @@ void MainWindow::on_pushButton_printEventList_clicked()
     qDebug("mainwindow: tableWidget_eventList:");
 
     // Print all items in event list
+
+    //ui->tableWidget_eventList->sortItems();
 }
 
 

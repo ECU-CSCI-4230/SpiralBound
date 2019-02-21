@@ -32,7 +32,7 @@ void addcalendarevent::on_buttonBox_accepted()
 
     if(!eventName.isEmpty())
     {
-        qDebug() << "addcalendarevent: sending name: " << eventName << "and datetime: " << eventDateTime;
+        qDebug() << "addcalendarevent: Sending name: " << eventName << "and datetime: " << eventDateTime;
 
         // Send data to mainwindow
         emit sendAddData(eventName, eventDateTime);
