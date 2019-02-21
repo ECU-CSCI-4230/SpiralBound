@@ -72,6 +72,9 @@ public:
     QPushButton *pushButton_deleteEvent;
     QPushButton *pushButton_printEventList;
     QCalendarWidget *calendarWidget;
+    QWidget *tab_3;
+    QGridLayout *gridLayout_5;
+    QLabel *label_2;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuEdit;
@@ -239,13 +242,25 @@ public:
         gridLayout_2->addWidget(calendarWidget, 1, 0, 5, 1);
 
         tabWidget->addTab(tab_2, QString());
+        tab_3 = new QWidget();
+        tab_3->setObjectName(QString::fromUtf8("tab_3"));
+        gridLayout_5 = new QGridLayout(tab_3);
+        gridLayout_5->setSpacing(6);
+        gridLayout_5->setContentsMargins(11, 11, 11, 11);
+        gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
+        label_2 = new QLabel(tab_3);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+
+        gridLayout_5->addWidget(label_2, 0, 0, 1, 1);
+
+        tabWidget->addTab(tab_3, QString());
 
         gridLayout->addWidget(tabWidget, 0, 0, 1, 1);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 943, 26));
+        menuBar->setGeometry(QRect(0, 0, 943, 25));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuEdit = new QMenu(menuBar);
@@ -305,7 +320,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -351,6 +366,8 @@ public:
         pushButton_deleteEvent->setText(QApplication::translate("MainWindow", "Delete", nullptr));
         pushButton_printEventList->setText(QApplication::translate("MainWindow", "Print (Debug)", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Calendar", nullptr));
+        label_2->setText(QApplication::translate("MainWindow", "TextLabel", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Flash Cards", nullptr));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
         menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", nullptr));
         menuFormat->setTitle(QApplication::translate("MainWindow", "Format", nullptr));
