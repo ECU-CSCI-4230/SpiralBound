@@ -52,13 +52,16 @@ private slots:
     void on_pushButton_editEvent_clicked();
     void on_pushButton_printEventList_clicked();
 
-    // Receive addcalendarevent data to mainwindow
-    void receiveAddData(QString, QString);
-    // Receive deletecalendarevent data to mainwindow
-    void receiveDeleteData(bool);
+    // Connections
+    void receiveAddData(QString, QString);  // Receive addcalendarevent data to mainwindow
+    void receiveEditData(QString, QString);    // Receive editcalendarevent data to mainwindow
+    void receiveDeleteData(bool);           // Receive deletecalendarevent data to mainwindow
 
     // Stretch tableWidget_eventList headers to fit window
     void stretchTableHeaders();
+
+signals:
+    void sendEditData(QString, QString, QString);  // Send mainwindown data to editcalendarevent
 
 private:
     Ui::MainWindow *ui;

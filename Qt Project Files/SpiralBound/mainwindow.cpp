@@ -251,11 +251,29 @@ void MainWindow::receiveAddData(QString eventName, QString eventDateTime)
     QString time = datetime[1].append(" ").append(datetime[2]);
 
     // Create row
-    ui->tableWidget_eventList->insertRow (ui->tableWidget_eventList->rowCount() );
+    ui->tableWidget_eventList->insertRow(ui->tableWidget_eventList->rowCount() );
     // Populate row
     ui->tableWidget_eventList->setItem(ui->tableWidget_eventList->rowCount()-1, 0, new QTableWidgetItem(date));
     ui->tableWidget_eventList->setItem(ui->tableWidget_eventList->rowCount()-1, 1, new QTableWidgetItem(eventName));
     ui->tableWidget_eventList->setItem(ui->tableWidget_eventList->rowCount()-1, 2, new QTableWidgetItem(time));
+}
+
+// Author: Nicholas
+// Init Date: 19.02.2019
+// Last Updated: 19.02.2019
+void MainWindow::receiveEditData(QString eventName, QString eventDateTime)
+{
+    qDebug() << "mainwindow: Received data from addwindow" << eventName << eventDateTime;
+
+    // Seperate date from time
+    QStringList datetime = eventDateTime.split(" ");
+    QString date = datetime[0];
+    QString time = datetime[1].append(" ").append(datetime[2]);
+
+    // Populate row
+    ui->tableWidget_eventList->setItem(ui->tableWidget_eventList->currentRow(), 0, new QTableWidgetItem(date));
+    ui->tableWidget_eventList->setItem(ui->tableWidget_eventList->currentRow(), 1, new QTableWidgetItem(eventName));
+    ui->tableWidget_eventList->setItem(ui->tableWidget_eventList->currentRow(), 2, new QTableWidgetItem(time));
 }
 
 // Author: Nicholas, Cam, Jamie
@@ -277,11 +295,15 @@ void MainWindow::on_pushButton_addEvent_clicked()
 
 // Author: Nicholas
 // Init Date: 09.02.2019
-// Last Updated: 14.02.20119
+// Last Updated: 19.02.20119
 void MainWindow::on_pushButton_editEvent_clicked()
 {
+    QTableWidgetItem *item = ui->tableWidget_eventList->currentItem();
+    int row = ui->tableWidget_eventList->currentRow();
+    ui->tableWidget_eventList->selectRow(row);
+
     // If user did not select an event from the event list
-    if(ui->tableWidget_eventList->currentItem() == nullptr)
+    if(item == nullptr)
     {
         QMessageBox messageBox;
         messageBox.critical(nullptr,"Error","Select event to edit, please try again.");
@@ -289,6 +311,11 @@ void MainWindow::on_pushButton_editEvent_clicked()
     }
     else
     {
+        QString date = ui->tableWidget_eventList->item(row, 0)->text();
+        QString eventName = ui->tableWidget_eventList->item(row, 1)->text();
+        QString time = ui->tableWidget_eventList->item(row, 2)->text();
+
+
          qDebug() << "mainwindow: Sending item from tableWidget_eventList to editcalendarevent";
 
         // Builds editcalendarevent GUI/window
@@ -297,11 +324,12 @@ void MainWindow::on_pushButton_editEvent_clicked()
         editWindow->show();
 
         // Connect mainwindow to editcalendarevent window
-        //connect(this, SIGNAL(sendEditData(QTableWidgetItem *)), editWindow, SLOT(receiveEditData(QTableWidgetItem *)));
+        connect(this, SIGNAL(sendEditData(QString, QString, QString)), editWindow, SLOT(receiveEditData(QString, QString, QString)));
 
         // Send selected item to editcalendarevent window
-        //QTableWidgetItem *item = ui->tableWidget_eventList->currentItem();
-        //emit sendData(item);
+        emit sendEditData(date, eventName, time);
+
+        connect(editWindow, SIGNAL(sendEditData(QString, QString)), this, SLOT(receiveEditData(QString, QString)));
     }
 }
 

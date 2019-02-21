@@ -19,9 +19,11 @@ public:
 
 private slots:
     void on_buttonBox_accepted();
+    void receiveEditData(QString, QString, QString);   // Send editcalendarevent data to mainwindow
 
 signals:
-    void sendData(QString, QString);
+    void sendEditData(QTableWidgetItem *);
+    void sendEditData(QString, QString);
 
 private:
     Ui::editcalendarevent *ui;

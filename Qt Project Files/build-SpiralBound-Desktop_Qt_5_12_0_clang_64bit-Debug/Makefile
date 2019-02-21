@@ -734,6 +734,7 @@ moc_mainwindow.cpp: /Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		../SpiralBound/addcalendarevent.h \
+		../SpiralBound/deletecalendarevent.h \
 		../SpiralBound/mainwindow.h \
 		moc_predefs.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/bin/moc
@@ -817,6 +818,7 @@ main.o: ../SpiralBound/main.cpp ../SpiralBound/mainwindow.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		../SpiralBound/addcalendarevent.h \
+		../SpiralBound/deletecalendarevent.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../SpiralBound/main.cpp
@@ -830,9 +832,9 @@ mainwindow.o: ../SpiralBound/mainwindow.cpp ../SpiralBound/mainwindow.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		../SpiralBound/addcalendarevent.h \
+		../SpiralBound/deletecalendarevent.h \
 		ui_mainwindow.h \
 		../SpiralBound/aboutspiralbound.h \
-		../SpiralBound/deletecalendarevent.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QFile \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
@@ -871,10 +873,13 @@ addcalendarevent.o: ../SpiralBound/addcalendarevent.cpp ../SpiralBound/addcalend
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QTableWidget \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qtablewidget.h \
 		../SpiralBound/editcalendarevent.h \
+		../SpiralBound/deletecalendarevent.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QTextStream \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
-		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QDebug \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o addcalendarevent.o ../SpiralBound/addcalendarevent.cpp
 
 deletecalendarevent.o: ../SpiralBound/deletecalendarevent.cpp ../SpiralBound/deletecalendarevent.h \
@@ -893,6 +898,7 @@ editcalendarevent.o: ../SpiralBound/editcalendarevent.cpp ../SpiralBound/editcal
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../SpiralBound/addcalendarevent.h \
+		../SpiralBound/deletecalendarevent.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QTextStream \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \

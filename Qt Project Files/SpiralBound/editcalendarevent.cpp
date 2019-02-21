@@ -22,9 +22,23 @@ editcalendarevent::~editcalendarevent()
     delete ui;
 }
 
+
+// Author: Nicholas,
+// Init Date: 21.02.2019
+// Last Updated: 21.02.2019
+void editcalendarevent::receiveEditData(QString date, QString eventName, QString time)
+{
+    qDebug() << date << eventName << time;
+
+    ui->lineEdit_eventName->setText(eventName);
+    ui->dateTimeEdit->setDate(QDate::fromString(date,"MM/dd/yyyy"));
+    ui->dateTimeEdit->setTime(QTime::fromString(time,"hh:mm AP"));
+}
+
+
 // Author: Nicholas, Cam
 // Init Date: 09.02.2019
-// Last Updated: 09.02.2019
+// Last Updated: 21.02.2019
 void editcalendarevent::on_buttonBox_accepted()
 {
     // Qstrings
@@ -37,7 +51,8 @@ void editcalendarevent::on_buttonBox_accepted()
 
     if(!eventName.isEmpty())
     {
-        // createEvent(eventName, eventDateTime);
+        qDebug() << "editcalendarevent:";
+        emit sendEditData(eventName, eventDateTime);
     }
     else //if eventName is empty, display warning message.
     {
@@ -45,8 +60,4 @@ void editcalendarevent::on_buttonBox_accepted()
         messageBox.critical(nullptr,"Error","Name of event cannot be empty, please try again.");
         messageBox.setFixedSize(500,200);
     }
-
-
-    // TODO: Edit entry in Event List with new data
-
 }
