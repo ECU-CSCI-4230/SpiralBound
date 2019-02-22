@@ -374,16 +374,6 @@ void MainWindow::on_pushButton_deleteEvent_clicked()
         }
 }
 
-// Author: Cam
-// Init Date: 19.02.2019
-// Last Updated: 19.02.20119
-void MainWindow::stretchTableHeaders()
-{
-    // Stretches the horizontal header of tableWidget_eventList
-    QHeaderView* header = ui->tableWidget_eventList->horizontalHeader();
-    header->setSectionResizeMode(QHeaderView::Stretch);
-}
-
 // Author: Nicholas
 // Init Date: 19.02.2019
 // Last Updated: 19.02.20119
