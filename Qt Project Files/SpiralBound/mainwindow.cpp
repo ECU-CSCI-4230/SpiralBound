@@ -16,11 +16,15 @@
 #include <QItemSelectionModel>
 #include <QTableWidget>
 
-//================
-// Author:
-// Init Date:
-// Last Updated:
-//================
+
+
+//===========CODE STYLE===========//
+// Author:                        //
+// Init Date:                     //
+// Last Updated:                  //
+//================================//
+
+
 
 // Constructor
 MainWindow::MainWindow(QWidget *parent) :
@@ -65,7 +69,7 @@ void MainWindow::on_action_save_triggered()
 }
 
 // Author: Nicholas Ellis
-// Init Date: 29.01.2019
+// Init Date:    29.01.2019
 // Last Updated: 29.01.2019
 void MainWindow::on_action_about_triggered()
 {
@@ -75,7 +79,7 @@ void MainWindow::on_action_about_triggered()
 }
 
 // Author: Tyler Rogers
-// Init Date: 29.01.2019
+// Init Date:    29.01.2019
 // Last Updated: 29.01.2019
 void MainWindow::on_action_aboutQt_triggered()
 {
@@ -227,7 +231,7 @@ void MainWindow::on_action_export_triggered()
 }
 
 // Author: Tyler Rogers (cirkuitbreaker)
-// Init date: 29.01.2019
+// Init date:    29.01.2019
 // Last Updated: 29.01.2019
 void MainWindow::on_action_quit_triggered()
 {
@@ -239,7 +243,7 @@ void MainWindow::on_action_quit_triggered()
 //-----------------------------------------------------------+
 
 // Author: Nicholas
-// Init Date: 19.02.2019
+// Init Date:    19.02.2019
 // Last Updated: 19.02.2019
 void MainWindow::receiveAddData(QString eventName, QString eventDateTime)
 {
@@ -259,7 +263,7 @@ void MainWindow::receiveAddData(QString eventName, QString eventDateTime)
 }
 
 // Author: Nicholas, Cam, Jamie
-// Init Date: 05.02.2019
+// Init Date:    05.02.2019
 // Last Updated: 19.02.2019
 void MainWindow::on_pushButton_addEvent_clicked()
 {
@@ -276,7 +280,7 @@ void MainWindow::on_pushButton_addEvent_clicked()
 }
 
 // Author: Nicholas
-// Init Date: 09.02.2019
+// Init Date:    09.02.2019
 // Last Updated: 14.02.20119
 void MainWindow::on_pushButton_editEvent_clicked()
 {
@@ -306,7 +310,7 @@ void MainWindow::on_pushButton_editEvent_clicked()
 }
 
 // Author: Nicholas
-// Init Date: 09.02.2019
+// Init Date:    09.02.2019
 // Last Updated: 19.02.20119
 void MainWindow::receiveDeleteData(bool response)
 {
@@ -320,7 +324,7 @@ void MainWindow::receiveDeleteData(bool response)
 }
 
 // Author: Jamie, Nicholas
-// Init Date: 07.02.2019
+// Init Date:    07.02.2019
 // Last Updated: 19.02.20119
 void MainWindow::on_pushButton_deleteEvent_clicked()
 {
@@ -346,7 +350,7 @@ void MainWindow::on_pushButton_deleteEvent_clicked()
 }
 
 // Author: Nicholas
-// Init Date: 09.02.2019
+// Init Date:    09.02.2019
 // Last Updated: 09.02.20119
 void MainWindow::on_pushButton_printEventList_clicked()
 {
@@ -357,7 +361,9 @@ void MainWindow::on_pushButton_printEventList_clicked()
     //ui->tableWidget_eventList->sortItems();
 }
 
-
+// Author: Cam, Nicholas
+// Init Date:    19.02.2019
+// Last Updated: 19.02.2019
 void MainWindow::stretchTableHeaders()
 {
     // Stretches the horizontal header of tableWidget_eventList
@@ -366,6 +372,30 @@ void MainWindow::stretchTableHeaders()
 }
 
 
+//-----------------------------------------------------------+
+//                     Flash Card Tab                        |
+//-----------------------------------------------------------+
 
+// Author:
+// Init Date:
+// Last Updated:
+void MainWindow::on_pushButton_addDeck_clicked()
+{
+    // TODO: open window for adding deck.
+}
 
+// Author:
+// Init Date:
+// Last Updated:
+void MainWindow::on_pushButton_deleteDeck_clicked()
+{
+    // TODO: open window for deleting selected deck.
+}
 
+// Author:
+// Init Date:
+// Last Updated:
+void MainWindow::on_pushButton_studyDeck_clicked()
+{
+    // TODO: open study window for selected deck.
+}

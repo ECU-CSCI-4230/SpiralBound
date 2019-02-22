@@ -22,6 +22,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableWidget>
@@ -75,13 +76,14 @@ public:
     QCalendarWidget *calendarWidget;
     QWidget *tab_3;
     QGridLayout *gridLayout_5;
-    QLabel *label_cards;
-    QPushButton *pushButton_studyDeck;
     QPushButton *pushButton_deleteDeck;
-    QPushButton *pushButton_addDeck;
+    QSpacerItem *verticalSpacer;
+    QPushButton *pushButton_studyDeck;
     QLabel *label_decks;
-    QListWidget *listWidget_deckList;
+    QLabel *label_cards;
     QTableWidget *tableWidget_cardsTable;
+    QListWidget *listWidget_deckList;
+    QPushButton *pushButton_addDeck;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuEdit;
@@ -255,26 +257,24 @@ public:
         gridLayout_5->setSpacing(6);
         gridLayout_5->setContentsMargins(11, 11, 11, 11);
         gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
-        label_cards = new QLabel(tab_3);
-        label_cards->setObjectName(QString::fromUtf8("label_cards"));
-        label_cards->setAlignment(Qt::AlignCenter);
+        pushButton_deleteDeck = new QPushButton(tab_3);
+        pushButton_deleteDeck->setObjectName(QString::fromUtf8("pushButton_deleteDeck"));
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(pushButton_deleteDeck->sizePolicy().hasHeightForWidth());
+        pushButton_deleteDeck->setSizePolicy(sizePolicy1);
 
-        gridLayout_5->addWidget(label_cards, 0, 1, 1, 1);
+        gridLayout_5->addWidget(pushButton_deleteDeck, 4, 0, 1, 1);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_5->addItem(verticalSpacer, 0, 1, 6, 1);
 
         pushButton_studyDeck = new QPushButton(tab_3);
         pushButton_studyDeck->setObjectName(QString::fromUtf8("pushButton_studyDeck"));
 
-        gridLayout_5->addWidget(pushButton_studyDeck, 4, 0, 1, 1);
-
-        pushButton_deleteDeck = new QPushButton(tab_3);
-        pushButton_deleteDeck->setObjectName(QString::fromUtf8("pushButton_deleteDeck"));
-
-        gridLayout_5->addWidget(pushButton_deleteDeck, 3, 0, 1, 1);
-
-        pushButton_addDeck = new QPushButton(tab_3);
-        pushButton_addDeck->setObjectName(QString::fromUtf8("pushButton_addDeck"));
-
-        gridLayout_5->addWidget(pushButton_addDeck, 2, 0, 1, 1);
+        gridLayout_5->addWidget(pushButton_studyDeck, 5, 0, 1, 1);
 
         label_decks = new QLabel(tab_3);
         label_decks->setObjectName(QString::fromUtf8("label_decks"));
@@ -282,10 +282,11 @@ public:
 
         gridLayout_5->addWidget(label_decks, 0, 0, 1, 1);
 
-        listWidget_deckList = new QListWidget(tab_3);
-        listWidget_deckList->setObjectName(QString::fromUtf8("listWidget_deckList"));
+        label_cards = new QLabel(tab_3);
+        label_cards->setObjectName(QString::fromUtf8("label_cards"));
+        label_cards->setAlignment(Qt::AlignCenter);
 
-        gridLayout_5->addWidget(listWidget_deckList, 1, 0, 1, 1);
+        gridLayout_5->addWidget(label_cards, 0, 2, 1, 1);
 
         tableWidget_cardsTable = new QTableWidget(tab_3);
         if (tableWidget_cardsTable->columnCount() < 2)
@@ -299,7 +300,23 @@ public:
         tableWidget_cardsTable->horizontalHeader()->setDefaultSectionSize(220);
         tableWidget_cardsTable->horizontalHeader()->setProperty("showSortIndicator", QVariant(false));
 
-        gridLayout_5->addWidget(tableWidget_cardsTable, 1, 1, 3, 1);
+        gridLayout_5->addWidget(tableWidget_cardsTable, 1, 2, 5, 1);
+
+        listWidget_deckList = new QListWidget(tab_3);
+        listWidget_deckList->setObjectName(QString::fromUtf8("listWidget_deckList"));
+        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Expanding);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(listWidget_deckList->sizePolicy().hasHeightForWidth());
+        listWidget_deckList->setSizePolicy(sizePolicy2);
+
+        gridLayout_5->addWidget(listWidget_deckList, 1, 0, 1, 1);
+
+        pushButton_addDeck = new QPushButton(tab_3);
+        pushButton_addDeck->setObjectName(QString::fromUtf8("pushButton_addDeck"));
+        pushButton_addDeck->setEnabled(true);
+
+        gridLayout_5->addWidget(pushButton_addDeck, 2, 0, 1, 1);
 
         tabWidget->addTab(tab_3, QString());
 
@@ -308,7 +325,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 943, 25));
+        menuBar->setGeometry(QRect(0, 0, 943, 26));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuEdit = new QMenu(menuBar);
@@ -414,15 +431,15 @@ public:
         pushButton_deleteEvent->setText(QApplication::translate("MainWindow", "Delete", nullptr));
         pushButton_printEventList->setText(QApplication::translate("MainWindow", "Print (Debug)", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Calendar", nullptr));
-        label_cards->setText(QApplication::translate("MainWindow", "Cards", nullptr));
-        pushButton_studyDeck->setText(QApplication::translate("MainWindow", "Study", nullptr));
         pushButton_deleteDeck->setText(QApplication::translate("MainWindow", "Delete", nullptr));
-        pushButton_addDeck->setText(QApplication::translate("MainWindow", "Add", nullptr));
+        pushButton_studyDeck->setText(QApplication::translate("MainWindow", "Study", nullptr));
         label_decks->setText(QApplication::translate("MainWindow", "Decks", nullptr));
+        label_cards->setText(QApplication::translate("MainWindow", "Cards", nullptr));
         QTableWidgetItem *___qtablewidgetitem3 = tableWidget_cardsTable->horizontalHeaderItem(0);
         ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "Title", nullptr));
         QTableWidgetItem *___qtablewidgetitem4 = tableWidget_cardsTable->horizontalHeaderItem(1);
         ___qtablewidgetitem4->setText(QApplication::translate("MainWindow", "Body", nullptr));
+        pushButton_addDeck->setText(QApplication::translate("MainWindow", "Add", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Flash Cards", nullptr));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
         menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", nullptr));

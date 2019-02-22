@@ -46,7 +46,9 @@ private slots:
     void on_action_export_triggered();
     void on_action_quit_triggered();
 
+    //==================
     // Calendar Buttons
+    //==================
     void on_pushButton_addEvent_clicked();
     void on_pushButton_deleteEvent_clicked();
     void on_pushButton_editEvent_clicked();
@@ -59,6 +61,14 @@ private slots:
 
     // Stretch tableWidget_eventList headers to fit window
     void stretchTableHeaders();
+
+    //=========================
+    // Flash Card Tool Buttons
+    //=========================
+    void on_pushButton_addDeck_clicked();
+    void on_pushButton_deleteDeck_clicked();
+    void on_pushButton_studyDeck_clicked();
+
 
 private:
     Ui::MainWindow *ui;
