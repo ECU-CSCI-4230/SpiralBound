@@ -23,20 +23,16 @@ addcalendarevent::~addcalendarevent()
 
 // Author: Nicholas, Cam, Jamie
 // Init date: 05.02.2019
-// Last Updated: 12.02.2019
+// Last Updated: 21.02.2019
 void addcalendarevent::on_buttonBox_accepted()
 {
-    // Qstrings
-    QString eventName = ui->lineEdit_eventName->text();
-    QString eventDateTime = ui->dateTimeEdit->text();
+    QString name = ui->lineEdit_eventName->text();
+    QString dateTime = ui->dateTimeEdit->text();
 
-    if(!eventName.isEmpty())
+    if(!name.isEmpty())
     {
-        qDebug() << "addcalendarevent: Sending name: " << eventName << "and datetime: " << eventDateTime;
-
-        // Send data to mainwindow
-        emit sendAddData(eventName, eventDateTime);
-
+        // Send name and dateTime to mainwindow.cpp
+        emit sendAddData(name, dateTime);
     }
     else //if eventName is empty, display warning message.
     {

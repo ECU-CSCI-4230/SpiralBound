@@ -15,10 +15,10 @@ deletecalendarevent::~deletecalendarevent()
 
 // Author: Nicholas
 // Init Date: 05.02.2019
-// Last Updated: 12.02.2019
+// Last Updated: 21.02.2019
 void deletecalendarevent::on_buttonBox_accepted()
 {
-    // Send data to mainwindow
+    // Send signal to mainwindow.cpp
     emit sendDeleteData(true);
 }
 

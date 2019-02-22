@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[35];
-    char stringdata0[909];
+    QByteArrayData data[37];
+    char stringdata0[920];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -61,11 +61,13 @@ QT_MOC_LITERAL(26, 681, 24), // "on_action_quit_triggered"
 QT_MOC_LITERAL(27, 706, 30), // "on_pushButton_addEvent_clicked"
 QT_MOC_LITERAL(28, 737, 33), // "on_pushButton_deleteEvent_cli..."
 QT_MOC_LITERAL(29, 771, 31), // "on_pushButton_editEvent_clicked"
-QT_MOC_LITERAL(30, 803, 36), // "on_pushButton_printEventList_..."
-QT_MOC_LITERAL(31, 840, 14), // "receiveAddData"
-QT_MOC_LITERAL(32, 855, 15), // "receiveEditData"
-QT_MOC_LITERAL(33, 871, 17), // "receiveDeleteData"
-QT_MOC_LITERAL(34, 889, 19) // "stretchTableHeaders"
+QT_MOC_LITERAL(30, 803, 14), // "receiveAddData"
+QT_MOC_LITERAL(31, 818, 15), // "receiveEditData"
+QT_MOC_LITERAL(32, 834, 17), // "receiveDeleteData"
+QT_MOC_LITERAL(33, 852, 19), // "stretchTableHeaders"
+QT_MOC_LITERAL(34, 872, 36), // "on_tableWidget_eventList_cell..."
+QT_MOC_LITERAL(35, 909, 3), // "row"
+QT_MOC_LITERAL(36, 913, 6) // "column"
 
     },
     "MainWindow\0sendEditData\0\0"
@@ -96,9 +98,10 @@ QT_MOC_LITERAL(34, 889, 19) // "stretchTableHeaders"
     "on_pushButton_addEvent_clicked\0"
     "on_pushButton_deleteEvent_clicked\0"
     "on_pushButton_editEvent_clicked\0"
-    "on_pushButton_printEventList_clicked\0"
     "receiveAddData\0receiveEditData\0"
-    "receiveDeleteData\0stretchTableHeaders"
+    "receiveDeleteData\0stretchTableHeaders\0"
+    "on_tableWidget_eventList_cellChanged\0"
+    "row\0column"
 };
 #undef QT_MOC_LITERAL
 
@@ -146,11 +149,11 @@ static const uint qt_meta_data_MainWindow[] = {
       27,    0,  210,    2, 0x08 /* Private */,
       28,    0,  211,    2, 0x08 /* Private */,
       29,    0,  212,    2, 0x08 /* Private */,
-      30,    0,  213,    2, 0x08 /* Private */,
-      31,    2,  214,    2, 0x08 /* Private */,
-      32,    2,  219,    2, 0x08 /* Private */,
-      33,    1,  224,    2, 0x08 /* Private */,
-      34,    0,  227,    2, 0x08 /* Private */,
+      30,    2,  213,    2, 0x08 /* Private */,
+      31,    2,  218,    2, 0x08 /* Private */,
+      32,    1,  223,    2, 0x08 /* Private */,
+      33,    0,  226,    2, 0x08 /* Private */,
+      34,    2,  227,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString,    2,    2,    2,
@@ -183,11 +186,11 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
     QMetaType::Void, QMetaType::QString, QMetaType::QString,    2,    2,
     QMetaType::Void, QMetaType::QString, QMetaType::QString,    2,    2,
     QMetaType::Void, QMetaType::Bool,    2,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   35,   36,
 
        0        // eod
 };
@@ -226,11 +229,11 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 25: _t->on_pushButton_addEvent_clicked(); break;
         case 26: _t->on_pushButton_deleteEvent_clicked(); break;
         case 27: _t->on_pushButton_editEvent_clicked(); break;
-        case 28: _t->on_pushButton_printEventList_clicked(); break;
-        case 29: _t->receiveAddData((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
-        case 30: _t->receiveEditData((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
-        case 31: _t->receiveDeleteData((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 32: _t->stretchTableHeaders(); break;
+        case 28: _t->receiveAddData((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 29: _t->receiveEditData((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 30: _t->receiveDeleteData((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 31: _t->stretchTableHeaders(); break;
+        case 32: _t->on_tableWidget_eventList_cellChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

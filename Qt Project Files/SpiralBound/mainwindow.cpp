@@ -28,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->tableWidget_eventList->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 // Destructor
@@ -237,7 +238,6 @@ void MainWindow::on_action_quit_triggered()
 //-----------------------------------------------------------+
 //                   Calendar Tab                            |
 //-----------------------------------------------------------+
-
 // Author: Nicholas
 // Init Date: 19.02.2019
 // Last Updated: 19.02.2019
@@ -253,27 +253,10 @@ void MainWindow::receiveAddData(QString eventName, QString eventDateTime)
     // Create row
     ui->tableWidget_eventList->insertRow(ui->tableWidget_eventList->rowCount() );
     // Populate row
-    ui->tableWidget_eventList->setItem(ui->tableWidget_eventList->rowCount()-1, 0, new QTableWidgetItem(date));
-    ui->tableWidget_eventList->setItem(ui->tableWidget_eventList->rowCount()-1, 1, new QTableWidgetItem(eventName));
-    ui->tableWidget_eventList->setItem(ui->tableWidget_eventList->rowCount()-1, 2, new QTableWidgetItem(time));
-}
-
-// Author: Nicholas
-// Init Date: 19.02.2019
-// Last Updated: 19.02.2019
-void MainWindow::receiveEditData(QString eventName, QString eventDateTime)
-{
-    qDebug() << "mainwindow: Received data from addwindow" << eventName << eventDateTime;
-
-    // Seperate date from time
-    QStringList datetime = eventDateTime.split(" ");
-    QString date = datetime[0];
-    QString time = datetime[1].append(" ").append(datetime[2]);
-
-    // Populate row
-    ui->tableWidget_eventList->setItem(ui->tableWidget_eventList->currentRow(), 0, new QTableWidgetItem(date));
-    ui->tableWidget_eventList->setItem(ui->tableWidget_eventList->currentRow(), 1, new QTableWidgetItem(eventName));
-    ui->tableWidget_eventList->setItem(ui->tableWidget_eventList->currentRow(), 2, new QTableWidgetItem(time));
+    int row = ui->tableWidget_eventList->rowCount()-1;
+    ui->tableWidget_eventList->setItem(row, 0, new QTableWidgetItem(date));
+    ui->tableWidget_eventList->setItem(row, 1, new QTableWidgetItem(eventName));
+    ui->tableWidget_eventList->setItem(row, 2, new QTableWidgetItem(time));
 }
 
 // Author: Nicholas, Cam, Jamie
@@ -290,7 +273,25 @@ void MainWindow::on_pushButton_addEvent_clicked()
 
    // Connect mainwindow to addeventwindow
    connect(addWindow, SIGNAL(sendAddData(QString, QString)), this, SLOT(receiveAddData(QString, QString)));
+}
 
+// Author: Nicholas
+// Init Date: 19.02.2019
+// Last Updated: 19.02.2019
+void MainWindow::receiveEditData(QString eventName, QString eventDateTime)
+{
+    qDebug() << "mainwindow: Received data from addwindow" << eventName << eventDateTime;
+
+    // Seperate date from time
+    QStringList datetime = eventDateTime.split(" ");
+    QString date = datetime[0];
+    QString time = datetime[1].append(" ").append(datetime[2]);
+
+    // Populate current row
+    int row = ui->tableWidget_eventList->currentRow();
+    ui->tableWidget_eventList->setItem(row, 0, new QTableWidgetItem(date));
+    ui->tableWidget_eventList->setItem(row, 1, new QTableWidgetItem(eventName));
+    ui->tableWidget_eventList->setItem(row, 2, new QTableWidgetItem(time));
 }
 
 // Author: Nicholas
@@ -312,11 +313,10 @@ void MainWindow::on_pushButton_editEvent_clicked()
     else
     {
         QString date = ui->tableWidget_eventList->item(row, 0)->text();
-        QString eventName = ui->tableWidget_eventList->item(row, 1)->text();
+        QString name = ui->tableWidget_eventList->item(row, 1)->text();
         QString time = ui->tableWidget_eventList->item(row, 2)->text();
 
-
-         qDebug() << "mainwindow: Sending item from tableWidget_eventList to editcalendarevent";
+        qDebug() << "mainwindow: Sending item from tableWidget_eventList to editcalendarevent";
 
         // Builds editcalendarevent GUI/window
         editWindow = new editcalendarevent(this);
@@ -327,8 +327,9 @@ void MainWindow::on_pushButton_editEvent_clicked()
         connect(this, SIGNAL(sendEditData(QString, QString, QString)), editWindow, SLOT(receiveEditData(QString, QString, QString)));
 
         // Send selected item to editcalendarevent window
-        emit sendEditData(date, eventName, time);
+        emit sendEditData(date, name, time);
 
+        // Connect editcalendarevent to maindwindow
         connect(editWindow, SIGNAL(sendEditData(QString, QString)), this, SLOT(receiveEditData(QString, QString)));
     }
 }
@@ -373,19 +374,9 @@ void MainWindow::on_pushButton_deleteEvent_clicked()
         }
 }
 
-// Author: Nicholas
-// Init Date: 09.02.2019
-// Last Updated: 09.02.20119
-void MainWindow::on_pushButton_printEventList_clicked()
-{
-    qDebug("mainwindow: tableWidget_eventList:");
-
-    // Print all items in event list
-
-    //ui->tableWidget_eventList->sortItems();
-}
-
-
+// Author: Cam
+// Init Date: 19.02.2019
+// Last Updated: 19.02.20119
 void MainWindow::stretchTableHeaders()
 {
     // Stretches the horizontal header of tableWidget_eventList
@@ -393,7 +384,18 @@ void MainWindow::stretchTableHeaders()
     header->setSectionResizeMode(QHeaderView::Stretch);
 }
 
+// Author: Nicholas
+// Init Date: 19.02.2019
+// Last Updated: 19.02.20119
+void MainWindow::on_tableWidget_eventList_cellChanged(int row, int column)
+{
+    qDebug() << "mainwindow: Cell changed at:" << row << column;
 
+    if(column == 2)
+    {
+        //sort
+        qDebug() << "mainwindow: Time to sort";
+        ui->tableWidget_eventList->sortByColumn(0, Qt::AscendingOrder);
+    }
 
-
-
+}

@@ -23,14 +23,13 @@ editcalendarevent::~editcalendarevent()
 }
 
 
-// Author: Nicholas,
+// Author: Nicholas
 // Init Date: 21.02.2019
 // Last Updated: 21.02.2019
-void editcalendarevent::receiveEditData(QString date, QString eventName, QString time)
+void editcalendarevent::receiveEditData(QString date, QString name, QString time)
 {
-    qDebug() << date << eventName << time;
-
-    ui->lineEdit_eventName->setText(eventName);
+    // Prefill line edit boxes with selected data
+    ui->lineEdit_eventName->setText(name);
     ui->dateTimeEdit->setDate(QDate::fromString(date,"MM/dd/yyyy"));
     ui->dateTimeEdit->setTime(QTime::fromString(time,"hh:mm AP"));
 }
@@ -41,18 +40,13 @@ void editcalendarevent::receiveEditData(QString date, QString eventName, QString
 // Last Updated: 21.02.2019
 void editcalendarevent::on_buttonBox_accepted()
 {
-    // Qstrings
-    QString eventName = ui->lineEdit_eventName->text();
-    QString eventDateTime = ui->dateTimeEdit->text();
+    QString name = ui->lineEdit_eventName->text();
+    QString dateTime = ui->dateTimeEdit->text();
 
-    // print q string to console
-    std::cout << eventName.toStdString() << std::endl;
-    std::cout << eventDateTime.toStdString() << std::endl;
-
-    if(!eventName.isEmpty())
+    if(!name.isEmpty())
     {
-        qDebug() << "editcalendarevent:";
-        emit sendEditData(eventName, eventDateTime);
+        // Send name and dateTime to mainwindow.cpp
+        emit sendEditData(name, dateTime);
     }
     else //if eventName is empty, display warning message.
     {
