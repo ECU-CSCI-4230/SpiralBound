@@ -29,6 +29,16 @@ class Page
           * of blocks for the page. */
         void removeBlock(int index);
 
+        /** toString() converts the current page to a string form, where the form
+          * of this string is as follows:
+          * <name>\\n<date>\\n<block-count>\\n
+          * [\\n
+          * <block 1 content>\\n
+          * ]\\n
+          * ...
+          * [\\n
+          * <block n content>\\n
+          * ]\\n */
         char* toString();
 
     private:

@@ -16,6 +16,9 @@ class Block
         void setType(short p);
         void setContent(QString con);
 
+        /** toString() converts this block to a string form, where the form is
+          * <type>\\n<content>. The length of this string will not supercede
+          * MAX_LENGTH characters. */
         char* toString();
 
     private:

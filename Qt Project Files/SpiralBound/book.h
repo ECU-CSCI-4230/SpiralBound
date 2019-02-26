@@ -34,6 +34,8 @@ class Book
           * name and description. */
         void addSection(QString name, QString desc);
 
+        /** toString() converts this book's information to a string of the form
+          * <name>\\n<author>\\n<date> */
         char* toString();
 
     private:

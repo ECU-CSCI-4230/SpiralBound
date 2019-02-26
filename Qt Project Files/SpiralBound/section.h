@@ -33,6 +33,8 @@ class Section
         /** numPages() returns the number of pages in this section. */
         int numPages();
 
+        /** toString() converts this section's information to a string of the form
+          * <name>\\n<desc>. The description cannot supercede 200 chars in length. */
         char* toString();
 
     private:
