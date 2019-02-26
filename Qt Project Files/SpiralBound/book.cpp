@@ -2,6 +2,7 @@
 #include <section.h>
 #include <list>
 #include <map>
+#include <string>
 
 using namespace std;
 
@@ -45,7 +46,6 @@ void Book::setName(QString nm){ bookName = nm; };
 // Init date:    02-12-2019
 // Last Updated: 02-12-2019
 int Book::numSections() {
-
     return (int)bookList->size();
 }
 
@@ -78,4 +78,15 @@ void Book::addSection(QString name, QString desc) {
     bookList->push_back(new Section(name, desc));
 }
 
+// Author:       Matthew Morgan
+// Init date:    02-20-2019
+// Last Updated: 02-25-2019
+char* Book::toString() {
+   char* str = new char[256];
+   const char* nm = this->bookName.toStdString().c_str();
+   const char* au = this->author.toStdString().c_str();
+   const char* da = this->date.toString().toStdString().c_str();
 
+   sprintf(str, "%s\n%s\n%s", nm, au, da);
+   return str;
+}

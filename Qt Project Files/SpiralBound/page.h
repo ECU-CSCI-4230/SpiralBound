@@ -29,6 +29,8 @@ class Page
           * of blocks for the page. */
         void removeBlock(int index);
 
+        char* toString();
+
     private:
         QString pageName;
         QDate date;

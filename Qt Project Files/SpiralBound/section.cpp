@@ -34,7 +34,6 @@ void Section::setDesc(QString dc) { desc = dc; }
 // Init date:    02-02-2019
 // Last Updated: 02-12-2019
 Page* Section::getPage(int index) {
-
     if (index < 0 || index > (int)pages->size()-1) { return nullptr; }
 
     auto it = pages->begin();
@@ -53,7 +52,6 @@ void Section::addPage(QString nm) {
 // Init date:    02-02-2019
 // Last Updated: 02-12-2019
 void Section::removePage(int index) {
-
     if (index < 0 || index > (int) pages->size()-1) { return; }
 
     auto it = pages->begin();
@@ -66,4 +64,16 @@ void Section::removePage(int index) {
 // Last Updated: 02-12-2019
 int Section::numPages() {
     return (int) pages->size();
+}
+
+// Author:       Matthew Morgan
+// Init date:    02-20-2019
+// Last Updated: 02-25-2019
+char* Section::toString() {
+    char* str = new char[256];
+    const char* nm = this->secName.toStdString().c_str();
+    const char* dsc = this->desc.toStdString().c_str();
+
+    sprintf(str, "%s\n%s", nm, dsc);
+    return str;
 }

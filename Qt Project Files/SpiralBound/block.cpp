@@ -23,3 +23,14 @@ void Block::setType(short p) {
 // Init date:    02-12-2019
 // Last Updated: 02-12-2019
 void Block::setContent(QString con) { content = con; }
+
+// Author:       Matthew Morgan
+// Init date:    02-20-2019
+// Last Updated: 02-25-2019
+char* Block::toString() {
+    char* str = new char[MAX_LENGTH];
+    const char* con = this->content.toStdString().c_str();
+
+    sprintf(str, "%d\n%s", this->type, con);
+    return str;
+}

@@ -33,6 +33,8 @@ class Section
         /** numPages() returns the number of pages in this section. */
         int numPages();
 
+        char* toString();
+
     private:
         QString secName;
         QString desc;
