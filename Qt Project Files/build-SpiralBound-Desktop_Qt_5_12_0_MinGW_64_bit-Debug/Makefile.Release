@@ -1058,9 +1058,6 @@ release/mainwindow.o: ../SpiralBound/mainwindow.cpp ../SpiralBound/mainwindow.h 
 		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qheaderview.h \
 		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/QLabel \
 		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qlabel.h \
-		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/QListWidget \
-		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qlistwidget.h \
-		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qlistview.h \
 		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/QMenu \
 		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qmenu.h \
 		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/QMenuBar \
@@ -1068,7 +1065,6 @@ release/mainwindow.o: ../SpiralBound/mainwindow.cpp ../SpiralBound/mainwindow.h 
 		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/QPushButton \
 		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qpushbutton.h \
 		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qabstractbutton.h \
-		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/QSpacerItem \
 		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/QStatusBar \
 		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qstatusbar.h \
 		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/QTabWidget \
