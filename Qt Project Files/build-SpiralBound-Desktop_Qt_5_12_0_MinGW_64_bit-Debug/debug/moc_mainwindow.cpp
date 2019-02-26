@@ -64,9 +64,9 @@ QT_MOC_LITERAL(29, 790, 36), // "on_pushButton_printEventList_..."
 QT_MOC_LITERAL(30, 827, 14), // "receiveAddData"
 QT_MOC_LITERAL(31, 842, 17), // "receiveDeleteData"
 QT_MOC_LITERAL(32, 860, 19), // "stretchTableHeaders"
-QT_MOC_LITERAL(33, 880, 29), // "on_pushButton_addDeck_clicked"
-QT_MOC_LITERAL(34, 910, 32), // "on_pushButton_deleteDeck_clicked"
-QT_MOC_LITERAL(35, 943, 31) // "on_pushButton_studyDeck_clicked"
+QT_MOC_LITERAL(33, 880, 29), // "on_pushButton_addCard_clicked"
+QT_MOC_LITERAL(34, 910, 32), // "on_pushButton_deleteCard_clicked"
+QT_MOC_LITERAL(35, 943, 31) // "on_pushButton_studyCard_clicked"
 
     },
     "MainWindow\0on_action_open_triggered\0"
@@ -98,9 +98,9 @@ QT_MOC_LITERAL(35, 943, 31) // "on_pushButton_studyDeck_clicked"
     "on_pushButton_editEvent_clicked\0"
     "on_pushButton_printEventList_clicked\0"
     "receiveAddData\0receiveDeleteData\0"
-    "stretchTableHeaders\0on_pushButton_addDeck_clicked\0"
-    "on_pushButton_deleteDeck_clicked\0"
-    "on_pushButton_studyDeck_clicked"
+    "stretchTableHeaders\0on_pushButton_addCard_clicked\0"
+    "on_pushButton_deleteCard_clicked\0"
+    "on_pushButton_studyCard_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -229,9 +229,9 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 28: _t->receiveAddData((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
         case 29: _t->receiveDeleteData((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 30: _t->stretchTableHeaders(); break;
-        case 31: _t->on_pushButton_addDeck_clicked(); break;
-        case 32: _t->on_pushButton_deleteDeck_clicked(); break;
-        case 33: _t->on_pushButton_studyDeck_clicked(); break;
+        case 31: _t->on_pushButton_addCard_clicked(); break;
+        case 32: _t->on_pushButton_deleteCard_clicked(); break;
+        case 33: _t->on_pushButton_studyCard_clicked(); break;
         default: ;
         }
     }

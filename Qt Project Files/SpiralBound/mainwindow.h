@@ -6,6 +6,7 @@
 #include <editcalendarevent.h>
 #include <addcalendarevent.h>
 #include <deletecalendarevent.h>
+#include <addcard.h>
 
 namespace Ui {
 class MainWindow;
@@ -65,9 +66,9 @@ private slots:
     //=========================
     // Flash Card Tool Buttons
     //=========================
-    void on_pushButton_addDeck_clicked();
-    void on_pushButton_deleteDeck_clicked();
-    void on_pushButton_studyDeck_clicked();
+    void on_pushButton_addCard_clicked();
+    void on_pushButton_deleteCard_clicked();
+    void on_pushButton_studyCard_clicked();
 
 
 private:
@@ -77,6 +78,7 @@ private:
     deletecalendarevent *deleteWindow;
     addcalendarevent *addWindow;
     editcalendarevent *editWindow;
+    addcard *addCardWindow;
 };
 
 #endif // MAINWINDOW_H

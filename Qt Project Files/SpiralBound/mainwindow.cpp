@@ -380,15 +380,18 @@ void MainWindow::stretchTableHeaders()
 // Author:
 // Init Date:
 // Last Updated:
-void MainWindow::on_pushButton_addDeck_clicked()
+void MainWindow::on_pushButton_addCard_clicked()
 {
     // TODO: open window for adding deck.
+    addCardWindow = new addcard(this);
+    addCardWindow->setModal(true);
+    addCardWindow->show();
 }
 
 // Author:
 // Init Date:
 // Last Updated:
-void MainWindow::on_pushButton_deleteDeck_clicked()
+void MainWindow::on_pushButton_deleteCard_clicked()
 {
     // TODO: open window for deleting selected deck.
 }
@@ -396,7 +399,7 @@ void MainWindow::on_pushButton_deleteDeck_clicked()
 // Author:
 // Init Date:
 // Last Updated:
-void MainWindow::on_pushButton_studyDeck_clicked()
+void MainWindow::on_pushButton_studyCard_clicked()
 {
     // TODO: open study window for selected deck.
 }

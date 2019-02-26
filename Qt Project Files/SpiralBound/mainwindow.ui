@@ -228,7 +228,7 @@
          </widget>
         </item>
         <item row="2" column="0">
-         <widget class="QPushButton" name="pushButton_addDeck">
+         <widget class="QPushButton" name="pushButton_addCard">
           <property name="enabled">
            <bool>true</bool>
           </property>
@@ -238,7 +238,7 @@
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="QPushButton" name="pushButton_deleteDeck">
+         <widget class="QPushButton" name="pushButton_deleteCard">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -251,7 +251,7 @@
          </widget>
         </item>
         <item row="2" column="2">
-         <widget class="QPushButton" name="pushButton_studyDeck">
+         <widget class="QPushButton" name="pushButton_studyCard">
           <property name="text">
            <string>Study</string>
           </property>
@@ -269,7 +269,7 @@
      <x>0</x>
      <y>0</y>
      <width>943</width>
-     <height>26</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
