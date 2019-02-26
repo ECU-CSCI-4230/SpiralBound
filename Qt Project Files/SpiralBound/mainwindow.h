@@ -56,9 +56,6 @@ private slots:
     void receiveEditData(QString, QString);    // Receive editcalendarevent data to mainwindow
     void receiveDeleteData(bool);           // Receive deletecalendarevent data to mainwindow
 
-    // Stretch tableWidget_eventList headers to fit window
-    void stretchTableHeaders();
-
     void on_tableWidget_eventList_cellChanged(int row, int column);
 
 signals:

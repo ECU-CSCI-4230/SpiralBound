@@ -10,14 +10,20 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCalendarWidget>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
@@ -52,11 +58,19 @@ public:
     QAction *action_export;
     QAction *action_quit;
     QWidget *centralWidget;
+    QGridLayout *gridLayout;
     QTabWidget *tabWidget;
     QWidget *tab;
+    QGridLayout *gridLayout_3;
     QTextEdit *textEdit;
     QWidget *tab_2;
+    QGridLayout *gridLayout_2;
+    QPushButton *pushButton_editEvent;
+    QPushButton *pushButton_addEvent;
+    QTableWidget *tableWidget_eventList;
     QCalendarWidget *calendarWidget;
+    QLabel *label;
+    QPushButton *pushButton_deleteEvent;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuEdit;
@@ -71,7 +85,10 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(936, 642);
+        MainWindow->resize(943, 642);
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/SpiralBound/images/icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        MainWindow->setWindowIcon(icon);
         action_open = new QAction(MainWindow);
         action_open->setObjectName(QString::fromUtf8("action_open"));
         action_test = new QAction(MainWindow);
@@ -122,29 +139,107 @@ public:
         action_quit->setObjectName(QString::fromUtf8("action_quit"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
+        gridLayout = new QGridLayout(centralWidget);
+        gridLayout->setSpacing(6);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         tabWidget = new QTabWidget(centralWidget);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
         tabWidget->setEnabled(true);
-        tabWidget->setGeometry(QRect(0, 10, 831, 521));
         tabWidget->setTabPosition(QTabWidget::North);
         tabWidget->setElideMode(Qt::ElideNone);
         tabWidget->setDocumentMode(false);
         tab = new QWidget();
         tab->setObjectName(QString::fromUtf8("tab"));
+        gridLayout_3 = new QGridLayout(tab);
+        gridLayout_3->setSpacing(6);
+        gridLayout_3->setContentsMargins(11, 11, 11, 11);
+        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
         textEdit = new QTextEdit(tab);
         textEdit->setObjectName(QString::fromUtf8("textEdit"));
-        textEdit->setGeometry(QRect(0, 10, 831, 501));
+
+        gridLayout_3->addWidget(textEdit, 0, 0, 1, 1);
+
         tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QString::fromUtf8("tab_2"));
+        gridLayout_2 = new QGridLayout(tab_2);
+        gridLayout_2->setSpacing(6);
+        gridLayout_2->setContentsMargins(11, 11, 11, 11);
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        pushButton_editEvent = new QPushButton(tab_2);
+        pushButton_editEvent->setObjectName(QString::fromUtf8("pushButton_editEvent"));
+
+        gridLayout_2->addWidget(pushButton_editEvent, 3, 2, 1, 1);
+
+        pushButton_addEvent = new QPushButton(tab_2);
+        pushButton_addEvent->setObjectName(QString::fromUtf8("pushButton_addEvent"));
+
+        gridLayout_2->addWidget(pushButton_addEvent, 2, 2, 1, 1);
+
+        tableWidget_eventList = new QTableWidget(tab_2);
+        if (tableWidget_eventList->columnCount() < 3)
+            tableWidget_eventList->setColumnCount(3);
+        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        tableWidget_eventList->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+        tableWidget_eventList->setHorizontalHeaderItem(1, __qtablewidgetitem1);
+        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        tableWidget_eventList->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+        tableWidget_eventList->setObjectName(QString::fromUtf8("tableWidget_eventList"));
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(tableWidget_eventList->sizePolicy().hasHeightForWidth());
+        tableWidget_eventList->setSizePolicy(sizePolicy);
+        QFont font;
+        font.setPointSize(12);
+        tableWidget_eventList->setFont(font);
+        tableWidget_eventList->setAutoFillBackground(false);
+        tableWidget_eventList->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        tableWidget_eventList->setSizeAdjustPolicy(QAbstractScrollArea::AdjustIgnored);
+        tableWidget_eventList->setAutoScrollMargin(16);
+        tableWidget_eventList->setShowGrid(true);
+        tableWidget_eventList->setGridStyle(Qt::DotLine);
+        tableWidget_eventList->setSortingEnabled(true);
+        tableWidget_eventList->horizontalHeader()->setCascadingSectionResizes(false);
+        tableWidget_eventList->horizontalHeader()->setDefaultSectionSize(147);
+        tableWidget_eventList->horizontalHeader()->setMinimumSectionSize(5);
+        tableWidget_eventList->horizontalHeader()->setStretchLastSection(false);
+        tableWidget_eventList->verticalHeader()->setCascadingSectionResizes(false);
+
+        gridLayout_2->addWidget(tableWidget_eventList, 1, 2, 1, 1);
+
         calendarWidget = new QCalendarWidget(tab_2);
         calendarWidget->setObjectName(QString::fromUtf8("calendarWidget"));
-        calendarWidget->setGeometry(QRect(0, 0, 641, 331));
+        sizePolicy.setHeightForWidth(calendarWidget->sizePolicy().hasHeightForWidth());
+        calendarWidget->setSizePolicy(sizePolicy);
+
+        gridLayout_2->addWidget(calendarWidget, 1, 0, 5, 1);
+
+        label = new QLabel(tab_2);
+        label->setObjectName(QString::fromUtf8("label"));
+        QFont font1;
+        font1.setPointSize(24);
+        label->setFont(font1);
+        label->setTextFormat(Qt::AutoText);
+        label->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
+
+        gridLayout_2->addWidget(label, 0, 2, 1, 1);
+
+        pushButton_deleteEvent = new QPushButton(tab_2);
+        pushButton_deleteEvent->setObjectName(QString::fromUtf8("pushButton_deleteEvent"));
+
+        gridLayout_2->addWidget(pushButton_deleteEvent, 4, 2, 1, 1);
+
         tabWidget->addTab(tab_2, QString());
+
+        gridLayout->addWidget(tabWidget, 0, 0, 1, 1);
+
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 936, 22));
+        menuBar->setGeometry(QRect(0, 0, 943, 22));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuEdit = new QMenu(menuBar);
@@ -204,7 +299,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -212,7 +307,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "SprialBound", nullptr));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "SpiralBound", nullptr));
         action_open->setText(QApplication::translate("MainWindow", "Open", nullptr));
         action_test->setText(QApplication::translate("MainWindow", "Test", nullptr));
         action_save->setText(QApplication::translate("MainWindow", "Save", nullptr));
@@ -238,6 +333,16 @@ public:
         action_export->setText(QApplication::translate("MainWindow", "Export", nullptr));
         action_quit->setText(QApplication::translate("MainWindow", "Quit", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "TextEditor", nullptr));
+        pushButton_editEvent->setText(QApplication::translate("MainWindow", "Edit", nullptr));
+        pushButton_addEvent->setText(QApplication::translate("MainWindow", "Add", nullptr));
+        QTableWidgetItem *___qtablewidgetitem = tableWidget_eventList->horizontalHeaderItem(0);
+        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "Date", nullptr));
+        QTableWidgetItem *___qtablewidgetitem1 = tableWidget_eventList->horizontalHeaderItem(1);
+        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "Name", nullptr));
+        QTableWidgetItem *___qtablewidgetitem2 = tableWidget_eventList->horizontalHeaderItem(2);
+        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "Time", nullptr));
+        label->setText(QApplication::translate("MainWindow", "Events List", nullptr));
+        pushButton_deleteEvent->setText(QApplication::translate("MainWindow", "Delete", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Calendar", nullptr));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
         menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", nullptr));

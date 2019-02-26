@@ -264,10 +264,11 @@ void MainWindow::receiveAddData(QString eventName, QString eventDateTime)
 // Last Updated: 19.02.2019
 void MainWindow::on_pushButton_addEvent_clicked()
 {
+    QDate curDate = ui->calendarWidget->selectedDate();
     qDebug() << "mainwindow: Sending item from tableWidget_eventList to addcalendarevent";
 
    // Builds addcalendarevent GUI/window
-   addWindow = new addcalendarevent(this);
+   addWindow = new addcalendarevent(curDate ,this);
    addWindow->setModal(true);
    addWindow->show();
 

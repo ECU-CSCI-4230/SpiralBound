@@ -9,11 +9,12 @@
 #include <QTableWidget>
 #include <QDebug>
 
-addcalendarevent::addcalendarevent(QWidget *parent) :
+addcalendarevent::addcalendarevent(const QDate initDate, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::addcalendarevent)
 {
     ui->setupUi(this);
+    ui->dateTimeEdit->setDate(initDate);
 }
 
 addcalendarevent::~addcalendarevent()

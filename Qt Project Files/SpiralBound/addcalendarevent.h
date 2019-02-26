@@ -12,7 +12,7 @@ class addcalendarevent : public QDialog
     Q_OBJECT
 
 public:
-    explicit addcalendarevent(QWidget *parent = nullptr);
+    explicit addcalendarevent(const QDate initDate, QWidget *parent = nullptr);
     ~addcalendarevent();
 
 private slots:
