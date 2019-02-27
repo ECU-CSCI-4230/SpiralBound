@@ -50,6 +50,25 @@ class TestBook: public QObject {
             QCOMPARE(bkStr, "Sample\nMatthew Morgan\nTue Jun 18 2019");
         }
 
+        // Author:       Matthew Morgan
+        // Init date:    02-27-2019
+        // Last updated: 02-27-2019
+        /** testSecTF() tests the toString() and fromString() ops for Sections. */
+        static void testSecTF() {
+            const char* nm = "CSCI-4230";
+            const char* ds = "This is for Software Engineering II";
+
+            Section* sec = Section::fromString("CSCI-4230\nThis is for Software Engineering II");
+
+            cout << "  Testing property equivalence" << endl;
+            QCOMPARE(nm, sec->getSecName());
+            QCOMPARE(ds, sec->getDesc());
+
+            cout << "  Testing string conversion for section" << endl;
+            char* scStr = sec->toString();
+            QCOMPARE(scStr, "CSCI-4230\nThis is for Software Engineering II");
+        }
+
 //        static void testBookSave() {}
 //        static void testBookLoad() {}
 };

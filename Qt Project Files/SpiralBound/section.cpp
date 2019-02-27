@@ -1,4 +1,5 @@
 #include "section.h"
+#include "util.h"
 
 // Author:       Ketu Patel, Matthew Morgan
 // Init date:    02-02-2019
@@ -68,11 +69,11 @@ int Section::numPages() {
 
 // Author:       Matthew Morgan
 // Init date:    02-20-2019
-// Last Updated: 02-25-2019
+// Last Updated: 02-27-2019
 char* Section::toString() {
     char* str = new char[256];
-    const char* nm = this->secName.toStdString().c_str();
-    const char* dsc = this->desc.toStdString().c_str();
+    const char* nm = Util::QtoCString(secName);
+    const char* dsc = Util::QtoCString(desc);
 
     sprintf(str, "%s\n%s", nm, dsc);
     return str;

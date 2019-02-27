@@ -1,6 +1,7 @@
 #ifndef SECTION_H
 #define SECTION_H
 #include "page.h"
+#include "util.h"
 #include <QStringRef>
 #include <list>
 
@@ -37,7 +38,17 @@ class Section
           * <name>\\n<desc>. The description cannot supercede 200 chars in length. */
         char* toString();
 
-        static Section* fromString();
+        // Author:       Matthew Morgan
+        // Init date:    02-27-2019
+        // Last updated: 02-27-2019
+        static Section* fromString(const char* str) {
+            int index = Util::find(str, '\n', strlen(str));
+            QString nm = QString::fromUtf8(str, index),
+                    ds = QString::fromUtf8(str+index+1);
+
+            Section* sec = new Section(*(new QString(nm)), *(new QString(ds)));
+            return sec;
+        }
 
     private:
         QString secName;
