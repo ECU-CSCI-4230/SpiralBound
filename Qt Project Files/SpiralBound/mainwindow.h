@@ -42,9 +42,6 @@ private slots:
     void on_action_export_triggered();
     void on_action_quit_triggered();
 
-    void on_listWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
-
-    void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;

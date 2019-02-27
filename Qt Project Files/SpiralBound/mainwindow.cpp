@@ -229,14 +229,5 @@ void MainWindow::on_action_quit_triggered()
 }
 
 
-void MainWindow::on_pushButton_clicked()
-{
-    Book *s = new Book("KiddingBook", "AuthorKid");
-    s->addSection("Route", "k2");
-
-    QString l = s->getName();
-
-  qDebug("abc" + l.toLatin1() + "def");
-}
 
 

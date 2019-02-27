@@ -36,7 +36,6 @@ SOURCES += \
 HEADERS += \
         mainwindow.h \
     aboutspiralbound.h \
-    thewidgetitem.h \
     book.h \
     section.h \
     page.h \
