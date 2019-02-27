@@ -1,8 +1,6 @@
 #include "book.h"
-#include <section.h>
+#include "section.h"
 #include <list>
-#include <map>
-#include <string>
 
 using namespace std;
 
@@ -13,6 +11,16 @@ Book::Book(QString nm, QString auth) {
     bookName = nm;
     author   = auth;
     date     = QDate::currentDate();
+    bookList = new list<Section*>();
+}
+
+// Author:       Matthew Morgan
+// Init date:    02-27-2019
+// Last Updated: 02-27-2019
+Book::Book(const char* nm, const char* auth) {
+    bookName = QString::fromUtf8(nm);
+    author = QString::fromUtf8(auth);
+    date = QDate::currentDate();
     bookList = new list<Section*>();
 }
 
@@ -43,6 +51,11 @@ void Book::setAuthor(QString anm) { author = anm; }
 void Book::setName(QString nm){ bookName = nm; };
 
 // Author:       Matthew Morgan
+// Init date:    02-26-2019
+// Last Updated: 02-26-2019
+void Book::setDate(QDate dt) { date = dt; }
+
+// Author:       Matthew Morgan
 // Init date:    02-12-2019
 // Last Updated: 02-12-2019
 int Book::numSections() {
@@ -63,7 +76,7 @@ Section* Book::getSection(int index) {
 // Author:       Ketu Patel
 // Init date:    02-02-2019
 // Last Updated: 02-12-2019
-void Book:: removeSection(int index) {
+void Book::removeSection(int index) {
     if (index < 0 || index > (int)bookList->size()-1) { return; }
 
     auto it = bookList->begin();
@@ -80,12 +93,12 @@ void Book::addSection(QString name, QString desc) {
 
 // Author:       Matthew Morgan
 // Init date:    02-20-2019
-// Last Updated: 02-25-2019
+// Last Updated: 02-27-2019
 char* Book::toString() {
    char* str = new char[256];
-   const char* nm = this->bookName.toStdString().c_str();
-   const char* au = this->author.toStdString().c_str();
-   const char* da = this->date.toString().toStdString().c_str();
+   const char* nm = Util::QtoCString(bookName);
+   const char* au = Util::QtoCString(author);
+   const char* da = Util::QtoCString(date.toString(Qt::DateFormat::TextDate));
 
    sprintf(str, "%s\n%s\n%s", nm, au, da);
    return str;

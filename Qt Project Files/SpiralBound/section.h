@@ -1,7 +1,7 @@
 #ifndef SECTION_H
 #define SECTION_H
+#include "page.h"
 #include <QStringRef>
-#include <page.h>
 #include <list>
 
 using namespace std;
@@ -36,6 +36,8 @@ class Section
         /** toString() converts this section's information to a string of the form
           * <name>\\n<desc>. The description cannot supercede 200 chars in length. */
         char* toString();
+
+        static Section* fromString();
 
     private:
         QString secName;

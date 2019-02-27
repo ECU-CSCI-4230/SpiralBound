@@ -21,6 +21,8 @@ class Block
           * MAX_LENGTH characters. */
         char* toString();
 
+        static Block* fromString();
+
     private:
         QString content;
         short type;

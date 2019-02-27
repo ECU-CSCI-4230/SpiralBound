@@ -1,6 +1,6 @@
 #ifndef PAGE_H
 #define PAGE_H
-#include <block.h>
+#include "block.h"
 #include <iostream>
 #include <QString>
 #include <QDate>
@@ -40,6 +40,8 @@ class Page
           * <block n content>\\n
           * ]\\n */
         char* toString();
+
+        static Page* fromString();
 
     private:
         QString pageName;
