@@ -72,6 +72,7 @@ class TestBook: public QObject {
         // Author:       Matthew Morgan
         // Init date:    02-27-2019
         // Last updated: 02-27-2019
+        /** testBlkTF() tests the toString() and fromString() ops for Blocks. */
         static void testBlkTF() {
             const char* con = "This is some content for the testing\nThis is more content";
             const short typ = Block::TYPE_TEXT;
@@ -85,6 +86,39 @@ class TestBook: public QObject {
             cout << "  Testing string conversion for block" << endl;
             char* blStr = blk->toString();
             QCOMPARE(blStr, "0\nThis is some content for the testing\nThis is more content");
+        }
+
+        // Author:       Matthew Morgan
+        // Init date:    02-27-2019
+        // Last updated: 02-27-2019
+        static void testPgTF() {
+            const char* nm = "02/27/2019";
+            const char* dt = "Wed Feb 27 2019";
+            const char* full = "02/27/2019\nWed Feb 27 2019\n2\n\2540\nThis is content\2541\nThis is code";
+            short blkType[] = { 0, 1 };
+            const char* blkCon[] = { "This is content", "This is code" };
+
+            cout << "  Block separator is " << Page::CHAR_BLK << endl;
+            Page* pg = Page::fromString(full);
+
+            cout << "  Testing property equivalence" << endl;
+            QCOMPARE(nm, pg->getPageName().toStdString().c_str());
+            QCOMPARE(dt, pg->getDate().toString().toStdString().c_str());
+
+            cout << "  Testing blocks" << endl;
+            for(int i=pg->numBlocks()-1; i>=0; i--) {
+                if (pg->getBlock(i) == nullptr) {
+                    cout << "    Block " << i << " is null" << endl;
+                    continue;
+                }
+                QCOMPARE(blkType[i], pg->getBlock(i)->getType());
+                QCOMPARE(blkCon[i], pg->getBlock(i)->getContent().toStdString().c_str());
+                cout << "    Block " << i << " is okay" << endl;
+            }
+            QCOMPARE(pg->numBlocks(), 2);
+
+            cout << "  Testing string conversion for page" << endl;
+            QCOMPARE(full, pg->toString());
         }
 
 //        static void testBookSave() {}
