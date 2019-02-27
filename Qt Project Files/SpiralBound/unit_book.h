@@ -69,6 +69,24 @@ class TestBook: public QObject {
             QCOMPARE(scStr, "CSCI-4230\nThis is for Software Engineering II");
         }
 
+        // Author:       Matthew Morgan
+        // Init date:    02-27-2019
+        // Last updated: 02-27-2019
+        static void testBlkTF() {
+            const char* con = "This is some content for the testing\nThis is more content";
+            const short typ = Block::TYPE_TEXT;
+
+            Block* blk = Block::fromString("0\nThis is some content for the testing\nThis is more content");
+
+            cout << "  Testing property equivalence" << endl;
+            QCOMPARE(typ, blk->getType());
+            QCOMPARE(con, blk->getContent());
+
+            cout << "  Testing string conversion for block" << endl;
+            char* blStr = blk->toString();
+            QCOMPARE(blStr, "0\nThis is some content for the testing\nThis is more content");
+        }
+
 //        static void testBookSave() {}
 //        static void testBookLoad() {}
 };

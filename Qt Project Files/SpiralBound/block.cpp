@@ -1,4 +1,5 @@
 #include "block.h"
+#include "util.h"
 
 Block::Block() { type = TYPE_TEXT; content = ""; }
 
@@ -29,7 +30,7 @@ void Block::setContent(QString con) { content = con; }
 // Last Updated: 02-25-2019
 char* Block::toString() {
     char* str = new char[MAX_LENGTH];
-    const char* con = this->content.toStdString().c_str();
+    const char* con = Util::QtoCString(content);
 
     sprintf(str, "%d\n%s", this->type, con);
     return str;

@@ -1,6 +1,10 @@
 #ifndef BLOCK_H
 #define BLOCK_H
-#include <qstring.h>
+#include "util.h"
+#include <QString>
+#include <iostream>
+
+using namespace std;
 
 class Block
 {
@@ -21,7 +25,21 @@ class Block
           * MAX_LENGTH characters. */
         char* toString();
 
-        static Block* fromString();
+        // Author:       Matthew Morgan
+        // Init date:    02-27-2019
+        // Last updated: 02-27-2019
+        static Block* fromString(const char* str) {
+            int index = Util::find(str, '\n', strlen(str));
+            QString con = QString::fromUtf8(str+index+1, strlen(str)-index),
+                    typ = QString::fromUtf8(str, index);
+
+            sscanf(Util::QtoCString(typ), "%d", &index);
+
+            Block* blk = new Block();
+            blk->setContent(Util::QtoCString(con));
+            blk->setType((short)index);
+            return blk;
+        }
 
     private:
         QString content;
