@@ -238,7 +238,7 @@ void MainWindow::on_action_quit_triggered()
 //-----------------------------------------------------------+
 //                   Calendar Tab                            |
 //-----------------------------------------------------------+
-// Author: Nicholas
+// Author: Nicholas, Matthew
 // Init Date: 19.02.2019
 // Last Updated: 19.02.2019
 void MainWindow::receiveAddData(QString eventName, QString eventDateTime)
@@ -254,9 +254,11 @@ void MainWindow::receiveAddData(QString eventName, QString eventDateTime)
     ui->tableWidget_eventList->insertRow(ui->tableWidget_eventList->rowCount() );
     // Populate row
     int row = ui->tableWidget_eventList->rowCount()-1;
+    ui->tableWidget_eventList->setSortingEnabled(false);
     ui->tableWidget_eventList->setItem(row, 0, new QTableWidgetItem(date));
     ui->tableWidget_eventList->setItem(row, 1, new QTableWidgetItem(eventName));
     ui->tableWidget_eventList->setItem(row, 2, new QTableWidgetItem(time));
+    ui->tableWidget_eventList->setSortingEnabled(true);
 }
 
 // Author: Nicholas, Cam, Jamie
