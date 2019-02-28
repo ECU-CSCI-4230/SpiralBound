@@ -18,50 +18,11 @@
     <normaloff>:/SpiralBound/images/icon.png</normaloff>:/SpiralBound/images/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
-<<<<<<< HEAD
-   <widget class="QTabWidget" name="tabWidget">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>10</y>
-      <width>831</width>
-      <height>521</height>
-     </rect>
-    </property>
-    <property name="tabPosition">
-     <enum>QTabWidget::North</enum>
-    </property>
-    <property name="currentIndex">
-     <number>0</number>
-    </property>
-    <property name="elideMode">
-     <enum>Qt::ElideNone</enum>
-    </property>
-    <property name="documentMode">
-     <bool>false</bool>
-    </property>
-    <widget class="QWidget" name="tab">
-     <attribute name="title">
-      <string>TextEditor</string>
-     </attribute>
-     <widget class="QPlainTextEdit" name="plainTextEdit">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>10</y>
-        <width>831</width>
-        <height>501</height>
-       </rect>
-=======
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="enabled">
        <bool>true</bool>
->>>>>>> calendar
       </property>
       <property name="tabPosition">
        <enum>QTabWidget::North</enum>
@@ -216,13 +177,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-<<<<<<< HEAD
-     <width>936</width>
-     <height>21</height>
-=======
      <width>943</width>
      <height>22</height>
->>>>>>> calendar
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
