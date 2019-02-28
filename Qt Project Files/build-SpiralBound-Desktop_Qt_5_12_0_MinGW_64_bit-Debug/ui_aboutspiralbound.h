@@ -29,7 +29,16 @@ public:
     {
         if (AboutSpiralBound->objectName().isEmpty())
             AboutSpiralBound->setObjectName(QString::fromUtf8("AboutSpiralBound"));
+<<<<<<< HEAD:Qt Project Files/build-SpiralBound-Desktop_Qt_5_12_0_MinGW_64_bit-Debug/ui_aboutspiralbound.h
         AboutSpiralBound->resize(360, 200);
+=======
+        AboutSpiralBound->resize(350, 200);
+        QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(AboutSpiralBound->sizePolicy().hasHeightForWidth());
+        AboutSpiralBound->setSizePolicy(sizePolicy);
+>>>>>>> calendar:Qt Project Files/build-SpiralBound-Desktop_Qt_5_12_0_MinGW_64_bit-Debug/ui_aboutspiralbound.h
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/SpiralBound/images/icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         AboutSpiralBound->setWindowIcon(icon);
