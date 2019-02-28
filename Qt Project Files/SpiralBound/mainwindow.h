@@ -20,6 +20,7 @@ public:
     ~MainWindow();
 
 private slots:
+    // Menu Bar Buttons
     void on_action_open_triggered();
     void on_action_test_triggered();
     void on_action_save_triggered();
