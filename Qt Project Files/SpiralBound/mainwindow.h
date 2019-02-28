@@ -70,6 +70,9 @@ private slots:
     void on_pushButton_deleteCard_clicked();
     void on_pushButton_studyCard_clicked();
 
+    // Receive addCard data to mainwindow
+    void receiveCardData(QString, QString, QString);
+
 
 private:
     Ui::MainWindow *ui;
@@ -79,6 +82,7 @@ private:
     addcalendarevent *addWindow;
     editcalendarevent *editWindow;
     addcard *addCardWindow;
+
 };
 
 #endif // MAINWINDOW_H

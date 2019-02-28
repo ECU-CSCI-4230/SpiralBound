@@ -55,24 +55,28 @@ SOURCES       = ../SpiralBound/main.cpp \
 		../SpiralBound/aboutspiralbound.cpp \
 		../SpiralBound/addcalendarevent.cpp \
 		../SpiralBound/deletecalendarevent.cpp \
-		../SpiralBound/editcalendarevent.cpp qrc_spiralbound.cpp \
+		../SpiralBound/editcalendarevent.cpp \
+		../SpiralBound/addcard.cpp qrc_spiralbound.cpp \
 		moc_mainwindow.cpp \
 		moc_aboutspiralbound.cpp \
 		moc_addcalendarevent.cpp \
 		moc_deletecalendarevent.cpp \
-		moc_editcalendarevent.cpp
+		moc_editcalendarevent.cpp \
+		moc_addcard.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		aboutspiralbound.o \
 		addcalendarevent.o \
 		deletecalendarevent.o \
 		editcalendarevent.o \
+		addcard.o \
 		qrc_spiralbound.o \
 		moc_mainwindow.o \
 		moc_aboutspiralbound.o \
 		moc_addcalendarevent.o \
 		moc_deletecalendarevent.o \
-		moc_editcalendarevent.o
+		moc_editcalendarevent.o \
+		moc_addcard.o
 DIST          = /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/spec_pre.prf \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/qdevice.pri \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/device_config.prf \
@@ -256,12 +260,14 @@ DIST          = /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/spec_pre.pr
 		../SpiralBound/aboutspiralbound.h \
 		../SpiralBound/addcalendarevent.h \
 		../SpiralBound/deletecalendarevent.h \
-		../SpiralBound/editcalendarevent.h ../SpiralBound/main.cpp \
+		../SpiralBound/editcalendarevent.h \
+		../SpiralBound/addcard.h ../SpiralBound/main.cpp \
 		../SpiralBound/mainwindow.cpp \
 		../SpiralBound/aboutspiralbound.cpp \
 		../SpiralBound/addcalendarevent.cpp \
 		../SpiralBound/deletecalendarevent.cpp \
-		../SpiralBound/editcalendarevent.cpp
+		../SpiralBound/editcalendarevent.cpp \
+		../SpiralBound/addcard.cpp
 QMAKE_TARGET  = SpiralBound
 DESTDIR       = 
 TARGET        = SpiralBound.app/Contents/MacOS/SpiralBound
@@ -279,7 +285,7 @@ include /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/mac/sdk.mk
 first: all
 ####### Build rules
 
-SpiralBound.app/Contents/MacOS/SpiralBound: ui_mainwindow.h ui_aboutspiralbound.h ui_addcalendarevent.h ui_deletecalendarevent.h ui_editcalendarevent.h $(OBJECTS)  
+SpiralBound.app/Contents/MacOS/SpiralBound: ui_mainwindow.h ui_aboutspiralbound.h ui_addcalendarevent.h ui_deletecalendarevent.h ui_editcalendarevent.h ui_addcard.h $(OBJECTS)  
 	@test -d SpiralBound.app/Contents/MacOS/ || mkdir -p SpiralBound.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -683,9 +689,9 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../SpiralBound/spiralbound.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../SpiralBound/mainwindow.h ../SpiralBound/aboutspiralbound.h ../SpiralBound/addcalendarevent.h ../SpiralBound/deletecalendarevent.h ../SpiralBound/editcalendarevent.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../SpiralBound/main.cpp ../SpiralBound/mainwindow.cpp ../SpiralBound/aboutspiralbound.cpp ../SpiralBound/addcalendarevent.cpp ../SpiralBound/deletecalendarevent.cpp ../SpiralBound/editcalendarevent.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../SpiralBound/mainwindow.ui ../SpiralBound/aboutspiralbound.ui ../SpiralBound/addcalendarevent.ui ../SpiralBound/deletecalendarevent.ui ../SpiralBound/editcalendarevent.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../SpiralBound/mainwindow.h ../SpiralBound/aboutspiralbound.h ../SpiralBound/addcalendarevent.h ../SpiralBound/deletecalendarevent.h ../SpiralBound/editcalendarevent.h ../SpiralBound/addcard.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../SpiralBound/main.cpp ../SpiralBound/mainwindow.cpp ../SpiralBound/aboutspiralbound.cpp ../SpiralBound/addcalendarevent.cpp ../SpiralBound/deletecalendarevent.cpp ../SpiralBound/editcalendarevent.cpp ../SpiralBound/addcard.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../SpiralBound/mainwindow.ui ../SpiralBound/aboutspiralbound.ui ../SpiralBound/addcalendarevent.ui ../SpiralBound/deletecalendarevent.ui ../SpiralBound/editcalendarevent.ui ../SpiralBound/addcard.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -723,9 +729,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk -mmacosx-version-min=10.12 -Wall -W -dM -E -o moc_predefs.h /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_aboutspiralbound.cpp moc_addcalendarevent.cpp moc_deletecalendarevent.cpp moc_editcalendarevent.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_aboutspiralbound.cpp moc_addcalendarevent.cpp moc_deletecalendarevent.cpp moc_editcalendarevent.cpp moc_addcard.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_aboutspiralbound.cpp moc_addcalendarevent.cpp moc_deletecalendarevent.cpp moc_editcalendarevent.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_aboutspiralbound.cpp moc_addcalendarevent.cpp moc_deletecalendarevent.cpp moc_editcalendarevent.cpp moc_addcard.cpp
 moc_mainwindow.cpp: /Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QTableWidget \
@@ -734,6 +740,8 @@ moc_mainwindow.cpp: /Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		../SpiralBound/addcalendarevent.h \
+		../SpiralBound/deletecalendarevent.h \
+		../SpiralBound/addcard.h \
 		../SpiralBound/mainwindow.h \
 		moc_predefs.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/bin/moc
@@ -769,13 +777,20 @@ moc_editcalendarevent.cpp: /Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.fra
 		/Users/nickellis/Qt/5.12.0/clang_64/bin/moc
 	/Users/nickellis/Qt/5.12.0/clang_64/bin/moc $(DEFINES) --include '/Users/nickellis/Documents/Classes/CSCI_4230/Project/Snorlax/Qt Project Files/build-SpiralBound-Desktop_Qt_5_12_0_clang_64bit-Debug/moc_predefs.h' -I/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/macx-clang -I'/Users/nickellis/Documents/Classes/CSCI_4230/Project/Snorlax/Qt Project Files/SpiralBound' -I/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/nickellis/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers -I/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/nickellis/Qt/5.12.0/clang_64/lib ../SpiralBound/editcalendarevent.h -o moc_editcalendarevent.cpp
 
+moc_addcard.cpp: /Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../SpiralBound/addcard.h \
+		moc_predefs.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/bin/moc
+	/Users/nickellis/Qt/5.12.0/clang_64/bin/moc $(DEFINES) --include '/Users/nickellis/Documents/Classes/CSCI_4230/Project/Snorlax/Qt Project Files/build-SpiralBound-Desktop_Qt_5_12_0_clang_64bit-Debug/moc_predefs.h' -I/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/macx-clang -I'/Users/nickellis/Documents/Classes/CSCI_4230/Project/Snorlax/Qt Project Files/SpiralBound' -I/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/nickellis/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers -I/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/nickellis/Qt/5.12.0/clang_64/lib ../SpiralBound/addcard.h -o moc_addcard.cpp
+
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h ui_aboutspiralbound.h ui_addcalendarevent.h ui_deletecalendarevent.h ui_editcalendarevent.h
+compiler_uic_make_all: ui_mainwindow.h ui_aboutspiralbound.h ui_addcalendarevent.h ui_deletecalendarevent.h ui_editcalendarevent.h ui_addcard.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h ui_aboutspiralbound.h ui_addcalendarevent.h ui_deletecalendarevent.h ui_editcalendarevent.h
+	-$(DEL_FILE) ui_mainwindow.h ui_aboutspiralbound.h ui_addcalendarevent.h ui_deletecalendarevent.h ui_editcalendarevent.h ui_addcard.h
 ui_mainwindow.h: ../SpiralBound/mainwindow.ui \
 		/Users/nickellis/Qt/5.12.0/clang_64/bin/uic
 	/Users/nickellis/Qt/5.12.0/clang_64/bin/uic ../SpiralBound/mainwindow.ui -o ui_mainwindow.h
@@ -795,6 +810,10 @@ ui_deletecalendarevent.h: ../SpiralBound/deletecalendarevent.ui \
 ui_editcalendarevent.h: ../SpiralBound/editcalendarevent.ui \
 		/Users/nickellis/Qt/5.12.0/clang_64/bin/uic
 	/Users/nickellis/Qt/5.12.0/clang_64/bin/uic ../SpiralBound/editcalendarevent.ui -o ui_editcalendarevent.h
+
+ui_addcard.h: ../SpiralBound/addcard.ui \
+		/Users/nickellis/Qt/5.12.0/clang_64/bin/uic
+	/Users/nickellis/Qt/5.12.0/clang_64/bin/uic ../SpiralBound/addcard.ui -o ui_addcard.h
 
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
@@ -817,6 +836,8 @@ main.o: ../SpiralBound/main.cpp ../SpiralBound/mainwindow.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		../SpiralBound/addcalendarevent.h \
+		../SpiralBound/deletecalendarevent.h \
+		../SpiralBound/addcard.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../SpiralBound/main.cpp
@@ -830,9 +851,10 @@ mainwindow.o: ../SpiralBound/mainwindow.cpp ../SpiralBound/mainwindow.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		../SpiralBound/addcalendarevent.h \
+		../SpiralBound/deletecalendarevent.h \
+		../SpiralBound/addcard.h \
 		ui_mainwindow.h \
 		../SpiralBound/aboutspiralbound.h \
-		../SpiralBound/deletecalendarevent.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QFile \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
@@ -871,10 +893,14 @@ addcalendarevent.o: ../SpiralBound/addcalendarevent.cpp ../SpiralBound/addcalend
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QTableWidget \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qtablewidget.h \
 		../SpiralBound/editcalendarevent.h \
+		../SpiralBound/deletecalendarevent.h \
+		../SpiralBound/addcard.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QTextStream \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
-		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QDebug \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o addcalendarevent.o ../SpiralBound/addcalendarevent.cpp
 
 deletecalendarevent.o: ../SpiralBound/deletecalendarevent.cpp ../SpiralBound/deletecalendarevent.h \
@@ -893,6 +919,8 @@ editcalendarevent.o: ../SpiralBound/editcalendarevent.cpp ../SpiralBound/editcal
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../SpiralBound/addcalendarevent.h \
+		../SpiralBound/deletecalendarevent.h \
+		../SpiralBound/addcard.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QTextStream \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
@@ -904,6 +932,22 @@ editcalendarevent.o: ../SpiralBound/editcalendarevent.cpp ../SpiralBound/editcal
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QItemSelectionModel \
 		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qitemselectionmodel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o editcalendarevent.o ../SpiralBound/editcalendarevent.cpp
+
+addcard.o: ../SpiralBound/addcard.cpp ../SpiralBound/addcard.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		ui_addcard.h \
+		../SpiralBound/mainwindow.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QTableWidget \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qtablewidget.h \
+		../SpiralBound/editcalendarevent.h \
+		../SpiralBound/addcalendarevent.h \
+		../SpiralBound/deletecalendarevent.h \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QtDebug \
+		/Users/nickellis/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qdebug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o addcard.o ../SpiralBound/addcard.cpp
 
 qrc_spiralbound.o: qrc_spiralbound.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_spiralbound.o qrc_spiralbound.cpp
@@ -922,6 +966,9 @@ moc_deletecalendarevent.o: moc_deletecalendarevent.cpp
 
 moc_editcalendarevent.o: moc_editcalendarevent.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_editcalendarevent.o moc_editcalendarevent.cpp
+
+moc_addcard.o: moc_addcard.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_addcard.o moc_addcard.cpp
 
 ####### Install
 

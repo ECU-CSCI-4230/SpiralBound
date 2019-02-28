@@ -15,6 +15,13 @@ public:
     explicit addcard(QWidget *parent = nullptr);
     ~addcard();
 
+private slots:
+    void on_buttonBox_accepted();
+
+signals:
+    // Send addcalendarevent data to mainwindow
+    void sendCardData(QString,QString,QString);
+
 private:
     Ui::addcard *ui;
 };

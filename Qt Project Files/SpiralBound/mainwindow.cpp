@@ -376,16 +376,31 @@ void MainWindow::stretchTableHeaders()
 //-----------------------------------------------------------+
 //                     Flash Card Tab                        |
 //-----------------------------------------------------------+
+// Author: Nick
+// Init Date:    26.02.2019
+// Last Updated: 26.02.2019
+void MainWindow::receiveCardData(QString deckName, QString front, QString back)
+{
+    qDebug() << deckName << front << back;
 
-// Author:
-// Init Date:
-// Last Updated:
+    // Create row
+    ui->tableWidget_cardsTable->insertRow(ui->tableWidget_cardsTable->rowCount() );
+    // Populate row
+    ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 0, new QTableWidgetItem(deckName));
+    ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 1, new QTableWidgetItem(front));
+    ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 2, new QTableWidgetItem(back));
+}
+
+// Author: Jamie, Nick
+// Init Date:    26.02.2019
+// Last Updated: 26.02.2019
 void MainWindow::on_pushButton_addCard_clicked()
 {
-    // TODO: open window for adding deck.
     addCardWindow = new addcard(this);
     addCardWindow->setModal(true);
     addCardWindow->show();
+
+    connect(addCardWindow, SIGNAL(sendCardData(QString,QString,QString)), this, SLOT(receiveCardData(QString, QString, QString)));
 }
 
 // Author:
@@ -394,6 +409,7 @@ void MainWindow::on_pushButton_addCard_clicked()
 void MainWindow::on_pushButton_deleteCard_clicked()
 {
     // TODO: open window for deleting selected deck.
+
 }
 
 // Author:
