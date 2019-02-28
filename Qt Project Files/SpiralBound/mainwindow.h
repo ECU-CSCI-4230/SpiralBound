@@ -1,7 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-#include <qlistwidget.h>
-#include <QListWidget>
+
 #include <QMainWindow>
 #include <QTableWidget>
 #include <editcalendarevent.h>
@@ -65,7 +64,7 @@ signals:
 private:
     Ui::MainWindow *ui;
     QString file_path_;
-	
+
     deletecalendarevent *deleteWindow;
     addcalendarevent *addWindow;
     editcalendarevent *editWindow;

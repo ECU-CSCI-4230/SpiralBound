@@ -16,6 +16,12 @@
 #include <QItemSelectionModel>
 #include <QTableWidget>
 
+//================
+// Author:
+// Init Date:
+// Last Updated:
+//================
+
 // Constructor
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),

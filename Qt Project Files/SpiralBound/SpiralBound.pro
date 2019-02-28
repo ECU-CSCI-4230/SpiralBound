@@ -3,6 +3,8 @@
 ######################################################################
 
 QT += testlib
+QT += core gui
+QT += widgets
 TEMPLATE = app
 TARGET = SpiralBound
 INCLUDEPATH += .
@@ -27,11 +29,10 @@ SOURCES += \
         addcalendarevent.cpp \
         deletecalendarevent.cpp \
         editcalendarevent.cpp \
-		block.cpp \
+        block.cpp \
         page.cpp \
         section.cpp \
-        book.cpp \
-        unit_book.cpp
+        book.cpp
 
 HEADERS += \
         mainwindow.h \
