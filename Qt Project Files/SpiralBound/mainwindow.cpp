@@ -292,9 +292,11 @@ void MainWindow::receiveEditData(QString eventName, QString eventDateTime)
 
     // Populate current row
     int row = ui->tableWidget_eventList->currentRow();
+    ui->tableWidget_eventList->setSortingEnabled(false);
     ui->tableWidget_eventList->setItem(row, 0, new QTableWidgetItem(date));
     ui->tableWidget_eventList->setItem(row, 1, new QTableWidgetItem(eventName));
     ui->tableWidget_eventList->setItem(row, 2, new QTableWidgetItem(time));
+    ui->tableWidget_eventList->setSortingEnabled(true);
 }
 
 // Author: Nicholas
