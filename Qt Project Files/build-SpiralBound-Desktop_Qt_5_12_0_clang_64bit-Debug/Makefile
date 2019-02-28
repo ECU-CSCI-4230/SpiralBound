@@ -224,6 +224,7 @@ DIST          = /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/spec_pre.pr
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/qt_config.prf \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/macx-clang/qmake.conf \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/spec_post.prf \
+		../SpiralBound/.qmake.stash \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/exclusive_builds.prf \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/mac/sdk.prf \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/toolchain.prf \
@@ -433,6 +434,7 @@ Makefile: ../SpiralBound/SpiralBound.pro /Users/nickellis/Qt/5.12.0/clang_64/mks
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/qt_config.prf \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/macx-clang/qmake.conf \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/exclusive_builds.prf \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/mac/sdk.prf \
 		/Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/toolchain.prf \
@@ -617,6 +619,7 @@ Makefile: ../SpiralBound/SpiralBound.pro /Users/nickellis/Qt/5.12.0/clang_64/mks
 /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/qt_config.prf:
 /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/macx-clang/qmake.conf:
 /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/exclusive_builds.prf:
 /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/mac/sdk.prf:
 /Users/nickellis/Qt/5.12.0/clang_64/mkspecs/features/toolchain.prf:
@@ -692,6 +695,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r SpiralBound.app
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
