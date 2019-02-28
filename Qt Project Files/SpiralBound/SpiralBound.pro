@@ -27,15 +27,12 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    aboutspiralbound.cpp
 
 HEADERS += \
         mainwindow.h \
-    aboutspiralbound.h
 
 FORMS += \
         mainwindow.ui \
-    aboutspiralbound.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
