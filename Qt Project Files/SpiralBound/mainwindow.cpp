@@ -240,7 +240,7 @@ void MainWindow::on_action_quit_triggered()
 //-----------------------------------------------------------+
 // Author: Nicholas, Matthew
 // Init Date: 19.02.2019
-// Last Updated: 19.02.2019
+// Last Updated: 27.02.2019
 void MainWindow::receiveAddData(QString eventName, QString eventDateTime)
 {
     qDebug() << "mainwindow: Received data from addwindow" << eventName << eventDateTime;
@@ -280,7 +280,7 @@ void MainWindow::on_pushButton_addEvent_clicked()
 
 // Author: Nicholas
 // Init Date: 19.02.2019
-// Last Updated: 19.02.2019
+// Last Updated: 28.02.2019
 void MainWindow::receiveEditData(QString eventName, QString eventDateTime)
 {
     qDebug() << "mainwindow: Received data from addwindow" << eventName << eventDateTime;
