@@ -18,6 +18,7 @@ public:
 private slots:
     void on_pushButton_ok_clicked();
 
+
 private:
     Ui::AboutSpiralBound *ui;
 };

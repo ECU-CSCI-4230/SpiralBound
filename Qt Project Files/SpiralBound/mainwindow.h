@@ -3,6 +3,10 @@
 #include <qlistwidget.h>
 #include <QListWidget>
 #include <QMainWindow>
+#include <QTableWidget>
+#include <editcalendarevent.h>
+#include <addcalendarevent.h>
+#include <deletecalendarevent.h>
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +21,7 @@ public:
     ~MainWindow();
 
 private slots:
+    // Menu Bar Buttons
     void on_action_open_triggered();
     void on_action_test_triggered();
     void on_action_save_triggered();
@@ -42,12 +47,28 @@ private slots:
     void on_action_export_triggered();
     void on_action_quit_triggered();
 
+    // Calendar Buttons
+    void on_pushButton_addEvent_clicked();
+    void on_pushButton_deleteEvent_clicked();
+    void on_pushButton_editEvent_clicked();
+
+    // Connections
+    void receiveAddData(QString, QString);  // Receive addcalendarevent data to mainwindow
+    void receiveEditData(QString, QString);    // Receive editcalendarevent data to mainwindow
+    void receiveDeleteData(bool);           // Receive deletecalendarevent data to mainwindow
+
+    void on_tableWidget_eventList_cellChanged(int row, int column);
+
+signals:
+    void sendEditData(QString, QString, QString);  // Send mainwindown data to editcalendarevent
 
 private:
     Ui::MainWindow *ui;
     QString file_path_;
-    Ui::MainWindow *ListWidget;
-
+	
+    deletecalendarevent *deleteWindow;
+    addcalendarevent *addWindow;
+    editcalendarevent *editWindow;
 };
 
 #endif // MAINWINDOW_H

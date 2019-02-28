@@ -18,23 +18,45 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-# Input
-HEADERS += aboutspiralbound.h \
-           block.h \
-           book.h \
-           mainwindow.h \
-           page.h \
-           section.h \
-           thewidgetitem.h \
-           util.h \
-           /thewidgetitem.h \
-    unit_book.h
-FORMS += aboutspiralbound.ui mainwindow.ui
-SOURCES += aboutspiralbound.cpp \
-           block.cpp \
-           book.cpp \
-           main.cpp \
-           mainwindow.cpp \
-           page.cpp \
-           section.cpp \
-    unit_book.cpp
+CONFIG += c++11
+
+SOURCES += \
+        main.cpp \
+        mainwindow.cpp \
+        aboutspiralbound.cpp \
+        addcalendarevent.cpp \
+        deletecalendarevent.cpp \
+        editcalendarevent.cpp \
+		block.cpp \
+        page.cpp \
+        section.cpp \
+        book.cpp \
+        unit_book.cpp
+
+HEADERS += \
+        mainwindow.h \
+        aboutspiralbound.h \
+        addcalendarevent.h \
+        deletecalendarevent.h \
+        editcalendarevent.h \
+        block.h \
+        page.h \
+        section.h \
+        book.h \
+        util.h \
+        unit_book.h
+
+FORMS += \
+        mainwindow.ui \
+        aboutspiralbound.ui \
+        addcalendarevent.ui \
+        deletecalendarevent.ui \
+        editcalendarevent.ui
+
+# Default rules for deployment.
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    spiralbound.qrc

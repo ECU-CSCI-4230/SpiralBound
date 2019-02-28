@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/SpiralBound">
+        <file>images/icon.png</file>
+    </qresource>
+</RCC>
