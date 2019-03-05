@@ -79,6 +79,7 @@ public:
     QPushButton *pushButton_addCard;
     QPushButton *pushButton_deleteCard;
     QPushButton *pushButton_studyCard;
+    QPushButton *pushButton_import;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuEdit;
@@ -261,7 +262,7 @@ public:
         label_cards->setSizePolicy(sizePolicy1);
         label_cards->setAlignment(Qt::AlignCenter);
 
-        gridLayout_4->addWidget(label_cards, 0, 0, 1, 3);
+        gridLayout_4->addWidget(label_cards, 0, 0, 1, 1);
 
         tableWidget_cardsTable = new QTableWidget(tab_3);
         if (tableWidget_cardsTable->columnCount() < 3)
@@ -273,12 +274,13 @@ public:
         QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
         tableWidget_cardsTable->setHorizontalHeaderItem(2, __qtablewidgetitem5);
         tableWidget_cardsTable->setObjectName(QString::fromUtf8("tableWidget_cardsTable"));
+        tableWidget_cardsTable->setSortingEnabled(false);
         tableWidget_cardsTable->setColumnCount(3);
         tableWidget_cardsTable->horizontalHeader()->setCascadingSectionResizes(true);
         tableWidget_cardsTable->horizontalHeader()->setDefaultSectionSize(297);
-        tableWidget_cardsTable->horizontalHeader()->setProperty("showSortIndicator", QVariant(true));
+        tableWidget_cardsTable->horizontalHeader()->setProperty("showSortIndicator", QVariant(false));
 
-        gridLayout_4->addWidget(tableWidget_cardsTable, 1, 0, 1, 3);
+        gridLayout_4->addWidget(tableWidget_cardsTable, 1, 0, 1, 4);
 
         pushButton_addCard = new QPushButton(tab_3);
         pushButton_addCard->setObjectName(QString::fromUtf8("pushButton_addCard"));
@@ -300,6 +302,11 @@ public:
         pushButton_studyCard->setObjectName(QString::fromUtf8("pushButton_studyCard"));
 
         gridLayout_4->addWidget(pushButton_studyCard, 2, 2, 1, 1);
+
+        pushButton_import = new QPushButton(tab_3);
+        pushButton_import->setObjectName(QString::fromUtf8("pushButton_import"));
+
+        gridLayout_4->addWidget(pushButton_import, 2, 3, 1, 1);
 
         tabWidget->addTab(tab_3, QString());
 
@@ -401,6 +408,11 @@ public:
         action_printPreview->setText(QApplication::translate("MainWindow", "Print Preview", nullptr));
         action_export->setText(QApplication::translate("MainWindow", "Export", nullptr));
         action_quit->setText(QApplication::translate("MainWindow", "Quit", nullptr));
+        textEdit->setHtml(QApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.SF NS Text'; font-size:13pt;\"><br /></p></body></html>", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "TextEditor", nullptr));
         label->setText(QApplication::translate("MainWindow", "Events List", nullptr));
         QTableWidgetItem *___qtablewidgetitem = tableWidget_eventList->horizontalHeaderItem(0);
@@ -424,6 +436,7 @@ public:
         pushButton_addCard->setText(QApplication::translate("MainWindow", "Add", nullptr));
         pushButton_deleteCard->setText(QApplication::translate("MainWindow", "Delete", nullptr));
         pushButton_studyCard->setText(QApplication::translate("MainWindow", "Study", nullptr));
+        pushButton_import->setText(QApplication::translate("MainWindow", "Import...", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Flash Cards", nullptr));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
         menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", nullptr));

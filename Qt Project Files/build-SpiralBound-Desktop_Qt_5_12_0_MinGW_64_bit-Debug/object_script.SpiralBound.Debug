@@ -5,6 +5,8 @@ debug/addcalendarevent.o
 debug/deletecalendarevent.o
 debug/editcalendarevent.o
 debug/addcard.o
+debug/deletecard.o
+debug/importflashcards.o
 debug/qrc_spiralbound.o
 debug/moc_mainwindow.o
 debug/moc_aboutspiralbound.o
@@ -12,3 +14,5 @@ debug/moc_addcalendarevent.o
 debug/moc_deletecalendarevent.o
 debug/moc_editcalendarevent.o
 debug/moc_addcard.o
+debug/moc_deletecard.o
+debug/moc_importflashcards.o

@@ -5,6 +5,8 @@ release/addcalendarevent.o
 release/deletecalendarevent.o
 release/editcalendarevent.o
 release/addcard.o
+release/deletecard.o
+release/importflashcards.o
 release/qrc_spiralbound.o
 release/moc_mainwindow.o
 release/moc_aboutspiralbound.o
@@ -12,3 +14,5 @@ release/moc_addcalendarevent.o
 release/moc_deletecalendarevent.o
 release/moc_editcalendarevent.o
 release/moc_addcard.o
+release/moc_deletecard.o
+release/moc_importflashcards.o

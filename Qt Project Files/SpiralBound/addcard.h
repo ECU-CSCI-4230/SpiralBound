@@ -19,7 +19,7 @@ private slots:
     void on_buttonBox_accepted();
 
 signals:
-    // Send addcalendarevent data to mainwindow
+    // Send addcard data to mainwindow
     void sendCardData(QString,QString,QString);
 
 private:

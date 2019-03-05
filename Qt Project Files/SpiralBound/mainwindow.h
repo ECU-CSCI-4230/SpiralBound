@@ -7,6 +7,7 @@
 #include <addcalendarevent.h>
 #include <deletecalendarevent.h>
 #include <addcard.h>
+#include <importflashcards.h>
 
 namespace Ui {
 class MainWindow;
@@ -69,6 +70,7 @@ private slots:
     void on_pushButton_addCard_clicked();
     void on_pushButton_deleteCard_clicked();
     void on_pushButton_studyCard_clicked();
+    void on_pushButton_import_clicked();
 
     // Receive addCard data to mainwindow
     void receiveCardData(QString, QString, QString);
@@ -82,6 +84,7 @@ private:
     addcalendarevent *addWindow;
     editcalendarevent *editWindow;
     addcard *addCardWindow;
+    importflashcards *importCardWindow;
 
 };
 

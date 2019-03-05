@@ -32,7 +32,8 @@ SOURCES += \
     deletecalendarevent.cpp \
     editcalendarevent.cpp \
     addcard.cpp \
-    deletecard.cpp
+    deletecard.cpp \
+    importflashcards.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -41,7 +42,8 @@ HEADERS += \
     deletecalendarevent.h \
     editcalendarevent.h \
     addcard.h \
-    deletecard.h
+    deletecard.h \
+    importflashcards.h
 
 FORMS += \
         mainwindow.ui \
@@ -50,7 +52,8 @@ FORMS += \
     deletecalendarevent.ui \
     editcalendarevent.ui \
     addcard.ui \
-    deletecard.ui
+    deletecard.ui \
+    importflashcards.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
