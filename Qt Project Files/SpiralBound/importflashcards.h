@@ -20,6 +20,10 @@ private slots:
     void on_pushButton_import_clicked();
     void on_pushButton_cancel_clicked();
 
+signals:
+    // Add one card to the deck at a time.
+    void sendCardData(QString, QString, QString);
+
 private:
     Ui::importflashcards *ui;
 };

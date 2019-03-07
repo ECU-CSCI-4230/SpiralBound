@@ -2435,24 +2435,45 @@ release/importflashcards.o: ../SpiralBound/importflashcards.cpp ../SpiralBound/i
 		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/QLabel \
 		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qlabel.h \
 		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qframe.h \
-		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/QPlainTextEdit \
-		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qplaintextedit.h \
-		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qtextedit.h \
-		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qabstractscrollarea.h \
-		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtGui/qtextdocument.h \
-		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtGui/qtextoption.h \
-		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtGui/qtextcursor.h \
-		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtGui/qtextformat.h \
-		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtGui/qpen.h \
-		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtGui/qabstracttextdocumentlayout.h \
-		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtGui/qtextlayout.h \
-		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtGui/qglyphrun.h \
-		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtGui/qrawfont.h \
-		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtGui/qfontdatabase.h \
 		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/QPushButton \
 		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qpushbutton.h \
 		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qabstractbutton.h \
-		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtGui/qicon.h
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtGui/qicon.h \
+		../SpiralBound/mainwindow.h \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/QMainWindow \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qmainwindow.h \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qtabwidget.h \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/QTableWidget \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qtablewidget.h \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qtableview.h \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qabstractitemview.h \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtCore/qabstractitemmodel.h \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtCore/qitemselectionmodel.h \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qabstractitemdelegate.h \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qstyleoption.h \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qabstractspinbox.h \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtGui/qvalidator.h \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtCore/qregularexpression.h \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qslider.h \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qabstractslider.h \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qstyle.h \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qtabbar.h \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qrubberband.h \
+		../SpiralBound/editcalendarevent.h \
+		../SpiralBound/addcalendarevent.h \
+		../SpiralBound/deletecalendarevent.h \
+		../SpiralBound/addcard.h \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/QFileDialog \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qfiledialog.h \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtCore/qdir.h \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtCore/qfileinfo.h \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtCore/QFile \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/QMessageBox \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtWidgets/qmessagebox.h \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtCore/QTextStream \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtGui/QStandardItem \
+		C:/Users/Camby/Qt/5.12.0/mingw73_64/include/QtGui/qstandarditemmodel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\importflashcards.o ..\SpiralBound\importflashcards.cpp
 
 release/qrc_spiralbound.o: release/qrc_spiralbound.cpp 

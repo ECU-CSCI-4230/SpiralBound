@@ -422,11 +422,14 @@ void MainWindow::on_pushButton_studyCard_clicked()
 
 // Author: Cam
 // Init Date: 02.03.2019
-// Last Updated: 02.03.2019
+// Last Updated: 07.03.2019
 void MainWindow::on_pushButton_import_clicked()
 {
     //TODO: opens window for importing files
     importCardWindow = new importflashcards(this);
     importCardWindow->setModal(true);
     importCardWindow->show();
+
+    connect(importCardWindow, SIGNAL(sendCardData(QString,QString,QString)), this, SLOT(receiveCardData(QString, QString, QString)));
+
 }
