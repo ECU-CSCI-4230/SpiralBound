@@ -6,6 +6,7 @@
 #include "QMessageBox"
 #include "QTextStream"
 #include "QStandardItem"
+#include "QString"
 
 importflashcards::importflashcards(QWidget *parent) :
     QDialog(parent),
@@ -27,7 +28,7 @@ void importflashcards::on_pushButton_browse_clicked()
     // Open File Browser and select desired file
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
                                                     "/home",
-                                                    tr("*"));
+                                                    tr("*.csv *.txt"));
     // Get file path, display to user
     ui->label_selectedPath->setText(fileName);
 
@@ -38,38 +39,79 @@ void importflashcards::on_pushButton_browse_clicked()
 // Last Updated: 07.03.2019
 void importflashcards::on_pushButton_import_clicked()
 {
-    // Read File path
-    QFile file(ui->label_selectedPath->text());
+    // Get the path
+    QString path = ui->label_selectedPath->text();
 
-    // Parse through CSV file and add data to table   
-    if (file.open(QIODevice::ReadOnly))
+    if(path.back() == 'v')     // File is a csv file
     {
-        int index = 0;
-        QString deckName, front, back;
-        QTextStream in(&file);
+        // Read File path
+        QFile file(ui->label_selectedPath->text());
 
-        // While the file is not at the end
-        while(!in.atEnd())
+        // If file can open
+        if (file.open(QIODevice::ReadOnly))
         {
-            // Read one line at a time
-            QString fileLine = in.readLine();
+            int index = 0;
+            QString deckName, front, back;
+            QTextStream in(&file);
 
-            // Parse through each value
-            QStringList lineToken = fileLine.split(",", QString::SkipEmptyParts);
+            // While the file is not at the end
+            while(!in.atEnd())
+            {
+                // Read one line at a time
+                QString fileLine = in.readLine();
 
-            deckName = lineToken[0];
-            front    = lineToken[1];
-            back     = lineToken[2];
+                // Parse through each value
+                QStringList lineToken = fileLine.split(",", QString::SkipEmptyParts);
 
-            // Send card data back to main window
-            emit sendCardData(deckName, front, back);
+                deckName = lineToken[0];
+                front    = lineToken[1];
+                back     = lineToken[2];
 
-            // Go to next line of file
-            index++;
-        }
+                // Send card data back to main window
+                emit sendCardData(deckName, front, back);
 
-        // Close file
-        file.close();
+                // Go to next line of file
+                index++;
+            }
+
+            // Close file
+            file.close();
+         }
+
+    }
+    else if (path.back() == 't')    // File is a txt file
+    {
+        QFile file(ui->label_selectedPath->text());
+
+        if (file.open(QIODevice::ReadOnly))
+        {
+            int index = 0;
+            QString deckName, front, back;
+            QTextStream in(&file);
+
+            // While the file is not at the end
+            while(!in.atEnd())
+            {
+                // Read one line at a time
+                QString fileLine = in.readLine();
+
+                // Parse through each value
+                QStringList lineToken = fileLine.split("\t", QString::SkipEmptyParts);
+
+                deckName = lineToken[0];
+                front    = lineToken[1];
+                back     = lineToken[2];
+
+                // Send card data back to main window
+                emit sendCardData(deckName, front, back);
+
+                // Go to next line of file
+                index++;
+            }
+
+            // Close file
+            file.close();
+         }
     }
 
     // Close window
