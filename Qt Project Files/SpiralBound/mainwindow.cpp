@@ -15,7 +15,9 @@
 #include <QtDebug>
 #include <QItemSelectionModel>
 #include <QTableWidget>
-
+#include <page.h>
+#include <QListWidgetItem>
+#include <qinputdialog.h>
 //================
 // Author:
 // Init Date:
@@ -394,3 +396,71 @@ void MainWindow::on_tableWidget_eventList_cellChanged(int row, int column)
     }
 
 }
+
+// Author: Ketu Patel
+// Init Date: 10.03.2019
+// Last Updated: 11.03.20119
+void MainWindow::on_pushButton_AddPage_clicked()
+{
+
+    // Add Untitled Page
+    QListWidgetItem* pItem =new QListWidgetItem("Untitled Page");
+    pItem->setForeground(Qt::black);
+    pItem->setBackground(Qt::gray);
+    ui->listWidget_pages->addItem(pItem);
+    ui->listWidget_pages->show();
+
+}
+
+// Author: Ketu Patel
+// Init Date: 10.03.2019
+// Last Updated: 11.03.20119
+void MainWindow::on_tabWidget_2_tabCloseRequested(int index)
+{
+    // Closes selected tab
+    ui->tabWidget_2->removeTab(index);
+
+}
+
+// Author: Ketu Patel
+// Init Date: 10.03.2019
+// Last Updated: 11.03.20119
+void MainWindow::on_pushButton_addSection_clicked()
+{
+    // Adds a section
+    ui->tabWidget_2->addTab(new QWidget(), QString("New Section %0").arg(ui->tabWidget_2->count()+1));
+    ui->tabWidget_2->setCurrentIndex(ui->tabWidget_2->count()-1);
+
+    QPalette pal = palette();
+
+    // set gray background
+    if (ui->tabWidget_2->count() % 2 == 0 )
+    {
+    pal.setColor(QPalette::Background, Qt::gray);
+
+     ui->tabWidget_2->setPalette(pal);
+     ui->tabWidget_2->setAutoFillBackground(true);
+     ui->tabWidget_2->show();
+    }
+
+}
+
+// Author: Ketu Patel
+// Init Date: 10.03.2019
+// Last Updated: 11.03.20119
+void MainWindow::on_tabWidget_2_tabBarDoubleClicked(int index)
+{
+    bool ok;
+        // Rename a section upon double clicked event
+        QString text = QInputDialog::getText(0, "Rename Section",
+                                             "New Name:", QLineEdit::Normal,
+                                             "", &ok);
+        if (ok && !text.isEmpty()) {
+            QDate date = QDate::fromString(text);
+
+                   }
+    ui->tabWidget_2->setTabText(index, text);
+}
+
+
+

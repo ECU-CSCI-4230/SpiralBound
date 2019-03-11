@@ -52,7 +52,8 @@ FORMS += \
         aboutspiralbound.ui \
         addcalendarevent.ui \
         deletecalendarevent.ui \
-        editcalendarevent.ui
+        editcalendarevent.ui \
+    addpage.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
