@@ -83,6 +83,12 @@ border-color: rgb(0, 0, 0);</string>
           <height>491</height>
          </rect>
         </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="styleSheet">
          <string notr="true">border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 0, 0, 255), stop:1 rgba(255, 255, 255, 255));</string>
         </property>
@@ -93,7 +99,7 @@ border-color: rgb(0, 0, 0);</string>
          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:5.5pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
@@ -116,18 +122,30 @@ p, li { white-space: pre-wrap; }
        <widget class="QTabWidget" name="tabWidget_2">
         <property name="geometry">
          <rect>
-          <x>70</x>
+          <x>20</x>
           <y>0</y>
-          <width>681</width>
+          <width>731</width>
           <height>21</height>
          </rect>
         </property>
+        <property name="font">
+         <font>
+          <pointsize>6</pointsize>
+         </font>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(187, 187, 255);
-border-color: rgb(0, 0, 0);</string>
+         <string notr="true">/* QTabBar::tab { background: black; } */
+QTabBar::tab:selected, QTabBar::tab:selected:hover { background-color: #b4aeff; }
+QTabBar::tab:hover { background-color: gray; }</string>
+        </property>
+        <property name="tabPosition">
+         <enum>QTabWidget::North</enum>
         </property>
         <property name="tabShape">
-         <enum>QTabWidget::Triangular</enum>
+         <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
          <number>0</number>
@@ -145,6 +163,24 @@ border-color: rgb(0, 0, 0);</string>
          <bool>true</bool>
         </property>
         <widget class="QWidget" name="tab_5">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <attribute name="title">
           <string>New Section 1</string>
          </attribute>
@@ -158,15 +194,18 @@ border-color: rgb(0, 0, 0);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>71</width>
+          <width>21</width>
           <height>21</height>
          </rect>
+        </property>
+        <property name="toolTip">
+         <string>Click to add a new section</string>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgb(132, 101, 255);</string>
         </property>
         <property name="text">
-         <string>Add Section</string>
+         <string>+</string>
         </property>
        </widget>
        <zorder>textEdit</zorder>
@@ -307,7 +346,7 @@ border-color: rgb(0, 0, 0);</string>
      <x>0</x>
      <y>0</y>
      <width>943</width>
-     <height>21</height>
+     <height>17</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

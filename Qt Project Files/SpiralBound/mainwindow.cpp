@@ -444,8 +444,9 @@ void MainWindow::on_pushButton_addSection_clicked()
     book->getSection(book->numSections()-1)->addPage("Untitled Page");
     qDebug() << book->getSection(book->numSections()-1)->getSecName() << " was added";
 
-    QPalette pal = palette();
+/***
 
+    QPalette pal = palette();
     // set gray background
     if (ui->tabWidget_2->count() % 2 == 0 )
     {
@@ -454,7 +455,11 @@ void MainWindow::on_pushButton_addSection_clicked()
         ui->tabWidget_2->setAutoFillBackground(true);
     }
     on_tabWidget_2_currentChanged(ui->tabWidget_2->currentIndex());
+
+    */
 }
+
+
 
 // Author:       Ketu Patel, Matthew Morgan
 // Init Date:    10.03.2019
