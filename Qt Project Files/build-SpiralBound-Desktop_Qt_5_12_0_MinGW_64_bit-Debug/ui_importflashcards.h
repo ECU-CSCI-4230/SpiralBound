@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 
@@ -20,6 +21,7 @@ QT_BEGIN_NAMESPACE
 class Ui_importflashcards
 {
 public:
+    QGridLayout *gridLayout;
     QLabel *label_path;
     QPushButton *pushButton_import;
     QPushButton *pushButton_cancel;
@@ -31,22 +33,34 @@ public:
         if (importflashcards->objectName().isEmpty())
             importflashcards->setObjectName(QString::fromUtf8("importflashcards"));
         importflashcards->resize(400, 136);
+        gridLayout = new QGridLayout(importflashcards);
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         label_path = new QLabel(importflashcards);
         label_path->setObjectName(QString::fromUtf8("label_path"));
-        label_path->setGeometry(QRect(11, 43, 31, 50));
         label_path->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
+
+        gridLayout->addWidget(label_path, 1, 0, 1, 1);
+
         pushButton_import = new QPushButton(importflashcards);
         pushButton_import->setObjectName(QString::fromUtf8("pushButton_import"));
-        pushButton_import->setGeometry(QRect(11, 100, 185, 25));
+
+        gridLayout->addWidget(pushButton_import, 2, 0, 1, 2);
+
         pushButton_cancel = new QPushButton(importflashcards);
         pushButton_cancel->setObjectName(QString::fromUtf8("pushButton_cancel"));
-        pushButton_cancel->setGeometry(QRect(207, 100, 185, 25));
+
+        gridLayout->addWidget(pushButton_cancel, 2, 2, 1, 2);
+
         label_selectedPath = new QLabel(importflashcards);
         label_selectedPath->setObjectName(QString::fromUtf8("label_selectedPath"));
-        label_selectedPath->setGeometry(QRect(45, 43, 341, 50));
+
+        gridLayout->addWidget(label_selectedPath, 1, 1, 1, 3);
+
         pushButton_browse = new QPushButton(importflashcards);
         pushButton_browse->setObjectName(QString::fromUtf8("pushButton_browse"));
-        pushButton_browse->setGeometry(QRect(11, 11, 378, 25));
+
+        gridLayout->addWidget(pushButton_browse, 0, 0, 1, 4);
+
 
         retranslateUi(importflashcards);
 

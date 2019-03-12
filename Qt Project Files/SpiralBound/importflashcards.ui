@@ -13,74 +13,46 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QLabel" name="label_path">
-   <property name="geometry">
-    <rect>
-     <x>11</x>
-     <y>43</y>
-     <width>31</width>
-     <height>50</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Path:</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_import">
-   <property name="geometry">
-    <rect>
-     <x>11</x>
-     <y>100</y>
-     <width>185</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Import</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_cancel">
-   <property name="geometry">
-    <rect>
-     <x>207</x>
-     <y>100</y>
-     <width>185</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Cancel</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_selectedPath">
-   <property name="geometry">
-    <rect>
-     <x>45</x>
-     <y>43</y>
-     <width>341</width>
-     <height>50</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>None</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_browse">
-   <property name="geometry">
-    <rect>
-     <x>11</x>
-     <y>11</y>
-     <width>378</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Browse...</string>
-   </property>
-  </widget>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_path">
+     <property name="text">
+      <string>Path:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <widget class="QPushButton" name="pushButton_import">
+     <property name="text">
+      <string>Import</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2" colspan="2">
+    <widget class="QPushButton" name="pushButton_cancel">
+     <property name="text">
+      <string>Cancel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1" colspan="3">
+    <widget class="QLabel" name="label_selectedPath">
+     <property name="text">
+      <string>None</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="4">
+    <widget class="QPushButton" name="pushButton_browse">
+     <property name="text">
+      <string>Browse...</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>
