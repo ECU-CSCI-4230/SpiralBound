@@ -26,7 +26,9 @@ importflashcards::~importflashcards()
 void importflashcards::on_pushButton_browse_clicked()
 {
     // Open File Browser and select desired file
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("*.csv *.txt"));
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
+                                                    "/home",
+                                                    tr("*.csv *.txt"));
     // Get file path, display to user
     ui->label_selectedPath->setText(fileName);
 
