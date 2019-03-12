@@ -6,6 +6,7 @@
 #include <editcalendarevent.h>
 #include <addcalendarevent.h>
 #include <deletecalendarevent.h>
+#include <QListWidgetItem>
 #include "book.h"
 
 namespace Ui {
@@ -65,7 +66,8 @@ private slots:
     void on_tabWidget_2_tabBarDoubleClicked(int index);
     void on_tabWidget_2_currentChanged(int index);
     void on_listWidget_pages_currentRowChanged(int currentRow);
-
+    void on_listWidget_pages_itemDoubleClicked(QListWidgetItem* item);
+    void on_textEdit_textChanged(); // TESTING
 
 signals:
     void sendEditData(QString, QString, QString);  // Send mainwindown data to editcalendarevent

@@ -10,6 +10,7 @@ Page::Page()
     pageName = "default";
     date = QDate::currentDate();
     blocks = new list<Block*>();
+    content = "";
 }
 
 // Author:       Ketu Patel, Matthew Morgan
@@ -20,6 +21,7 @@ Page::Page(QString pg)
     pageName = pg;
     date = QDate::currentDate();
     blocks = new list<Block*>();
+    content = "";
 }
 
 // Author:       Ketu Patel
@@ -102,3 +104,15 @@ char* Page::toString() {
 
     return str;
 }
+
+/********** TEMPORARY **********/
+
+// Author:       Matthew Morgan
+// Init date:    03-12-2019
+// Last Updated: 03-12-2019
+void Page::setContent(QString qst) { content = qst; }
+
+// Author:       Matthew Morgan
+// Init date:    03-12-2019
+// Last Updated: 03-12-2019
+QString Page::getContent() { return content; }

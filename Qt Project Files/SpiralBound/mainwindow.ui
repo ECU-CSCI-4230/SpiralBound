@@ -70,7 +70,7 @@ border-color: rgb(0, 0, 0);</string>
         </property>
         <item>
          <property name="text">
-          <string>New Item</string>
+          <string>Untitled Page</string>
          </property>
         </item>
        </widget>

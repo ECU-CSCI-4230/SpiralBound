@@ -422,9 +422,14 @@ void MainWindow::on_pushButton_AddPage_clicked()
 // Last Updated: 11.03.2019
 void MainWindow::on_tabWidget_2_tabCloseRequested(int index)
 {
-    qDebug() << book->getSection(index)->getSecName() << " was removed";
-    book->removeSection(index);
-    ui->tabWidget_2->removeTab(index);
+    if (ui->tabWidget_2->count() > 1) {
+        // Only remove a section if there is another available
+        qDebug() << book->getSection(index)->getSecName() << " was removed";
+        book->removeSection(index);
+        ui->tabWidget_2->removeTab(index);
+    }
+    else {
+    }
 }
 
 // Author:       Ketu Patel, Matthew Morgan
@@ -436,6 +441,7 @@ void MainWindow::on_pushButton_addSection_clicked()
     ui->tabWidget_2->addTab(new QWidget(), QString("New Section %0").arg(ui->tabWidget_2->count()+1));
     ui->tabWidget_2->setCurrentIndex(ui->tabWidget_2->count()-1);
     book->addSection(ui->tabWidget_2->tabText(ui->tabWidget_2->count()-1), "");
+    book->getSection(book->numSections()-1)->addPage("Untitled Page");
     qDebug() << book->getSection(book->numSections()-1)->getSecName() << " was added";
 
     QPalette pal = palette();
@@ -460,9 +466,9 @@ void MainWindow::on_tabWidget_2_tabBarDoubleClicked(int index)
     QString text = QInputDialog::getText(nullptr, "Rename Section", "New Name:", QLineEdit::Normal, "", &ok);
 
     if (ok && !text.isEmpty()) {
-      qDebug() << "Section \"" << book->getSection(index)->getSecName() << "\" renamed to " << text;
-      book->getSection(index)->setName(text);
-      ui->tabWidget_2->setTabText(index, text);
+        qDebug() << "Section \"" << book->getSection(index)->getSecName() << "\" renamed to " << text;
+        book->getSection(index)->setName(text);
+        ui->tabWidget_2->setTabText(index, text);
     }
 }
 
@@ -490,5 +496,39 @@ void MainWindow::on_listWidget_pages_currentRowChanged(int currentRow) {
     Page* cur = book->getSection(ui->tabWidget_2->currentIndex())->getPage(currentRow);
     if (cur != nullptr) {
         qDebug() << "Page changed to " << cur->getPageName();
+        ui->textEdit->setText(cur->getContent());
     }
+}
+
+// Author:       Matthew Morgan
+// Init Date:    11.03.2019
+// Last Updated: 11.03.2019
+/** findItemIndex(item,wid) will find the numerical index of an item, item, in a list widget
+  * wid, returning the index, or -1 if the item is not found in the widget. */
+int findItemIndex(QListWidgetItem* item, QListWidget* wid) {
+    for(int i=0; i<wid->count(); i++) {
+        if (wid->item(i) == item) { return i; }
+    }
+    return -1;
+}
+
+// Author:       Matthew Morgan
+// Init Date:    11.03.2019
+// Last Updated: 11.03.2019
+void MainWindow::on_listWidget_pages_itemDoubleClicked(QListWidgetItem* item) {
+    // Allow renaming of a page if the new name isn't blank
+    bool ok;
+    QString text = QInputDialog::getText(nullptr, "Rename Page", "New Name:", QLineEdit::Normal, item->text(), &ok);
+    int index = findItemIndex(item, ui->listWidget_pages);
+
+    if (ok && !text.isEmpty()) {
+        Section* sec = book->getSection(ui->tabWidget_2->currentIndex());
+        qDebug() << "Page \"" << sec->getPage(index)->getPageName() << "\" renamed to " << text;
+        sec->getPage(index)->setPgName(text);
+        item->setText(text);
+    }
+}
+
+void MainWindow::on_textEdit_textChanged() {
+    book->getSection(ui->tabWidget_2->currentIndex())->getPage(ui->listWidget_pages->currentRow())->setContent(QString(ui->textEdit->toPlainText()));
 }

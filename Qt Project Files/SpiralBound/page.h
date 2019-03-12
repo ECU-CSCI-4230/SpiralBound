@@ -20,6 +20,8 @@ class Page
         QDate getDate();
         void setPgName(QString nm);
         void setDate(QDate dt);
+        void setContent(QString qst); // TEMPORARY
+        QString getContent();         // TEMPORARY
         int numBlocks();
 
         /** getBlock(index) gets the block at the specified index in the list
@@ -44,7 +46,7 @@ class Page
         // Init date:    02-27-2019
         // Last updated: 02-27-2019
         static Page* fromString(const char* str) {
-            int len = strlen(str),
+            int len = (int)strlen(str),
                 nm = Util::find(str, '\n', len),
                 dt = Util::find(str+nm+1, '\n', len-nm-1),
                 blk = Util::find(str+nm+dt+2, '\n', len-nm-dt-2);
@@ -73,7 +75,7 @@ class Page
         }
 
     private:
-        QString pageName;
+        QString pageName, content;
         QDate date;
         list<Block*>* blocks;
 };
