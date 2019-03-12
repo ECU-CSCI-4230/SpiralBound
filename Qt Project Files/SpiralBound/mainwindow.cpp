@@ -15,14 +15,9 @@
 #include <QtDebug>
 #include <QItemSelectionModel>
 #include <QTableWidget>
-#include <page.h>
 #include <QListWidgetItem>
 #include <qinputdialog.h>
-//================
-// Author:
-// Init Date:
-// Last Updated:
-//================
+#include "book.h"
 
 // Constructor
 MainWindow::MainWindow(QWidget *parent) :
@@ -31,6 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->tableWidget_eventList->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    book = new Book("", "");
+    book->addSection("New Section 1", "");
 }
 
 // Destructor
@@ -67,8 +64,8 @@ void MainWindow::on_action_save_triggered()
 
 }
 
-// Author: Nicholas Ellis
-// Init Date: 29.01.2019
+// Author:       Nicholas Ellis
+// Init Date:    29.01.2019
 // Last Updated: 29.01.2019
 void MainWindow::on_action_about_triggered()
 {
@@ -77,8 +74,8 @@ void MainWindow::on_action_about_triggered()
     dialogWindow.exec();
 }
 
-// Author: Tyler Rogers
-// Init Date: 29.01.2019
+// Author:       Tyler Rogers
+// Init Date:    29.01.2019
 // Last Updated: 29.01.2019
 void MainWindow::on_action_aboutQt_triggered()
 {
@@ -229,8 +226,8 @@ void MainWindow::on_action_export_triggered()
 
 }
 
-// Author: Tyler Rogers (cirkuitbreaker)
-// Init date: 29.01.2019
+// Author:       Tyler Rogers (cirkuitbreaker)
+// Init date:    29.01.2019
 // Last Updated: 29.01.2019
 void MainWindow::on_action_quit_triggered()
 {
@@ -240,8 +237,8 @@ void MainWindow::on_action_quit_triggered()
 //-----------------------------------------------------------+
 //                   Calendar Tab                            |
 //-----------------------------------------------------------+
-// Author: Nicholas, Matthew
-// Init Date: 19.02.2019
+// Author:       Nicholas, Matthew
+// Init Date:    19.02.2019
 // Last Updated: 27.02.2019
 void MainWindow::receiveAddData(QString eventName, QString eventDateTime)
 {
@@ -263,8 +260,8 @@ void MainWindow::receiveAddData(QString eventName, QString eventDateTime)
     ui->tableWidget_eventList->setSortingEnabled(true);
 }
 
-// Author: Nicholas, Cam, Jamie
-// Init Date: 05.02.2019
+// Author:       Nicholas, Cam, Jamie
+// Init Date:    05.02.2019
 // Last Updated: 19.02.2019
 void MainWindow::on_pushButton_addEvent_clicked()
 {
@@ -280,8 +277,8 @@ void MainWindow::on_pushButton_addEvent_clicked()
    connect(addWindow, SIGNAL(sendAddData(QString, QString)), this, SLOT(receiveAddData(QString, QString)));
 }
 
-// Author: Nicholas
-// Init Date: 19.02.2019
+// Author:       Nicholas
+// Init Date:    19.02.2019
 // Last Updated: 28.02.2019
 void MainWindow::receiveEditData(QString eventName, QString eventDateTime)
 {
@@ -301,8 +298,8 @@ void MainWindow::receiveEditData(QString eventName, QString eventDateTime)
     ui->tableWidget_eventList->setSortingEnabled(true);
 }
 
-// Author: Nicholas
-// Init Date: 09.02.2019
+// Author:       Nicholas
+// Init Date:    09.02.2019
 // Last Updated: 19.02.20119
 void MainWindow::on_pushButton_editEvent_clicked()
 {
@@ -341,8 +338,8 @@ void MainWindow::on_pushButton_editEvent_clicked()
     }
 }
 
-// Author: Nicholas
-// Init Date: 09.02.2019
+// Author:       Nicholas
+// Init Date:    09.02.2019
 // Last Updated: 19.02.20119
 void MainWindow::receiveDeleteData(bool response)
 {
@@ -355,8 +352,8 @@ void MainWindow::receiveDeleteData(bool response)
    }
 }
 
-// Author: Jamie, Nicholas
-// Init Date: 07.02.2019
+// Author:       Jamie, Nicholas
+// Init Date:    07.02.2019
 // Last Updated: 19.02.20119
 void MainWindow::on_pushButton_deleteEvent_clicked()
 {
@@ -381,8 +378,8 @@ void MainWindow::on_pushButton_deleteEvent_clicked()
         }
 }
 
-// Author: Nicholas
-// Init Date: 19.02.2019
+// Author:       Nicholas
+// Init Date:    19.02.2019
 // Last Updated: 19.02.20119
 void MainWindow::on_tableWidget_eventList_cellChanged(int row, int column)
 {
@@ -397,14 +394,17 @@ void MainWindow::on_tableWidget_eventList_cellChanged(int row, int column)
 
 }
 
-// Author: Ketu Patel
-// Init Date: 10.03.2019
-// Last Updated: 11.03.20119
+
+//-----------------------------------------------------------+
+//                   Notetake Tab                            |
+//-----------------------------------------------------------+
+// Author:       Ketu Patel
+// Init Date:    10.03.2019
+// Last Updated: 11.03.2019
 void MainWindow::on_pushButton_AddPage_clicked()
 {
-
     // Add Untitled Page
-    QListWidgetItem* pItem =new QListWidgetItem("Untitled Page");
+    QListWidgetItem* pItem = new QListWidgetItem("Untitled Page");
     pItem->setForeground(Qt::black);
     pItem->setBackground(Qt::gray);
     ui->listWidget_pages->addItem(pItem);
@@ -412,54 +412,53 @@ void MainWindow::on_pushButton_AddPage_clicked()
 
 }
 
-// Author: Ketu Patel
-// Init Date: 10.03.2019
-// Last Updated: 11.03.20119
+// Author:       Ketu Patel, Matthew Morgan
+// Init Date:    10.03.2019
+// Last Updated: 11.03.2019
 void MainWindow::on_tabWidget_2_tabCloseRequested(int index)
 {
-    // Closes selected tab
+    qDebug() << book->getSection(index)->getSecName() << " was removed";
+    book->removeSection(index);
     ui->tabWidget_2->removeTab(index);
-
 }
 
-// Author: Ketu Patel
-// Init Date: 10.03.2019
-// Last Updated: 11.03.20119
+// Author:       Ketu Patel, Matthew Morgan
+// Init Date:    10.03.2019
+// Last Updated: 11.03.2019
 void MainWindow::on_pushButton_addSection_clicked()
 {
     // Adds a section
     ui->tabWidget_2->addTab(new QWidget(), QString("New Section %0").arg(ui->tabWidget_2->count()+1));
     ui->tabWidget_2->setCurrentIndex(ui->tabWidget_2->count()-1);
+    book->addSection(ui->tabWidget_2->tabText(ui->tabWidget_2->count()-1), "");
+    qDebug() << book->getSection(book->numSections()-1)->getSecName() << " was added";
 
     QPalette pal = palette();
 
     // set gray background
     if (ui->tabWidget_2->count() % 2 == 0 )
     {
-    pal.setColor(QPalette::Background, Qt::gray);
-
-     ui->tabWidget_2->setPalette(pal);
-     ui->tabWidget_2->setAutoFillBackground(true);
-     ui->tabWidget_2->show();
+        pal.setColor(QPalette::Background, Qt::gray);
+        ui->tabWidget_2->setPalette(pal);
+        ui->tabWidget_2->setAutoFillBackground(true);
+        ui->tabWidget_2->show();
     }
-
 }
 
-// Author: Ketu Patel
-// Init Date: 10.03.2019
-// Last Updated: 11.03.20119
+// Author:       Ketu Patel, Matthew Morgan
+// Init Date:    10.03.2019
+// Last Updated: 11.03.2019
 void MainWindow::on_tabWidget_2_tabBarDoubleClicked(int index)
 {
+    // Rename a section, but ONLY if the new name isn't blank
     bool ok;
-        // Rename a section upon double clicked event
-        QString text = QInputDialog::getText(0, "Rename Section",
-                                             "New Name:", QLineEdit::Normal,
-                                             "", &ok);
-        if (ok && !text.isEmpty()) {
-            QDate date = QDate::fromString(text);
+    QString text = QInputDialog::getText(nullptr, "Rename Section", "New Name:", QLineEdit::Normal, "", &ok);
 
-                   }
-    ui->tabWidget_2->setTabText(index, text);
+    if (ok && !text.isEmpty()) {
+      qDebug() << "Section \"" << book->getSection(index)->getSecName() << "\" renamed to \"" << text << "\"";
+      book->getSection(index)->setName(text);
+      ui->tabWidget_2->setTabText(index, text);
+    }
 }
 
 

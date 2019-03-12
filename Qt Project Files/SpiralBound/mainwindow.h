@@ -6,6 +6,7 @@
 #include <editcalendarevent.h>
 #include <addcalendarevent.h>
 #include <deletecalendarevent.h>
+#include "book.h"
 
 namespace Ui {
 class MainWindow;
@@ -53,7 +54,7 @@ private slots:
 
     // Connections
     void receiveAddData(QString, QString);  // Receive addcalendarevent data to mainwindow
-    void receiveEditData(QString, QString);    // Receive editcalendarevent data to mainwindow
+    void receiveEditData(QString, QString); // Receive editcalendarevent data to mainwindow
     void receiveDeleteData(bool);           // Receive deletecalendarevent data to mainwindow
 
     // GUI settings for Sections and pages
@@ -74,6 +75,8 @@ private:
     deletecalendarevent *deleteWindow;
     addcalendarevent *addWindow;
     editcalendarevent *editWindow;
+
+    Book* book;
 };
 
 #endif // MAINWINDOW_H
