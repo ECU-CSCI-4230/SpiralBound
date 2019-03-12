@@ -8,6 +8,7 @@
 #include <deletecalendarevent.h>
 #include <addcard.h>
 #include <importflashcards.h>
+#include <deletecard.h>
 
 namespace Ui {
 class MainWindow;
@@ -85,6 +86,7 @@ private:
     editcalendarevent *editWindow;
     addcard *addCardWindow;
     importflashcards *importCardWindow;
+    deletecard *deleteCardWindow;
 
 };
 

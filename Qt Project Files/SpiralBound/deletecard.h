@@ -15,6 +15,13 @@ public:
     explicit deletecard(QWidget *parent = nullptr);
     ~deletecard();
 
+private slots:
+    void on_buttonBox_accepted();
+
+signals:
+    // Send deletecalendarevent data to mainwindow
+    void sendDeleteData(bool);
+
 private:
     Ui::deletecard *ui;
 };

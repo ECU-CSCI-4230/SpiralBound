@@ -403,13 +403,31 @@ void MainWindow::on_pushButton_addCard_clicked()
     connect(addCardWindow, SIGNAL(sendCardData(QString,QString,QString)), this, SLOT(receiveCardData(QString, QString, QString)));
 }
 
-// Author:
-// Init Date:
-// Last Updated:
+// Author: Jamie
+// Init Date: 12.03.2019
+// Last Updated: 12.03.2019
 void MainWindow::on_pushButton_deleteCard_clicked()
 {
     // TODO: open window for deleting selected deck.
+    // Get current selected row
+    QTableWidgetItem *item = ui->tableWidget_cardsTable->currentItem();
 
+    if(item == nullptr)
+        {
+            QMessageBox messageBox;
+            messageBox.critical(nullptr,"Error","Select event to delete, please try again.");
+            messageBox.setFixedSize(500,200);
+        }
+        else
+        {
+            // Builds deletecard GUI/window
+            deleteCardWindow = new deletecard(this);
+            deleteCardWindow->setModal(true);
+            deleteCardWindow->show();
+
+            // Connect mainwindow to addeventwindow
+            connect(deleteCardWindow, SIGNAL(sendDeleteData(bool)), this, SLOT(receiveDeleteData(bool)));
+        }
 }
 
 // Author:
