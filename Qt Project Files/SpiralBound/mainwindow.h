@@ -63,6 +63,8 @@ private slots:
     void on_tabWidget_2_tabCloseRequested(int index);
     void on_pushButton_addSection_clicked();
     void on_tabWidget_2_tabBarDoubleClicked(int index);
+    void on_tabWidget_2_currentChanged(int index);
+    void on_listWidget_pages_currentRowChanged(int currentRow);
 
 
 signals:
