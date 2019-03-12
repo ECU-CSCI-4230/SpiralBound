@@ -425,27 +425,6 @@ QTabBar::tab:hover { background-color: gray; }</string>
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <widget class="QToolBar" name="toolBar">
-   <property name="windowTitle">
-    <string>toolBar</string>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-   <addaction name="action_save"/>
-   <addaction name="action_saveAs"/>
-   <addaction name="action_open"/>
-   <addaction name="action_new"/>
-   <addaction name="action_openRecent"/>
-   <addaction name="action_printPreview"/>
-   <addaction name="action_print"/>
-   <addaction name="separator"/>
-   <addaction name="separator"/>
-   <addaction name="action_quit"/>
-  </widget>
   <action name="action_open">
    <property name="icon">
     <iconset resource="spiralbound.qrc">
