@@ -75,6 +75,7 @@ private slots:
 
     // Receive addCard data to mainwindow
     void receiveCardData(QString, QString, QString);
+    void receiveCardDeleteData(bool);
 
 
 private:

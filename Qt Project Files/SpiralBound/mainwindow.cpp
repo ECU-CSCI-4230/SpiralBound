@@ -391,6 +391,20 @@ void MainWindow::receiveCardData(QString deckName, QString front, QString back)
     ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 2, new QTableWidgetItem(back));
 }
 
+// Author: Jamie, Nicholas
+// Init Date:    09.02.2019
+// Last Updated: 19.02.20119
+void MainWindow::receiveCardDeleteData(bool response)
+{
+   if(response == true)
+   {
+       qDebug() << "mainwindow: Deleting item from tableWidget_eventList";
+
+       // Delete item from table
+       ui->tableWidget_cardsTable->removeRow(ui->tableWidget_cardsTable->currentItem()->row());
+   }
+}
+
 // Author: Jamie, Nick
 // Init Date:    26.02.2019
 // Last Updated: 26.02.2019
@@ -426,7 +440,7 @@ void MainWindow::on_pushButton_deleteCard_clicked()
             deleteCardWindow->show();
 
             // Connect mainwindow to addeventwindow
-            connect(deleteCardWindow, SIGNAL(sendDeleteData(bool)), this, SLOT(receiveDeleteData(bool)));
+            connect(deleteCardWindow, SIGNAL(sendDeleteData(bool)), this, SLOT(receiveCardDeleteData(bool)));
         }
 }
 
