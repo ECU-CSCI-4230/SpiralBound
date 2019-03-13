@@ -537,3 +537,4 @@ void MainWindow::on_listWidget_pages_itemDoubleClicked(QListWidgetItem* item) {
 void MainWindow::on_textEdit_textChanged() {
     book->getSection(ui->tabWidget_2->currentIndex())->getPage(ui->listWidget_pages->currentRow())->setContent(QString(ui->textEdit->toPlainText()));
 }
+

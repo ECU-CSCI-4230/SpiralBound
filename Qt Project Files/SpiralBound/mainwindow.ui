@@ -122,9 +122,9 @@ p, li { white-space: pre-wrap; }
        <widget class="QTabWidget" name="tabWidget_2">
         <property name="geometry">
          <rect>
-          <x>20</x>
+          <x>44</x>
           <y>0</y>
-          <width>731</width>
+          <width>441</width>
           <height>21</height>
          </rect>
         </property>
@@ -192,7 +192,7 @@ QTabBar::tab:hover { background-color: gray; }</string>
        <widget class="QPushButton" name="pushButton_addSection">
         <property name="geometry">
          <rect>
-          <x>0</x>
+          <x>23</x>
           <y>0</y>
           <width>21</width>
           <height>21</height>
@@ -202,17 +202,258 @@ QTabBar::tab:hover { background-color: gray; }</string>
          <string>Click to add a new section</string>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(132, 101, 255);</string>
+         <string notr="true">background-color: rgb(190, 164, 255);</string>
         </property>
         <property name="text">
          <string>+</string>
         </property>
        </widget>
+       <widget class="QPushButton" name="pushButton_bold">
+        <property name="geometry">
+         <rect>
+          <x>508</x>
+          <y>1</y>
+          <width>16</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="toolTip">
+         <string>Bold</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="spiralbound.qrc">
+          <normaloff>:/SpiralBound/images/bold.png</normaloff>:/SpiralBound/images/bold.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>14</width>
+          <height>14</height>
+         </size>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_italics">
+        <property name="geometry">
+         <rect>
+          <x>528</x>
+          <y>1</y>
+          <width>16</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="toolTip">
+         <string>Italic</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="spiralbound.qrc">
+          <normaloff>:/SpiralBound/images/italic2.png</normaloff>:/SpiralBound/images/italic2.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>14</width>
+          <height>14</height>
+         </size>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_underline">
+        <property name="geometry">
+         <rect>
+          <x>548</x>
+          <y>1</y>
+          <width>16</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="toolTip">
+         <string>Underline</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../../../../../Desktop/png/underline.png</normaloff>../../../../../Desktop/png/underline.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>14</width>
+          <height>14</height>
+         </size>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_numbered">
+        <property name="geometry">
+         <rect>
+          <x>600</x>
+          <y>1</y>
+          <width>16</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="toolTip">
+         <string>Numbered List</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="spiralbound.qrc">
+          <normaloff>:/SpiralBound/images/list.png</normaloff>:/SpiralBound/images/list.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="Line" name="line">
+        <property name="geometry">
+         <rect>
+          <x>582</x>
+          <y>0</y>
+          <width>21</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_bulleted">
+        <property name="geometry">
+         <rect>
+          <x>623</x>
+          <y>1</y>
+          <width>16</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="toolTip">
+         <string>Bulleted List</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="spiralbound.qrc">
+          <normaloff>:/SpiralBound/images/list.png</normaloff>:/SpiralBound/images/list.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="Line" name="line_2">
+        <property name="geometry">
+         <rect>
+          <x>640</x>
+          <y>0</y>
+          <width>16</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton">
+        <property name="geometry">
+         <rect>
+          <x>568</x>
+          <y>0</y>
+          <width>16</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="toolTip">
+         <string>Strikethrough</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../../../../../Desktop/png/strikethrough.png</normaloff>../../../../../Desktop/png/strikethrough.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>14</width>
+          <height>14</height>
+         </size>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_save">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>21</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-color: rgb(0, 0, 0);</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../../../../../Desktop/png/save.png</normaloff>../../../../../Desktop/png/save.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>14</width>
+          <height>14</height>
+         </size>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <zorder>line</zorder>
        <zorder>textEdit</zorder>
        <zorder>tabWidget_2</zorder>
        <zorder>listWidget_pages</zorder>
        <zorder>pushButton_AddPage</zorder>
        <zorder>pushButton_addSection</zorder>
+       <zorder>pushButton_bold</zorder>
+       <zorder>pushButton_italics</zorder>
+       <zorder>pushButton_underline</zorder>
+       <zorder>pushButton_numbered</zorder>
+       <zorder>pushButton_bulleted</zorder>
+       <zorder>line_2</zorder>
+       <zorder>pushButton</zorder>
+       <zorder>pushButton_save</zorder>
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">

@@ -14,5 +14,12 @@
         <file>images/quit.png</file>
         <file>images/save_as.png</file>
         <file>images/export.png</file>
+        <file>images/bold.png</file>
+        <file>images/italic2.png</file>
+        <file>images/list.png</file>
+        <file>images/list-2.png</file>
+        <file>images/save.png</file>
+        <file>images/strikethrough.png</file>
+        <file>images/underline.png</file>
     </qresource>
 </RCC>

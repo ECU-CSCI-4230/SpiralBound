@@ -69,6 +69,7 @@ private slots:
     void on_listWidget_pages_itemDoubleClicked(QListWidgetItem* item);
     void on_textEdit_textChanged(); // TESTING
 
+
 signals:
     void sendEditData(QString, QString, QString);  // Send mainwindown data to editcalendarevent
 
