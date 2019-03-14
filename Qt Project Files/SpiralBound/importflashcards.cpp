@@ -7,6 +7,7 @@
 #include "QTextStream"
 #include "QStandardItem"
 #include "QString"
+#include "QStandardPaths"
 
 importflashcards::importflashcards(QWidget *parent) :
     QDialog(parent),
@@ -22,11 +23,12 @@ importflashcards::~importflashcards()
 
 // Author: Cam
 // Init Date: 05.03.2019
-// Last Updated: 05.03.2019
+// Last Updated: 13.03.2019
 void importflashcards::on_pushButton_browse_clicked()
 {
     // Open File Browser and select desired file
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("*.csv *.txt"));
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), QString(QDir::homePath()),
+                                                    tr("CSV File (*.csv);;Text File (*.txt)"));
     // Get file path, display to user
     ui->label_selectedPath->setText(fileName);
 

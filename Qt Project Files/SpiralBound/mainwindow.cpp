@@ -429,7 +429,7 @@ void MainWindow::on_pushButton_deleteCard_clicked()
     if(item == nullptr)
         {
             QMessageBox messageBox;
-            messageBox.critical(nullptr,"Error","Select event to delete, please try again.");
+            messageBox.critical(nullptr,"Error","Select a card to delete, please try again.");
             messageBox.setFixedSize(500,200);
         }
         else
