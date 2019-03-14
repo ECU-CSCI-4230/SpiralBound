@@ -99,7 +99,7 @@ border-color: rgb(0, 0, 0);</string>
          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
@@ -296,7 +296,7 @@ QTabBar::tab:hover { background-color: gray; }</string>
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../../../../../Desktop/png/underline.png</normaloff>../../../../../Desktop/png/underline.png</iconset>
+          <normaloff>images/underline.png</normaloff>images/underline.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -409,7 +409,7 @@ QTabBar::tab:hover { background-color: gray; }</string>
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../../../../../Desktop/png/strikethrough.png</normaloff>../../../../../Desktop/png/strikethrough.png</iconset>
+          <normaloff>images/strikethrough.png</normaloff>images/strikethrough.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -438,7 +438,7 @@ QTabBar::tab:hover { background-color: gray; }</string>
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../../../../../Desktop/png/save.png</normaloff>../../../../../Desktop/png/save.png</iconset>
+          <normaloff>images/save.png</normaloff>images/save.png</iconset>
         </property>
         <property name="iconSize">
          <size>
