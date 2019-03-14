@@ -8,6 +8,7 @@
 #include <deletecalendarevent.h>
 #include <QListWidgetItem>
 #include "book.h"
+#include "markdowneditor.h"
 
 namespace Ui {
 class MainWindow;
@@ -81,6 +82,7 @@ private:
     editcalendarevent *editWindow;
 
     Book* book;
+    MarkdownEditor* me;
 };
 
 #endif // MAINWINDOW_H

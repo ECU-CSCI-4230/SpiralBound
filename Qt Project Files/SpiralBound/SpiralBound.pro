@@ -32,7 +32,8 @@ SOURCES += \
         block.cpp \
         page.cpp \
         section.cpp \
-        book.cpp
+        book.cpp \
+    markdowneditor.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -45,7 +46,8 @@ HEADERS += \
         section.h \
         book.h \
         util.h \
-        unit_book.h
+        unit_book.h \
+    markdowneditor.h
 
 FORMS += \
         mainwindow.ui \

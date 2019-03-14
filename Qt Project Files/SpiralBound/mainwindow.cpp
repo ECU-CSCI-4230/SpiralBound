@@ -30,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->tableWidget_eventList->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     book = new Book("", "");
+    me = new MarkdownEditor(ui->textEdit);
 
     // Add a defaults ection, page, and change to view that page in that section on startup
     book->addSection("New Section 1", "");
@@ -135,7 +136,7 @@ void MainWindow::on_action_saveAs_triggered()
 // Last Updated:
 void MainWindow::on_action_bold_triggered()
 {
-
+    me->bold();
 }
 
 // Author:
@@ -143,7 +144,7 @@ void MainWindow::on_action_bold_triggered()
 // Last Updated:
 void MainWindow::on_action_italic_triggered()
 {
-
+    me->italic();
 }
 
 // Author:
@@ -167,7 +168,7 @@ void MainWindow::on_action_comment_triggered()
 // Last Updated:
 void MainWindow::on_action_strikethrough_triggered()
 {
-
+    me->strikethough();
 }
 
 // Author:
@@ -191,7 +192,6 @@ void MainWindow::on_action_unindent_triggered()
 // Last Updated:
 void MainWindow::on_action_bulletedList_triggered()
 {
-
 }
 
 // Author:
