@@ -67,7 +67,7 @@ private slots:
     void on_tabWidget_2_currentChanged(int index);
     void on_listWidget_pages_currentRowChanged(int currentRow);
     void on_listWidget_pages_itemDoubleClicked(QListWidgetItem* item);
-
+    void on_pushButton_removePage_clicked();
 
 signals:
     void sendEditData(QString, QString, QString);  // Send mainwindown data to editcalendarevent

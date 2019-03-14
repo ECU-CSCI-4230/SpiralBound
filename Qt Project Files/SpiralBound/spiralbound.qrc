@@ -21,5 +21,7 @@
         <file>images/save.png</file>
         <file>images/strikethrough.png</file>
         <file>images/underline.png</file>
+        <file>images/removepg.png</file>
+        <file>images/addpg.png</file>
     </qresource>
 </RCC>

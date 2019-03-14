@@ -80,7 +80,7 @@ border-color: rgb(0, 0, 0);</string>
           <x>0</x>
           <y>20</y>
           <width>751</width>
-          <height>491</height>
+          <height>511</height>
          </rect>
         </property>
         <property name="sizePolicy">
@@ -99,24 +99,34 @@ border-color: rgb(0, 0, 0);</string>
          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:5.5pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
        <widget class="QPushButton" name="pushButton_AddPage">
         <property name="geometry">
          <rect>
-          <x>750</x>
+          <x>749</x>
           <y>0</y>
-          <width>181</width>
+          <width>81</width>
           <height>21</height>
          </rect>
+        </property>
+        <property name="toolTip">
+         <string>Add Page</string>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgb(121, 121, 121);</string>
         </property>
         <property name="text">
-         <string>+ Add Page</string>
+         <string>Add</string>
+        </property>
+        <property name="icon">
+         <iconset resource="spiralbound.qrc">
+          <normaloff>:/SpiralBound/images/addpg.png</normaloff>:/SpiralBound/images/addpg.png</iconset>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
         </property>
        </widget>
        <widget class="QTabWidget" name="tabWidget_2">
@@ -357,7 +367,7 @@ QTabBar::tab:hover { background-color: gray; }</string>
         </property>
         <property name="icon">
          <iconset resource="spiralbound.qrc">
-          <normaloff>:/SpiralBound/images/list.png</normaloff>:/SpiralBound/images/list.png</iconset>
+          <normaloff>:/SpiralBound/images/list-2.png</normaloff>:/SpiralBound/images/list-2.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -440,6 +450,29 @@ QTabBar::tab:hover { background-color: gray; }</string>
          <bool>true</bool>
         </property>
        </widget>
+       <widget class="QPushButton" name="pushButton_removePage">
+        <property name="geometry">
+         <rect>
+          <x>839</x>
+          <y>0</y>
+          <width>81</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="toolTip">
+         <string>Delete Page</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(121, 121, 121);</string>
+        </property>
+        <property name="text">
+         <string>Delete</string>
+        </property>
+        <property name="icon">
+         <iconset resource="spiralbound.qrc">
+          <normaloff>:/SpiralBound/images/removepg.png</normaloff>:/SpiralBound/images/removepg.png</iconset>
+        </property>
+       </widget>
        <zorder>line</zorder>
        <zorder>textEdit</zorder>
        <zorder>tabWidget_2</zorder>
@@ -454,6 +487,7 @@ QTabBar::tab:hover { background-color: gray; }</string>
        <zorder>line_2</zorder>
        <zorder>pushButton</zorder>
        <zorder>pushButton_save</zorder>
+       <zorder>pushButton_removePage</zorder>
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -587,7 +621,7 @@ QTabBar::tab:hover { background-color: gray; }</string>
      <x>0</x>
      <y>0</y>
      <width>943</width>
-     <height>17</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

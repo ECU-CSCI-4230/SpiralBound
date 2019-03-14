@@ -532,3 +532,23 @@ void MainWindow::on_listWidget_pages_itemDoubleClicked(QListWidgetItem* item) {
         item->setText(text);
     }
 }
+
+// Author:       Ketu Patel
+// Init Date:    13.03.2019
+// Last Updated: 13.03.2019
+void MainWindow::on_pushButton_removePage_clicked()
+{
+
+    // Delete the page if it is not the only one left
+    // if (ui->listWidget_pages->count() >1 ) {
+
+    QList<QListWidgetItem*> items = ui->listWidget_pages->selectedItems();
+
+    foreach(QListWidgetItem * item, items)
+    {
+        delete ui->listWidget_pages->takeItem(ui->listWidget_pages->row(item));
+    }
+  //  }
+
+  //  else {}
+}
