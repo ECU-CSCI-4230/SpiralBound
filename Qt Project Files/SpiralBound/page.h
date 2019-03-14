@@ -5,6 +5,7 @@
 #include <iostream>
 #include <QString>
 #include <QDate>
+#include <QTextDocument>
 #include <list>
 
 using namespace std;
@@ -20,8 +21,8 @@ class Page
         QDate getDate();
         void setPgName(QString nm);
         void setDate(QDate dt);
-        void setContent(QString qst); // TEMPORARY
-        QString getContent();         // TEMPORARY
+        void setContent(QTextDocument* qst); // TEMPORARY
+        QTextDocument* getContent();         // TEMPORARY
         int numBlocks();
 
         /** getBlock(index) gets the block at the specified index in the list
@@ -75,7 +76,8 @@ class Page
         }
 
     private:
-        QString pageName, content;
+        QString pageName;
+        QTextDocument* content;
         QDate date;
         list<Block*>* blocks;
 };

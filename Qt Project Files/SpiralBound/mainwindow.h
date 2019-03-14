@@ -67,7 +67,6 @@ private slots:
     void on_tabWidget_2_currentChanged(int index);
     void on_listWidget_pages_currentRowChanged(int currentRow);
     void on_listWidget_pages_itemDoubleClicked(QListWidgetItem* item);
-    void on_textEdit_textChanged(); // TESTING
 
 
 signals:

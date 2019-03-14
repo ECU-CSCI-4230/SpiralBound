@@ -30,8 +30,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->tableWidget_eventList->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     book = new Book("", "");
+
+    // Add a defaults ection, page, and change to view that page in that section on startup
     book->addSection("New Section 1", "");
     book->getSection(0)->addPage("Untitled Page");
+    ui->textEdit->setDocument(book->getSection(0)->getPage(0)->getContent());
+    ui->listWidget_pages->setCurrentRow(0);
 }
 
 // Destructor
@@ -404,16 +408,13 @@ void MainWindow::on_tableWidget_eventList_cellChanged(int row, int column)
 //-----------------------------------------------------------+
 // Author:       Ketu Patel, Matthew Morgan
 // Init Date:    10.03.2019
-// Last Updated: 11.03.2019
+// Last Updated: 12.03.2019
 void MainWindow::on_pushButton_AddPage_clicked()
 {
-    // Add Untitled Page
-    QListWidgetItem* pItem = new QListWidgetItem("Untitled Page");
-    // pItem->setForeground(Qt::black);
-    // pItem->setBackground(Qt::gray);
-    ui->listWidget_pages->addItem(pItem);
-
+    // Add Untitled Page and switch to it
+    ui->listWidget_pages->addItem(new QListWidgetItem("Untitled Page"));
     book->getSection(ui->tabWidget_2->currentIndex())->addPage("Untitled Page");
+    ui->listWidget_pages->setCurrentRow(ui->listWidget_pages->count()-1);
     qDebug() << "New page added to section \"" << book->getSection(ui->tabWidget_2->currentIndex())->getSecName() << "\"";
 }
 
@@ -434,7 +435,7 @@ void MainWindow::on_tabWidget_2_tabCloseRequested(int index)
 
 // Author:       Ketu Patel, Matthew Morgan
 // Init Date:    10.03.2019
-// Last Updated: 11.03.2019
+// Last Updated: 13.03.2019
 void MainWindow::on_pushButton_addSection_clicked()
 {
     // Adds a section
@@ -444,19 +445,14 @@ void MainWindow::on_pushButton_addSection_clicked()
     book->getSection(book->numSections()-1)->addPage("Untitled Page");
     qDebug() << book->getSection(book->numSections()-1)->getSecName() << " was added";
 
-/***
-
-    QPalette pal = palette();
-    // set gray background
-    if (ui->tabWidget_2->count() % 2 == 0 )
-    {
-        pal.setColor(QPalette::Background, Qt::gray);
-        ui->tabWidget_2->setPalette(pal);
-        ui->tabWidget_2->setAutoFillBackground(true);
+    // Update the list of pages
+    Section* sec = book->getSection(ui->tabWidget_2->currentIndex());
+    ui->listWidget_pages->clear();
+    for(int i=0; i<sec->numPages(); i++) {
+        ui->listWidget_pages->addItem(new QListWidgetItem(sec->getPage(i)->getPageName()));
     }
-    on_tabWidget_2_currentChanged(ui->tabWidget_2->currentIndex());
-
-    */
+    ui->listWidget_pages->setCurrentRow(0);
+    ui->textEdit->setDocument(sec->getPage(0)->getContent());
 }
 
 
@@ -479,29 +475,32 @@ void MainWindow::on_tabWidget_2_tabBarDoubleClicked(int index)
 
 // Author:       Matthew Morgan
 // Init Date:    11.03.2019
-// Last Updated: 11.03.2019
+// Last Updated: 13.03.2019
 void MainWindow::on_tabWidget_2_currentChanged(int index) {
     // Change the listing of pages to be based on the current section
     Section* sec = book->getSection(index);
 
     if (sec != nullptr) {
         qDebug() << "Section changed to " << sec->getSecName();
+
+        // Update the list of pages
         ui->listWidget_pages->clear();
         for(int i=0; i<sec->numPages(); i++) {
             ui->listWidget_pages->addItem(new QListWidgetItem(sec->getPage(i)->getPageName()));
         }
         ui->listWidget_pages->setCurrentRow(0);
+        ui->textEdit->setDocument(book->getSection(ui->tabWidget_2->currentIndex())->getPage(0)->getContent());
     }
 }
 
 // Author:       Matthew Morgan
 // Init Date:    11.03.2019
-// Last Updated: 11.03.2019
+// Last Updated: 13.03.2019
 void MainWindow::on_listWidget_pages_currentRowChanged(int currentRow) {
     Page* cur = book->getSection(ui->tabWidget_2->currentIndex())->getPage(currentRow);
     if (cur != nullptr) {
         qDebug() << "Page changed to " << cur->getPageName();
-        ui->textEdit->setText(cur->getContent());
+        ui->textEdit->setDocument(cur->getContent());
     }
 }
 
@@ -533,8 +532,3 @@ void MainWindow::on_listWidget_pages_itemDoubleClicked(QListWidgetItem* item) {
         item->setText(text);
     }
 }
-
-void MainWindow::on_textEdit_textChanged() {
-    book->getSection(ui->tabWidget_2->currentIndex())->getPage(ui->listWidget_pages->currentRow())->setContent(QString(ui->textEdit->toPlainText()));
-}
-

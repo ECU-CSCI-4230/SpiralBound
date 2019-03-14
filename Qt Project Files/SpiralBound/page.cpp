@@ -4,24 +4,24 @@
 
 // Author:       Ketu Patel, Matthew Morgan
 // Init date:    02-02-2019
-// Last Updated: 02-27-2019
+// Last Updated: 03-13-2019
 Page::Page()
 {
     pageName = "default";
     date = QDate::currentDate();
     blocks = new list<Block*>();
-    content = "";
+    content = new QTextDocument();
 }
 
 // Author:       Ketu Patel, Matthew Morgan
 // Init date:    02-02-2019
-// Last Updated: 02-27-2019
+// Last Updated: 03-13-2019
 Page::Page(QString pg)
 {
     pageName = pg;
     date = QDate::currentDate();
     blocks = new list<Block*>();
-    content = "";
+    content =  new QTextDocument();
 }
 
 // Author:       Ketu Patel
@@ -110,9 +110,9 @@ char* Page::toString() {
 // Author:       Matthew Morgan
 // Init date:    03-12-2019
 // Last Updated: 03-12-2019
-void Page::setContent(QString qst) { content = qst; }
+void Page::setContent(QTextDocument* tmp) { content = tmp; }
 
 // Author:       Matthew Morgan
 // Init date:    03-12-2019
 // Last Updated: 03-12-2019
-QString Page::getContent() { return content; }
+QTextDocument* Page::getContent() { return content; }
