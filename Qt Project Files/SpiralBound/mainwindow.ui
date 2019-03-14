@@ -89,6 +89,11 @@ border-color: rgb(0, 0, 0);</string>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 0, 0, 255), stop:1 rgba(255, 255, 255, 255));</string>
         </property>
@@ -99,7 +104,7 @@ border-color: rgb(0, 0, 0);</string>
          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
@@ -116,7 +121,7 @@ p, li { white-space: pre-wrap; }
          <string>Add Page</string>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(121, 121, 121);</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>Add</string>
@@ -140,7 +145,7 @@ p, li { white-space: pre-wrap; }
         </property>
         <property name="font">
          <font>
-          <pointsize>6</pointsize>
+          <pointsize>7</pointsize>
          </font>
         </property>
         <property name="autoFillBackground">
@@ -244,7 +249,7 @@ QTabBar::tab:hover { background-color: gray; }</string>
          </size>
         </property>
         <property name="checkable">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
         <property name="flat">
          <bool>true</bool>
@@ -295,8 +300,8 @@ QTabBar::tab:hover { background-color: gray; }</string>
          <string/>
         </property>
         <property name="icon">
-         <iconset>
-          <normaloff>images/underline.png</normaloff>images/underline.png</iconset>
+         <iconset resource="spiralbound.qrc">
+          <normaloff>:/SpiralBound/images/underline.png</normaloff>:/SpiralBound/images/underline.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -392,7 +397,7 @@ QTabBar::tab:hover { background-color: gray; }</string>
          <enum>Qt::Vertical</enum>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="pushButton_strike">
         <property name="geometry">
          <rect>
           <x>568</x>
@@ -408,8 +413,8 @@ QTabBar::tab:hover { background-color: gray; }</string>
          <string/>
         </property>
         <property name="icon">
-         <iconset>
-          <normaloff>images/strikethrough.png</normaloff>images/strikethrough.png</iconset>
+         <iconset resource="spiralbound.qrc">
+          <normaloff>:/SpiralBound/images/strikethrough.png</normaloff>:/SpiralBound/images/strikethrough.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -437,8 +442,8 @@ QTabBar::tab:hover { background-color: gray; }</string>
          <string/>
         </property>
         <property name="icon">
-         <iconset>
-          <normaloff>images/save.png</normaloff>images/save.png</iconset>
+         <iconset resource="spiralbound.qrc">
+          <normaloff>:/SpiralBound/images/save.png</normaloff>:/SpiralBound/images/save.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -463,7 +468,7 @@ QTabBar::tab:hover { background-color: gray; }</string>
          <string>Delete Page</string>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(121, 121, 121);</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>Delete</string>
@@ -485,7 +490,7 @@ QTabBar::tab:hover { background-color: gray; }</string>
        <zorder>pushButton_numbered</zorder>
        <zorder>pushButton_bulleted</zorder>
        <zorder>line_2</zorder>
-       <zorder>pushButton</zorder>
+       <zorder>pushButton_strike</zorder>
        <zorder>pushButton_save</zorder>
        <zorder>pushButton_removePage</zorder>
       </widget>
