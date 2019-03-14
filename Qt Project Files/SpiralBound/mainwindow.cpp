@@ -402,7 +402,6 @@ void MainWindow::on_tableWidget_eventList_cellChanged(int row, int column)
 
 }
 
-
 //-----------------------------------------------------------+
 //                   Notetake Tab                            |
 //-----------------------------------------------------------+
@@ -415,7 +414,6 @@ void MainWindow::on_pushButton_AddPage_clicked()
     ui->listWidget_pages->addItem(new QListWidgetItem("Untitled Page"));
     book->getSection(ui->tabWidget_2->currentIndex())->addPage("Untitled Page");
     ui->listWidget_pages->setCurrentRow(ui->listWidget_pages->count()-1);
-    qDebug() << "New page added to section \"" << book->getSection(ui->tabWidget_2->currentIndex())->getSecName() << "\"";
 }
 
 // Author:       Ketu Patel, Matthew Morgan
@@ -425,7 +423,6 @@ void MainWindow::on_tabWidget_2_tabCloseRequested(int index)
 {
     if (ui->tabWidget_2->count() > 1) {
         // Only remove a section if there is another available
-        qDebug() << book->getSection(index)->getSecName() << " was removed";
         book->removeSection(index);
         ui->tabWidget_2->removeTab(index);
     }
@@ -443,7 +440,6 @@ void MainWindow::on_pushButton_addSection_clicked()
     ui->tabWidget_2->setCurrentIndex(ui->tabWidget_2->count()-1);
     book->addSection(ui->tabWidget_2->tabText(ui->tabWidget_2->count()-1), "");
     book->getSection(book->numSections()-1)->addPage("Untitled Page");
-    qDebug() << book->getSection(book->numSections()-1)->getSecName() << " was added";
 
     // Update the list of pages
     Section* sec = book->getSection(ui->tabWidget_2->currentIndex());
@@ -455,8 +451,6 @@ void MainWindow::on_pushButton_addSection_clicked()
     ui->textEdit->setDocument(sec->getPage(0)->getContent());
 }
 
-
-
 // Author:       Ketu Patel, Matthew Morgan
 // Init Date:    10.03.2019
 // Last Updated: 11.03.2019
@@ -464,10 +458,9 @@ void MainWindow::on_tabWidget_2_tabBarDoubleClicked(int index)
 {
     // Rename a section, but ONLY if the new name isn't blank
     bool ok;
-    QString text = QInputDialog::getText(nullptr, "Rename Section", "New Name:", QLineEdit::Normal, "", &ok);
+    QString text = QInputDialog::getText(nullptr, "Rename Section", "New Name:", QLineEdit::Normal, book->getSection(index)->getSecName(), &ok);
 
     if (ok && !text.isEmpty()) {
-        qDebug() << "Section \"" << book->getSection(index)->getSecName() << "\" renamed to " << text;
         book->getSection(index)->setName(text);
         ui->tabWidget_2->setTabText(index, text);
     }
@@ -481,8 +474,6 @@ void MainWindow::on_tabWidget_2_currentChanged(int index) {
     Section* sec = book->getSection(index);
 
     if (sec != nullptr) {
-        qDebug() << "Section changed to " << sec->getSecName();
-
         // Update the list of pages
         ui->listWidget_pages->clear();
         for(int i=0; i<sec->numPages(); i++) {
@@ -499,7 +490,6 @@ void MainWindow::on_tabWidget_2_currentChanged(int index) {
 void MainWindow::on_listWidget_pages_currentRowChanged(int currentRow) {
     Page* cur = book->getSection(ui->tabWidget_2->currentIndex())->getPage(currentRow);
     if (cur != nullptr) {
-        qDebug() << "Page changed to " << cur->getPageName();
         ui->textEdit->setDocument(cur->getContent());
     }
 }
@@ -527,7 +517,6 @@ void MainWindow::on_listWidget_pages_itemDoubleClicked(QListWidgetItem* item) {
 
     if (ok && !text.isEmpty()) {
         Section* sec = book->getSection(ui->tabWidget_2->currentIndex());
-        qDebug() << "Page \"" << sec->getPage(index)->getPageName() << "\" renamed to " << text;
         sec->getPage(index)->setPgName(text);
         item->setText(text);
     }

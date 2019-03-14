@@ -46,10 +46,10 @@
        <widget class="QListWidget" name="listWidget_pages">
         <property name="geometry">
          <rect>
-          <x>750</x>
+          <x>740</x>
           <y>20</y>
-          <width>181</width>
-          <height>511</height>
+          <width>175</width>
+          <height>521</height>
          </rect>
         </property>
         <property name="minimumSize">
@@ -79,8 +79,8 @@ border-color: rgb(0, 0, 0);</string>
          <rect>
           <x>0</x>
           <y>20</y>
-          <width>751</width>
-          <height>511</height>
+          <width>741</width>
+          <height>521</height>
          </rect>
         </property>
         <property name="sizePolicy">
@@ -111,7 +111,7 @@ p, li { white-space: pre-wrap; }
        <widget class="QPushButton" name="pushButton_AddPage">
         <property name="geometry">
          <rect>
-          <x>749</x>
+          <x>740</x>
           <y>0</y>
           <width>81</width>
           <height>21</height>
@@ -458,7 +458,7 @@ QTabBar::tab:hover { background-color: gray; }</string>
        <widget class="QPushButton" name="pushButton_removePage">
         <property name="geometry">
          <rect>
-          <x>839</x>
+          <x>835</x>
           <y>0</y>
           <width>81</width>
           <height>21</height>
