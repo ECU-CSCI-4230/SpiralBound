@@ -64,7 +64,21 @@ private slots:
     void receiveEditData(QString, QString); // Receive editcalendarevent data to mainwindow
     void receiveDeleteData(bool);           // Receive deletecalendarevent data to mainwindow
 
-    // GUI settings for Sections and pages
+    //=========================
+    // Flash Card Tool Buttons
+    //=========================
+    void on_pushButton_addCard_clicked();
+    void on_pushButton_deleteCard_clicked();
+    void on_pushButton_studyCard_clicked();
+    void on_pushButton_import_clicked();
+
+    // Receive addCard data to mainwindow
+    void receiveCardData(QString, QString, QString);
+    void receiveCardDeleteData(bool);
+
+    // =========================
+    // Notebook
+    // =========================
     void on_tableWidget_eventList_cellChanged(int row, int column);
     void on_pushButton_AddPage_clicked();
     void on_tabWidget_2_tabCloseRequested(int index);
@@ -77,18 +91,6 @@ private slots:
 
 signals:
     void sendEditData(QString, QString, QString);  // Send mainwindown data to editcalendarevent
-
-    //=========================
-    // Flash Card Tool Buttons
-    //=========================
-    void on_pushButton_addCard_clicked();
-    void on_pushButton_deleteCard_clicked();
-    void on_pushButton_studyCard_clicked();
-    void on_pushButton_import_clicked();
-
-    // Receive addCard data to mainwindow
-    void receiveCardData(QString, QString, QString);
-    void receiveCardDeleteData(bool);
 
 private:
     Ui::MainWindow *ui;

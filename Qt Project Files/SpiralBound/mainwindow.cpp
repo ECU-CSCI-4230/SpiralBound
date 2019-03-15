@@ -537,6 +537,7 @@ void MainWindow::on_pushButton_removePage_clicked()
             book->getSection(ui->tabWidget_2->currentIndex())->removePage(row);
         }
     }
+}
 
 //-----------------------------------------------------------+
 //                     Flash Card Tab                        |
