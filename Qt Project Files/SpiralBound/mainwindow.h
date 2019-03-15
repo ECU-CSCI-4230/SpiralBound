@@ -9,6 +9,9 @@
 #include <QListWidgetItem>
 #include "book.h"
 #include "markdowneditor.h"
+#include <addcard.h>
+#include <importflashcards.h>
+#include <deletecard.h>
 
 namespace Ui {
 class MainWindow;
@@ -49,7 +52,9 @@ private slots:
     void on_action_export_triggered();
     void on_action_quit_triggered();
 
+    //==================
     // Calendar Buttons
+    //==================
     void on_pushButton_addEvent_clicked();
     void on_pushButton_deleteEvent_clicked();
     void on_pushButton_editEvent_clicked();
@@ -73,6 +78,18 @@ private slots:
 signals:
     void sendEditData(QString, QString, QString);  // Send mainwindown data to editcalendarevent
 
+    //=========================
+    // Flash Card Tool Buttons
+    //=========================
+    void on_pushButton_addCard_clicked();
+    void on_pushButton_deleteCard_clicked();
+    void on_pushButton_studyCard_clicked();
+    void on_pushButton_import_clicked();
+
+    // Receive addCard data to mainwindow
+    void receiveCardData(QString, QString, QString);
+    void receiveCardDeleteData(bool);
+
 private:
     Ui::MainWindow *ui;
     QString file_path_;
@@ -80,6 +97,10 @@ private:
     deletecalendarevent *deleteWindow;
     addcalendarevent *addWindow;
     editcalendarevent *editWindow;
+
+    addcard *addCardWindow;
+    importflashcards *importCardWindow;
+    deletecard *deleteCardWindow;
 
     Book* book;
     MarkdownEditor* me;

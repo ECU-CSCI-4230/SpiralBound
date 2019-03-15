@@ -32,11 +32,12 @@ MainWindow::MainWindow(QWidget *parent) :
     book = new Book("", "");
     me = new MarkdownEditor(ui->textEdit);
 
-    // Add a defaults ection, page, and change to view that page in that section on startup
+    // Add a default section, page, and change to view that page in that section on startup
     book->addSection("New Section 1", "");
     book->getSection(0)->addPage("Untitled Page");
     ui->textEdit->setDocument(book->getSection(0)->getPage(0)->getContent());
     ui->listWidget_pages->setCurrentRow(0);
+    ui->tableWidget_cardsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 // Destructor
@@ -536,4 +537,95 @@ void MainWindow::on_pushButton_removePage_clicked()
             book->getSection(ui->tabWidget_2->currentIndex())->removePage(row);
         }
     }
+
+//-----------------------------------------------------------+
+//                     Flash Card Tab                        |
+//-----------------------------------------------------------+
+// Author: Nick
+// Init Date:    26.02.2019
+// Last Updated: 26.02.2019
+void MainWindow::receiveCardData(QString deckName, QString front, QString back)
+{
+    qDebug() << deckName << front << back;
+
+    // Create row
+    ui->tableWidget_cardsTable->insertRow(ui->tableWidget_cardsTable->rowCount() );
+    // Populate row
+    ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 0, new QTableWidgetItem(deckName));
+    ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 1, new QTableWidgetItem(front));
+    ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 2, new QTableWidgetItem(back));
+}
+
+// Author: Jamie, Nicholas
+// Init Date:    09.02.2019
+// Last Updated: 19.02.2019
+void MainWindow::receiveCardDeleteData(bool response)
+{
+   if(response == true)
+   {
+       qDebug() << "mainwindow: Deleting item from tableWidget_eventList";
+
+       // Delete item from table
+       ui->tableWidget_cardsTable->removeRow(ui->tableWidget_cardsTable->currentItem()->row());
+   }
+}
+
+// Author: Jamie, Nick
+// Init Date:    26.02.2019
+// Last Updated: 26.02.2019
+void MainWindow::on_pushButton_addCard_clicked()
+{
+    addCardWindow = new addcard(this);
+    addCardWindow->setModal(true);
+    addCardWindow->show();
+
+    connect(addCardWindow, SIGNAL(sendCardData(QString,QString,QString)), this, SLOT(receiveCardData(QString, QString, QString)));
+}
+
+// Author: Jamie
+// Init Date: 12.03.2019
+// Last Updated: 12.03.2019
+void MainWindow::on_pushButton_deleteCard_clicked()
+{
+    // TODO: open window for deleting selected deck.
+    // Get current selected row
+    QTableWidgetItem *item = ui->tableWidget_cardsTable->currentItem();
+
+    if(item == nullptr)
+        {
+            QMessageBox messageBox;
+            messageBox.critical(nullptr,"Error","Select a card to delete, please try again.");
+            messageBox.setFixedSize(500,200);
+        }
+        else
+        {
+            // Builds deletecard GUI/window
+            deleteCardWindow = new deletecard(this);
+            deleteCardWindow->setModal(true);
+            deleteCardWindow->show();
+
+            // Connect mainwindow to addeventwindow
+            connect(deleteCardWindow, SIGNAL(sendDeleteData(bool)), this, SLOT(receiveCardDeleteData(bool)));
+        }
+}
+
+// Author:
+// Init Date:
+// Last Updated:
+void MainWindow::on_pushButton_studyCard_clicked()
+{
+    // TODO: open study window for selected deck.
+}
+
+// Author: Cam
+// Init Date: 02.03.2019
+// Last Updated: 07.03.2019
+void MainWindow::on_pushButton_import_clicked()
+{
+    //TODO: opens window for importing files
+    importCardWindow = new importflashcards(this);
+    importCardWindow->setModal(true);
+    importCardWindow->show();
+
+    connect(importCardWindow, SIGNAL(sendCardData(QString,QString,QString)), this, SLOT(receiveCardData(QString, QString, QString)));
 }
