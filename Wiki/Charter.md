@@ -1,5 +1,3 @@
-# Team Charter for Snorlax
-
 | Team Member Names | Contact Information          | Preferred Contact Method |
 | ----------------- | ---------------------------- | ------------------------ |
 | Camby             | abellc16@students.ecu.edu    | Discord                  |
@@ -22,7 +20,7 @@
 
    To complete the project we chose Scrum process with a two week sprint. We plan on having all of the basic features complete halfway through the semester. As for quality, we will be focusing on functionality over form.
 
-2. **Who is responsible for each activity? What roles will each member have? **
+2. **Who is responsible for each activity? What roles will each member have?**
 
    We are going to work collaboratively. For tasks we plan to work in pairs. We plan on switching roles when it comes to work submission and presentations.  
 
@@ -52,4 +50,4 @@
 
 9. **What methods will be used to keep the team on track?**
 
-   During meetings we will discuss who is doing well and who is not. We plan on holding each other accountable. Any other discussion will be on Discord.
+   During meetings we will discuss who is doing well and who is not. We plan on holding each other accountable. Any other discussion will be on Discord. 
