@@ -12,7 +12,6 @@
         <file>images/icon/format_underline.png</file>
         <file>images/icon/insert_link.png</file>
         <file>images/icon/insert_table.png</file>
-        <file>images/icon/op_add.png</file>
         <file>images/icon/op_copy.png</file>
         <file>images/icon/op_cut.png</file>
         <file>images/icon/op_export.png</file>
@@ -25,10 +24,7 @@
         <file>images/icon/op_redo.png</file>
         <file>images/icon/op_save.png</file>
         <file>images/icon/op_undo.png</file>
-        <file>images/icon/op_delete.png</file>
-        <file>images/icon/op_delete2.png</file>
-        <file>images/icon/op_add2.png</file>
-        <file>images/icon/op_delete3.png</file>
-        <file>images/editredo.png</file>
+        <file>images/icon/op_page_erase.png</file>
+        <file>images/icon/op_page_new.png</file>
     </qresource>
 </RCC>

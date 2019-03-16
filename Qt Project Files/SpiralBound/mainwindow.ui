@@ -120,6 +120,9 @@ p, li { white-space: pre-wrap; }
         <property name="toolTip">
          <string>Add Page</string>
         </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
         <property name="styleSheet">
          <string notr="true"/>
         </property>
@@ -128,7 +131,7 @@ p, li { white-space: pre-wrap; }
         </property>
         <property name="icon">
          <iconset resource="spiralbound.qrc">
-          <normaloff>:/SpiralBound/images/icon/op_add.png</normaloff>:/SpiralBound/images/icon/op_add.png</iconset>
+          <normaloff>:/SpiralBound/images/icon/op_page_new.png</normaloff>:/SpiralBound/images/icon/op_page_new.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -481,7 +484,7 @@ QTabBar::tab:hover { background-color: gray; }</string>
         </property>
         <property name="icon">
          <iconset resource="spiralbound.qrc">
-          <normaloff>:/SpiralBound/images/icon/op_delete.png</normaloff>:/SpiralBound/images/icon/op_delete.png</iconset>
+          <normaloff>:/SpiralBound/images/icon/op_page_erase.png</normaloff>:/SpiralBound/images/icon/op_page_erase.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -732,7 +735,7 @@ QTabBar::tab:hover { background-color: gray; }</string>
      <x>0</x>
      <y>0</y>
      <width>943</width>
-     <height>17</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
