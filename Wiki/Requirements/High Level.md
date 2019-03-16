@@ -16,6 +16,7 @@
 - **HFE-05**: Customization of bulleted graphics (such as you'd find in Microsoft Office, for example)
 
 ## Study Tool (Optional)
-- **HFS-01**: Functional flash-card tool that has a section-set setup, where you have sections (i.e. courses) and sets of flash cards (i.e. one per chapter), with an automated set for all sets to be pulled from
-- **HFS-02**: Toggleability of flash cards from a set to be blacklisted to offer customization of study sessions (Say you understand certain concepts better than others, and you've made a set of cards for the whole chapter - you can toggle off some of them as you study so they don't reappear to put focus on what you don't know.)
-- **HFS-03**: Categorization of study cards into objectives or course goals (For example, if you're studying a programming language like Java, you may have a section for syntax and another for typing/type-casting, etc.)
+- **HFS-01**: Functional flash-card utility that has decks, where each deck has a set of flash cards for studying.
+- **HFS-02**: Toggleability of flash cards from a set to be blacklisted to offer customization of study sessions.
+- **HFS-03**: Categorization of study cards into objectives or course goals.
+- **HFS-04**: The user should be able to study a flash-card deck, and should be able to study multiple decks at a time.

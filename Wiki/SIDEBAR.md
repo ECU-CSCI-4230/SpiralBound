@@ -16,7 +16,7 @@
     <li> <a href="https://github.com/ECU-CSCI-4230/SpiralBound/wiki/High-Level-Requirements">High-level Requirements</a>
     <li> <a href="https://github.com/ECU-CSCI-4230/SpiralBound/wiki/Requirements:-Notebook">Notebook</a>
     <li> <a href="https://github.com/ECU-CSCI-4230/SpiralBound/wiki/Requirements:-Calendar">Calendar</a>
-    <li> <a href="#">Flash Cards</a>
+    <li> <a href="https://github.com/ECU-CSCI-4230/SpiralBound/wiki/Requirements:-Study-Tool">Flash Cards</a>
   </ul>
 </details>
 

@@ -1,7 +1,9 @@
 #### DFE-01 (details HFE-01, HFE-02, HFE-03)
 The user should be able to take notes with basic rich-text editing features, including but not limited to: bolding, italicization, and underlining of text; colorization of fonts; differentiation of code styling (mono-spaced font) from regular notes; and the indentation of notes using bulleted lists of ordered or unordered format.
 
-The operation of text-editing should be in a block-based format, where each block contains a type of content as well as the content itself. These blocks should be easily inserted, deletable, and modifiable. _(This functionality is similar to JupyterLab Notebooks.)_
+~~The operation of text-editing should be in a block-based format, where each block contains a type of content as well as the content itself. These blocks should be easily inserted, deletable, and modifiable. _(This functionality is similar to JupyterLab Notebooks.)_~~
+
+**Update 03-15-19**: The operation of text-editing should use Qt's built-in TextEdit widget, where each page is its own QTextDocument.
 
 The text-editing window should, given a language, understand the basic syntax of that language, such as Java, CSS, or HTML, and display these programming languages in a font that is mono-spaced for ease of reading. The background of these sections should also be lightly darker in color than a regular text segment.
 
