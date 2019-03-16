@@ -493,6 +493,70 @@ QTabBar::tab:hover { background-color: gray; }</string>
          </size>
         </property>
        </widget>
+       <widget class="QPushButton" name="pushButton_indent">
+        <property name="geometry">
+         <rect>
+          <x>655</x>
+          <y>2</y>
+          <width>16</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="toolTip">
+         <string>Bold</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="spiralbound.qrc">
+          <normaloff>:/SpiralBound/images/icon/format_indent.png</normaloff>:/SpiralBound/images/icon/format_indent.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>14</width>
+          <height>14</height>
+         </size>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_undent">
+        <property name="geometry">
+         <rect>
+          <x>678</x>
+          <y>2</y>
+          <width>16</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="toolTip">
+         <string>Bold</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="spiralbound.qrc">
+          <normaloff>:/SpiralBound/images/icon/format_outdent.png</normaloff>:/SpiralBound/images/icon/format_outdent.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>14</width>
+          <height>14</height>
+         </size>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
        <zorder>line</zorder>
        <zorder>textEdit</zorder>
        <zorder>tabWidget_2</zorder>
@@ -508,6 +572,8 @@ QTabBar::tab:hover { background-color: gray; }</string>
        <zorder>pushButton_strike</zorder>
        <zorder>pushButton_save</zorder>
        <zorder>pushButton_removePage</zorder>
+       <zorder>pushButton_indent</zorder>
+       <zorder>pushButton_undent</zorder>
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">

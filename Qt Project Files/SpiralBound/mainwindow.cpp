@@ -50,29 +50,9 @@ MainWindow::~MainWindow()
 //                    Menu Bar Buttons                       |
 //-----------------------------------------------------------+
 
-// Author:
-// Init Date:
-// Last Updated:
-void MainWindow::on_action_open_triggered()
-{
-
-}
-
-// Author:
-// Init Date:
-// Last Updated:
-void MainWindow::on_action_test_triggered()
-{
-
-}
-
-// Author:
-// Init Date:
-// Last Updated:
-void MainWindow::on_action_save_triggered()
-{
-
-}
+void MainWindow::on_action_open_triggered() {}
+void MainWindow::on_action_test_triggered() {}
+void MainWindow::on_action_save_triggered() {}
 
 // Author:       Nicholas Ellis
 // Init Date:    29.01.2019
@@ -87,161 +67,33 @@ void MainWindow::on_action_about_triggered()
 // Author:       Tyler Rogers
 // Init Date:    29.01.2019
 // Last Updated: 29.01.2019
-void MainWindow::on_action_aboutQt_triggered()
-{
-    QApplication::aboutQt();
-}
+void MainWindow::on_action_aboutQt_triggered() { QApplication::aboutQt(); }
 
-// Author:
-// Init Date:
-// Last Updated:
-void MainWindow::on_action_crashCourse_triggered()
-{
+void MainWindow::on_action_crashCourse_triggered() {}
+void MainWindow::on_action_print_triggered() {}
+void MainWindow::on_action_new_triggered() {}
+void MainWindow::on_action_openRecent_triggered() {}
+void MainWindow::on_action_saveAs_triggered() {}
 
-}
+void MainWindow::on_action_bold_triggered() { me->bold(); }
+void MainWindow::on_action_italic_triggered() { me->italic(); }
+void MainWindow::on_action_strikethrough_triggered() { me->strikethough(); }
+void MainWindow::on_action_underline_triggered() {}
+void MainWindow::on_action_indent_triggered() {}
+void MainWindow::on_action_unindent_triggered() {}
+void MainWindow::on_action_bulletedList_triggered() {}
+void MainWindow::on_action_numberedList_triggered() {}
+void MainWindow::on_action_comment_triggered() {}
 
-// Author:
-// Init Date:
-// Last Updated:
-void MainWindow::on_action_print_triggered()
-{
-
-}
-
-// Author:
-// Init Date:
-// Last Updated:
-void MainWindow::on_action_new_triggered()
-{
-
-}
-
-// Author:
-// Init Date:
-// Last Updated:
-void MainWindow::on_action_openRecent_triggered()
-{
-
-}
-
-// Author:
-// Init Date:
-// Last Updated:
-void MainWindow::on_action_saveAs_triggered()
-{
-
-}
-
-// Author:
-// Init Date:
-// Last Updated:
-void MainWindow::on_action_bold_triggered()
-{
-    me->bold();
-}
-
-// Author:
-// Init Date:
-// Last Updated:
-void MainWindow::on_action_italic_triggered()
-{
-    me->italic();
-}
-
-// Author:
-// Init Date:
-// Last Updated:
-void MainWindow::on_action_underline_triggered()
-{
-
-}
-
-// Author:
-// Init Date:
-// Last Updated:
-void MainWindow::on_action_comment_triggered()
-{
-
-}
-
-// Author:
-// Init Date:
-// Last Updated:
-void MainWindow::on_action_strikethrough_triggered()
-{
-    me->strikethough();
-}
-
-// Author:
-// Init Date:
-// Last Updated:
-void MainWindow::on_action_indent_triggered()
-{
-
-}
-
-// Author:
-// Init Date:
-// Last Updated:
-void MainWindow::on_action_unindent_triggered()
-{
-
-}
-
-// Author:
-// Init Date:
-// Last Updated:
-void MainWindow::on_action_bulletedList_triggered()
-{
-}
-
-// Author:
-// Init Date:
-// Last Updated:
-void MainWindow::on_action_numberedList_triggered()
-{
-
-}
-
-// Author:
-// Init Date:
-// Last Updated:
-void MainWindow::on_action_taskList_triggered()
-{
-
-}
-
-// Author:
-// Init Date:
-// Last Updated:
-void MainWindow::on_action_preferences_triggered()
-{
-
-}
-
-// Author:
-// Init date:
-// Last Updated:
-void MainWindow::on_action_printPreview_triggered()
-{
-
-}
-
-// Author:
-// Init date:
-// Last Updated:
-void MainWindow::on_action_export_triggered()
-{
-
-}
+void MainWindow::on_action_taskList_triggered() {}
+void MainWindow::on_action_preferences_triggered() {}
+void MainWindow::on_action_printPreview_triggered() {}
+void MainWindow::on_action_export_triggered() {}
 
 // Author:       Tyler Rogers (cirkuitbreaker)
 // Init date:    29.01.2019
 // Last Updated: 29.01.2019
-void MainWindow::on_action_quit_triggered()
-{
-    QApplication::quit();
-}
+void MainWindow::on_action_quit_triggered() { QApplication::quit(); }
 
 //-----------------------------------------------------------+
 //                   Calendar Tab                            |
@@ -400,7 +252,6 @@ void MainWindow::on_tableWidget_eventList_cellChanged(int row, int column)
         qDebug() << "mainwindow: Time to sort";
         ui->tableWidget_eventList->sortByColumn(0, Qt::AscendingOrder);
     }
-
 }
 
 //-----------------------------------------------------------+
@@ -538,6 +389,16 @@ void MainWindow::on_pushButton_removePage_clicked()
         }
     }
 }
+
+void MainWindow::on_pushButton_bold_clicked() {}
+void MainWindow::on_pushButton_italics_clicked() {}
+void MainWindow::on_pushButton_underline_clicked() {}
+void MainWindow::on_pushButton_bulleted_clicked() {}
+void MainWindow::on_pushButton_numbered_clicked() {}
+void MainWindow::on_pushButton_save_clicked() {}
+void MainWindow::on_pushButton_strike_clicked() {}
+void MainWindow::on_pushButton_undent_clicked() {}
+void MainWindow::on_pushButton_indent_clicked() {}
 
 //-----------------------------------------------------------+
 //                     Flash Card Tab                        |

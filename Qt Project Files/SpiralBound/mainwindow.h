@@ -26,7 +26,9 @@ public:
     ~MainWindow();
 
 private slots:
+    // =========================
     // Menu Bar Buttons
+    // =========================
     void on_action_open_triggered();
     void on_action_test_triggered();
     void on_action_save_triggered();
@@ -37,6 +39,13 @@ private slots:
     void on_action_new_triggered();
     void on_action_openRecent_triggered();
     void on_action_saveAs_triggered();
+    void on_action_taskList_triggered();
+    void on_action_preferences_triggered();
+    void on_action_printPreview_triggered();
+    void on_action_export_triggered();
+    void on_action_quit_triggered();
+
+    // Menu for formatting
     void on_action_bold_triggered();
     void on_action_italic_triggered();
     void on_action_underline_triggered();
@@ -46,11 +55,6 @@ private slots:
     void on_action_unindent_triggered();
     void on_action_bulletedList_triggered();
     void on_action_numberedList_triggered();
-    void on_action_taskList_triggered();
-    void on_action_preferences_triggered();
-    void on_action_printPreview_triggered();
-    void on_action_export_triggered();
-    void on_action_quit_triggered();
 
     //==================
     // Calendar Buttons
@@ -88,6 +92,17 @@ private slots:
     void on_listWidget_pages_currentRowChanged(int currentRow);
     void on_listWidget_pages_itemDoubleClicked(QListWidgetItem* item);
     void on_pushButton_removePage_clicked();
+
+    // Shortcut bar for Markdown
+    void on_pushButton_bold_clicked();
+    void on_pushButton_bulleted_clicked();
+    void on_pushButton_italics_clicked();
+    void on_pushButton_numbered_clicked();
+    void on_pushButton_save_clicked();
+    void on_pushButton_strike_clicked();
+    void on_pushButton_underline_clicked();
+    void on_pushButton_indent_clicked();
+    void on_pushButton_undent_clicked();
 
 signals:
     void sendEditData(QString, QString, QString);  // Send mainwindown data to editcalendarevent
