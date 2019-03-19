@@ -274,11 +274,22 @@ void MainWindow::on_pushButton_AddPage_clicked()
 void MainWindow::on_tabWidget_2_tabCloseRequested(int index)
 {
     if (ui->tabWidget_2->count() > 1) {
+
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this, "Delete Section", "Are you sure you want to delete this section?",
+                                        QMessageBox::Yes|QMessageBox::No);
+        if (reply == QMessageBox::Yes){
+
         // Only remove a section if there is another available
         book->removeSection(index);
         ui->tabWidget_2->removeTab(index);
+        }
+        else{}
     }
     else {
+            QMessageBox messageBox;
+            messageBox.critical(nullptr,"Error","Cannot delete the only section.");
+            messageBox.setFixedSize(500,200);
     }
 }
 
@@ -387,6 +398,12 @@ void MainWindow::on_pushButton_removePage_clicked()
             ui->listWidget_pages->takeItem(row);
             book->getSection(ui->tabWidget_2->currentIndex())->removePage(row);
         }
+    }
+    else {
+        QMessageBox messageBox;
+        messageBox.critical(nullptr,"Error","Cannot delete the only page.");
+        messageBox.setFixedSize(500,200);
+
     }
 }
 
