@@ -10,7 +10,7 @@
 
 ## Text Editor
 - **HFE-01**: Functional rich-text editor that allows font weight and colorization changes, as well as code-block distinction and unordered/ordered lists
-- **HFE-02**: Functional section-page design such that a notebook may have sections (i.e. courses) and pages (i.e. a day of notes)
+- **HFE-02**: Functional section-page design such that a notebook may have sections (i.e. courses) and pages (i.e. a day of notes); colorizable section tabs
 - **HFE-03**: Syntax colorization/recognition for a couple of programming languages, with extensibility to others
 - **HFE-04**: Automated content saving of notes for crash recovery
 - **HFE-05**: Customization of bulleted graphics (such as you'd find in Microsoft Office, for example)

@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <help_text>fontsize=12
+
+// Classes have 'signals' in them b/c
+// of Qt's emphasis on having not only
+// methods, but also slots and signals.</help_text>
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>140</y>
+      <w>280</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>// ------------------------------------
+// Documenting Classes
+// Only document important methods and
+// signals - that is, ones that aren't
+// event-driven, etc.
+//
+// Usage of abbreviations, such as QLW
+// for QListWidget, are acceptable when
+// needed for shortening length
+// ------------------------------------
+bg=#DDDDDD
+*MainWindow*
+--
+/------------------ Variables ------------------/
+--
+- file_path_: QString
+- book: Book*
+- me: MarkdownEditor*
+
+--
+*/------------------- Methods -------------------/*
+--
+/Methods, Slots/
+- findItemIndex(QLWI* item, QLW* wid): int
+/- See CalEvent and Card classes for slots/
+
+/Signals/
+- sendEditData(QString, QString, QString): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>370</x>
+      <y>360</y>
+      <w>250</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>bg=#DDDDDD
+*AddCalendarEvent*
+--
+/------------------ Variables ------------------/
+--
+n/a
+
+--
+*/------------------- Methods -------------------/*
+--
+/Signals/
+- sendAddData(QString, QString): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>370</x>
+      <y>500</y>
+      <w>250</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>bg=#DDDDDD
+*EditCalendarEvent*
+--
+/------------------ Variables ------------------/
+--
+n/a
+
+--
+*/------------------- Methods -------------------/*
+--
+/Signals/
+- sendEditData(QTWI*): void
+- sendEditData(QString, QString): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>370</x>
+      <y>220</y>
+      <w>250</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>bg=#DDDDDD
+*DeleteCalendarEvent*
+--
+/------------------ Variables ------------------/
+--
+n/a
+
+--
+*/------------------- Methods -------------------/*
+--
+/Signals/
+- sendDeleteData(bool): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>40</x>
+      <y>740</y>
+      <w>250</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>bg=#DDDDDD
+*Section*
+--
+/------------------ Variables ------------------/
+--
+- name, desc: QString
+- pages: list&lt;Page*&gt;*
+
+--
+*/------------------- Methods -------------------/*
+--
+/Methods, Slots/
+- getName(): QString
+- getDesc(): QString
+- setDesc(QString ds): void
+- setName(QString nm): void
+- numsPages(): int
+- removePage(int index): void
+- addPage(QString nm, QString dsc): void
+- toString(): char*
+- fromString(char* in): static Section*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>40</x>
+      <y>400</y>
+      <w>250</w>
+      <h>300</h>
+    </coordinates>
+    <panel_attributes>bg=#DDDDDD
+*Book*
+--
+/------------------ Variables ------------------/
+--
+- bookName, author: QString
+- date: QDate
+- bookList: list&lt;Section*&gt;*
+
+--
+*/------------------- Methods -------------------/*
+--
+/Methods, Slots/
+- getName(): QString
+- getAuthor(): QString
+- getDate(): QDate
+- setAuthor(QString auth): void
+- setName(QString nm): void
+- setDate(QDate dt): void
+- numSections(): int
+- removeSection(int index): void
+- addSection(QString nm, QString dsc): void
+- toString(): char*
+- fromString(char* in): static Book*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>180</y>
+      <w>90</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1..1</panel_attributes>
+    <additional_attributes>10.0;10.0;20.0;10.0;20.0;50.0;70.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>180</y>
+      <w>90</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1..1</panel_attributes>
+    <additional_attributes>10.0;10.0;20.0;10.0;20.0;190.0;70.0;190.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>180</y>
+      <w>90</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1..1</panel_attributes>
+    <additional_attributes>10.0;10.0;20.0;10.0;20.0;330.0;70.0;330.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>150</x>
+      <y>350</y>
+      <w>50</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1..1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>150</x>
+      <y>690</y>
+      <w>50</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1..n</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>370</x>
+      <y>740</y>
+      <w>250</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>bg=#DDDDDD
+*Page*
+--
+/------------------ Variables ------------------/
+--
+- name: QString
+- date: QDate
+- content: QTextDocument*
+--
+*/------------------- Methods -------------------/*
+--
+/Methods, Slots/
+- getName(): QString
+- getDate(): QDate
+- dateContent(): QTextDocument*
+- setName(QString nm): void
+- setDate(QDate dt): void
+- setContent(QTD* con): void
+- toString(): char*
+- fromString(char* in): static Page*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>280</x>
+      <y>740</y>
+      <w>110</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1..n</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>370</x>
+      <y>660</y>
+      <w>250</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>bg=#DDDDDD
+*AboutSpiralBound*
+/ASB is a small dialog window that shows/
+/information about the program/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>180</y>
+      <w>90</w>
+      <h>520</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1..1</panel_attributes>
+    <additional_attributes>10.0;10.0;20.0;10.0;20.0;490.0;70.0;490.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>680</x>
+      <y>220</y>
+      <w>250</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>bg=#DDDDDD
+*AddCard*
+--
+/------------------ Variables ------------------/
+--
+n/a
+
+--
+*/------------------- Methods -------------------/*
+--
+/Signals/
+- sendCardData(QStr, QStr, QString): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>680</x>
+      <y>360</y>
+      <w>250</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>bg=#DDDDDD
+*DeleteCard*
+--
+/------------------ Variables ------------------/
+--
+n/a
+
+--
+*/------------------- Methods -------------------/*
+--
+/Signals/
+- sendDeleteData(bool): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>180</y>
+      <w>400</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1..1</panel_attributes>
+    <additional_attributes>10.0;10.0;330.0;10.0;330.0;50.0;380.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>180</y>
+      <w>400</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1..1</panel_attributes>
+    <additional_attributes>10.0;10.0;330.0;10.0;330.0;190.0;380.0;190.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>680</x>
+      <y>500</y>
+      <w>250</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>bg=#DDDDDD
+*ImportFlashCards*
+--
+/------------------ Variables ------------------/
+--
+n/a
+
+--
+*/------------------- Methods -------------------/*
+--
+/Signals/
+- sendCardData(QStr, QStr, QString): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>180</y>
+      <w>400</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1..1</panel_attributes>
+    <additional_attributes>10.0;10.0;330.0;10.0;330.0;330.0;380.0;330.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>680</x>
+      <y>740</y>
+      <w>250</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>bg=#DDDDDD
+*Util*
+/Util provides helper functions, thus isn't/
+/instantiated by any other class/
+--
+/------------------ Variables ------------------/
+--
+n/a
+
+--
+*/------------------- Methods -------------------/*
+--
+/Methods, Slots/
+- find(char* str, char c, int strlen): static int
+- findr(char* str, char c, int strlen): static int
+- QtoCString(QString qstr): static char*</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

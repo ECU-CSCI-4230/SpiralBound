@@ -9,15 +9,44 @@
   </ul>
 </details>
 
-<!-- Requirements Section -->
+<!-- Program Design -->
 <details>
-  <summary> Requirements </summary>
-  <ul>
-    <li> <a href="https://github.com/ECU-CSCI-4230/SpiralBound/wiki/High-Level-Requirements">High-level Requirements</a>
-    <li> <a href="https://github.com/ECU-CSCI-4230/SpiralBound/wiki/Requirements:-Notebook">Notebook</a>
-    <li> <a href="https://github.com/ECU-CSCI-4230/SpiralBound/wiki/Requirements:-Calendar">Calendar</a>
-    <li> <a href="https://github.com/ECU-CSCI-4230/SpiralBound/wiki/Requirements:-Study-Tool">Flash Cards</a>
-  </ul>
+  <summary> Program Design </summary>
+  <blockquote>
+    <details>
+      <summary> Requirements </summary>
+      <ul>
+        <li> <a href="https://github.com/ECU-CSCI-4230/SpiralBound/wiki/High-Level-Requirements">High-level Requirements</a>
+        <li> <a href="https://github.com/ECU-CSCI-4230/SpiralBound/wiki/Requirements:-Notebook">Notebook</a>
+        <li> <a href="https://github.com/ECU-CSCI-4230/SpiralBound/wiki/Requirements:-Calendar">Calendar</a>
+        <li> <a href="https://github.com/ECU-CSCI-4230/SpiralBound/wiki/Requirements:-Study-Tool">Flash Cards</a>
+      </ul>
+    </details>
+    <details>
+      <summary> Architecture and Design [WIP] </summary>
+      <ul>
+        <li> High-Level Architecture
+        <li> Architectural Patterns
+        <li> System Components
+        <li> Class Diagrams and Important Classes/Functions/Files
+        <li> Crash Course (New Dev Intro)
+      </ul>
+    </details>
+    <details>
+      <summary> Implementation [WIP] </summary>
+      <!-- <ul>
+       <li> Technology Stack
+       <li> Onboarding Documentation
+       <li> Style, Error Checking
+       <li> GitHub Usage
+      </ul> -->
+    </details>
+    <details>
+      <summary> Testing [WIP] </summary>
+      <!-- <ul>
+      </ul> -->
+    </details>
+  </blockquote>
 </details>
 
 <!-- Status Reports Section -->
