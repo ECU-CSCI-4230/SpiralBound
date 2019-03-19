@@ -23,13 +23,13 @@
       </ul>
     </details>
     <details>
-      <summary> Architecture and Design [WIP] </summary>
+      <summary> Architecture and Design </summary>
       <ul>
-        <li> High-Level Architecture
-        <li> Architectural Patterns
-        <li> System Components
-        <li> Class Diagrams and Important Classes/Functions/Files
-        <li> Crash Course (New Dev Intro)
+        <li> <a href="https://github.com/ECU-CSCI-4230/SpiralBound/wiki/Architecture:-High-Level">High-Level Architecture</a>
+        <li> <a href="https://github.com/ECU-CSCI-4230/SpiralBound/wiki/Architecture:-Patterns">Architectural Patterns</a>
+        <li> <a href="https://github.com/ECU-CSCI-4230/SpiralBound/wiki/Architecture:-Components">System Components</a>
+        <li> <a href="https://github.com/ECU-CSCI-4230/SpiralBound/wiki/Design:-Classes">Class Diagram and Design</a>
+        <li> <a href="https://github.com/ECU-CSCI-4230/SpiralBound/wiki/Design:-Complicated-Choices">Complex Choice</a> (wip)
       </ul>
     </details>
     <details>
