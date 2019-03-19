@@ -83,8 +83,9 @@ int main(int argc, char *argv[])
 
     MainWindow w;
 
-    QTimer::singleShot(5000, splash, SLOT(close()));
-    QTimer::singleShot(5000, &w, SLOT(show()));
+    // TODO: CHANGE VALUES OF TIMERS EVENTUALLY
+    QTimer::singleShot(500, splash, SLOT(close()));
+    QTimer::singleShot(500, &w, SLOT(show()));
     // w.show();
     return a.exec();
 }
