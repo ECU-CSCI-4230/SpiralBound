@@ -61,7 +61,6 @@ FORMS += \
         addcalendarevent.ui \
         deletecalendarevent.ui \
         editcalendarevent.ui \
-        addpage.ui \
         addcard.ui \
         deletecard.ui \
         importflashcards.ui
