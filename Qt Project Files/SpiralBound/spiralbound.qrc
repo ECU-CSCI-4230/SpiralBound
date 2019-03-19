@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/SpiralBound">
         <file>images/icon.png</file>
-        <file>images/SplashScreen.png</file>
+        <file>images/image0.png</file>
         <file>images/icon/format_bold.png</file>
         <file>images/icon/format_font.png</file>
         <file>images/icon/format_indent.png</file>
