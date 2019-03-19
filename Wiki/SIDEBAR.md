@@ -33,13 +33,12 @@
       </ul>
     </details>
     <details>
-      <summary> Implementation [WIP] </summary>
-      <!-- <ul>
-       <li> Technology Stack
-       <li> Onboarding Documentation
-       <li> Style, Error Checking
-       <li> GitHub Usage
-      </ul> -->
+      <summary> Implementation </summary>
+      <ul>
+       <li> <a href="https://github.com/ECU-CSCI-4230/SpiralBound/wiki/Implementation:-Stack">Technology Stack, Onboarding</a>
+       <li> <a href="https://github.com/ECU-CSCI-4230/SpiralBound/wiki/Implementation:-Code-Standards">Style, Error Checking</a>
+       <li> <a href="https://github.com/ECU-CSCI-4230/SpiralBound/wiki/Implementation:-GitHub">GitHub Usage</a>
+      </ul>
     </details>
     <details>
       <summary> Testing [WIP] </summary>
