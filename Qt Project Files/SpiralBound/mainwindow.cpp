@@ -421,6 +421,13 @@ void MainWindow::on_pushButton_removePage_clicked()
     delete ind;
 }
 
+// Author:       Matthew Morgan
+// Init Date:    21.03.2019
+// Last Updated: 21.03.2019
+void MainWindow::on_treeWidget_sections_currentItemChanged(QTreeWidgetItem *cur, __attribute__((unused)) QTreeWidgetItem *prev) {
+    on_treeWidget_sections_itemClicked(cur, 0);
+}
+
 void MainWindow::on_pushButton_bold_clicked() {}
 void MainWindow::on_pushButton_italics_clicked() {}
 void MainWindow::on_pushButton_underline_clicked() {}

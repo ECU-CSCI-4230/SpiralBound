@@ -92,6 +92,7 @@ private slots:
     void on_pushButton_removePage_clicked();
     void on_treeWidget_sections_itemDoubleClicked(QTreeWidgetItem *item, int column);
     void on_treeWidget_sections_itemClicked(QTreeWidgetItem *item, int column);
+    void on_treeWidget_sections_currentItemChanged(QTreeWidgetItem *cur, QTreeWidgetItem* prev);
 
     // Shortcut bar for Markdown
     void on_pushButton_bold_clicked();
