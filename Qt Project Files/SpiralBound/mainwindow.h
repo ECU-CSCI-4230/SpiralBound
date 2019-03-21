@@ -65,6 +65,7 @@ private slots:
     void on_pushButton_addEvent_clicked();
     void on_pushButton_deleteEvent_clicked();
     void on_pushButton_editEvent_clicked();
+    void on_tableWidget_eventList_cellChanged(int row, int column);
 
     // Connections
     void receiveAddData(QString, QString);  // Receive addcalendarevent data to mainwindow
@@ -86,7 +87,6 @@ private slots:
     // =========================
     // Notebook
     // =========================
-    void on_tableWidget_eventList_cellChanged(int row, int column);
     void on_pushButton_addPage_clicked();
     void on_pushButton_addSection_clicked();
     void on_pushButton_removePage_clicked();

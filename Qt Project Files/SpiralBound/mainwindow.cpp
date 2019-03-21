@@ -259,41 +259,24 @@ void MainWindow::on_tableWidget_eventList_cellChanged(int row, int column)
 //-----------------------------------------------------------+
 //                   Notetake Tab                            |
 //-----------------------------------------------------------+
-// Author:       Ketu Patel, Matthew Morgan
+// Author:       Matthew Morgan
 // Init Date:    10.03.2019
 // Last Updated: 20.03.2019
 void MainWindow::on_pushButton_addPage_clicked()
 {
-    // Add Untitled Page and switch to it
-//    ui->listWidget_pages->addItem(new QListWidgetItem("Untitled Page"));
-//    book->getSection(ui->tabWidget_2->currentIndex())->addPage("Untitled Page");
-//    ui->listWidget_pages->setCurrentRow(ui->listWidget_pages->count()-1);
+    // Add a new page to the section, and activate it as the current
+    int* ind = Util::getSectionPage(ui->treeWidget_sections, ui->treeWidget_sections->selectedItems().front());
+    QTreeWidgetItem* pg = new QTreeWidgetItem();
+
+    book->getSection(ind[0])->addPage("Untitled Page");
+    ui->treeWidget_sections->topLevelItem(ind[0])->addChild(pg);
+    ui->treeWidget_sections->clearSelection();
+    pg->setText(0, "Untitled Page");
+    pg->setSelected(true);
+    on_treeWidget_sections_itemClicked(pg, 0);
+
+    delete ind;
 }
-
-// Author:       Ketu Patel, Matthew Morgan
-// Init Date:    10.03.2019
-// Last Updated: 11.03.2019
-//void MainWindow::on_tabWidget_2_tabCloseRequested(int index)
-//{
-//    if (ui->tabWidget_2->count() > 1) {
-
-//        QMessageBox::StandardButton reply;
-//        reply = QMessageBox::question(this, "Delete Section", "Are you sure you want to delete this section?",
-//                                        QMessageBox::Yes|QMessageBox::No);
-//        if (reply == QMessageBox::Yes){
-
-//        // Only remove a section if there is another available
-//        book->removeSection(index);
-//        ui->tabWidget_2->removeTab(index);
-//        }
-//        else{}
-//    }
-//    else {
-//            QMessageBox messageBox;
-//            messageBox.critical(nullptr,"Error","Cannot delete the only section.");
-//            messageBox.setFixedSize(500,200);
-//    }
-//}
 
 // Author:       Matthew Morgan
 // Init Date:    10.03.2019
@@ -387,23 +370,56 @@ void MainWindow::receiveSectionData(QString nm, QColor col, int ind) {
 
 // Author:       Ketu Patel, Matthew Morgan
 // Init Date:    13.03.2019
-// Last Updated: 13.03.2019
+// Last Updated: 20.03.2019
 void MainWindow::on_pushButton_removePage_clicked()
 {
-//    // Delete page if it isn't the only one left
-//    if (ui->listWidget_pages->count() > 1) {
-//        QList<QListWidgetItem*> its = ui->listWidget_pages->selectedItems();
-//        foreach(QListWidgetItem *it, its) {
-//            int row = ui->listWidget_pages->row(it);
-//            ui->listWidget_pages->takeItem(row);
-//            book->getSection(ui->tabWidget_2->currentIndex())->removePage(row);
-//        }
-//    }
-//    else {
-//        QMessageBox messageBox;
-//        messageBox.critical(nullptr,"Error","Cannot delete the only page.");
-//        messageBox.setFixedSize(500,200);
-//    }
+    int* ind = Util::getSectionPage(ui->treeWidget_sections, ui->treeWidget_sections->selectedItems().front());
+
+    if (ind[1] == -1) {
+        // Deleting a section
+        if (book->numSections() > 1) {
+            QMessageBox::StandardButton reply = QMessageBox::question(this,
+                "Delete Section", "Are you sure you want to delete this section?");
+
+            if (reply == QMessageBox::Yes) {
+                book->removeSection(ind[0]);
+                ui->treeWidget_sections->takeTopLevelItem(ind[0]);
+
+                // Move to the first page of the first section
+                ui->treeWidget_sections->clearSelection();
+                ui->treeWidget_sections->topLevelItem(0)->setExpanded(true);
+                ui->treeWidget_sections->topLevelItem(0)->child(0)->setSelected(true);
+                on_treeWidget_sections_itemClicked(ui->treeWidget_sections->topLevelItem(0)->child(0), 0);
+            }
+        }
+        else {
+            QMessageBox msg;
+            msg.critical(nullptr, "Error", "Cannot delete the last section of the notebook!");
+            msg.setFixedSize(500, 200);
+        }
+    }
+    else {
+        // Deleting a page
+        Section* sec = book->getSection(ind[0]);
+
+        if (sec->numPages() > 1) {
+            sec->removePage(ind[1]);
+            ui->treeWidget_sections->topLevelItem(ind[0])->takeChild(ind[1]);
+
+            // Select the first page of the section from which the page was removed
+            ui->treeWidget_sections->clearSelection();
+            ui->treeWidget_sections->topLevelItem(ind[0])->setExpanded(true);
+            ui->treeWidget_sections->topLevelItem(ind[0])->child(0)->setSelected(true);
+            on_treeWidget_sections_itemClicked(ui->treeWidget_sections->topLevelItem(ind[0])->child(0), 0);
+        }
+        else {
+            QMessageBox msg;
+            msg.critical(nullptr, "Error", "Cannot delete the only page of a section!");
+            msg.setFixedSize(500, 200);
+        }
+    }
+
+    delete ind;
 }
 
 void MainWindow::on_pushButton_bold_clicked() {}
