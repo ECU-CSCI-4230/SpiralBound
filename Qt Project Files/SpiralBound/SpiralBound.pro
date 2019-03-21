@@ -48,7 +48,6 @@ HEADERS += \
         section.h \
         book.h \
         util.h \
-        unit_book.h \
         markdowneditor.h \
         addcard.h \
         deletecard.h \

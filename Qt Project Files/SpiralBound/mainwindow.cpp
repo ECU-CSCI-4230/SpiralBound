@@ -20,7 +20,6 @@
 #include "book.h"
 #include "section.h"
 #include "page.h"
-#include "block.h"
 #include "util.h"
 
 // Constructor
@@ -34,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     me = new MarkdownEditor(ui->textEdit);
 
     // Add a default section, page, and change to view that page in that section on startup
-    book->addSection("Section 01", "");
+    book->addSection("Section 01");
     book->getSection(0)->addPage("Untitled Page");
     ui->textEdit->setDocument(book->getSection(0)->getPage(0)->getContent());
     ui->treeWidget_sections->setItemSelected(ui->treeWidget_sections->topLevelItem(0)->child(0), true);
@@ -288,7 +287,7 @@ void MainWindow::on_pushButton_addSection_clicked()
     int size = book->numSections();
     QTreeWidgetItem *sec = new QTreeWidgetItem(), *pg = new QTreeWidgetItem();
 
-    book->addSection(QString("New Section %1").arg(book->numSections()+1), "");
+    book->addSection(QString("New Section %1").arg(book->numSections()+1));
     book->getSection(size)->addPage("Untitled Page");
 
     ui->treeWidget_sections->addTopLevelItem(sec);

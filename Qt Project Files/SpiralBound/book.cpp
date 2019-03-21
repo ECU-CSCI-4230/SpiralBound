@@ -84,10 +84,10 @@ void Book::removeSection(int index) {
     bookList->erase(it);
 }
 
-// Author:       Ketu Patel
+// Author:       Ketu Patel, Matthew Morgan
 // Init date:    02-02-2019
-// Last Updated: 02-12-2019
-void Book::addSection(QString name, QString desc) {
+// Last Updated: 03-21-2019
+void Book::addSection(QString name) {
     bookList->push_back(new Section(name));
 }
 
