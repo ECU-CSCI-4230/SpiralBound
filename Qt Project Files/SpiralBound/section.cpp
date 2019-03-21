@@ -3,13 +3,25 @@
 
 // Author:       Ketu Patel, Matthew Morgan
 // Init date:    02-02-2019
-// Last Updated: 02-12-2019
+// Last Updated: 03-20-2019
 Section::Section(QString nm, QString ds)
 {
     secName = nm;
     desc = ds;
     pages = new list<Page*>();
+    col = *(new QColor(DEF_COLOR));
+    doc = new QTextDocument();
 }
+
+// Author:       Matthew Morgan
+// Init date:    03-20-2019
+// Last Updated: 03-20-2019
+QTextDocument* Section::getDoc() { return doc; }
+
+// Author:       Matthew Morgan
+// Init date:    03-20-2019
+// Last Updated: 03-20-2019
+void Section::setDoc(QTextDocument* nDoc) { doc = nDoc; }
 
 // Author:       Ketu Patel
 // Init date:    02-02-2019
@@ -20,6 +32,16 @@ QString Section::getSecName() { return secName; }
 // Init date:    02-02-2019
 // Last Updated: 02-02-2019
 QString Section::getDesc() { return desc; }
+
+// Author:       Matthew Morgan
+// Init Date:    03-20-2019
+// Last Updated: 03-20-2019
+void Section::setColor(QColor color) { col = color; }
+
+// Author:       Matthew Morgan
+// Init Date:    03-20-2019
+// Last Updated: 03-20-2019
+QColor Section::getColor() { return col; }
 
 // Author:       Ketu Patel
 // Init date:    02-02-2019

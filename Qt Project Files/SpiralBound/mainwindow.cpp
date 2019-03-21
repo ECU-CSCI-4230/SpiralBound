@@ -21,6 +21,7 @@
 #include "section.h"
 #include "page.h"
 #include "block.h"
+#include "util.h"
 
 // Constructor
 MainWindow::MainWindow(QWidget *parent) :
@@ -33,10 +34,12 @@ MainWindow::MainWindow(QWidget *parent) :
     me = new MarkdownEditor(ui->textEdit);
 
     // Add a default section, page, and change to view that page in that section on startup
-    book->addSection("New Section 1", "");
+    book->addSection("Section 01", "");
     book->getSection(0)->addPage("Untitled Page");
     ui->textEdit->setDocument(book->getSection(0)->getPage(0)->getContent());
-    ui->listWidget_pages->setCurrentRow(0);
+    ui->treeWidget_sections->setItemSelected(ui->treeWidget_sections->topLevelItem(0)->child(0), true);
+    ui->treeWidget_sections->topLevelItem(0)->setExpanded(true);
+
     ui->tableWidget_cardsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
@@ -198,7 +201,6 @@ void MainWindow::on_pushButton_editEvent_clicked()
         connect(editWindow, SIGNAL(sendEditData(QString, QString)), this, SLOT(receiveEditData(QString, QString)));
     }
 }
-
 // Author:       Nicholas
 // Init Date:    09.02.2019
 // Last Updated: 19.02.2019
@@ -259,130 +261,128 @@ void MainWindow::on_tableWidget_eventList_cellChanged(int row, int column)
 //-----------------------------------------------------------+
 // Author:       Ketu Patel, Matthew Morgan
 // Init Date:    10.03.2019
-// Last Updated: 12.03.2019
-void MainWindow::on_pushButton_AddPage_clicked()
+// Last Updated: 20.03.2019
+void MainWindow::on_pushButton_addPage_clicked()
 {
     // Add Untitled Page and switch to it
-    ui->listWidget_pages->addItem(new QListWidgetItem("Untitled Page"));
-    book->getSection(ui->tabWidget_2->currentIndex())->addPage("Untitled Page");
-    ui->listWidget_pages->setCurrentRow(ui->listWidget_pages->count()-1);
+//    ui->listWidget_pages->addItem(new QListWidgetItem("Untitled Page"));
+//    book->getSection(ui->tabWidget_2->currentIndex())->addPage("Untitled Page");
+//    ui->listWidget_pages->setCurrentRow(ui->listWidget_pages->count()-1);
 }
 
 // Author:       Ketu Patel, Matthew Morgan
 // Init Date:    10.03.2019
 // Last Updated: 11.03.2019
-void MainWindow::on_tabWidget_2_tabCloseRequested(int index)
-{
-    if (ui->tabWidget_2->count() > 1) {
+//void MainWindow::on_tabWidget_2_tabCloseRequested(int index)
+//{
+//    if (ui->tabWidget_2->count() > 1) {
 
-        QMessageBox::StandardButton reply;
-        reply = QMessageBox::question(this, "Delete Section", "Are you sure you want to delete this section?",
-                                        QMessageBox::Yes|QMessageBox::No);
-        if (reply == QMessageBox::Yes){
+//        QMessageBox::StandardButton reply;
+//        reply = QMessageBox::question(this, "Delete Section", "Are you sure you want to delete this section?",
+//                                        QMessageBox::Yes|QMessageBox::No);
+//        if (reply == QMessageBox::Yes){
 
-        // Only remove a section if there is another available
-        book->removeSection(index);
-        ui->tabWidget_2->removeTab(index);
-        }
-        else{}
-    }
-    else {
-            QMessageBox messageBox;
-            messageBox.critical(nullptr,"Error","Cannot delete the only section.");
-            messageBox.setFixedSize(500,200);
-    }
-}
+//        // Only remove a section if there is another available
+//        book->removeSection(index);
+//        ui->tabWidget_2->removeTab(index);
+//        }
+//        else{}
+//    }
+//    else {
+//            QMessageBox messageBox;
+//            messageBox.critical(nullptr,"Error","Cannot delete the only section.");
+//            messageBox.setFixedSize(500,200);
+//    }
+//}
 
-// Author:       Ketu Patel, Matthew Morgan
+// Author:       Matthew Morgan
 // Init Date:    10.03.2019
-// Last Updated: 13.03.2019
+// Last Updated: 20.03.2019
 void MainWindow::on_pushButton_addSection_clicked()
 {
-    // Adds a section
-    ui->tabWidget_2->addTab(new QWidget(), QString("New Section %0").arg(ui->tabWidget_2->count()+1));
-    ui->tabWidget_2->setCurrentIndex(ui->tabWidget_2->count()-1);
-    book->addSection(ui->tabWidget_2->tabText(ui->tabWidget_2->count()-1), "");
-    book->getSection(book->numSections()-1)->addPage("Untitled Page");
+    // Add a new section and page, and update the tree to reflect these changes
+    // Clear the page selection
+    int size = book->numSections();
+    QTreeWidgetItem *sec = new QTreeWidgetItem(), *pg = new QTreeWidgetItem();
 
-    // Update the list of pages
-    Section* sec = book->getSection(ui->tabWidget_2->currentIndex());
-    ui->listWidget_pages->clear();
-    for(int i=0; i<sec->numPages(); i++) {
-        ui->listWidget_pages->addItem(new QListWidgetItem(sec->getPage(i)->getPageName()));
-    }
-    ui->listWidget_pages->setCurrentRow(0);
-    ui->textEdit->setDocument(sec->getPage(0)->getContent());
-}
+    book->addSection(QString("New Section %1").arg(book->numSections()+1), "");
+    book->getSection(size)->addPage("Untitled Page");
 
-// Author:       Ketu Patel, Matthew Morgan
-// Init Date:    10.03.2019
-// Last Updated: 11.03.2019
-void MainWindow::on_tabWidget_2_tabBarDoubleClicked(int index)
-{
-    // Rename a section, but ONLY if the new name isn't blank
-    bool ok;
-    QString text = QInputDialog::getText(nullptr, "Rename Section", "New Name:", QLineEdit::Normal, book->getSection(index)->getSecName(), &ok);
+    ui->treeWidget_sections->addTopLevelItem(sec);
+    sec->setText(0, book->getSection(size)->getSecName());
+    sec->addChild(pg);
+    pg->setText(0, "Untitled Page");
 
-    if (ok && !text.isEmpty()) {
-        book->getSection(index)->setName(text);
-        ui->tabWidget_2->setTabText(index, text);
-    }
+    ui->treeWidget_sections->setItemExpanded(sec, true);
+    ui->treeWidget_sections->clearSelection();
+    pg->setSelected(true);
+    on_treeWidget_sections_itemClicked(pg, 0);
 }
 
 // Author:       Matthew Morgan
-// Init Date:    11.03.2019
-// Last Updated: 13.03.2019
-void MainWindow::on_tabWidget_2_currentChanged(int index) {
-    // Change the listing of pages to be based on the current section
-    Section* sec = book->getSection(index);
+// Init Date:    20.03.2019
+// Last Updated: 20.03.2019
+void MainWindow::on_treeWidget_sections_itemDoubleClicked(QTreeWidgetItem *item, int column) {
+    int* ind = Util::getSectionPage(ui->treeWidget_sections, item);
 
-    if (sec != nullptr) {
-        // Update the list of pages
-        ui->listWidget_pages->clear();
-        for(int i=0; i<sec->numPages(); i++) {
-            ui->listWidget_pages->addItem(new QListWidgetItem(sec->getPage(i)->getPageName()));
+    if (ind[1] > -1) {
+        // Allow renaming of a page if the new name isn't blank
+        bool ok;
+        QString text = QInputDialog::getText(nullptr, "Rename Page", "New Name:", QLineEdit::Normal, item->text(column), &ok);
+
+        if (ok && !text.isEmpty()) {
+            Section* sec = book->getSection(ind[0]);
+            sec->getPage(ind[1])->setPgName(text);
+            item->setText(column, text);
         }
-        ui->listWidget_pages->setCurrentRow(0);
-        ui->textEdit->setDocument(book->getSection(ui->tabWidget_2->currentIndex())->getPage(0)->getContent());
     }
+    else {
+        // Changing section information
+        // Instantiate the window, then send the data and wait to receive updated data
+        editSectionWindow = new editsection(this);
+        editSectionWindow->setModal(true);
+        editSectionWindow->show();
+
+        Section* sec = book->getSection(ind[0]);
+        connect(this, SIGNAL(sendSectionInfo(QString, QColor, int)), editSectionWindow, SLOT(receiveSectionData(QString, QColor, int)));
+        emit sendSectionInfo(sec->getSecName(), sec->getColor(), ind[0]);
+        connect(editSectionWindow, SIGNAL(sendSectionData(QString, QColor, int)), this, SLOT(receiveSectionData(QString, QColor, int)));
+    }
+
+    delete ind;
 }
 
 // Author:       Matthew Morgan
-// Init Date:    11.03.2019
-// Last Updated: 13.03.2019
-void MainWindow::on_listWidget_pages_currentRowChanged(int currentRow) {
-    Page* cur = book->getSection(ui->tabWidget_2->currentIndex())->getPage(currentRow);
-    if (cur != nullptr) {
-        ui->textEdit->setDocument(cur->getContent());
+// Init Date:    20.03.2019
+// Last Updated: 20.03.2019
+void MainWindow::on_treeWidget_sections_itemClicked(QTreeWidgetItem* item, __attribute__((unused)) int column) {
+    // Dynamically update the content being displayed - section info or page content
+    int* ind = Util::getSectionPage(ui->treeWidget_sections, item);
+
+    if (ind[1] == -1) {
+        ui->textEdit->setDocument(book->getSection(ind[0])->getDoc());
     }
+    else {
+        ui->textEdit->setDocument(book->getSection(ind[0])->getPage(ind[1])->getContent());
+    }
+
+    delete ind;
 }
 
 // Author:       Matthew Morgan
-// Init Date:    11.03.2019
-// Last Updated: 11.03.2019
-/** findItemIndex(item,wid) will find the numerical index of an item, item, in a list widget
-  * wid, returning the index, or -1 if the item is not found in the widget. */
-int findItemIndex(QListWidgetItem* item, QListWidget* wid) {
-    for(int i=0; i<wid->count(); i++) {
-        if (wid->item(i) == item) { return i; }
-    }
-    return -1;
-}
+// Init Date:    20.03.2019
+// Last Updated: 20.03.2019
+void MainWindow::receiveSectionData(QString nm, QColor col, int ind) {
+    // Update the section's color and name
+    Section* sec = book->getSection(ind);
+    sec->setName(nm);
+    sec->setColor(col);
 
-// Author:       Matthew Morgan
-// Init Date:    11.03.2019
-// Last Updated: 11.03.2019
-void MainWindow::on_listWidget_pages_itemDoubleClicked(QListWidgetItem* item) {
-    // Allow renaming of a page if the new name isn't blank
-    bool ok;
-    QString text = QInputDialog::getText(nullptr, "Rename Page", "New Name:", QLineEdit::Normal, item->text(), &ok);
-    int index = findItemIndex(item, ui->listWidget_pages);
-
-    if (ok && !text.isEmpty()) {
-        Section* sec = book->getSection(ui->tabWidget_2->currentIndex());
-        sec->getPage(index)->setPgName(text);
-        item->setText(text);
-    }
+    ui->treeWidget_sections->topLevelItem(ind)->setText(0, nm);
+    QBrush pal = ui->treeWidget_sections->palette().background();
+    pal.setColor(col);
+    pal.setStyle(Qt::BrushStyle::SolidPattern);
+    ui->treeWidget_sections->topLevelItem(ind)->setBackground(0, pal);
 }
 
 // Author:       Ketu Patel, Matthew Morgan
@@ -390,21 +390,20 @@ void MainWindow::on_listWidget_pages_itemDoubleClicked(QListWidgetItem* item) {
 // Last Updated: 13.03.2019
 void MainWindow::on_pushButton_removePage_clicked()
 {
-    // Delete page if it isn't the only one left
-    if (ui->listWidget_pages->count() > 1) {
-        QList<QListWidgetItem*> its = ui->listWidget_pages->selectedItems();
-        foreach(QListWidgetItem *it, its) {
-            int row = ui->listWidget_pages->row(it);
-            ui->listWidget_pages->takeItem(row);
-            book->getSection(ui->tabWidget_2->currentIndex())->removePage(row);
-        }
-    }
-    else {
-        QMessageBox messageBox;
-        messageBox.critical(nullptr,"Error","Cannot delete the only page.");
-        messageBox.setFixedSize(500,200);
-
-    }
+//    // Delete page if it isn't the only one left
+//    if (ui->listWidget_pages->count() > 1) {
+//        QList<QListWidgetItem*> its = ui->listWidget_pages->selectedItems();
+//        foreach(QListWidgetItem *it, its) {
+//            int row = ui->listWidget_pages->row(it);
+//            ui->listWidget_pages->takeItem(row);
+//            book->getSection(ui->tabWidget_2->currentIndex())->removePage(row);
+//        }
+//    }
+//    else {
+//        QMessageBox messageBox;
+//        messageBox.critical(nullptr,"Error","Cannot delete the only page.");
+//        messageBox.setFixedSize(500,200);
+//    }
 }
 
 void MainWindow::on_pushButton_bold_clicked() {}

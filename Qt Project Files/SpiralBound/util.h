@@ -1,6 +1,7 @@
 #ifndef UTIL_H
 #define UTIL_H
 #include <QString>
+#include <QTreeWidget>
 #include <iostream>
 
 using namespace std;
@@ -45,6 +46,41 @@ class Util {
             char* str = new char[qstr.length()+1];
             strcpy(str, qstr.toStdString().c_str());
             return str;
+        }
+
+
+        // Author:       Matthew Morgan
+        // Init Date:    03-20-2019
+        // Last Updated: 03-20-2019
+        /** getSectionPage(tree, item) gets the index of the item in the given tree widget.
+          * If the item is a page, then the page's index is also fetched. Index 0 of the
+          * returned result is the section index, and 1 is the page index. If either value
+          * is a -1, then the index was not found. */
+
+        static int* getSectionPage(QTreeWidget* tree, QTreeWidgetItem* item) {
+            int* dat = new int[2];
+            bool isSec = (item->childCount() > 0);
+            int top = tree->topLevelItemCount();
+
+            dat[0] = -1; dat[1] = -1;
+
+            if (isSec) {
+                // Is a section - find the index of the section
+                for(int i=0; i<top; i++)
+                    if (tree->topLevelItem(i) == item) { dat[0] = i; break; }
+            }
+            else {
+                // Not a section - get the parent (the section TWI), find it's index
+                // and fetch the page's index
+                QTreeWidgetItem* sec = item->parent();
+
+                for(int i=0; i<top; i++)
+                    if (tree->topLevelItem(i) == sec) { dat[0] = i; break; }
+
+                dat[1] = sec->indexOfChild(item);
+            }
+
+            return dat;
         }
 };
 

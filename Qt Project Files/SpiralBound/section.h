@@ -3,6 +3,8 @@
 #include "page.h"
 #include "util.h"
 #include <QStringRef>
+#include <QColor>
+#include <QTextDocument>
 #include <list>
 
 using namespace std;
@@ -10,14 +12,22 @@ using namespace std;
 class Section
 {
     public:
+        const QString DEF_COLOR = "#FFFFFF";
+
         Section(QString sc, QString ds);
         Section() {
             secName = "Default";
             desc = "Default";
+            col = *(new QColor(DEF_COLOR));
+            doc = new QTextDocument();
         }
 
         QString getSecName();
         QString getDesc();
+        QColor getColor();
+        QTextDocument* getDoc();
+        void setDoc(QTextDocument* doc);
+        void setColor(QColor c);
         void setName(QString nm);
         void setDesc(QString dc);
 
@@ -53,6 +63,8 @@ class Section
     private:
         QString secName;
         QString desc;
+        QTextDocument* doc;
+        QColor col;
         list<Page*>* pages;
 };
 

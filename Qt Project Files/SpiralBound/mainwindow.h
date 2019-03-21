@@ -3,15 +3,18 @@
 
 #include <QMainWindow>
 #include <QTableWidget>
+#include <QListWidgetItem>
+#include <QTreeWidgetItem>
+
 #include <editcalendarevent.h>
 #include <addcalendarevent.h>
 #include <deletecalendarevent.h>
-#include <QListWidgetItem>
-#include "book.h"
-#include "markdowneditor.h"
 #include <addcard.h>
 #include <importflashcards.h>
 #include <deletecard.h>
+#include <editsection.h>
+#include "markdowneditor.h"
+#include "book.h"
 
 namespace Ui {
 class MainWindow;
@@ -84,14 +87,11 @@ private slots:
     // Notebook
     // =========================
     void on_tableWidget_eventList_cellChanged(int row, int column);
-    void on_pushButton_AddPage_clicked();
-    void on_tabWidget_2_tabCloseRequested(int index);
+    void on_pushButton_addPage_clicked();
     void on_pushButton_addSection_clicked();
-    void on_tabWidget_2_tabBarDoubleClicked(int index);
-    void on_tabWidget_2_currentChanged(int index);
-    void on_listWidget_pages_currentRowChanged(int currentRow);
-    void on_listWidget_pages_itemDoubleClicked(QListWidgetItem* item);
     void on_pushButton_removePage_clicked();
+    void on_treeWidget_sections_itemDoubleClicked(QTreeWidgetItem *item, int column);
+    void on_treeWidget_sections_itemClicked(QTreeWidgetItem *item, int column);
 
     // Shortcut bar for Markdown
     void on_pushButton_bold_clicked();
@@ -104,8 +104,12 @@ private slots:
     void on_pushButton_indent_clicked();
     void on_pushButton_undent_clicked();
 
+    // Asynchronous
+    void receiveSectionData(QString, QColor, int);
+
 signals:
     void sendEditData(QString, QString, QString);  // Send mainwindown data to editcalendarevent
+    void sendSectionInfo(QString, QColor, int);
 
 private:
     Ui::MainWindow *ui;
@@ -119,6 +123,7 @@ private:
     importflashcards *importCardWindow;
     deletecard *deleteCardWindow;
 
+    editsection* editSectionWindow;
     Book* book;
     MarkdownEditor* me;
 };
