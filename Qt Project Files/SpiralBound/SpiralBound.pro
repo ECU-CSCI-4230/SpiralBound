@@ -29,7 +29,6 @@ SOURCES += \
         addcalendarevent.cpp \
         deletecalendarevent.cpp \
         editcalendarevent.cpp \
-        block.cpp \
         page.cpp \
         section.cpp \
         book.cpp \
@@ -45,7 +44,6 @@ HEADERS += \
         addcalendarevent.h \
         deletecalendarevent.h \
         editcalendarevent.h \
-        block.h \
         page.h \
         section.h \
         book.h \
