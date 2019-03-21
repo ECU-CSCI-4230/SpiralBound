@@ -33,6 +33,8 @@ Totals: 5 passed, 1 failed, 0 skipped, 0 blacklisted, 8ms
 ********* Finished testing of TestBook *********
 ```
 
+This test failed because of an OBOB when searching for '\n' characters to parse the content of a page.
+
 ```
 ********* Start testing of TestBook *********
 Config: Using QtTest library 5.12.0, Qt 5.12.0 (x86_64-little_endian-llp64 shared (dynamic) release build; by GCC 7.3.0)
@@ -61,6 +63,7 @@ PASS   : TestBook::cleanupTestCase()
 Totals: 5 passed, 1 failed, 0 skipped, 0 blacklisted, 7ms
 ********* Finished testing of TestBook *********
 ```
+The above failure occurred because of an error when computing the length necessary for parsing information.
 
 ```
 ********* Start testing of TestBook *********
