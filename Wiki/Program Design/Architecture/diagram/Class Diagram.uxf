@@ -5,14 +5,14 @@
 // Classes have 'signals' in them b/c
 // of Qt's emphasis on having not only
 // methods, but also slots and signals.</help_text>
-  <zoom_level>10</zoom_level>
+  <zoom_level>9</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>30</x>
-      <y>140</y>
-      <w>280</w>
-      <h>220</h>
+      <x>45</x>
+      <y>243</y>
+      <w>252</w>
+      <h>207</h>
     </coordinates>
     <panel_attributes>// ------------------------------------
 // Documenting Classes
@@ -41,16 +41,17 @@ bg=#DDDDDD
 /- See CalEvent and Card classes for slots/
 
 /Signals/
-- sendEditData(QString, QString, QString): void</panel_attributes>
+- sendEditData(QString, QString, QString): void
+- sendSectionInfo(QString, QColor, int): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>370</x>
-      <y>360</y>
-      <w>250</w>
-      <h>130</h>
+      <x>585</x>
+      <y>324</y>
+      <w>225</w>
+      <h>117</h>
     </coordinates>
     <panel_attributes>bg=#DDDDDD
 *AddCalendarEvent*
@@ -69,10 +70,10 @@ n/a
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>370</x>
-      <y>500</y>
-      <w>250</w>
-      <h>150</h>
+      <x>819</x>
+      <y>324</y>
+      <w>225</w>
+      <h>135</h>
     </coordinates>
     <panel_attributes>bg=#DDDDDD
 *EditCalendarEvent*
@@ -92,10 +93,10 @@ n/a
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>370</x>
-      <y>220</y>
-      <w>250</w>
-      <h>130</h>
+      <x>351</x>
+      <y>324</y>
+      <w>225</w>
+      <h>117</h>
     </coordinates>
     <panel_attributes>bg=#DDDDDD
 *DeleteCalendarEvent*
@@ -114,10 +115,10 @@ n/a
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>40</x>
-      <y>740</y>
-      <w>250</w>
-      <h>260</h>
+      <x>324</x>
+      <y>639</y>
+      <w>225</w>
+      <h>234</h>
     </coordinates>
     <panel_attributes>bg=#DDDDDD
 *Section*
@@ -145,10 +146,10 @@ n/a
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>40</x>
-      <y>400</y>
-      <w>250</w>
-      <h>300</h>
+      <x>54</x>
+      <y>639</y>
+      <w>225</w>
+      <h>270</h>
     </coordinates>
     <panel_attributes>bg=#DDDDDD
 *Book*
@@ -179,70 +180,70 @@ n/a
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>300</x>
-      <y>180</y>
-      <w>90</w>
-      <h>80</h>
+      <x>288</x>
+      <y>288</y>
+      <w>207</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m2=1..1</panel_attributes>
-    <additional_attributes>10.0;10.0;20.0;10.0;20.0;50.0;70.0;50.0</additional_attributes>
+    <additional_attributes>10.0;10.0;190.0;10.0;190.0;40.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>300</x>
-      <y>180</y>
-      <w>90</w>
-      <h>220</h>
+      <x>288</x>
+      <y>288</y>
+      <w>450</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m2=1..1</panel_attributes>
-    <additional_attributes>10.0;10.0;20.0;10.0;20.0;190.0;70.0;190.0</additional_attributes>
+    <additional_attributes>10.0;10.0;460.0;10.0;460.0;40.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>300</x>
-      <y>180</y>
-      <w>90</w>
-      <h>360</h>
+      <x>288</x>
+      <y>288</y>
+      <w>684</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m2=1..1</panel_attributes>
-    <additional_attributes>10.0;10.0;20.0;10.0;20.0;330.0;70.0;330.0</additional_attributes>
+    <additional_attributes>10.0;10.0;720.0;10.0;720.0;40.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>150</x>
-      <y>350</y>
-      <w>50</w>
-      <h>70</h>
+      <x>153</x>
+      <y>441</y>
+      <w>45</w>
+      <h>216</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m2=1..1</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;220.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>150</x>
-      <y>690</y>
-      <w>50</w>
-      <h>70</h>
+      <x>270</x>
+      <y>639</y>
+      <w>72</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m2=1..n</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>370</x>
-      <y>740</y>
-      <w>250</w>
-      <h>260</h>
+      <x>594</x>
+      <y>639</y>
+      <w>225</w>
+      <h>234</h>
     </coordinates>
     <panel_attributes>bg=#DDDDDD
 *Page*
@@ -269,22 +270,22 @@ m2=1..n</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>740</y>
-      <w>110</w>
-      <h>40</h>
+      <x>540</x>
+      <y>639</y>
+      <w>72</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m2=1..n</panel_attributes>
-    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>370</x>
-      <y>660</y>
-      <w>250</w>
-      <h>50</h>
+      <x>351</x>
+      <y>450</y>
+      <w>225</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>bg=#DDDDDD
 *AboutSpiralBound*
@@ -295,22 +296,22 @@ m2=1..n</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>300</x>
-      <y>180</y>
-      <w>90</w>
-      <h>520</h>
+      <x>288</x>
+      <y>288</y>
+      <w>81</w>
+      <h>198</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m2=1..1</panel_attributes>
-    <additional_attributes>10.0;10.0;20.0;10.0;20.0;490.0;70.0;490.0</additional_attributes>
+    <additional_attributes>10.0;10.0;20.0;10.0;20.0;190.0;70.0;190.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>680</x>
-      <y>220</y>
-      <w>250</w>
-      <h>130</h>
+      <x>351</x>
+      <y>153</y>
+      <w>225</w>
+      <h>117</h>
     </coordinates>
     <panel_attributes>bg=#DDDDDD
 *AddCard*
@@ -329,10 +330,10 @@ n/a
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>680</x>
-      <y>360</y>
-      <w>250</w>
-      <h>130</h>
+      <x>585</x>
+      <y>153</y>
+      <w>225</w>
+      <h>117</h>
     </coordinates>
     <panel_attributes>bg=#DDDDDD
 *DeleteCard*
@@ -351,34 +352,34 @@ n/a
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>300</x>
-      <y>180</y>
-      <w>400</w>
-      <h>80</h>
+      <x>288</x>
+      <y>261</y>
+      <w>207</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m2=1..1</panel_attributes>
-    <additional_attributes>10.0;10.0;330.0;10.0;330.0;50.0;380.0;50.0</additional_attributes>
+    <additional_attributes>10.0;40.0;190.0;40.0;190.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>300</x>
-      <y>180</y>
-      <w>400</w>
-      <h>220</h>
+      <x>288</x>
+      <y>261</y>
+      <w>450</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m2=1..1</panel_attributes>
-    <additional_attributes>10.0;10.0;330.0;10.0;330.0;190.0;380.0;190.0</additional_attributes>
+    <additional_attributes>10.0;40.0;460.0;40.0;460.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>680</x>
-      <y>500</y>
-      <w>250</w>
-      <h>130</h>
+      <x>819</x>
+      <y>153</y>
+      <w>225</w>
+      <h>117</h>
     </coordinates>
     <panel_attributes>bg=#DDDDDD
 *ImportFlashCards*
@@ -397,22 +398,22 @@ n/a
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>300</x>
-      <y>180</y>
-      <w>400</w>
-      <h>360</h>
+      <x>288</x>
+      <y>261</y>
+      <w>684</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m2=1..1</panel_attributes>
-    <additional_attributes>10.0;10.0;330.0;10.0;330.0;330.0;380.0;330.0</additional_attributes>
+    <additional_attributes>10.0;40.0;720.0;40.0;720.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>680</x>
-      <y>740</y>
-      <w>250</w>
-      <h>160</h>
+      <x>828</x>
+      <y>639</y>
+      <w>225</w>
+      <h>171</h>
     </coordinates>
     <panel_attributes>bg=#DDDDDD
 *Util*
@@ -430,6 +431,67 @@ n/a
 - find(char* str, char c, int strlen): static int
 - findr(char* str, char c, int strlen): static int
 - QtoCString(QString qstr): static char*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>585</x>
+      <y>450</y>
+      <w>225</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>bg=#DDDDDD
+*EditSection*
+--
+/------------------ Variables ------------------/
+--
+- myIndex: int
+- myCol: QColor
+
+--
+*/------------------- Methods -------------------/*
+--
+/Signals/
+- sendSectionInfo(QString, QColor, int): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>288</x>
+      <y>288</y>
+      <w>315</w>
+      <h>261</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1..1</panel_attributes>
+    <additional_attributes>10.0;10.0;20.0;10.0;20.0;260.0;330.0;260.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1296</x>
+      <y>0</y>
+      <w>126</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>Note..
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>54</x>
+      <y>585</y>
+      <w>99</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+fontsize=10
+/Connection to the/
+/MainWindow class/</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
