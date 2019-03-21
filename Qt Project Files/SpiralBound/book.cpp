@@ -88,7 +88,7 @@ void Book::removeSection(int index) {
 // Init date:    02-02-2019
 // Last Updated: 02-12-2019
 void Book::addSection(QString name, QString desc) {
-    bookList->push_back(new Section(name, desc));
+    bookList->push_back(new Section(name));
 }
 
 // Author:       Matthew Morgan

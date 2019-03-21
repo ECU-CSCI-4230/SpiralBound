@@ -52,21 +52,23 @@ class TestBook: public QObject {
 
         // Author:       Matthew Morgan
         // Init date:    02-27-2019
-        // Last updated: 02-27-2019
+        // Last updated: 03-21-2019
         /** testSecTF() tests the toString() and fromString() ops for Sections. */
         static void testSecTF() {
             const char* nm = "CSCI-4230";
+			const char* col = "#ff00aa";
             const char* ds = "This is for Software Engineering II";
 
-            Section* sec = Section::fromString("CSCI-4230\nThis is for Software Engineering II");
+            Section* sec = Section::fromString("CSCI-4230\n#ff00aa\nThis is for Software Engineering II");
 
             cout << "  Testing property equivalence" << endl;
             QCOMPARE(nm, sec->getSecName());
-            QCOMPARE(ds, sec->getDesc());
+            QCOMPARE(ds, sec->getDoc()->toPlainText());
+			QCOMPARE(col, sec->getColor().name().toLower().toStdString().c_str());
 
             cout << "  Testing string conversion for section" << endl;
-            char* scStr = sec->toString();
-            QCOMPARE(scStr, "CSCI-4230\nThis is for Software Engineering II");
+            QString scStr = sec->toString();
+            QCOMPARE(scStr, "CSCI-4230\n#ff00aa\nThis is for Software Engineering II");
         }
 
         // Author:       Matthew Morgan
