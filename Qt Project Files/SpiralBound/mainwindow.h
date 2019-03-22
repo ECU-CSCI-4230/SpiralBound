@@ -112,6 +112,10 @@ signals:
     void sendEditData(QString, QString, QString);  // Send mainwindown data to editcalendarevent
     void sendSectionInfo(QString, QColor, int);
 
+    // Loading signals
+    void loadCard(QString, QString, QString);
+    void loadEvent(QString, QString);
+
 private:
     Ui::MainWindow *ui;
     QString file_path_;

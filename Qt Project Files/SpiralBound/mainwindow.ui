@@ -865,8 +865,8 @@ p, li { white-space: pre-wrap; }
   <widget class="QStatusBar" name="statusBar"/>
   <action name="action_open">
    <property name="icon">
-    <iconset>
-     <normaloff>:/SpiralBound/images/fileopen.png</normaloff>:/SpiralBound/images/fileopen.png</iconset>
+    <iconset resource="spiralbound.qrc">
+     <normaloff>:/SpiralBound/images/icon/op_open.png</normaloff>:/SpiralBound/images/icon/op_open.png</iconset>
    </property>
    <property name="text">
     <string>Open</string>
@@ -879,9 +879,9 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_save">
    <property name="icon">
-    <iconset>
-     <activeon>:/SpiralBound/images/filesave.png</activeon>
-    </iconset>
+    <iconset resource="spiralbound.qrc">
+     <normaloff>:/SpiralBound/images/icon/op_save.png</normaloff>
+     <activeon>:/SpiralBound/images/filesave.png</activeon>:/SpiralBound/images/icon/op_save.png</iconset>
    </property>
    <property name="text">
     <string>Save</string>
@@ -907,9 +907,9 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
-     <activeon>:/SpiralBound/images/print.jpg</activeon>
-    </iconset>
+    <iconset resource="spiralbound.qrc">
+     <normaloff>:/SpiralBound/images/icon/op_print.png</normaloff>
+     <activeon>:/SpiralBound/images/print.jpg</activeon>:/SpiralBound/images/icon/op_print.png</iconset>
    </property>
    <property name="text">
     <string>Print</string>
@@ -917,9 +917,9 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_new">
    <property name="icon">
-    <iconset>
-     <activeon>:/SpiralBound/images/filenew.png</activeon>
-    </iconset>
+    <iconset resource="spiralbound.qrc">
+     <normaloff>:/SpiralBound/images/icon/op_page_new.png</normaloff>
+     <activeon>:/SpiralBound/images/filenew.png</activeon>:/SpiralBound/images/icon/op_page_new.png</iconset>
    </property>
    <property name="text">
     <string>New</string>
@@ -1012,9 +1012,9 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_export">
    <property name="icon">
-    <iconset>
-     <activeon>:/SpiralBound/images/export.png</activeon>
-    </iconset>
+    <iconset resource="spiralbound.qrc">
+     <normaloff>:/SpiralBound/images/icon/op_export.png</normaloff>
+     <activeon>:/SpiralBound/images/export.png</activeon>:/SpiralBound/images/icon/op_export.png</iconset>
    </property>
    <property name="text">
     <string>Export</string>

@@ -51,11 +51,6 @@ MainWindow::~MainWindow()
 //-----------------------------------------------------------+
 //                    Menu Bar Buttons                       |
 //-----------------------------------------------------------+
-
-void MainWindow::on_action_open_triggered() {}
-void MainWindow::on_action_test_triggered() {}
-void MainWindow::on_action_save_triggered() {}
-
 // Author:       Nicholas Ellis
 // Init Date:    29.01.2019
 // Last Updated: 29.01.2019
@@ -75,7 +70,106 @@ void MainWindow::on_action_crashCourse_triggered() {}
 void MainWindow::on_action_print_triggered() {}
 void MainWindow::on_action_new_triggered() {}
 void MainWindow::on_action_openRecent_triggered() {}
-void MainWindow::on_action_saveAs_triggered() {}
+
+// Author:       Matthew Morgan
+// Init Date:    21.03.2019
+// Last Updated: 21.03.2019
+void MainWindow::on_action_open_triggered() {
+    // Get the directory of the notebook and check for the about file's existence
+    QString dir = QFileDialog::getExistingDirectory(this, "Select Notebook Directory", QString(QDir::homePath()));
+    Book* nBook;
+
+    QString about = QString("%1/about.txt").arg(dir);
+    QFile* read = new QFile(about);
+
+    if (!QFile::exists(about)) {
+        Util::showError("Error", "The selected directory is not detected as a notebook!");
+        return;
+    }
+
+    if (!read->open(QFile::ReadOnly)) {
+        Util::showError("Error", "The Notebook 'About' file couldn't be opened!");
+        return;
+    }
+
+    // -----------------------------------------------------------------------------
+    // Open the book file and read in it's information
+    QTextStream str(&*read);
+
+    QString name = str.readLine(),
+            auth = str.readLine(),
+            date = str.readLine();
+    QStringList datePiece = date.split("-");
+
+    nBook = new Book(name, auth);
+    nBook->setDate(QDate(datePiece.takeAt(0).toInt(), datePiece.takeAt(1).toInt(), datePiece.takeAt(2).toInt()));
+
+    // -----------------------------------------------------------------------------
+    connect(this, SIGNAL(loadCard(QString, QString, QString)), this, SLOT(receiveCardData(QString, QString, QString)));
+    for(int i=str.readLine().toInt(); i>0; i--) {
+        // Read in a single study deck
+        QString deckName = str.readLine();
+        QFile* deck = new QFile(QString("%1/study/%2.csv").arg(dir).arg(i));
+
+        if (!deck->open(QFile::ReadOnly)) {
+            Util::showError("Error", "A study deck couldn't be read; there may be corruption!");
+            return;
+        }
+
+        QTextStream deckStr(&*deck);
+
+        while(!deckStr.atEnd()) {
+            // Card format is <n>,<front>,<back>, where <n> specifies where to split the front/back from
+            // As such, parse <n>, then remove '<n>,' from the string, then parse the front/back
+            QString card = deckStr.readLine();
+            int ind = card.left(card.indexOf(',')).toInt();
+            card = card.right(card.length()-card.indexOf(',')-1);
+            emit loadCard(deckName, card.left(ind), card.right(card.length()-ind-1));
+        }
+
+        deck->close();
+        delete deck;
+    }
+
+    read->close();
+    delete read;
+
+    // -----------------------------------------------------------------------------
+    // Read in calendar events, but only if the cal.csv file exists
+    read = new QFile(QString("%1/cal.csv").arg(dir));
+
+    if (read->exists()) {
+        if (!read->open(QFile::ReadOnly)) {
+            Util::showError("Error", "The notebook's calendar events couldn't be loaded!");
+            return;
+        }
+
+        QTextStream cal(&*read);
+
+        connect(this, SIGNAL(loadEvent(QString, QString)), this, SLOT(receiveAddData(QString, QString)));
+        while(!cal.atEnd()) {
+            QStringList event = cal.readLine().split(",");
+            emit loadEvent(event.at(1), QString("%1 %2").arg(event.at(0)).arg(event.at(2)));
+        }
+    }
+
+    read->close();
+    delete read;
+}
+
+// Author:       Matthew Morgan
+// Init Date:    21.03.2019
+// Last Updated: 21.03.2019
+void MainWindow::on_action_save_triggered() {
+
+}
+
+// Author:       Matthew Morgan
+// Init Date:    21.03.2019
+// Last Updated: 21.03.2019
+void MainWindow::on_action_saveAs_triggered() {
+
+}
 
 void MainWindow::on_action_bold_triggered() { me->bold(); }
 void MainWindow::on_action_italic_triggered() { me->italic(); }
@@ -87,6 +181,7 @@ void MainWindow::on_action_bulletedList_triggered() {}
 void MainWindow::on_action_numberedList_triggered() {}
 void MainWindow::on_action_comment_triggered() {}
 
+void MainWindow::on_action_test_triggered() {}
 void MainWindow::on_action_taskList_triggered() {}
 void MainWindow::on_action_preferences_triggered() {}
 void MainWindow::on_action_printPreview_triggered() {}

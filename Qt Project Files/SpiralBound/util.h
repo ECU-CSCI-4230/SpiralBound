@@ -2,6 +2,7 @@
 #define UTIL_H
 #include <QString>
 #include <QTreeWidget>
+#include <QMessageBox>
 #include <iostream>
 
 using namespace std;
@@ -81,6 +82,17 @@ class Util {
             }
 
             return dat;
+        }
+
+        // Author:       Matthew Morgan
+        // Init Date:    03-21-2019
+        // Last Updated: 03-21-2019
+        /** showError(title, msg) shows an error prompt with the given title and message
+          * to the screen. */
+        static void showError(QString title, QString message) {
+            QMessageBox msg;
+            msg.critical(nullptr, title, message);
+            msg.setFixedSize(500, 200);
         }
 };
 

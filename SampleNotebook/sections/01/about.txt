@@ -1,0 +1,5 @@
+Sample Section 01
+#FF0000
+This is a sample section, written using the Vim text editor.
+
+This multi-line description should be auto-loaded using the Section API.

@@ -1,0 +1,8 @@
+Section 01, Page 01
+2019-03-21
+This is the content of the first page in the notebook.
+
+It isn't really 'that' special.
+**Bold markdown** _Italic markdown_ ~~Strikethrough markdown~~
+
+Look at all that beautiful markdown above.
