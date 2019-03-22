@@ -76,185 +76,184 @@ void MainWindow::on_action_openRecent_triggered() {}
 // Last Updated: 21.03.2019
 void MainWindow::on_action_open_triggered() {
     // Get the directory of the notebook and check for the about file's existence
-    QString dir = QFileDialog::getExistingDirectory(this, "Select Notebook Directory", QString(QDir::homePath()));
-    Book* nBook;
+    // QString dir = QFileDialog::getExistingDirectory(this, "Select Notebook Directory", QString(QDir::homePath()));
+    QString dir = "F:/Academic/Source/SpiralBound/SampleNotebook";
 
-    QString about = QString("%1/about.txt").arg(dir);
-    QFile* read = new QFile(about);
+    try {
+        for(int i=ui->tableWidget_eventList->rowCount(); i>0; i--)
+            ui->tableWidget_eventList->removeRow(0);
 
-    if (!QFile::exists(about)) {
-        Util::showError("Error", "The selected directory is not detected as a notebook!");
+        for(int i=ui->tableWidget_cardsTable->rowCount(); i>0; i--)
+            ui->tableWidget_cardsTable->removeRow(0);
+
+        Book* nBook;
+        QString about = QString("%1/about.txt").arg(dir);
+        QFile* read = new QFile(about);
+
+        if (!QFile::exists(about))
+            throw "The selected directory is not detected as a notebook!";
+
+        if (!read->open(QFile::ReadOnly))
+            throw "The notebook's 'about' file couldn't be opened!";
+
+        // -----------------------------------------------------------------------------
+        // Open the book file and read in it's information
+        QTextStream str(&*read);
+
+        QString name = str.readLine(),
+                auth = str.readLine(),
+                date = str.readLine();
+        QStringList datePiece = date.split("-");
+
+        nBook = new Book(name, auth);
+        nBook->setDate(QDate(datePiece.at(0).toInt(), datePiece.at(1).toInt(), datePiece.at(2).toInt()));
+
+        // -----------------------------------------------------------------------------
+        // Read in the study decks
+        connect(this, SIGNAL(loadCard(QString, QString, QString)), this, SLOT(receiveCardData(QString, QString, QString)));
+
+        for(int i=str.readLine().toInt(); i>0; i--) {
+            // Read in a single study deck
+            QString deckName = str.readLine();
+            QFile* deck = new QFile(QString("%1/study/%2.csv").arg(dir).arg(i));
+
+            if (!deck->open(QFile::ReadOnly))
+                throw "A study deck couldn't be read; there may be corruption!";
+
+            QTextStream deckStr(&*deck);
+
+            while(!deckStr.atEnd()) {
+                // Card format is <n>,<front>,<back>, where <n> specifies where to split the front/back from
+                // As such, parse <n>, then remove '<n>,' from the string, then parse the front/back
+                QString card = deckStr.readLine();
+                int ind = card.left(card.indexOf(',')).toInt();
+                card = card.right(card.length()-card.indexOf(',')-1);
+                emit loadCard(deckName, card.left(ind), card.right(card.length()-ind-1));
+            }
+
+            deck->close();
+            delete deck;
+        }
+
+        disconnect(this, SIGNAL(loadCard(QString, QString, QString)), this, SLOT(receiveCardData(QString, QString, QString)));
+
+        read->close();
         delete read;
-        return;
-    }
 
-    if (!read->open(QFile::ReadOnly)) {
-        Util::showError("Error", "The Notebook 'About' file couldn't be opened!");
+        // -----------------------------------------------------------------------------
+        // Read in calendar events, but only if the cal.csv file exists
+        read = new QFile(QString("%1/cal.csv").arg(dir));
+
+        if (read->exists()) {
+            if (!read->open(QFile::ReadOnly))
+                throw "The notebook's calendar events couldn't be loaded!";
+
+            QTextStream cal(&*read);
+
+            connect(this, SIGNAL(loadEvent(QString, QString)), this, SLOT(receiveAddData(QString, QString)));
+
+            while(!cal.atEnd()) {
+                QStringList event = cal.readLine().split(",");
+                emit loadEvent(event.at(1), QString("%1 %2").arg(event.at(0)).arg(event.at(2)));
+            }
+
+            disconnect(this, SIGNAL(loadEvent(QString, QString)), this, SLOT(receiveAddData(QString, QString)));
+        }
+
+        read->close();
         delete read;
-        return;
-    }
 
-    // -----------------------------------------------------------------------------
-    // Open the book file and read in it's information
-    QTextStream str(&*read);
+        // -----------------------------------------------------------------------------
+        // Read in notebook sections
+        QDir sec = QDir(QString("%1/sections").arg(dir));
+        sec.setFilter(QDir::Dirs|QDir::NoDotAndDotDot);
 
-    QString name = str.readLine(),
-            auth = str.readLine(),
-            date = str.readLine();
-    QStringList datePiece = date.split("-");
+        // For every section, we will:
+        // + Open the 'about.txt' file for that section to get the name, color, and summary
+        // + Iterate through every page of the section and add them to the section
+        for(QString section : sec.entryList()) {
+            QFile* about = new QFile(QString("%1/%2/about.txt").arg(sec.path()).arg(section));
+            QDir pgs = QDir(QString("%1/%2").arg(sec.path()).arg(section)); // Should point to <path>/sections/<sec>
+            pgs.setFilter(QDir::Files);
 
-    nBook = new Book(name, auth);
-    nBook->setDate(QDate(datePiece.takeAt(0).toInt(), datePiece.takeAt(1).toInt(), datePiece.takeAt(2).toInt()));
+            if (!about->open(QFile::ReadOnly))
+                throw "The about file for a section couldn't be opened!";
 
-    // -----------------------------------------------------------------------------
-    connect(this, SIGNAL(loadCard(QString, QString, QString)), this, SLOT(receiveCardData(QString, QString, QString)));
-    for(int i=str.readLine().toInt(); i>0; i--) {
-        // Read in a single study deck
-        QString deckName = str.readLine();
-        QFile* deck = new QFile(QString("%1/study/%2.csv").arg(dir).arg(i));
+            QTextStream abStr(*&about);
+            QString secName = abStr.readLine(),
+                    secCol = abStr.readLine(),
+                    secCont = abStr.readAll();
 
-        if (!deck->open(QFile::ReadOnly)) {
-            Util::showError("Error", "A study deck couldn't be read; there may be corruption!");
-            delete nBook;
-            delete read;
-            return;
-        }
+            int ind = nBook->numSections();
+            nBook->addSection(secName);
+            nBook->getSection(ind)->setDoc(new QTextDocument(secCont));
+            nBook->getSection(ind)->setColor(QColor(secCol));
 
-        QTextStream deckStr(&*deck);
-
-        while(!deckStr.atEnd()) {
-            // Card format is <n>,<front>,<back>, where <n> specifies where to split the front/back from
-            // As such, parse <n>, then remove '<n>,' from the string, then parse the front/back
-            QString card = deckStr.readLine();
-            int ind = card.left(card.indexOf(',')).toInt();
-            card = card.right(card.length()-card.indexOf(',')-1);
-            emit loadCard(deckName, card.left(ind), card.right(card.length()-ind-1));
-        }
-
-        deck->close();
-        delete deck;
-    }
-
-    read->close();
-    delete read;
-
-    // -----------------------------------------------------------------------------
-    // Read in calendar events, but only if the cal.csv file exists
-    read = new QFile(QString("%1/cal.csv").arg(dir));
-
-    if (read->exists()) {
-        if (!read->open(QFile::ReadOnly)) {
-            Util::showError("Error", "The notebook's calendar events couldn't be loaded!");
-            delete nBook;
-            delete read;
-            return;
-        }
-
-        QTextStream cal(&*read);
-
-        connect(this, SIGNAL(loadEvent(QString, QString)), this, SLOT(receiveAddData(QString, QString)));
-        while(!cal.atEnd()) {
-            QStringList event = cal.readLine().split(",");
-            emit loadEvent(event.at(1), QString("%1 %2").arg(event.at(0)).arg(event.at(2)));
-        }
-    }
-
-    read->close();
-    delete read;
-
-    // -----------------------------------------------------------------------------
-    // Read in notebook sections
-    QDir sec = QDir(QString("%1/sections").arg(dir));
-    sec.setFilter(QDir::Dirs|QDir::NoDotAndDotDot);
-
-    // For every section, we will:
-    // + Open the 'about.txt' file for that section to get the name, color, and summary
-    // + Iterate through every page of the section and add them to the section
-    for(QString section : sec.entryList()) {
-        QFile* about = new QFile(QString("%1/%2/about.txt").arg(sec.path()).arg(section));
-        QDir pgs = QDir(QString("%1/%2").arg(sec.path()).arg(section)); // Should point to <path>/sections/<sec>
-        pgs.setFilter(QDir::Files);
-
-        if (!about->open(QFile::ReadOnly)) {
-            Util::showError("Error", "The about file for a section couldn't be opened!");
+            about->close();
             delete about;
-            return;
-        }
 
-        QTextStream abStr(*&about);
-        QString secName = abStr.readLine(),
-                secCol = abStr.readLine(),
-                secCont = abStr.readAll();
+            // Read in pages
+            for(QString pg : pgs.entryList()) {
+                QFile* page = new QFile(QString("%1/%2").arg(pgs.path()).arg(pg));
 
-        int ind = nBook->numSections();
-        nBook->addSection(secName);
-        nBook->getSection(ind)->setDoc(new QTextDocument(secCont));
-        nBook->getSection(ind)->setColor(QColor(secCol));
+                // Skip the 'about' file since it was already used
+                if (page->fileName().split('/').last() == "about.txt") {
+                    delete page;
+                    continue;
+                }
 
-        about->close();
-        delete about;
+                if (!page->open(QFile::ReadOnly))
+                    throw "A page couldn't be read for a section!";
 
-        // Read in pages
-        for(QString pg : pgs.entryList()) {
-            QFile* page = new QFile(QString("%1/%2").arg(pgs.path()).arg(pg));
+                QTextStream pgStream(*&page);
+                QString pgName = pgStream.readLine(),
+                        pgDate = pgStream.readLine(),
+                        pgCont = pgStream.readAll();
+                QStringList datePiece = pgDate.split("-");
 
-            // Skip the 'about' file since it was already used
-            if (page->fileName().split('/').last() == "about.txt") {
+                int indPg = nBook->getSection(ind)->numPages();
+                nBook->getSection(ind)->addPage(pgName);
+                nBook->getSection(ind)->getPage(indPg)->setDate(QDate(datePiece.at(0).toInt(), datePiece.at(1).toInt(), datePiece.at(2).toInt()));
+                nBook->getSection(ind)->getPage(indPg)->setContent(new QTextDocument(pgCont));
+
                 delete page;
-                continue;
             }
+        }
 
-            if (!page->open(QFile::ReadOnly)) {
-                Util::showError("Error", "A page could not be read for the section!");
-                delete page;
-                return;
+        // Update the notebook interface to reflect the new book
+        ui->treeWidget_sections->clear();
+
+        for(int i=nBook->numSections()-1; i>=0; i--) {
+            QTreeWidgetItem* item = new QTreeWidgetItem();
+            QBrush pal = item->background(0);
+
+            // Set the item's properties after inserting it
+            pal.setColor(nBook->getSection(i)->getColor());
+            pal.setStyle(Qt::BrushStyle::SolidPattern);
+            item->setBackground(0, pal);
+            item->setText(0, nBook->getSection(i)->getSecName());
+            ui->treeWidget_sections->insertTopLevelItem(0, item);
+
+            for(int k=nBook->getSection(i)->numPages()-1; k>=0; k--) {
+                QTreeWidgetItem* pg = new QTreeWidgetItem();
+                pg->setText(0, nBook->getSection(i)->getPage(k)->getPageName());
+                item->insertChild(0, pg);
             }
-
-            QTextStream pgStream(*&page);
-            QString pgName = pgStream.readLine(),
-                    pgDate = pgStream.readLine(),
-                    pgCont = pgStream.readAll();
-            QStringList datePiece = pgDate.split("-");
-
-            int indPg = nBook->getSection(ind)->numPages();
-            nBook->getSection(ind)->addPage(pgName);
-            //nBook->getSection(ind)->getPage(indPg)->setDate(QDate(datePiece.at(0).toInt(), datePiece.at(1).toInt(), datePiece.at(2).toInt()));
-            nBook->getSection(ind)->getPage(indPg)->setContent(new QTextDocument(pgCont));
-
-            delete page;
         }
+
+        // Select the first section's summary
+        ui->treeWidget_sections->topLevelItem(0)->setExpanded(true);
+        ui->treeWidget_sections->topLevelItem(0)->child(0)->setSelected(true);
+        ui->textEdit->setDocument(nBook->getSection(0)->getPage(0)->getContent());
+
+        delete book;
+        book = nBook;
     }
-
-    // Update the notebook interface to reflect the new book
-    delete book;
-    book = nBook;
-
-    ui->treeWidget_sections->clear();
-
-    qDebug() << "There are " << nBook->numSections() << " sections";
-
-    for(int i=nBook->numSections()-1; i>=0; i--) {
-        QTreeWidgetItem* item = new QTreeWidgetItem();
-        QBrush pal = ui->treeWidget_sections->palette().background();
-
-        // Set the item's properties after inserting it
-        ui->treeWidget_sections->insertTopLevelItem(0, item);
-        item->setText(0, nBook->getSection(i)->getSecName());
-        pal.setColor(nBook->getSection(i)->getColor());
-        pal.setStyle(Qt::BrushStyle::SolidPattern);
-        item->setBackground(0, pal);
-
-        for(int k=nBook->getSection(i)->numPages()-1; k>=0; k--) {
-            QTreeWidgetItem* pg = new QTreeWidgetItem();
-            pg->setText(0, nBook->getSection(i)->getPage(k)->getPageName());
-            item->insertChild(0, pg);
-        }
+    catch(exception& e) {
+        qDebug() << "Woopsie: " << e.what();
+        Util::showError("Load Error", "The notebook you selected couldn't be loaded.");
     }
-
-    // Select the first section's summary
-    ui->treeWidget_sections->topLevelItem(0)->setExpanded(true);
-    ui->treeWidget_sections->topLevelItem(0)->child(0)->setSelected(true);
-    on_treeWidget_sections_itemClicked(ui->treeWidget_sections->topLevelItem(0)->child(0), 0);
+    catch(...) { qDebug() << "Woopsie..."; }
 }
 
 // Author:       Matthew Morgan
@@ -297,11 +296,9 @@ void MainWindow::on_action_quit_triggered() { QApplication::quit(); }
 //-----------------------------------------------------------+
 // Author:       Nicholas, Matthew
 // Init Date:    19.02.2019
-// Last Updated: 27.02.2019
+// Last Updated: 22.03.2019
 void MainWindow::receiveAddData(QString eventName, QString eventDateTime)
 {
-    qDebug() << "mainwindow: Received data from addwindow" << eventName << eventDateTime;
-
     // Seperate date from time
     QStringList datetime = eventDateTime.split(" ");
     QString date = datetime[0];
@@ -320,11 +317,10 @@ void MainWindow::receiveAddData(QString eventName, QString eventDateTime)
 
 // Author:       Nicholas, Cam, Jamie
 // Init Date:    05.02.2019
-// Last Updated: 19.02.2019
+// Last Updated: 22.03.2019
 void MainWindow::on_pushButton_addEvent_clicked()
 {
     QDate curDate = ui->calendarWidget->selectedDate();
-    qDebug() << "mainwindow: Sending item from tableWidget_eventList to addcalendarevent";
 
    // Builds addcalendarevent GUI/window
    addWindow = new addcalendarevent(curDate ,this);
@@ -337,11 +333,9 @@ void MainWindow::on_pushButton_addEvent_clicked()
 
 // Author:       Nicholas
 // Init Date:    19.02.2019
-// Last Updated: 28.02.2019
+// Last Updated: 22.03.2019
 void MainWindow::receiveEditData(QString eventName, QString eventDateTime)
 {
-    qDebug() << "mainwindow: Received data from addwindow" << eventName << eventDateTime;
-
     // Seperate date from time
     QStringList datetime = eventDateTime.split(" ");
     QString date = datetime[0];
@@ -378,8 +372,6 @@ void MainWindow::on_pushButton_editEvent_clicked()
         QString name = ui->tableWidget_eventList->item(row, 1)->text();
         QString time = ui->tableWidget_eventList->item(row, 2)->text();
 
-        qDebug() << "mainwindow: Sending item from tableWidget_eventList to editcalendarevent";
-
         // Builds editcalendarevent GUI/window
         editWindow = new editcalendarevent(this);
         editWindow->setModal(true);
@@ -402,8 +394,6 @@ void MainWindow::receiveDeleteData(bool response)
 {
    if(response == true)
    {
-       qDebug() << "mainwindow: Deleting item from tableWidget_eventList";
-
        // Delete item from table
        ui->tableWidget_eventList->removeRow(ui->tableWidget_eventList->currentItem()->row());
    }
@@ -437,15 +427,11 @@ void MainWindow::on_pushButton_deleteEvent_clicked()
 
 // Author:       Nicholas
 // Init Date:    19.02.2019
-// Last Updated: 19.02.2019
-void MainWindow::on_tableWidget_eventList_cellChanged(int row, int column)
+// Last Updated: 22.03.2019
+void MainWindow::on_tableWidget_eventList_cellChanged(__attribute__((unused)) int row, int column)
 {
-    qDebug() << "mainwindow: Cell changed at:" << row << column;
-
     if(column == 2)
     {
-        //sort
-        qDebug() << "mainwindow: Time to sort";
         ui->tableWidget_eventList->sortByColumn(0, Qt::AscendingOrder);
     }
 }
@@ -564,10 +550,10 @@ void MainWindow::receiveSectionData(QString nm, QColor col, int ind) {
 
 // Author:       Ketu Patel, Matthew Morgan
 // Init Date:    13.03.2019
-// Last Updated: 20.03.2019
+// Last Updated: 22.03.2019
 void MainWindow::on_pushButton_removePage_clicked()
 {
-    int* ind = Util::getSectionPage(ui->treeWidget_sections, ui->treeWidget_sections->selectedItems().front());
+    int* ind = Util::getSectionPage(ui->treeWidget_sections, ui->treeWidget_sections->selectedItems().first());
 
     if (ind[1] == -1) {
         // Deleting a section
@@ -576,8 +562,8 @@ void MainWindow::on_pushButton_removePage_clicked()
                 "Delete Section", "Are you sure you want to delete this section?");
 
             if (reply == QMessageBox::Yes) {
+                delete ui->treeWidget_sections->topLevelItem(ind[0]);
                 book->removeSection(ind[0]);
-                ui->treeWidget_sections->takeTopLevelItem(ind[0]);
 
                 // Move to the first page of the first section
                 ui->treeWidget_sections->clearSelection();
@@ -597,8 +583,8 @@ void MainWindow::on_pushButton_removePage_clicked()
         Section* sec = book->getSection(ind[0]);
 
         if (sec->numPages() > 1) {
-            sec->removePage(ind[1]);
             ui->treeWidget_sections->topLevelItem(ind[0])->takeChild(ind[1]);
+            sec->removePage(ind[1]);
 
             // Select the first page of the section from which the page was removed
             ui->treeWidget_sections->clearSelection();
@@ -620,6 +606,7 @@ void MainWindow::on_pushButton_removePage_clicked()
 // Init Date:    21.03.2019
 // Last Updated: 21.03.2019
 void MainWindow::on_treeWidget_sections_currentItemChanged(QTreeWidgetItem *cur, __attribute__((unused)) QTreeWidgetItem *prev) {
+    if (cur == nullptr) { return; }
     on_treeWidget_sections_itemClicked(cur, 0);
 }
 
@@ -638,11 +625,9 @@ void MainWindow::on_pushButton_indent_clicked() {}
 //-----------------------------------------------------------+
 // Author: Nick
 // Init Date:    26.02.2019
-// Last Updated: 26.02.2019
+// Last Updated: 22.03.2019
 void MainWindow::receiveCardData(QString deckName, QString front, QString back)
 {
-    qDebug() << deckName << front << back;
-
     // Create row
     ui->tableWidget_cardsTable->insertRow(ui->tableWidget_cardsTable->rowCount() );
     // Populate row
@@ -653,13 +638,11 @@ void MainWindow::receiveCardData(QString deckName, QString front, QString back)
 
 // Author: Jamie, Nicholas
 // Init Date:    09.02.2019
-// Last Updated: 19.02.2019
+// Last Updated: 22.03.2019
 void MainWindow::receiveCardDeleteData(bool response)
 {
    if(response == true)
    {
-       qDebug() << "mainwindow: Deleting item from tableWidget_eventList";
-
        // Delete item from table
        ui->tableWidget_cardsTable->removeRow(ui->tableWidget_cardsTable->currentItem()->row());
    }
