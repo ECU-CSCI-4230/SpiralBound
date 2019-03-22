@@ -103,3 +103,13 @@ char* Book::toString() {
    sprintf(str, "%s\n%s\n%s", nm, au, da);
    return str;
 }
+
+// Author:       Matthew Morgan
+// Init date:    03-22-2019
+// Last Updated: 03-22-2019
+void Book::loadSection(Section* sec) { bookList->push_back(sec); }
+
+// Author:       Matthew Morgan
+// Init date:    03-22-2019
+// Last Updated: 03-22-2019
+void Book::loadPage(Section* sec, Page* pg) { sec->loadPage(pg); }

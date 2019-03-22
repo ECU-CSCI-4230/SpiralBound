@@ -63,6 +63,8 @@ class Section
             return sec;
         }
 
+        void loadPage(Page* pg);
+
     private:
         QString secName;
         QTextDocument* doc;

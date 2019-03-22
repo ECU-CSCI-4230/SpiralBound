@@ -32,6 +32,13 @@ MainWindow::MainWindow(QWidget *parent) :
     book = new Book("", "");
     me = new MarkdownEditor(ui->textEdit);
 
+    // Check for the saving directory on startup; create it if it doesnt exist
+    QDir save = QDir(QString("%1/.spiralbound/books").arg(QDir::homePath()));
+    if (!save.exists()) {
+        save.mkdir(save.path()); // This returns a boolean; do error checks?
+        qDebug() << "Created save directory at" << save.path();
+    }
+
     // Add a default section, page, and change to view that page in that section on startup
     file_path = "";
     book->addSection("Section 01");
@@ -83,7 +90,7 @@ void MainWindow::on_action_open_triggered() {
     }
 
     // Get the directory of the notebook and check for the about file's existence
-    QString dir = QFileDialog::getExistingDirectory(this, "Select Notebook Directory", QString(QDir::homePath()));
+    QString dir = QFileDialog::getExistingDirectory(this, "Select Notebook Directory", QString("%1/.spiralbound/books").arg(QDir::homePath()));
     //QString dir = "F:/Academic/Source/SpiralBound/SampleNotebook";
 
     if (dir == "") { return; }
@@ -112,10 +119,8 @@ void MainWindow::on_action_open_triggered() {
         QString name = str.readLine(),
                 auth = str.readLine(),
                 date = str.readLine();
-        QStringList datePiece = date.split("-");
 
-        nBook = new Book(name, auth);
-        nBook->setDate(QDate(datePiece.at(0).toInt(), datePiece.at(1).toInt(), datePiece.at(2).toInt()));
+        nBook = Book::fromString(QString("%1\n%2\n%3").arg(name).arg(auth).arg(date).toStdString().c_str());
 
         // -----------------------------------------------------------------------------
         // Read in the study decks
@@ -189,14 +194,9 @@ void MainWindow::on_action_open_triggered() {
                 throw "The about file for a section couldn't be opened!";
 
             QTextStream abStr(*&about);
-            QString secName = abStr.readLine(),
-                    secCol = abStr.readLine(),
-                    secCont = abStr.readAll();
 
-            int ind = nBook->numSections();
-            nBook->addSection(secName);
-            nBook->getSection(ind)->setDoc(new QTextDocument(secCont));
-            nBook->getSection(ind)->setColor(QColor(secCol));
+            Section* mySec = Section::fromString(abStr.readAll().toStdString().c_str());
+            nBook->loadSection(mySec);
 
             about->close();
             delete about;
@@ -215,15 +215,9 @@ void MainWindow::on_action_open_triggered() {
                     throw "A page couldn't be read for a section!";
 
                 QTextStream pgStream(*&page);
-                QString pgName = pgStream.readLine(),
-                        pgDate = pgStream.readLine(),
-                        pgCont = pgStream.readAll();
-                QStringList datePiece = pgDate.split("-");
 
-                int indPg = nBook->getSection(ind)->numPages();
-                nBook->getSection(ind)->addPage(pgName);
-                nBook->getSection(ind)->getPage(indPg)->setDate(QDate(datePiece.at(0).toInt(), datePiece.at(1).toInt(), datePiece.at(2).toInt()));
-                nBook->getSection(ind)->getPage(indPg)->setContent(new QTextDocument(pgCont));
+                Page* myPg = Page::fromString(pgStream.readAll().toStdString().c_str());
+                nBook->loadPage(mySec, myPg);
 
                 delete page;
             }
@@ -267,17 +261,92 @@ void MainWindow::on_action_open_triggered() {
 }
 
 // Author:       Matthew Morgan
-// Init Date:    21.03.2019
-// Last Updated: 21.03.2019
-void MainWindow::on_action_save_triggered() {
+// Init Date:    22.03.2019
+// Last Updated: 22.03.2019
+QString save(bool quick, QString path, Book* book) {
+    QString dir;
 
+    // If we're quick saving, use the current path; else, construct the directory
+    // If the notebook already exists, ask if the user wants to overwrite
+    if (quick) { dir = path; }
+    else {
+        dir = QString("%1/.spiralbound/books/%2").arg(QDir::homePath()).arg(book->getName());
+
+        if (QDir(dir).exists() && QFile(QString("%1/about.txt").arg(dir)).exists()) {
+            if (!Util::confirm("Overwrite", "A notebook already exists in this directory; overwrite?"))
+                return "";
+        }
+        else
+            QDir(dir).mkdir(dir);
+    }
+
+    try {
+        // ------------------------------------------
+        // Save the about file
+        QFile* bkFile = new QFile(QString("%1/about.txt").arg(dir));
+
+        if (!bkFile->open(QFile::WriteOnly))
+            throw "The notebook's about file couldn't be written";
+
+        QTextStream bk(*&bkFile);
+        bk << book->toString();
+
+        // ------------------------------------------
+        // Save study decks and calendar (WIP)
+
+        bkFile->close();
+        delete bkFile;
+
+        // ------------------------------------------
+        // Create section directories and store section information
+        for(int i=book->numSections()-1; i>=0; i--) {
+            QDir section = QDir(QString("%1/sections/%2").arg(dir).arg(i));
+            if (section.exists()) { section.rmdir(section.path()); }
+            section.mkpath(section.path());
+            bkFile = new QFile(QString("%1/about.txt").arg(section.path()));
+
+            if (!bkFile->open(QFile::WriteOnly))
+                throw "A section's about file couldn't be written!";
+
+            QTextStream sec(*&bkFile);
+            sec << book->getSection(i)->toString();
+
+            // Save pages
+            for(int k=book->getSection(i)->numPages()-1; k>=0; k--) {
+                QFile* page = new QFile(QString("%1/pg-%2.txt").arg(section.path()).arg(k));
+
+                if (!page->open(QFile::WriteOnly))
+                    throw "A section's pages couldn't be saved properly";
+
+                QTextStream pg(*&page);
+                pg << book->getSection(i)->getPage(k)->toString();
+
+                page->close();
+                delete page;
+            }
+
+            bkFile->close();
+            delete bkFile;
+        }
+    }
+    catch(...) {
+        qDebug() << "Saving Woopsie";
+        Util::showError("Save Error", "An error occured during saving.");
+    }
+
+    qDebug() << dir;
+    return dir;
 }
 
 // Author:       Matthew Morgan
 // Init Date:    21.03.2019
-// Last Updated: 21.03.2019
-void MainWindow::on_action_saveAs_triggered() {
-
+// Last Updated: 22.03.2019
+void MainWindow::on_action_save_triggered() {
+    // Only triggers saving functionality without prompting issues unless file_path is empty
+    // In that case, we update the file path
+    bool quick = (file_path == "");
+    QString new_path = save(quick, file_path, book);
+    if (!quick) { file_path = new_path; }
 }
 
 void MainWindow::on_action_bold_triggered() { me->bold(); }

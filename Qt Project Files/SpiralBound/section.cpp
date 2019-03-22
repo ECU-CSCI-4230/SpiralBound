@@ -83,3 +83,8 @@ int Section::numPages() {
 QString Section::toString() {
     return QString("%1\n%2\n%3").arg(secName, col.name(), doc->toPlainText());
 }
+
+// Author:       Matthew Morgan
+// Init Date:    03-22-2019
+// Last Updated: 03-22-2019
+void Section::loadPage(Page* pg) { pages->push_back(pg); }

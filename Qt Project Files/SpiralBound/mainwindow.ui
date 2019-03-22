@@ -796,7 +796,6 @@ p, li { white-space: pre-wrap; }
     <addaction name="action_openRecent"/>
     <addaction name="separator"/>
     <addaction name="action_save"/>
-    <addaction name="action_saveAs"/>
     <addaction name="separator"/>
     <addaction name="action_printPreview"/>
     <addaction name="action_print"/>

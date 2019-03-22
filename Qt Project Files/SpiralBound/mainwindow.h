@@ -41,7 +41,6 @@ private slots:
     void on_action_print_triggered();
     void on_action_new_triggered();
     void on_action_openRecent_triggered();
-    void on_action_saveAs_triggered();
     void on_action_taskList_triggered();
     void on_action_preferences_triggered();
     void on_action_printPreview_triggered();
