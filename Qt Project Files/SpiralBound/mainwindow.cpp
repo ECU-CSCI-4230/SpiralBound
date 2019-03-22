@@ -84,11 +84,13 @@ void MainWindow::on_action_open_triggered() {
 
     if (!QFile::exists(about)) {
         Util::showError("Error", "The selected directory is not detected as a notebook!");
+        delete read;
         return;
     }
 
     if (!read->open(QFile::ReadOnly)) {
         Util::showError("Error", "The Notebook 'About' file couldn't be opened!");
+        delete read;
         return;
     }
 
@@ -113,6 +115,8 @@ void MainWindow::on_action_open_triggered() {
 
         if (!deck->open(QFile::ReadOnly)) {
             Util::showError("Error", "A study deck couldn't be read; there may be corruption!");
+            delete nBook;
+            delete read;
             return;
         }
 
@@ -141,6 +145,8 @@ void MainWindow::on_action_open_triggered() {
     if (read->exists()) {
         if (!read->open(QFile::ReadOnly)) {
             Util::showError("Error", "The notebook's calendar events couldn't be loaded!");
+            delete nBook;
+            delete read;
             return;
         }
 
@@ -155,6 +161,100 @@ void MainWindow::on_action_open_triggered() {
 
     read->close();
     delete read;
+
+    // -----------------------------------------------------------------------------
+    // Read in notebook sections
+    QDir sec = QDir(QString("%1/sections").arg(dir));
+    sec.setFilter(QDir::Dirs|QDir::NoDotAndDotDot);
+
+    // For every section, we will:
+    // + Open the 'about.txt' file for that section to get the name, color, and summary
+    // + Iterate through every page of the section and add them to the section
+    for(QString section : sec.entryList()) {
+        QFile* about = new QFile(QString("%1/%2/about.txt").arg(sec.path()).arg(section));
+        QDir pgs = QDir(QString("%1/%2").arg(sec.path()).arg(section)); // Should point to <path>/sections/<sec>
+        pgs.setFilter(QDir::Files);
+
+        if (!about->open(QFile::ReadOnly)) {
+            Util::showError("Error", "The about file for a section couldn't be opened!");
+            delete about;
+            return;
+        }
+
+        QTextStream abStr(*&about);
+        QString secName = abStr.readLine(),
+                secCol = abStr.readLine(),
+                secCont = abStr.readAll();
+
+        int ind = nBook->numSections();
+        nBook->addSection(secName);
+        nBook->getSection(ind)->setDoc(new QTextDocument(secCont));
+        nBook->getSection(ind)->setColor(QColor(secCol));
+
+        about->close();
+        delete about;
+
+        // Read in pages
+        for(QString pg : pgs.entryList()) {
+            QFile* page = new QFile(QString("%1/%2").arg(pgs.path()).arg(pg));
+
+            // Skip the 'about' file since it was already used
+            if (page->fileName().split('/').last() == "about.txt") {
+                delete page;
+                continue;
+            }
+
+            if (!page->open(QFile::ReadOnly)) {
+                Util::showError("Error", "A page could not be read for the section!");
+                delete page;
+                return;
+            }
+
+            QTextStream pgStream(*&page);
+            QString pgName = pgStream.readLine(),
+                    pgDate = pgStream.readLine(),
+                    pgCont = pgStream.readAll();
+            QStringList datePiece = pgDate.split("-");
+
+            int indPg = nBook->getSection(ind)->numPages();
+            nBook->getSection(ind)->addPage(pgName);
+            //nBook->getSection(ind)->getPage(indPg)->setDate(QDate(datePiece.at(0).toInt(), datePiece.at(1).toInt(), datePiece.at(2).toInt()));
+            nBook->getSection(ind)->getPage(indPg)->setContent(new QTextDocument(pgCont));
+
+            delete page;
+        }
+    }
+
+    // Update the notebook interface to reflect the new book
+    delete book;
+    book = nBook;
+
+    ui->treeWidget_sections->clear();
+
+    qDebug() << "There are " << nBook->numSections() << " sections";
+
+    for(int i=nBook->numSections()-1; i>=0; i--) {
+        QTreeWidgetItem* item = new QTreeWidgetItem();
+        QBrush pal = ui->treeWidget_sections->palette().background();
+
+        // Set the item's properties after inserting it
+        ui->treeWidget_sections->insertTopLevelItem(0, item);
+        item->setText(0, nBook->getSection(i)->getSecName());
+        pal.setColor(nBook->getSection(i)->getColor());
+        pal.setStyle(Qt::BrushStyle::SolidPattern);
+        item->setBackground(0, pal);
+
+        for(int k=nBook->getSection(i)->numPages()-1; k>=0; k--) {
+            QTreeWidgetItem* pg = new QTreeWidgetItem();
+            pg->setText(0, nBook->getSection(i)->getPage(k)->getPageName());
+            item->insertChild(0, pg);
+        }
+    }
+
+    // Select the first section's summary
+    ui->treeWidget_sections->topLevelItem(0)->setExpanded(true);
+    ui->treeWidget_sections->topLevelItem(0)->child(0)->setSelected(true);
+    on_treeWidget_sections_itemClicked(ui->treeWidget_sections->topLevelItem(0)->child(0), 0);
 }
 
 // Author:       Matthew Morgan

@@ -116,7 +116,7 @@ signals:
     void loadCard(QString, QString, QString);
     void loadEvent(QString, QString);
 
-private:
+private:    
     Ui::MainWindow *ui;
     QString file_path_;
 
