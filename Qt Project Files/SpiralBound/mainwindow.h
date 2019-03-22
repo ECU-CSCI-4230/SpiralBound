@@ -98,7 +98,6 @@ private slots:
     void on_pushButton_bulleted_clicked();
     void on_pushButton_italics_clicked();
     void on_pushButton_numbered_clicked();
-    void on_pushButton_save_clicked();
     void on_pushButton_strike_clicked();
     void on_pushButton_underline_clicked();
     void on_pushButton_indent_clicked();

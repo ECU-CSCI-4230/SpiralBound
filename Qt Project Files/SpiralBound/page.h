@@ -12,8 +12,6 @@ using namespace std;
 class Page
 {
     public:
-        static const char CHAR_BLK = '\254';
-
         Page();
         Page(QString pg);
         QString getPageName();

@@ -98,8 +98,18 @@ class Util {
         // Author:       Matthew Morgan
         // Init Date:    03-22-2019
         // Last Updated: 03-22-2019
+        /** showMessage(title, msg) shows a message to the user in an information box. */
+        static void showMessage(QString title, QString message) {
+            QMessageBox msg;
+            msg.information(nullptr, title, message);
+            msg.setFixedSize(500, 200);
+        }
+
+        // Author:       Matthew Morgan
+        // Init Date:    03-22-2019
+        // Last Updated: 03-22-2019
         /** confirm(title, msg) shows a confirmation prompt to the user, and returns whether
-          * or not they click 'yes'. */
+          * or not they click 'yes'. (True for yes, False for no) */
         static bool confirm(QString title, QString message) {
             return QMessageBox::question(nullptr, title, message) == QMessageBox::Yes;
         }

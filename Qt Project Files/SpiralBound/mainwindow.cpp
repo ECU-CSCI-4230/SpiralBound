@@ -29,7 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->tableWidget_eventList->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    book = new Book("", "");
+    book = new Book("Default", "User");
     me = new MarkdownEditor(ui->textEdit);
 
     // Check for the saving directory on startup; create it if it doesnt exist
@@ -263,8 +263,13 @@ void MainWindow::on_action_open_triggered() {
 // Author:       Matthew Morgan
 // Init Date:    22.03.2019
 // Last Updated: 22.03.2019
-QString save(Book* book, Ui::MainWindow* main) {
-    QString dir = QString("%1/.spiralbound/books/%2").arg(QDir::homePath()).arg(book->getName());
+/** save(book, main, <dir>) saves the current Book instance, and flash cards/calendar information, to the
+  * directory selected, using the MainWindow interface - main - to perform fetching of needed data. It
+  * returns the directory of the saved book.
+  *
+  * The default directory for dir is <home>/.spiralbound/books/. */
+QString save(Book* book, Ui::MainWindow* main, QString dir=QString("%1/.spiralbound/books/").arg(QDir::homePath())) {
+    dir = QString("%1/%2").arg(dir).arg(book->getName());
 
     QDir root = QDir(dir);
     if (!root.exists()) { root.mkpath(dir); }
@@ -349,6 +354,27 @@ QString save(Book* book, Ui::MainWindow* main) {
 // Last Updated: 22.03.2019
 void MainWindow::on_action_save_triggered() { save(book, ui); }
 
+// Author:       Matthew Morgan
+// Init Date:    22.03.2019
+// Last Updated: 22.03.2019
+void MainWindow::on_action_export_triggered() {
+    // Export the notebook to the given location of the user's choice;
+    // Show a message that they'll need to create a directory if it doesn't exist
+    // If they select a location that has a notebook in it, then prompt for overwrite
+
+    Util::showMessage("Exporting", "A file dialog is about to open for you to select where to export this notebook. If the directory "
+                                   "doesn't exist, then you'll need to create it before accepting.");
+
+    QString dir = QFileDialog::getExistingDirectory(this, "Select Notebook Directory", QString("%1/.spiralbound/books").arg(QDir::homePath()));
+    if (dir == "") { return; }
+
+    if (QFile(QString("%1/%2/about.txt").arg(dir).arg(book->getName())).exists())
+        if (!Util::confirm("Overwrite", "A notebook is detected in this directory. Overwrite?"))
+            return;
+
+    save(book, ui, dir);
+}
+
 void MainWindow::on_action_bold_triggered() { me->bold(); }
 void MainWindow::on_action_italic_triggered() { me->italic(); }
 void MainWindow::on_action_strikethrough_triggered() { me->strikethough(); }
@@ -363,7 +389,6 @@ void MainWindow::on_action_test_triggered() {}
 void MainWindow::on_action_taskList_triggered() {}
 void MainWindow::on_action_preferences_triggered() {}
 void MainWindow::on_action_printPreview_triggered() {}
-void MainWindow::on_action_export_triggered() {}
 
 // Author:       Tyler Rogers (cirkuitbreaker)
 // Init date:    29.01.2019
@@ -694,7 +719,6 @@ void MainWindow::on_pushButton_italics_clicked() {}
 void MainWindow::on_pushButton_underline_clicked() {}
 void MainWindow::on_pushButton_bulleted_clicked() {}
 void MainWindow::on_pushButton_numbered_clicked() {}
-void MainWindow::on_pushButton_save_clicked() {}
 void MainWindow::on_pushButton_strike_clicked() {}
 void MainWindow::on_pushButton_undent_clicked() {}
 void MainWindow::on_pushButton_indent_clicked() {}
