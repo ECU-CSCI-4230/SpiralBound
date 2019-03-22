@@ -118,7 +118,7 @@ signals:
 
 private:    
     Ui::MainWindow *ui;
-    QString file_path_;
+    QString file_path;
 
     deletecalendarevent *deleteWindow;
     addcalendarevent *addWindow;

@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     me = new MarkdownEditor(ui->textEdit);
 
     // Add a default section, page, and change to view that page in that section on startup
+    file_path = "";
     book->addSection("Section 01");
     book->getSection(0)->addPage("Untitled Page");
     ui->textEdit->setDocument(book->getSection(0)->getPage(0)->getContent());
@@ -73,11 +74,19 @@ void MainWindow::on_action_openRecent_triggered() {}
 
 // Author:       Matthew Morgan
 // Init Date:    21.03.2019
-// Last Updated: 21.03.2019
+// Last Updated: 22.03.2019
 void MainWindow::on_action_open_triggered() {
+    // Prompt the user about whether to load a book if one is already open
+    if (file_path != "") {
+        if (!Util::confirm("Proceed with Load", "You have a notebook already open; any unsaved changes will be lost. Continue?"))
+            return;
+    }
+
     // Get the directory of the notebook and check for the about file's existence
-    // QString dir = QFileDialog::getExistingDirectory(this, "Select Notebook Directory", QString(QDir::homePath()));
-    QString dir = "F:/Academic/Source/SpiralBound/SampleNotebook";
+    QString dir = QFileDialog::getExistingDirectory(this, "Select Notebook Directory", QString(QDir::homePath()));
+    //QString dir = "F:/Academic/Source/SpiralBound/SampleNotebook";
+
+    if (dir == "") { return; }
 
     try {
         for(int i=ui->tableWidget_eventList->rowCount(); i>0; i--)
@@ -248,6 +257,7 @@ void MainWindow::on_action_open_triggered() {
 
         delete book;
         book = nBook;
+        file_path = QString(dir);
     }
     catch(exception& e) {
         qDebug() << "Woopsie: " << e.what();

@@ -94,6 +94,15 @@ class Util {
             msg.critical(nullptr, title, message);
             msg.setFixedSize(500, 200);
         }
+
+        // Author:       Matthew Morgan
+        // Init Date:    03-22-2019
+        // Last Updated: 03-22-2019
+        /** confirm(title, msg) shows a confirmation prompt to the user, and returns whether
+          * or not they click 'yes'. */
+        static bool confirm(QString title, QString message) {
+            return QMessageBox::question(nullptr, title, message) == QMessageBox::Yes;
+        }
 };
 
 #endif // UTIL_H
