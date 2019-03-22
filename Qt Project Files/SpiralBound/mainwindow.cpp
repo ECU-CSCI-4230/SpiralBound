@@ -33,11 +33,11 @@ MainWindow::MainWindow(QWidget *parent) :
     me = new MarkdownEditor(ui->textEdit);
 
     // Check for the saving directory on startup; create it if it doesnt exist
-    QDir save = QDir(QString("%1/.spiralbound/books").arg(QDir::homePath()));
-    if (!save.exists()) {
-        save.mkdir(save.path()); // This returns a boolean; do error checks?
-        qDebug() << "Created save directory at" << save.path();
-    }
+    QDir save = QDir(QString("%1/.spiralbound/books").arg(QDir::homePath())),
+         back = QDir(QString("%1/.spiralbound/backup").arg(QDir::homePath()));
+
+    if (!save.exists()) { save.mkdir(save.path()); } // Returns a bool - do error check?
+    if (!back.exists()) { back.mkdir(save.path()); }
 
     // Add a default section, page, and change to view that page in that section on startup
     file_path = "";
@@ -263,22 +263,11 @@ void MainWindow::on_action_open_triggered() {
 // Author:       Matthew Morgan
 // Init Date:    22.03.2019
 // Last Updated: 22.03.2019
-QString save(bool quick, QString path, Book* book) {
-    QString dir;
+QString save(Book* book, Ui::MainWindow* main) {
+    QString dir = QString("%1/.spiralbound/books/%2").arg(QDir::homePath()).arg(book->getName());
 
-    // If we're quick saving, use the current path; else, construct the directory
-    // If the notebook already exists, ask if the user wants to overwrite
-    if (quick) { dir = path; }
-    else {
-        dir = QString("%1/.spiralbound/books/%2").arg(QDir::homePath()).arg(book->getName());
-
-        if (QDir(dir).exists() && QFile(QString("%1/about.txt").arg(dir)).exists()) {
-            if (!Util::confirm("Overwrite", "A notebook already exists in this directory; overwrite?"))
-                return "";
-        }
-        else
-            QDir(dir).mkdir(dir);
-    }
+    QDir root = QDir(dir);
+    if (!root.exists()) { root.mkpath(dir); }
 
     try {
         // ------------------------------------------
@@ -292,7 +281,25 @@ QString save(bool quick, QString path, Book* book) {
         bk << book->toString();
 
         // ------------------------------------------
-        // Save study decks and calendar (WIP)
+        // Save study cards
+
+        bkFile->close();
+        delete bkFile;
+
+        // ------------------------------------------
+        // Save calendar events
+        bkFile = new QFile(QString("%1/cal.csv").arg(dir));
+
+        if (!bkFile->open(QFile::WriteOnly))
+            throw "The notebook's calendar events couldn't be saved!";
+
+        QTextStream cal(*&bkFile);
+
+        for(int i=main->tableWidget_eventList->rowCount()-1; i>=0; i--) {
+            cal << main->tableWidget_eventList->item(i, 0)->text() << ","
+                << main->tableWidget_eventList->item(i, 1)->text() << ","
+                << main->tableWidget_eventList->item(i, 2)->text() << "\n";
+        }
 
         bkFile->close();
         delete bkFile;
@@ -334,20 +341,13 @@ QString save(bool quick, QString path, Book* book) {
         Util::showError("Save Error", "An error occured during saving.");
     }
 
-    qDebug() << dir;
     return dir;
 }
 
 // Author:       Matthew Morgan
 // Init Date:    21.03.2019
 // Last Updated: 22.03.2019
-void MainWindow::on_action_save_triggered() {
-    // Only triggers saving functionality without prompting issues unless file_path is empty
-    // In that case, we update the file path
-    bool quick = (file_path == "");
-    QString new_path = save(quick, file_path, book);
-    if (!quick) { file_path = new_path; }
-}
+void MainWindow::on_action_save_triggered() { save(book, ui); }
 
 void MainWindow::on_action_bold_triggered() { me->bold(); }
 void MainWindow::on_action_italic_triggered() { me->italic(); }
