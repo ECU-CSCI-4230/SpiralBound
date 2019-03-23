@@ -287,6 +287,46 @@ QString save(Book* book, Ui::MainWindow* main, QString dir=QString("%1/.spiralbo
 
         // ------------------------------------------
         // Save study cards
+        QDir study = QDir(QString("%1/study").arg(dir));
+        if (!study.exists()) { study.mkdir(study.path()); }
+
+        /***************************************************************************************************************
+          * This algorithm will be highly inefficient for larger-scale deck sizes; as such, it only persists here until
+          * there is a means of better accessing decks. It generates a list of decks, and then linearly scans the entire
+          * card set to filter out which cards belong to the deck being searched.
+          **************************************************************************************************************/
+
+        // Construct the deck list and write the number of decks down
+        QStringList deckList;
+        for(int i=main->tableWidget_cardsTable->rowCount()-1; i>=0; i--) {
+            QString deck = main->tableWidget_cardsTable->item(i, 0)->text();
+            if (!deckList.contains(deck)) { deckList.push_back(deck); }
+        }
+        bk << endl << deckList.size() << endl;
+
+        // Iterate through every deck, writing the cards for that deck into its file
+        for(int i=deckList.size()-1; i>=0; i--) {
+            QString deck = deckList.takeFirst();
+            QFile* deckFile = new QFile(QString("%1/study/%2.csv").arg(dir).arg(i+1));
+            bk << deck << endl;
+
+            if (!deckFile->open(QFile::WriteOnly))
+                throw "A deck file couldn't be opened for writing!";
+
+            QTextStream dStream(*&deckFile);
+
+            for(int k=main->tableWidget_cardsTable->rowCount()-1; k>=0; k--) {
+                if (deck == main->tableWidget_cardsTable->item(k, 0)->text())
+                    dStream << main->tableWidget_cardsTable->item(k, 1)->text().length() << ","
+                            << main->tableWidget_cardsTable->item(k, 1)->text() << ","
+                            << main->tableWidget_cardsTable->item(k, 2)->text() << endl;
+            }
+
+            deckFile->close();
+            delete deckFile;
+        }
+
+        // ************************************************************************************************************
 
         bkFile->close();
         delete bkFile;
