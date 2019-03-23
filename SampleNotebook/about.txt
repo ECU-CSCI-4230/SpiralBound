@@ -2,6 +2,3 @@ Example Software Engineering Notebook
 Matthew Morgan
 Wed Mar 20 2019
 2
-Software Engineering
-Web Applications
-

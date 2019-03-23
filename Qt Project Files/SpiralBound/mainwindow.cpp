@@ -81,7 +81,7 @@ void MainWindow::on_action_openRecent_triggered() {}
 
 // Author:       Matthew Morgan
 // Init Date:    21.03.2019
-// Last Updated: 22.03.2019
+// Last Updated: 23.03.2019
 void MainWindow::on_action_open_triggered() {
     // Prompt the user about whether to load a book if one is already open
     if (file_path != "") {
@@ -123,18 +123,23 @@ void MainWindow::on_action_open_triggered() {
         nBook = Book::fromString(QString("%1\n%2\n%3").arg(name).arg(auth).arg(date).toStdString().c_str());
 
         // -----------------------------------------------------------------------------
-        // Read in the study decks
+        // Read in the study decks by connecting mainwindow to itself and emitting read cards
+        // for insertion into the card table.
+        int cntDeck = str.readLine().toInt();
+        read->close();
+        delete read;
+
         connect(this, SIGNAL(loadCard(QString, QString, QString)), this, SLOT(receiveCardData(QString, QString, QString)));
 
-        for(int i=str.readLine().toInt(); i>0; i--) {
+        for(int i=1; i<=cntDeck; i++) {
             // Read in a single study deck
-            QString deckName = str.readLine();
             QFile* deck = new QFile(QString("%1/study/%2.csv").arg(dir).arg(i));
 
             if (!deck->open(QFile::ReadOnly))
                 throw "A study deck couldn't be read; there may be corruption!";
 
             QTextStream deckStr(&*deck);
+            QString deckName = deckStr.readLine();
 
             while(!deckStr.atEnd()) {
                 // Card format is <n>,<front>,<back>, where <n> specifies where to split the front/back from
@@ -151,12 +156,9 @@ void MainWindow::on_action_open_triggered() {
 
         disconnect(this, SIGNAL(loadCard(QString, QString, QString)), this, SLOT(receiveCardData(QString, QString, QString)));
 
-        read->close();
-        delete read;
-
         // -----------------------------------------------------------------------------
         // Read in calendar events, but only if the cal.csv file exists
-        read = new QFile(QString("%1/cal.csv").arg(dir));
+        read = new QFile(QString("%1/cal.txt").arg(dir));
 
         if (read->exists()) {
             if (!read->open(QFile::ReadOnly))
@@ -167,8 +169,10 @@ void MainWindow::on_action_open_triggered() {
             connect(this, SIGNAL(loadEvent(QString, QString)), this, SLOT(receiveAddData(QString, QString)));
 
             while(!cal.atEnd()) {
-                QStringList event = cal.readLine().split(",");
-                emit loadEvent(event.at(1), QString("%1 %2").arg(event.at(0)).arg(event.at(2)));
+                QString date = cal.readLine(),
+                        name = cal.readLine(),
+                        time = cal.readLine();
+                emit loadEvent(name, date+" "+time);
             }
 
             disconnect(this, SIGNAL(loadEvent(QString, QString)), this, SLOT(receiveAddData(QString, QString)));
@@ -274,11 +278,12 @@ QString save(Book* book, Ui::MainWindow* main, QString dir=QString("%1/.spiralbo
 
     QDir root = QDir(dir);
     QDir back = QDir(backup);
+    back.setFilter(QDir::NoDotAndDotDot|QDir::AllEntries);
 
     if (!root.exists()) { root.mkpath(dir); }
 
     // Create a backup in the backup directory and remove the old one
-    if (back.exists()) { back.rmdir(back.path()); }
+    if (back.exists()) { back.removeRecursively(); }
     Util::copyDirectory(dir, backup);
 
     try {
@@ -310,23 +315,25 @@ QString save(Book* book, Ui::MainWindow* main, QString dir=QString("%1/.spiralbo
             if (!deckList.contains(deck)) { deckList.push_back(deck); }
         }
         bk << endl << deckList.size() << endl;
+        bkFile->close();
+        delete bkFile;
 
         // Iterate through every deck, writing the cards for that deck into its file
         for(int i=deckList.size()-1; i>=0; i--) {
             QString deck = deckList.takeFirst();
             QFile* deckFile = new QFile(QString("%1/study/%2.csv").arg(dir).arg(i+1));
-            bk << deck << endl;
 
             if (!deckFile->open(QFile::WriteOnly))
                 throw "A deck file couldn't be opened for writing!";
 
             QTextStream dStream(*&deckFile);
+            dStream << deck << "\n";
 
             for(int k=main->tableWidget_cardsTable->rowCount()-1; k>=0; k--) {
                 if (deck == main->tableWidget_cardsTable->item(k, 0)->text())
                     dStream << main->tableWidget_cardsTable->item(k, 1)->text().length() << ","
                             << main->tableWidget_cardsTable->item(k, 1)->text() << ","
-                            << main->tableWidget_cardsTable->item(k, 2)->text() << endl;
+                            << main->tableWidget_cardsTable->item(k, 2)->text() << "\n";
             }
 
             deckFile->close();
@@ -335,12 +342,9 @@ QString save(Book* book, Ui::MainWindow* main, QString dir=QString("%1/.spiralbo
 
         // ************************************************************************************************************
 
-        bkFile->close();
-        delete bkFile;
-
         // ------------------------------------------
         // Save calendar events
-        bkFile = new QFile(QString("%1/cal.csv").arg(dir));
+        bkFile = new QFile(QString("%1/cal.txt").arg(dir));
 
         if (!bkFile->open(QFile::WriteOnly))
             throw "The notebook's calendar events couldn't be saved!";
@@ -348,8 +352,8 @@ QString save(Book* book, Ui::MainWindow* main, QString dir=QString("%1/.spiralbo
         QTextStream cal(*&bkFile);
 
         for(int i=main->tableWidget_eventList->rowCount()-1; i>=0; i--) {
-            cal << main->tableWidget_eventList->item(i, 0)->text() << ","
-                << main->tableWidget_eventList->item(i, 1)->text() << ","
+            cal << main->tableWidget_eventList->item(i, 0)->text() << "\n"
+                << main->tableWidget_eventList->item(i, 1)->text() << "\n"
                 << main->tableWidget_eventList->item(i, 2)->text() << "\n";
         }
 
