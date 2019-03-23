@@ -3,6 +3,9 @@
 #include <QString>
 #include <QTreeWidget>
 #include <QMessageBox>
+#include <QFile>
+#include <QDir>
+#include <QDebug>
 #include <iostream>
 
 using namespace std;
@@ -112,6 +115,41 @@ class Util {
           * or not they click 'yes'. (True for yes, False for no) */
         static bool confirm(QString title, QString message) {
             return QMessageBox::question(nullptr, title, message) == QMessageBox::Yes;
+        }
+
+        // Author:       Matthew Morgan
+        // Init Date:    03-22-2019
+        // Last Updated: 03-22-2019
+        /** copyDirectory(from, into) is a wrapper for the private copyDirectory(from, into),
+          * accepting directories as strings and setting up QDir instances for copying files. */
+        static void copyDirectory(QString from, QString into) {
+            QDir fr = QDir(from), to = QDir(into);
+            fr.setFilter(QDir::NoDotAndDotDot|QDir::AllEntries);
+            copyDirectory(fr, to);
+        }
+
+    private:
+        // Author:       Matthew Morgan
+        // Init Date:    03-22-2019
+        // Last Updated: 03-22-2019
+        /** copyDirectory(from, into) copies the files and directories in 'from' to the directory
+          * 'into', recursively calling itself on subdirectories. */
+        static void copyDirectory(QDir from, QDir into) {
+            if (!into.exists()) { into.mkpath(into.path()); }
+
+            for(QString fil : from.entryList()) {
+                QString oldName = from.path() + "/" + fil,
+                        newName = into.path() + "/" + fil;
+                QFile* f = new QFile(oldName);
+                QFileInfo info = QFileInfo(oldName);
+
+                if (info.isDir())
+                    copyDirectory(oldName, newName);
+                else
+                    f->copy(newName);
+
+                delete f;
+            }
         }
 };
 

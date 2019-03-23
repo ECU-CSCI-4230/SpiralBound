@@ -269,10 +269,17 @@ void MainWindow::on_action_open_triggered() {
   *
   * The default directory for dir is <home>/.spiralbound/books/. */
 QString save(Book* book, Ui::MainWindow* main, QString dir=QString("%1/.spiralbound/books/").arg(QDir::homePath())) {
-    dir = QString("%1/%2").arg(dir).arg(book->getName());
+    QString backup = QDir::homePath() + "/.spiralbound/backup/" + book->getName();
+    dir = dir + book->getName();
 
     QDir root = QDir(dir);
+    QDir back = QDir(backup);
+
     if (!root.exists()) { root.mkpath(dir); }
+
+    // Create a backup in the backup directory and remove the old one
+    if (back.exists()) { back.rmdir(back.path()); }
+    Util::copyDirectory(dir, backup);
 
     try {
         // ------------------------------------------
@@ -382,8 +389,10 @@ QString save(Book* book, Ui::MainWindow* main, QString dir=QString("%1/.spiralbo
         }
     }
     catch(...) {
+        // An error occured - reverse backup
         qDebug() << "Saving Woopsie";
         Util::showError("Save Error", "An error occured during saving.");
+        Util::copyDirectory(backup, dir);
     }
 
     return dir;
