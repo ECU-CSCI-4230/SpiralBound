@@ -16,6 +16,7 @@
 #include <QItemSelectionModel>
 #include <QTableWidget>
 #include <QListWidgetItem>
+#include <list>
 #include <qinputdialog.h>
 #include "book.h"
 #include "section.h"
@@ -81,7 +82,7 @@ void MainWindow::on_action_openRecent_triggered() {}
 
 // Author:       Matthew Morgan
 // Init Date:    21.03.2019
-// Last Updated: 23.03.2019
+// Last Updated: 24.03.2019
 void MainWindow::on_action_open_triggered() {
     // Prompt the user about whether to load a book if one is already open
     if (file_path != "") {
@@ -96,15 +97,15 @@ void MainWindow::on_action_open_triggered() {
     if (dir == "") { return; }
 
     try {
-        for(int i=ui->tableWidget_eventList->rowCount(); i>0; i--)
-            ui->tableWidget_eventList->removeRow(0);
-
-        for(int i=ui->tableWidget_cardsTable->rowCount(); i>0; i--)
-            ui->tableWidget_cardsTable->removeRow(0);
-
+        list<Deck*> decks = list<Deck*>();
+        list<Event*> events = list<Event*>();
         Book* nBook;
+
+        // -----------------------------------------------------------------------------
+        // Open the book file and read in it's information
         QString about = QString("%1/about.txt").arg(dir);
         QFile* read = new QFile(about);
+        int numDeck;
 
         if (!QFile::exists(about))
             throw "The selected directory is not detected as a notebook!";
@@ -112,26 +113,22 @@ void MainWindow::on_action_open_triggered() {
         if (!read->open(QFile::ReadOnly))
             throw "The notebook's 'about' file couldn't be opened!";
 
-        // -----------------------------------------------------------------------------
-        // Open the book file and read in it's information
         QTextStream str(&*read);
 
         QString name = str.readLine(),
                 auth = str.readLine(),
                 date = str.readLine();
+        numDeck = str.readLine().toInt();
 
         nBook = Book::fromString(QString("%1\n%2\n%3").arg(name).arg(auth).arg(date).toStdString().c_str());
+        read->close();
+        delete read;
 
         // -----------------------------------------------------------------------------
         // Read in the study decks by connecting mainwindow to itself and emitting read cards
         // for insertion into the card table.
-        int cntDeck = str.readLine().toInt();
-        read->close();
-        delete read;
 
-        connect(this, SIGNAL(loadCard(QString, QString, QString)), this, SLOT(receiveCardData(QString, QString, QString)));
-
-        for(int i=1; i<=cntDeck; i++) {
+        for(int i=1; i<=numDeck; i++) {
             // Read in a single study deck
             QFile* deck = new QFile(QString("%1/study/%2.csv").arg(dir).arg(i));
 
@@ -139,7 +136,9 @@ void MainWindow::on_action_open_triggered() {
                 throw "A study deck couldn't be read; there may be corruption!";
 
             QTextStream deckStr(&*deck);
-            QString deckName = deckStr.readLine();
+            Deck* dck = new Deck();
+            decks.push_back(dck);
+            dck->name = deckStr.readLine();
 
             while(!deckStr.atEnd()) {
                 // Card format is <n>,<front>,<back>, where <n> specifies where to split the front/back from
@@ -147,14 +146,14 @@ void MainWindow::on_action_open_triggered() {
                 QString card = deckStr.readLine();
                 int ind = card.left(card.indexOf(',')).toInt();
                 card = card.right(card.length()-card.indexOf(',')-1);
-                emit loadCard(deckName, card.left(ind), card.right(card.length()-ind-1));
+
+                dck->front.push_back(card.left(ind));
+                dck->back.push_back(card.right(card.length()-ind-1));
             }
 
             deck->close();
             delete deck;
         }
-
-        disconnect(this, SIGNAL(loadCard(QString, QString, QString)), this, SLOT(receiveCardData(QString, QString, QString)));
 
         // -----------------------------------------------------------------------------
         // Read in calendar events, but only if the cal.csv file exists
@@ -166,16 +165,13 @@ void MainWindow::on_action_open_triggered() {
 
             QTextStream cal(&*read);
 
-            connect(this, SIGNAL(loadEvent(QString, QString)), this, SLOT(receiveAddData(QString, QString)));
-
             while(!cal.atEnd()) {
-                QString date = cal.readLine(),
-                        name = cal.readLine(),
-                        time = cal.readLine();
-                emit loadEvent(name, date+" "+time);
+                Event* ev = new Event();
+                ev->date = cal.readLine();
+                ev->name = cal.readLine();
+                ev->time = cal.readLine();
+                events.push_back(ev);
             }
-
-            disconnect(this, SIGNAL(loadEvent(QString, QString)), this, SLOT(receiveAddData(QString, QString)));
         }
 
         read->close();
@@ -252,6 +248,28 @@ void MainWindow::on_action_open_triggered() {
         ui->treeWidget_sections->topLevelItem(0)->setExpanded(true);
         ui->treeWidget_sections->topLevelItem(0)->child(0)->setSelected(true);
         ui->textEdit->setDocument(nBook->getSection(0)->getPage(0)->getContent());
+
+        // Update the list of calendar events and decks
+        for(int i=ui->tableWidget_eventList->rowCount(); i>0; i--)
+            ui->tableWidget_eventList->removeRow(0);
+
+        for(int i=ui->tableWidget_cardsTable->rowCount(); i>0; i--)
+            ui->tableWidget_cardsTable->removeRow(0);
+
+        connect(this, SIGNAL(loadCard(QString, QString, QString)), this, SLOT(receiveCardData(QString, QString, QString)));
+        for(Deck* d : decks) {
+            for(int i=0; i<d->front.size(); i++)
+                emit loadCard(d->name, d->front.at(i), d->back.at(i));
+            delete d;
+        }
+        disconnect(this, SIGNAL(loadCard(QString, QString, QString)), this, SLOT(receiveCardData(QString, QString, QString)));
+
+        connect(this, SIGNAL(loadEvent(QString, QString)), this, SLOT(receiveAddData(QString, QString)));
+        for(Event* e : events) {
+            emit loadEvent(e->name, e->date+" "+e->time);
+            delete e;
+        }
+        disconnect(this, SIGNAL(loadEvent(QString, QString)), this, SLOT(receiveAddData(QString, QString)));
 
         delete book;
         book = nBook;

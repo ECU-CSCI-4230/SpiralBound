@@ -153,4 +153,26 @@ class Util {
         }
 };
 
+// Deck structure
+struct Deck {
+    QString name;
+    QStringList front, back;
+
+    Deck() {
+        name = "";
+        front = QStringList();
+        back = QStringList();
+    }
+};
+
+// Calendar structure
+struct Event {
+    QString name, date, time;
+    Event() {
+        name = "";
+        date = "";
+        time = "";
+    }
+};
+
 #endif // UTIL_H
