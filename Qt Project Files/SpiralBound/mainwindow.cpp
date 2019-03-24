@@ -12,7 +12,6 @@
 #include <QFont>
 #include <QColorDialog>
 #include <QColor>
-#include <QtDebug>
 #include <QItemSelectionModel>
 #include <QTableWidget>
 #include <QListWidgetItem>
@@ -21,6 +20,7 @@
 #include "section.h"
 #include "page.h"
 #include "util.h"
+#include "addbook.h"
 
 // Constructor
 MainWindow::MainWindow(QWidget *parent) :
@@ -73,10 +73,29 @@ void MainWindow::on_action_aboutQt_triggered() { QApplication::aboutQt(); }
 
 void MainWindow::on_action_crashCourse_triggered() {}
 void MainWindow::on_action_print_triggered() {}
-void MainWindow::on_action_new_triggered() {}
+
+// Author:       Ketu Patel
+// Init Date:    23.03.2019
+// Last Updated: 23.03.2019
+void MainWindow::receiveBookData(QString bookNm, QString authNm, QString date)
+{
+    qDebug() <<"mainWinow: Received data from addbook window" << bookNm <<  date <<authNm  ;
+}
+
+// Author:       Ketu Patel
+// Init Date:    23.03.2019
+// Last Updated: 23.03.2019
+void MainWindow::on_action_new_triggered() {
+
+    newBook = new addbook();
+    newBook->setModal(true);
+    newBook->show();
+
+    connect(newBook, SIGNAL(sendBookData(QString, QString, QString)), this, SLOT(receiveBookData(QString, QString, QString)));
+}
+
 void MainWindow::on_action_openRecent_triggered() {}
 void MainWindow::on_action_saveAs_triggered() {}
-
 void MainWindow::on_action_bold_triggered() { me->bold(); }
 void MainWindow::on_action_italic_triggered() { me->italic(); }
 void MainWindow::on_action_strikethrough_triggered() { me->strikethough(); }
@@ -367,6 +386,7 @@ void MainWindow::receiveSectionData(QString nm, QColor col, int ind) {
     ui->treeWidget_sections->topLevelItem(ind)->setBackground(0, pal);
 }
 
+
 // Author:       Ketu Patel, Matthew Morgan
 // Init Date:    13.03.2019
 // Last Updated: 20.03.2019
@@ -529,3 +549,4 @@ void MainWindow::on_pushButton_import_clicked()
 
     connect(importCardWindow, SIGNAL(sendCardData(QString,QString,QString)), this, SLOT(receiveCardData(QString, QString, QString)));
 }
+

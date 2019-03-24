@@ -15,6 +15,7 @@
 #include <editsection.h>
 #include "markdowneditor.h"
 #include "book.h"
+#include "addbook.h"
 
 namespace Ui {
 class MainWindow;
@@ -107,6 +108,7 @@ private slots:
 
     // Asynchronous
     void receiveSectionData(QString, QColor, int);
+    void receiveBookData(QString, QString, QString);
 
 signals:
     void sendEditData(QString, QString, QString);  // Send mainwindown data to editcalendarevent
@@ -127,6 +129,8 @@ private:
     editsection* editSectionWindow;
     Book* book;
     MarkdownEditor* me;
+    addbook *newBook;
+
 };
 
 #endif // MAINWINDOW_H
