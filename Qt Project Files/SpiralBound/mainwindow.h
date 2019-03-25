@@ -108,7 +108,7 @@ private slots:
 
     // Asynchronous
     void receiveSectionData(QString, QColor, int);
-    void receiveBookData(QString, QString, QString);
+    void receiveBookData(QString, QString);
 
 signals:
     void sendEditData(QString, QString, QString);  // Send mainwindown data to editcalendarevent

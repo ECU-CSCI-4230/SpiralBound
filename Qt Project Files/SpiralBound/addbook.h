@@ -20,7 +20,7 @@ private slots:
 
 signals:
     // Send data to mainWindow
-    void sendBookData(QString,QString, QString);
+    void sendBookData(QString,QString);
 
 private:
     Ui::addbook *ui;

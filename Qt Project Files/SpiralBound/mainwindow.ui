@@ -1001,51 +1001,91 @@ p, li { white-space: pre-wrap; }
    </property>
   </action>
   <action name="action_bold">
+   <property name="icon">
+    <iconset resource="spiralbound.qrc">
+     <normaloff>:/SpiralBound/images/icon/format_bold.png</normaloff>:/SpiralBound/images/icon/format_bold.png</iconset>
+   </property>
    <property name="text">
     <string>Bold</string>
    </property>
   </action>
   <action name="action_italic">
+   <property name="icon">
+    <iconset resource="spiralbound.qrc">
+     <normaloff>:/SpiralBound/images/icon/format_italic.png</normaloff>:/SpiralBound/images/icon/format_italic.png</iconset>
+   </property>
    <property name="text">
     <string>Italic</string>
    </property>
   </action>
   <action name="action_underline">
+   <property name="icon">
+    <iconset resource="spiralbound.qrc">
+     <normaloff>:/SpiralBound/images/icon/format_underline.png</normaloff>:/SpiralBound/images/icon/format_underline.png</iconset>
+   </property>
    <property name="text">
     <string>Underline</string>
    </property>
   </action>
   <action name="action_comment">
+   <property name="icon">
+    <iconset resource="spiralbound.qrc">
+     <normaloff>:/SpiralBound/images/icon/op_comment.png</normaloff>:/SpiralBound/images/icon/op_comment.png</iconset>
+   </property>
    <property name="text">
     <string>Comment</string>
    </property>
   </action>
   <action name="action_strikethrough">
+   <property name="icon">
+    <iconset resource="spiralbound.qrc">
+     <normaloff>:/SpiralBound/images/icon/format_strike.png</normaloff>:/SpiralBound/images/icon/format_strike.png</iconset>
+   </property>
    <property name="text">
     <string>Strikethrough</string>
    </property>
   </action>
   <action name="action_indent">
+   <property name="icon">
+    <iconset resource="spiralbound.qrc">
+     <normaloff>:/SpiralBound/images/icon/format_indent.png</normaloff>:/SpiralBound/images/icon/format_indent.png</iconset>
+   </property>
    <property name="text">
     <string>Indent</string>
    </property>
   </action>
   <action name="action_unindent">
+   <property name="icon">
+    <iconset resource="spiralbound.qrc">
+     <normaloff>:/SpiralBound/images/icon/format_outdent.png</normaloff>:/SpiralBound/images/icon/format_outdent.png</iconset>
+   </property>
    <property name="text">
     <string>Unindent</string>
    </property>
   </action>
   <action name="action_bulletedList">
+   <property name="icon">
+    <iconset resource="spiralbound.qrc">
+     <normaloff>:/SpiralBound/images/icon/format_list_unorder.png</normaloff>:/SpiralBound/images/icon/format_list_unorder.png</iconset>
+   </property>
    <property name="text">
     <string>Bulleted List</string>
    </property>
   </action>
   <action name="action_numberedList">
+   <property name="icon">
+    <iconset resource="spiralbound.qrc">
+     <normaloff>:/SpiralBound/images/icon/format_list_order.png</normaloff>:/SpiralBound/images/icon/format_list_order.png</iconset>
+   </property>
    <property name="text">
     <string>Numbered List</string>
    </property>
   </action>
   <action name="action_taskList">
+   <property name="icon">
+    <iconset resource="spiralbound.qrc">
+     <normaloff>:/SpiralBound/images/icon/op_tasklist.png</normaloff>:/SpiralBound/images/icon/op_tasklist.png</iconset>
+   </property>
    <property name="text">
     <string>Task List</string>
    </property>

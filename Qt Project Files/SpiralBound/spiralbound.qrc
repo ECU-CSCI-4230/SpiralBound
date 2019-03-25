@@ -30,5 +30,7 @@
         <file>images/icon/op_new_notebook.png</file>
         <file>images/icon/op_quit.png</file>
         <file>images/icon/op_recent.png</file>
+        <file>images/icon/op_tasklist.png</file>
+        <file>images/icon/op_comment.png</file>
     </qresource>
 </RCC>

@@ -77,9 +77,9 @@ void MainWindow::on_action_print_triggered() {}
 // Author:       Ketu Patel
 // Init Date:    23.03.2019
 // Last Updated: 23.03.2019
-void MainWindow::receiveBookData(QString bookNm, QString authNm, QString date)
+void MainWindow::receiveBookData(QString bookNm, QString authNm)
 {
-    qDebug() <<"mainWinow: Received data from addbook window" << bookNm <<  date <<authNm  ;
+    qDebug() <<"mainWinow: Received data from addbook window" << bookNm <<authNm  ;
 }
 
 // Author:       Ketu Patel
@@ -91,7 +91,7 @@ void MainWindow::on_action_new_triggered() {
     newBook->setModal(true);
     newBook->show();
 
-    connect(newBook, SIGNAL(sendBookData(QString, QString, QString)), this, SLOT(receiveBookData(QString, QString, QString)));
+    connect(newBook, SIGNAL(sendBookData(QString, QString)), this, SLOT(receiveBookData(QString, QString)));
 }
 
 void MainWindow::on_action_openRecent_triggered() {}
