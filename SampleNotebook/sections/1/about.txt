@@ -1,0 +1,5 @@
+Secondest of Sections
+#CCCCCC
+This is the second section that is available in the test notebook.
+
+As you can see, the color of this section should be a shade of gray; the first section should have a color similar to red. This section will have two pages in it.

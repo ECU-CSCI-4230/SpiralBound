@@ -84,11 +84,11 @@ void Book::removeSection(int index) {
     bookList->erase(it);
 }
 
-// Author:       Ketu Patel
+// Author:       Ketu Patel, Matthew Morgan
 // Init date:    02-02-2019
-// Last Updated: 02-12-2019
-void Book::addSection(QString name, QString desc) {
-    bookList->push_back(new Section(name, desc));
+// Last Updated: 03-21-2019
+void Book::addSection(QString name) {
+    bookList->push_back(new Section(name));
 }
 
 // Author:       Matthew Morgan
@@ -103,3 +103,13 @@ char* Book::toString() {
    sprintf(str, "%s\n%s\n%s", nm, au, da);
    return str;
 }
+
+// Author:       Matthew Morgan
+// Init date:    03-22-2019
+// Last Updated: 03-22-2019
+void Book::loadSection(Section* sec) { bookList->push_back(sec); }
+
+// Author:       Matthew Morgan
+// Init date:    03-22-2019
+// Last Updated: 03-22-2019
+void Book::loadPage(Section* sec, Page* pg) { sec->loadPage(pg); }

@@ -35,9 +35,8 @@ class Book
           * sections. */
         void removeSection(int index);
 
-        /** addSection(name, desc) adds a section to the notebook with the given
-          * name and description. */
-        void addSection(QString name, QString desc);
+        /** addSection(name) adds a section to the notebook with the given name. */
+        void addSection(QString name);
 
         /** toString() converts this book's information to a string of the form
           * <name>\\n<author>\\n<date> */
@@ -59,6 +58,9 @@ class Book
 
             return bk;
         }
+
+        void loadSection(Section* sec);
+        void loadPage(Section* sec, Page* pg);
 
     private:
         QString bookName, author;

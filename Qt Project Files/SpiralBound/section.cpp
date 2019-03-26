@@ -1,35 +1,45 @@
 #include "section.h"
-#include "util.h"
 
 // Author:       Ketu Patel, Matthew Morgan
 // Init date:    02-02-2019
-// Last Updated: 02-12-2019
-Section::Section(QString nm, QString ds)
+// Last Updated: 03-21-2019
+Section::Section(QString nm)
 {
     secName = nm;
-    desc = ds;
     pages = new list<Page*>();
+    col = *(new QColor(DEF_COLOR));
+    doc = new QTextDocument();
 }
+
+// Author:       Matthew Morgan
+// Init date:    03-20-2019
+// Last Updated: 03-20-2019
+QTextDocument* Section::getDoc() { return doc; }
+
+// Author:       Matthew Morgan
+// Init date:    03-20-2019
+// Last Updated: 03-20-2019
+void Section::setDoc(QTextDocument* nDoc) { doc = nDoc; }
 
 // Author:       Ketu Patel
 // Init date:    02-02-2019
 // Last Updated: 02-02-2019
 QString Section::getSecName() { return secName; }
 
-// Author:       Ketu Patel
-// Init date:    02-02-2019
-// Last Updated: 02-02-2019
-QString Section::getDesc() { return desc; }
+// Author:       Matthew Morgan
+// Init Date:    03-20-2019
+// Last Updated: 03-20-2019
+void Section::setColor(QColor color) { col = color; }
+
+// Author:       Matthew Morgan
+// Init Date:    03-20-2019
+// Last Updated: 03-20-2019
+QColor Section::getColor() { return col; }
 
 // Author:       Ketu Patel
 // Init date:    02-02-2019
 // Last Updated: 02-02-2019
 void Section::setName(QString nm) { secName = nm; }
-
-// Author:       Ketu Patel
-// Init date:    02-02-2019
-// Last Updated: 02-02-2019
-void Section::setDesc(QString dc) { desc = dc; }
 
 // Author:       Ketu Patel, Matthew Morgan
 // Init date:    02-02-2019
@@ -69,12 +79,12 @@ int Section::numPages() {
 
 // Author:       Matthew Morgan
 // Init date:    02-20-2019
-// Last Updated: 02-27-2019
-char* Section::toString() {
-    char* str = new char[256];
-    const char* nm = Util::QtoCString(secName);
-    const char* dsc = Util::QtoCString(desc);
-
-    sprintf(str, "%s\n%s", nm, dsc);
-    return str;
+// Last Updated: 03-21-2019
+QString Section::toString() {
+    return QString("%1\n%2\n%3").arg(secName, col.name(), doc->toPlainText());
 }
+
+// Author:       Matthew Morgan
+// Init Date:    03-22-2019
+// Last Updated: 03-22-2019
+void Section::loadPage(Page* pg) { pages->push_back(pg); }

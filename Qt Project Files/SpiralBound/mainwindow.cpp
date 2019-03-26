@@ -16,11 +16,12 @@
 #include <QItemSelectionModel>
 #include <QTableWidget>
 #include <QListWidgetItem>
+#include <list>
 #include <qinputdialog.h>
 #include "book.h"
 #include "section.h"
 #include "page.h"
-#include "block.h"
+#include "util.h"
 
 // Constructor
 MainWindow::MainWindow(QWidget *parent) :
@@ -29,14 +30,24 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->tableWidget_eventList->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    book = new Book("", "");
+    book = new Book("Default", "User");
     me = new MarkdownEditor(ui->textEdit);
 
+    // Check for the saving directory on startup; create it if it doesnt exist
+    QDir save = QDir(QString("%1/.spiralbound/books").arg(QDir::homePath())),
+         back = QDir(QString("%1/.spiralbound/backup").arg(QDir::homePath()));
+
+    if (!save.exists()) { save.mkdir(save.path()); } // Returns a bool - do error check?
+    if (!back.exists()) { back.mkdir(save.path()); }
+
     // Add a default section, page, and change to view that page in that section on startup
-    book->addSection("New Section 1", "");
+    file_path = "";
+    book->addSection("Section 01");
     book->getSection(0)->addPage("Untitled Page");
     ui->textEdit->setDocument(book->getSection(0)->getPage(0)->getContent());
-    ui->listWidget_pages->setCurrentRow(0);
+    ui->treeWidget_sections->setItemSelected(ui->treeWidget_sections->topLevelItem(0)->child(0), true);
+    ui->treeWidget_sections->topLevelItem(0)->setExpanded(true);
+
     ui->tableWidget_cardsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
@@ -49,11 +60,6 @@ MainWindow::~MainWindow()
 //-----------------------------------------------------------+
 //                    Menu Bar Buttons                       |
 //-----------------------------------------------------------+
-
-void MainWindow::on_action_open_triggered() {}
-void MainWindow::on_action_test_triggered() {}
-void MainWindow::on_action_save_triggered() {}
-
 // Author:       Nicholas Ellis
 // Init Date:    29.01.2019
 // Last Updated: 29.01.2019
@@ -73,7 +79,372 @@ void MainWindow::on_action_crashCourse_triggered() {}
 void MainWindow::on_action_print_triggered() {}
 void MainWindow::on_action_new_triggered() {}
 void MainWindow::on_action_openRecent_triggered() {}
-void MainWindow::on_action_saveAs_triggered() {}
+
+// Author:       Matthew Morgan
+// Init Date:    21.03.2019
+// Last Updated: 24.03.2019
+void MainWindow::on_action_open_triggered() {
+    // Prompt the user about whether to load a book if one is already open
+    if (file_path != "") {
+        if (!Util::confirm("Proceed with Load", "You have a notebook already open; any unsaved changes will be lost. Continue?"))
+            return;
+    }
+
+    // Get the directory of the notebook and check for the about file's existence
+    QString dir = QFileDialog::getExistingDirectory(this, "Select Notebook Directory", QString("%1/.spiralbound/books").arg(QDir::homePath()));
+    //QString dir = "F:/Academic/Source/SpiralBound/SampleNotebook";
+
+    if (dir == "") { return; }
+
+    try {
+        list<Deck*> decks = list<Deck*>();
+        list<Event*> events = list<Event*>();
+        Book* nBook;
+
+        // -----------------------------------------------------------------------------
+        // Open the book file and read in it's information
+        QString about = QString("%1/about.txt").arg(dir);
+        QFile* read = new QFile(about);
+        int numDeck;
+
+        if (!QFile::exists(about))
+            throw "The selected directory is not detected as a notebook!";
+
+        if (!read->open(QFile::ReadOnly))
+            throw "The notebook's 'about' file couldn't be opened!";
+
+        QTextStream str(&*read);
+
+        QString name = str.readLine(),
+                auth = str.readLine(),
+                date = str.readLine();
+        numDeck = str.readLine().toInt();
+
+        nBook = Book::fromString(QString("%1\n%2\n%3").arg(name).arg(auth).arg(date).toStdString().c_str());
+        read->close();
+        delete read;
+
+        // -----------------------------------------------------------------------------
+        // Read in the study decks by connecting mainwindow to itself and emitting read cards
+        // for insertion into the card table.
+
+        for(int i=1; i<=numDeck; i++) {
+            // Read in a single study deck
+            QFile* deck = new QFile(QString("%1/study/%2.csv").arg(dir).arg(i));
+
+            if (!deck->open(QFile::ReadOnly))
+                throw "A study deck couldn't be read; there may be corruption!";
+
+            QTextStream deckStr(&*deck);
+            Deck* dck = new Deck();
+            decks.push_back(dck);
+            dck->name = deckStr.readLine();
+
+            while(!deckStr.atEnd()) {
+                // Card format is <n>,<front>,<back>, where <n> specifies where to split the front/back from
+                // As such, parse <n>, then remove '<n>,' from the string, then parse the front/back
+                QString card = deckStr.readLine();
+                int ind = card.left(card.indexOf(',')).toInt();
+                card = card.right(card.length()-card.indexOf(',')-1);
+
+                dck->front.push_back(card.left(ind));
+                dck->back.push_back(card.right(card.length()-ind-1));
+            }
+
+            deck->close();
+            delete deck;
+        }
+
+        // -----------------------------------------------------------------------------
+        // Read in calendar events, but only if the cal.csv file exists
+        read = new QFile(QString("%1/cal.txt").arg(dir));
+
+        if (read->exists()) {
+            if (!read->open(QFile::ReadOnly))
+                throw "The notebook's calendar events couldn't be loaded!";
+
+            QTextStream cal(&*read);
+
+            while(!cal.atEnd()) {
+                Event* ev = new Event();
+                ev->date = cal.readLine();
+                ev->name = cal.readLine();
+                ev->time = cal.readLine();
+                events.push_back(ev);
+            }
+        }
+
+        read->close();
+        delete read;
+
+        // -----------------------------------------------------------------------------
+        // Read in notebook sections
+        QDir sec = QDir(QString("%1/sections").arg(dir));
+        sec.setFilter(QDir::Dirs|QDir::NoDotAndDotDot);
+
+        // For every section, we will:
+        // + Open the 'about.txt' file for that section to get the name, color, and summary
+        // + Iterate through every page of the section and add them to the section
+        for(QString section : sec.entryList()) {
+            QFile* about = new QFile(QString("%1/%2/about.txt").arg(sec.path()).arg(section));
+            QDir pgs = QDir(QString("%1/%2").arg(sec.path()).arg(section)); // Should point to <path>/sections/<sec>
+            pgs.setFilter(QDir::Files);
+
+            if (!about->open(QFile::ReadOnly))
+                throw "The about file for a section couldn't be opened!";
+
+            QTextStream abStr(*&about);
+
+            Section* mySec = Section::fromString(abStr.readAll().toStdString().c_str());
+            nBook->loadSection(mySec);
+
+            about->close();
+            delete about;
+
+            // Read in pages
+            for(QString pg : pgs.entryList()) {
+                QFile* page = new QFile(QString("%1/%2").arg(pgs.path()).arg(pg));
+
+                // Skip the 'about' file since it was already used
+                if (page->fileName().split('/').last() == "about.txt") {
+                    delete page;
+                    continue;
+                }
+
+                if (!page->open(QFile::ReadOnly))
+                    throw "A page couldn't be read for a section!";
+
+                QTextStream pgStream(*&page);
+
+                Page* myPg = Page::fromString(pgStream.readAll().toStdString().c_str());
+                nBook->loadPage(mySec, myPg);
+
+                delete page;
+            }
+        }
+
+        // Update the notebook interface to reflect the new book
+        ui->treeWidget_sections->clear();
+
+        for(int i=nBook->numSections()-1; i>=0; i--) {
+            QTreeWidgetItem* item = new QTreeWidgetItem();
+            QBrush pal = item->background(0);
+
+            // Set the item's properties after inserting it
+            pal.setColor(nBook->getSection(i)->getColor());
+            pal.setStyle(Qt::BrushStyle::SolidPattern);
+            item->setBackground(0, pal);
+            item->setText(0, nBook->getSection(i)->getSecName());
+            ui->treeWidget_sections->insertTopLevelItem(0, item);
+
+            for(int k=nBook->getSection(i)->numPages()-1; k>=0; k--) {
+                QTreeWidgetItem* pg = new QTreeWidgetItem();
+                pg->setText(0, nBook->getSection(i)->getPage(k)->getPageName());
+                item->insertChild(0, pg);
+            }
+        }
+
+        // Select the first section's summary
+        ui->treeWidget_sections->topLevelItem(0)->setExpanded(true);
+        ui->treeWidget_sections->topLevelItem(0)->child(0)->setSelected(true);
+        ui->textEdit->setDocument(nBook->getSection(0)->getPage(0)->getContent());
+
+        // Update the list of calendar events and decks
+        for(int i=ui->tableWidget_eventList->rowCount(); i>0; i--)
+            ui->tableWidget_eventList->removeRow(0);
+
+        for(int i=ui->tableWidget_cardsTable->rowCount(); i>0; i--)
+            ui->tableWidget_cardsTable->removeRow(0);
+
+        connect(this, SIGNAL(loadCard(QString, QString, QString)), this, SLOT(receiveCardData(QString, QString, QString)));
+        for(Deck* d : decks) {
+            for(int i=0; i<d->front.size(); i++)
+                emit loadCard(d->name, d->front.at(i), d->back.at(i));
+            delete d;
+        }
+        disconnect(this, SIGNAL(loadCard(QString, QString, QString)), this, SLOT(receiveCardData(QString, QString, QString)));
+
+        connect(this, SIGNAL(loadEvent(QString, QString)), this, SLOT(receiveAddData(QString, QString)));
+        for(Event* e : events) {
+            emit loadEvent(e->name, e->date+" "+e->time);
+            delete e;
+        }
+        disconnect(this, SIGNAL(loadEvent(QString, QString)), this, SLOT(receiveAddData(QString, QString)));
+
+        delete book;
+        book = nBook;
+        file_path = QString(dir);
+    }
+    catch(exception& e) {
+        qDebug() << "Woopsie: " << e.what();
+        Util::showError("Load Error", "The notebook you selected couldn't be loaded.");
+    }
+    catch(...) { qDebug() << "Woopsie..."; }
+}
+
+// Author:       Matthew Morgan
+// Init Date:    22.03.2019
+// Last Updated: 22.03.2019
+/** save(book, main, <dir>) saves the current Book instance, and flash cards/calendar information, to the
+  * directory selected, using the MainWindow interface - main - to perform fetching of needed data. It
+  * returns the directory of the saved book.
+  *
+  * The default directory for dir is <home>/.spiralbound/books/. */
+QString save(Book* book, Ui::MainWindow* main, QString dir=QString("%1/.spiralbound/books/").arg(QDir::homePath())) {
+    QString backup = QDir::homePath() + "/.spiralbound/backup/" + book->getName();
+    dir = dir + book->getName();
+
+    QDir root = QDir(dir);
+    QDir back = QDir(backup);
+    back.setFilter(QDir::NoDotAndDotDot|QDir::AllEntries);
+
+    if (!root.exists()) { root.mkpath(dir); }
+
+    // Create a backup in the backup directory and remove the old one
+    if (back.exists()) { back.removeRecursively(); }
+    Util::copyDirectory(dir, backup);
+
+    try {
+        // ------------------------------------------
+        // Save the about file
+        QFile* bkFile = new QFile(QString("%1/about.txt").arg(dir));
+
+        if (!bkFile->open(QFile::WriteOnly))
+            throw "The notebook's about file couldn't be written";
+
+        QTextStream bk(*&bkFile);
+        bk << book->toString();
+
+        // ------------------------------------------
+        // Save study cards
+        QDir study = QDir(QString("%1/study").arg(dir));
+        if (!study.exists()) { study.mkdir(study.path()); }
+
+        /***************************************************************************************************************
+          * This algorithm will be highly inefficient for larger-scale deck sizes; as such, it only persists here until
+          * there is a means of better accessing decks. It generates a list of decks, and then linearly scans the entire
+          * card set to filter out which cards belong to the deck being searched.
+          **************************************************************************************************************/
+
+        // Construct the deck list and write the number of decks down
+        QStringList deckList;
+        for(int i=main->tableWidget_cardsTable->rowCount()-1; i>=0; i--) {
+            QString deck = main->tableWidget_cardsTable->item(i, 0)->text();
+            if (!deckList.contains(deck)) { deckList.push_back(deck); }
+        }
+        bk << endl << deckList.size() << endl;
+        bkFile->close();
+        delete bkFile;
+
+        // Iterate through every deck, writing the cards for that deck into its file
+        for(int i=deckList.size()-1; i>=0; i--) {
+            QString deck = deckList.takeFirst();
+            QFile* deckFile = new QFile(QString("%1/study/%2.csv").arg(dir).arg(i+1));
+
+            if (!deckFile->open(QFile::WriteOnly))
+                throw "A deck file couldn't be opened for writing!";
+
+            QTextStream dStream(*&deckFile);
+            dStream << deck << "\n";
+
+            for(int k=main->tableWidget_cardsTable->rowCount()-1; k>=0; k--) {
+                if (deck == main->tableWidget_cardsTable->item(k, 0)->text())
+                    dStream << main->tableWidget_cardsTable->item(k, 1)->text().length() << ","
+                            << main->tableWidget_cardsTable->item(k, 1)->text() << ","
+                            << main->tableWidget_cardsTable->item(k, 2)->text() << "\n";
+            }
+
+            deckFile->close();
+            delete deckFile;
+        }
+
+        // ************************************************************************************************************
+
+        // ------------------------------------------
+        // Save calendar events
+        bkFile = new QFile(QString("%1/cal.txt").arg(dir));
+
+        if (!bkFile->open(QFile::WriteOnly))
+            throw "The notebook's calendar events couldn't be saved!";
+
+        QTextStream cal(*&bkFile);
+
+        for(int i=main->tableWidget_eventList->rowCount()-1; i>=0; i--) {
+            cal << main->tableWidget_eventList->item(i, 0)->text() << "\n"
+                << main->tableWidget_eventList->item(i, 1)->text() << "\n"
+                << main->tableWidget_eventList->item(i, 2)->text() << "\n";
+        }
+
+        bkFile->close();
+        delete bkFile;
+
+        // ------------------------------------------
+        // Create section directories and store section information
+        for(int i=book->numSections()-1; i>=0; i--) {
+            QDir section = QDir(QString("%1/sections/%2").arg(dir).arg(i));
+            if (section.exists()) { section.rmdir(section.path()); }
+            section.mkpath(section.path());
+            bkFile = new QFile(QString("%1/about.txt").arg(section.path()));
+
+            if (!bkFile->open(QFile::WriteOnly))
+                throw "A section's about file couldn't be written!";
+
+            QTextStream sec(*&bkFile);
+            sec << book->getSection(i)->toString();
+
+            // Save pages
+            for(int k=book->getSection(i)->numPages()-1; k>=0; k--) {
+                QFile* page = new QFile(QString("%1/pg-%2.txt").arg(section.path()).arg(k));
+
+                if (!page->open(QFile::WriteOnly))
+                    throw "A section's pages couldn't be saved properly";
+
+                QTextStream pg(*&page);
+                pg << book->getSection(i)->getPage(k)->toString();
+
+                page->close();
+                delete page;
+            }
+
+            bkFile->close();
+            delete bkFile;
+        }
+    }
+    catch(...) {
+        // An error occured - reverse backup
+        qDebug() << "Saving Woopsie";
+        Util::showError("Save Error", "An error occured during saving.");
+        Util::copyDirectory(backup, dir);
+    }
+
+    return dir;
+}
+
+// Author:       Matthew Morgan
+// Init Date:    21.03.2019
+// Last Updated: 22.03.2019
+void MainWindow::on_action_save_triggered() { save(book, ui); }
+
+// Author:       Matthew Morgan
+// Init Date:    22.03.2019
+// Last Updated: 22.03.2019
+void MainWindow::on_action_export_triggered() {
+    // Export the notebook to the given location of the user's choice;
+    // Show a message that they'll need to create a directory if it doesn't exist
+    // If they select a location that has a notebook in it, then prompt for overwrite
+
+    Util::showMessage("Exporting", "A file dialog is about to open for you to select where to export this notebook. If the directory "
+                                   "doesn't exist, then you'll need to create it before accepting.");
+
+    QString dir = QFileDialog::getExistingDirectory(this, "Select Notebook Directory", QString("%1/.spiralbound/books").arg(QDir::homePath()));
+    if (dir == "") { return; }
+
+    if (QFile(QString("%1/%2/about.txt").arg(dir).arg(book->getName())).exists())
+        if (!Util::confirm("Overwrite", "A notebook is detected in this directory. Overwrite?"))
+            return;
+
+    save(book, ui, dir);
+}
 
 void MainWindow::on_action_bold_triggered() { me->bold(); }
 void MainWindow::on_action_italic_triggered() { me->italic(); }
@@ -85,10 +456,10 @@ void MainWindow::on_action_bulletedList_triggered() {}
 void MainWindow::on_action_numberedList_triggered() {}
 void MainWindow::on_action_comment_triggered() {}
 
+void MainWindow::on_action_test_triggered() {}
 void MainWindow::on_action_taskList_triggered() {}
 void MainWindow::on_action_preferences_triggered() {}
 void MainWindow::on_action_printPreview_triggered() {}
-void MainWindow::on_action_export_triggered() {}
 
 // Author:       Tyler Rogers (cirkuitbreaker)
 // Init date:    29.01.2019
@@ -100,11 +471,9 @@ void MainWindow::on_action_quit_triggered() { QApplication::quit(); }
 //-----------------------------------------------------------+
 // Author:       Nicholas, Matthew
 // Init Date:    19.02.2019
-// Last Updated: 27.02.2019
+// Last Updated: 22.03.2019
 void MainWindow::receiveAddData(QString eventName, QString eventDateTime)
 {
-    qDebug() << "mainwindow: Received data from addwindow" << eventName << eventDateTime;
-
     // Seperate date from time
     QStringList datetime = eventDateTime.split(" ");
     QString date = datetime[0];
@@ -123,11 +492,10 @@ void MainWindow::receiveAddData(QString eventName, QString eventDateTime)
 
 // Author:       Nicholas, Cam, Jamie
 // Init Date:    05.02.2019
-// Last Updated: 19.02.2019
+// Last Updated: 22.03.2019
 void MainWindow::on_pushButton_addEvent_clicked()
 {
     QDate curDate = ui->calendarWidget->selectedDate();
-    qDebug() << "mainwindow: Sending item from tableWidget_eventList to addcalendarevent";
 
    // Builds addcalendarevent GUI/window
    addWindow = new addcalendarevent(curDate ,this);
@@ -140,11 +508,9 @@ void MainWindow::on_pushButton_addEvent_clicked()
 
 // Author:       Nicholas
 // Init Date:    19.02.2019
-// Last Updated: 28.02.2019
+// Last Updated: 22.03.2019
 void MainWindow::receiveEditData(QString eventName, QString eventDateTime)
 {
-    qDebug() << "mainwindow: Received data from addwindow" << eventName << eventDateTime;
-
     // Seperate date from time
     QStringList datetime = eventDateTime.split(" ");
     QString date = datetime[0];
@@ -181,8 +547,6 @@ void MainWindow::on_pushButton_editEvent_clicked()
         QString name = ui->tableWidget_eventList->item(row, 1)->text();
         QString time = ui->tableWidget_eventList->item(row, 2)->text();
 
-        qDebug() << "mainwindow: Sending item from tableWidget_eventList to editcalendarevent";
-
         // Builds editcalendarevent GUI/window
         editWindow = new editcalendarevent(this);
         editWindow->setModal(true);
@@ -198,7 +562,6 @@ void MainWindow::on_pushButton_editEvent_clicked()
         connect(editWindow, SIGNAL(sendEditData(QString, QString)), this, SLOT(receiveEditData(QString, QString)));
     }
 }
-
 // Author:       Nicholas
 // Init Date:    09.02.2019
 // Last Updated: 19.02.2019
@@ -206,8 +569,6 @@ void MainWindow::receiveDeleteData(bool response)
 {
    if(response == true)
    {
-       qDebug() << "mainwindow: Deleting item from tableWidget_eventList";
-
        // Delete item from table
        ui->tableWidget_eventList->removeRow(ui->tableWidget_eventList->currentItem()->row());
    }
@@ -241,15 +602,11 @@ void MainWindow::on_pushButton_deleteEvent_clicked()
 
 // Author:       Nicholas
 // Init Date:    19.02.2019
-// Last Updated: 19.02.2019
-void MainWindow::on_tableWidget_eventList_cellChanged(int row, int column)
+// Last Updated: 22.03.2019
+void MainWindow::on_tableWidget_eventList_cellChanged(__attribute__((unused)) int row, int column)
 {
-    qDebug() << "mainwindow: Cell changed at:" << row << column;
-
     if(column == 2)
     {
-        //sort
-        qDebug() << "mainwindow: Time to sort";
         ui->tableWidget_eventList->sortByColumn(0, Qt::AscendingOrder);
     }
 }
@@ -257,137 +614,175 @@ void MainWindow::on_tableWidget_eventList_cellChanged(int row, int column)
 //-----------------------------------------------------------+
 //                   Notetake Tab                            |
 //-----------------------------------------------------------+
-// Author:       Ketu Patel, Matthew Morgan
+// Author:       Matthew Morgan
 // Init Date:    10.03.2019
-// Last Updated: 12.03.2019
-void MainWindow::on_pushButton_AddPage_clicked()
+// Last Updated: 20.03.2019
+void MainWindow::on_pushButton_addPage_clicked()
 {
-    // Add Untitled Page and switch to it
-    ui->listWidget_pages->addItem(new QListWidgetItem("Untitled Page"));
-    book->getSection(ui->tabWidget_2->currentIndex())->addPage("Untitled Page");
-    ui->listWidget_pages->setCurrentRow(ui->listWidget_pages->count()-1);
+    // Add a new page to the section, and activate it as the current
+    int* ind = Util::getSectionPage(ui->treeWidget_sections, ui->treeWidget_sections->selectedItems().front());
+    QTreeWidgetItem* pg = new QTreeWidgetItem();
+
+    book->getSection(ind[0])->addPage("Untitled Page");
+    ui->treeWidget_sections->topLevelItem(ind[0])->addChild(pg);
+    ui->treeWidget_sections->clearSelection();
+    pg->setText(0, "Untitled Page");
+    pg->setSelected(true);
+    on_treeWidget_sections_itemClicked(pg, 0);
+
+    delete ind;
 }
 
-// Author:       Ketu Patel, Matthew Morgan
+// Author:       Matthew Morgan
 // Init Date:    10.03.2019
-// Last Updated: 11.03.2019
-void MainWindow::on_tabWidget_2_tabCloseRequested(int index)
-{
-    if (ui->tabWidget_2->count() > 1) {
-        // Only remove a section if there is another available
-        book->removeSection(index);
-        ui->tabWidget_2->removeTab(index);
-    }
-    else {
-    }
-}
-
-// Author:       Ketu Patel, Matthew Morgan
-// Init Date:    10.03.2019
-// Last Updated: 13.03.2019
+// Last Updated: 20.03.2019
 void MainWindow::on_pushButton_addSection_clicked()
 {
-    // Adds a section
-    ui->tabWidget_2->addTab(new QWidget(), QString("New Section %0").arg(ui->tabWidget_2->count()+1));
-    ui->tabWidget_2->setCurrentIndex(ui->tabWidget_2->count()-1);
-    book->addSection(ui->tabWidget_2->tabText(ui->tabWidget_2->count()-1), "");
-    book->getSection(book->numSections()-1)->addPage("Untitled Page");
+    // Add a new section and page, and update the tree to reflect these changes
+    // Clear the page selection
+    int size = book->numSections();
+    QTreeWidgetItem *sec = new QTreeWidgetItem(), *pg = new QTreeWidgetItem();
 
-    // Update the list of pages
-    Section* sec = book->getSection(ui->tabWidget_2->currentIndex());
-    ui->listWidget_pages->clear();
-    for(int i=0; i<sec->numPages(); i++) {
-        ui->listWidget_pages->addItem(new QListWidgetItem(sec->getPage(i)->getPageName()));
-    }
-    ui->listWidget_pages->setCurrentRow(0);
-    ui->textEdit->setDocument(sec->getPage(0)->getContent());
-}
+    book->addSection(QString("New Section %1").arg(book->numSections()+1));
+    book->getSection(size)->addPage("Untitled Page");
 
-// Author:       Ketu Patel, Matthew Morgan
-// Init Date:    10.03.2019
-// Last Updated: 11.03.2019
-void MainWindow::on_tabWidget_2_tabBarDoubleClicked(int index)
-{
-    // Rename a section, but ONLY if the new name isn't blank
-    bool ok;
-    QString text = QInputDialog::getText(nullptr, "Rename Section", "New Name:", QLineEdit::Normal, book->getSection(index)->getSecName(), &ok);
+    ui->treeWidget_sections->addTopLevelItem(sec);
+    sec->setText(0, book->getSection(size)->getSecName());
+    sec->addChild(pg);
+    pg->setText(0, "Untitled Page");
 
-    if (ok && !text.isEmpty()) {
-        book->getSection(index)->setName(text);
-        ui->tabWidget_2->setTabText(index, text);
-    }
+    ui->treeWidget_sections->setItemExpanded(sec, true);
+    ui->treeWidget_sections->clearSelection();
+    pg->setSelected(true);
+    on_treeWidget_sections_itemClicked(pg, 0);
 }
 
 // Author:       Matthew Morgan
-// Init Date:    11.03.2019
-// Last Updated: 13.03.2019
-void MainWindow::on_tabWidget_2_currentChanged(int index) {
-    // Change the listing of pages to be based on the current section
-    Section* sec = book->getSection(index);
+// Init Date:    20.03.2019
+// Last Updated: 20.03.2019
+void MainWindow::on_treeWidget_sections_itemDoubleClicked(QTreeWidgetItem *item, int column) {
+    int* ind = Util::getSectionPage(ui->treeWidget_sections, item);
 
-    if (sec != nullptr) {
-        // Update the list of pages
-        ui->listWidget_pages->clear();
-        for(int i=0; i<sec->numPages(); i++) {
-            ui->listWidget_pages->addItem(new QListWidgetItem(sec->getPage(i)->getPageName()));
+    if (ind[1] > -1) {
+        // Allow renaming of a page if the new name isn't blank
+        bool ok;
+        QString text = QInputDialog::getText(nullptr, "Rename Page", "New Name:", QLineEdit::Normal, item->text(column), &ok);
+
+        if (ok && !text.isEmpty()) {
+            Section* sec = book->getSection(ind[0]);
+            sec->getPage(ind[1])->setPgName(text);
+            item->setText(column, text);
         }
-        ui->listWidget_pages->setCurrentRow(0);
-        ui->textEdit->setDocument(book->getSection(ui->tabWidget_2->currentIndex())->getPage(0)->getContent());
     }
+    else {
+        // Changing section information
+        // Instantiate the window, then send the data and wait to receive updated data
+        editSectionWindow = new editsection(this);
+        editSectionWindow->setModal(true);
+        editSectionWindow->show();
+
+        Section* sec = book->getSection(ind[0]);
+        connect(this, SIGNAL(sendSectionInfo(QString, QColor, int)), editSectionWindow, SLOT(receiveSectionData(QString, QColor, int)));
+        emit sendSectionInfo(sec->getSecName(), sec->getColor(), ind[0]);
+        connect(editSectionWindow, SIGNAL(sendSectionData(QString, QColor, int)), this, SLOT(receiveSectionData(QString, QColor, int)));
+    }
+
+    delete ind;
 }
 
 // Author:       Matthew Morgan
-// Init Date:    11.03.2019
-// Last Updated: 13.03.2019
-void MainWindow::on_listWidget_pages_currentRowChanged(int currentRow) {
-    Page* cur = book->getSection(ui->tabWidget_2->currentIndex())->getPage(currentRow);
-    if (cur != nullptr) {
-        ui->textEdit->setDocument(cur->getContent());
+// Init Date:    20.03.2019
+// Last Updated: 20.03.2019
+void MainWindow::on_treeWidget_sections_itemClicked(QTreeWidgetItem* item, __attribute__((unused)) int column) {
+    // Dynamically update the content being displayed - section info or page content
+    int* ind = Util::getSectionPage(ui->treeWidget_sections, item);
+
+    if (ind[1] == -1) {
+        ui->textEdit->setDocument(book->getSection(ind[0])->getDoc());
     }
+    else {
+        ui->textEdit->setDocument(book->getSection(ind[0])->getPage(ind[1])->getContent());
+    }
+
+    delete ind;
 }
 
 // Author:       Matthew Morgan
-// Init Date:    11.03.2019
-// Last Updated: 11.03.2019
-/** findItemIndex(item,wid) will find the numerical index of an item, item, in a list widget
-  * wid, returning the index, or -1 if the item is not found in the widget. */
-int findItemIndex(QListWidgetItem* item, QListWidget* wid) {
-    for(int i=0; i<wid->count(); i++) {
-        if (wid->item(i) == item) { return i; }
-    }
-    return -1;
-}
+// Init Date:    20.03.2019
+// Last Updated: 20.03.2019
+void MainWindow::receiveSectionData(QString nm, QColor col, int ind) {
+    // Update the section's color and name
+    Section* sec = book->getSection(ind);
+    sec->setName(nm);
+    sec->setColor(col);
 
-// Author:       Matthew Morgan
-// Init Date:    11.03.2019
-// Last Updated: 11.03.2019
-void MainWindow::on_listWidget_pages_itemDoubleClicked(QListWidgetItem* item) {
-    // Allow renaming of a page if the new name isn't blank
-    bool ok;
-    QString text = QInputDialog::getText(nullptr, "Rename Page", "New Name:", QLineEdit::Normal, item->text(), &ok);
-    int index = findItemIndex(item, ui->listWidget_pages);
-
-    if (ok && !text.isEmpty()) {
-        Section* sec = book->getSection(ui->tabWidget_2->currentIndex());
-        sec->getPage(index)->setPgName(text);
-        item->setText(text);
-    }
+    ui->treeWidget_sections->topLevelItem(ind)->setText(0, nm);
+    QBrush pal = ui->treeWidget_sections->palette().background();
+    pal.setColor(col);
+    pal.setStyle(Qt::BrushStyle::SolidPattern);
+    ui->treeWidget_sections->topLevelItem(ind)->setBackground(0, pal);
 }
 
 // Author:       Ketu Patel, Matthew Morgan
 // Init Date:    13.03.2019
-// Last Updated: 13.03.2019
+// Last Updated: 22.03.2019
 void MainWindow::on_pushButton_removePage_clicked()
 {
-    // Delete page if it isn't the only one left
-    if (ui->listWidget_pages->count() > 1) {
-        QList<QListWidgetItem*> its = ui->listWidget_pages->selectedItems();
-        foreach(QListWidgetItem *it, its) {
-            int row = ui->listWidget_pages->row(it);
-            ui->listWidget_pages->takeItem(row);
-            book->getSection(ui->tabWidget_2->currentIndex())->removePage(row);
+    int* ind = Util::getSectionPage(ui->treeWidget_sections, ui->treeWidget_sections->selectedItems().first());
+
+    if (ind[1] == -1) {
+        // Deleting a section
+        if (book->numSections() > 1) {
+            QMessageBox::StandardButton reply = QMessageBox::question(this,
+                "Delete Section", "Are you sure you want to delete this section?");
+
+            if (reply == QMessageBox::Yes) {
+                delete ui->treeWidget_sections->topLevelItem(ind[0]);
+                book->removeSection(ind[0]);
+
+                // Move to the first page of the first section
+                ui->treeWidget_sections->clearSelection();
+                ui->treeWidget_sections->topLevelItem(0)->setExpanded(true);
+                ui->treeWidget_sections->topLevelItem(0)->child(0)->setSelected(true);
+                on_treeWidget_sections_itemClicked(ui->treeWidget_sections->topLevelItem(0)->child(0), 0);
+            }
+        }
+        else {
+            QMessageBox msg;
+            msg.critical(nullptr, "Error", "Cannot delete the last section of the notebook!");
+            msg.setFixedSize(500, 200);
         }
     }
+    else {
+        // Deleting a page
+        Section* sec = book->getSection(ind[0]);
+
+        if (sec->numPages() > 1) {
+            ui->treeWidget_sections->topLevelItem(ind[0])->takeChild(ind[1]);
+            sec->removePage(ind[1]);
+
+            // Select the first page of the section from which the page was removed
+            ui->treeWidget_sections->clearSelection();
+            ui->treeWidget_sections->topLevelItem(ind[0])->setExpanded(true);
+            ui->treeWidget_sections->topLevelItem(ind[0])->child(0)->setSelected(true);
+            on_treeWidget_sections_itemClicked(ui->treeWidget_sections->topLevelItem(ind[0])->child(0), 0);
+        }
+        else {
+            QMessageBox msg;
+            msg.critical(nullptr, "Error", "Cannot delete the only page of a section!");
+            msg.setFixedSize(500, 200);
+        }
+    }
+
+    delete ind;
+}
+
+// Author:       Matthew Morgan
+// Init Date:    21.03.2019
+// Last Updated: 21.03.2019
+void MainWindow::on_treeWidget_sections_currentItemChanged(QTreeWidgetItem *cur, __attribute__((unused)) QTreeWidgetItem *prev) {
+    if (cur == nullptr) { return; }
+    on_treeWidget_sections_itemClicked(cur, 0);
 }
 
 void MainWindow::on_pushButton_bold_clicked() {}
@@ -395,7 +790,6 @@ void MainWindow::on_pushButton_italics_clicked() {}
 void MainWindow::on_pushButton_underline_clicked() {}
 void MainWindow::on_pushButton_bulleted_clicked() {}
 void MainWindow::on_pushButton_numbered_clicked() {}
-void MainWindow::on_pushButton_save_clicked() {}
 void MainWindow::on_pushButton_strike_clicked() {}
 void MainWindow::on_pushButton_undent_clicked() {}
 void MainWindow::on_pushButton_indent_clicked() {}
@@ -405,11 +799,9 @@ void MainWindow::on_pushButton_indent_clicked() {}
 //-----------------------------------------------------------+
 // Author: Nick
 // Init Date:    26.02.2019
-// Last Updated: 26.02.2019
+// Last Updated: 22.03.2019
 void MainWindow::receiveCardData(QString deckName, QString front, QString back)
 {
-    qDebug() << deckName << front << back;
-
     // Create row
     ui->tableWidget_cardsTable->insertRow(ui->tableWidget_cardsTable->rowCount() );
     // Populate row
@@ -420,13 +812,11 @@ void MainWindow::receiveCardData(QString deckName, QString front, QString back)
 
 // Author: Jamie, Nicholas
 // Init Date:    09.02.2019
-// Last Updated: 19.02.2019
+// Last Updated: 22.03.2019
 void MainWindow::receiveCardDeleteData(bool response)
 {
    if(response == true)
    {
-       qDebug() << "mainwindow: Deleting item from tableWidget_eventList";
-
        // Delete item from table
        ui->tableWidget_cardsTable->removeRow(ui->tableWidget_cardsTable->currentItem()->row());
    }

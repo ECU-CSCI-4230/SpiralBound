@@ -1,0 +1,5 @@
+Tertiariest
+#73B0D6
+This is the third section of the notebook _(with an actual, decent color selection)_. It has been appended because of the necessity to test multiple sections with multiple pages, as well as to test the saving functionality.
+
+Cool, eh?
