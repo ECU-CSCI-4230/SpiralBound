@@ -2,6 +2,7 @@
 - **HFG-01**: There should be a couple of different themes for the user to select, where these themes customize the appearance and display of notes, deadlines, etc.
 - **HNG-01**: SpiralBound shouldn't require greater than 512 MB of RAM, and should operate on Windows 7+, macOS, and Linux.
 - **HNG-02**: SpiralBound should be a portable application. That is, it should be able to be exported to a flashdrive and run on another computer with a similar operating system.
+- **HNG-03**: The notebook, calendar events, and study cards should all be saved within a central directory, and files should be stored appropriately such that there is less requirements to read/write data to the disk redundantly. _(For example, saving all of the book pages when only one has been modified.)_
 
 ## Calendar
 - **HFC-01**: Functional calendar display that shows a preview of the deadlines for the present week or month

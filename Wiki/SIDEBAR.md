@@ -52,14 +52,18 @@
           <summary> Testing Executions </summary>
           <ul>
             <li> <a href="https://github.com/ECU-CSCI-4230/SpiralBound/wiki/Testing-3-21:-Notebook">3/21: Notebook</a>
-			<li> <a href="https://github.com/ECU-CSCI-4230/SpiralBound/wiki/Testing:-03-22:-Notebook">3/22: Notebook</a>
+		      	<li> <a href="https://github.com/ECU-CSCI-4230/SpiralBound/wiki/Testing:-03-22:-Notebook">3/22: Notebook</a>
           </ul>
         </details>
+        <ul>
+          <li> WIP
+        </ul>
       </blockquote>
-      <ul>
-        <li> WIP
-      </ul>
     </details>
+    <hr />
+    <ul>
+      <li> <a href="https://github.com/ECU-CSCI-4230/SpiralBound/wiki/Design:-Saving,-Loading">Saving and Loading</a>
+    </ul>
   </blockquote>
 </details>
 

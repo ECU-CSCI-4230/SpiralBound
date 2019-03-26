@@ -9,10 +9,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>45</x>
-      <y>243</y>
+      <x>576</x>
+      <y>306</y>
       <w>252</w>
-      <h>207</h>
+      <h>234</h>
     </coordinates>
     <panel_attributes>// ------------------------------------
 // Documenting Classes
@@ -29,7 +29,7 @@ bg=#DDDDDD
 --
 /------------------ Variables ------------------/
 --
-- file_path_: QString
+- file_path: QString
 - book: Book*
 - me: MarkdownEditor*
 
@@ -42,14 +42,16 @@ bg=#DDDDDD
 
 /Signals/
 - sendEditData(QString, QString, QString): void
-- sendSectionInfo(QString, QColor, int): void</panel_attributes>
+- sendSectionInfo(QString, QColor, int): void
+- loadCard(QString, QString, QString): void
+- loadEvent(QString, QString): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>585</x>
-      <y>324</y>
+      <x>1116</x>
+      <y>387</y>
       <w>225</w>
       <h>117</h>
     </coordinates>
@@ -70,8 +72,8 @@ n/a
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>819</x>
-      <y>324</y>
+      <x>1350</x>
+      <y>387</y>
       <w>225</w>
       <h>135</h>
     </coordinates>
@@ -93,8 +95,8 @@ n/a
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>351</x>
-      <y>324</y>
+      <x>882</x>
+      <y>387</y>
       <w>225</w>
       <h>117</h>
     </coordinates>
@@ -115,41 +117,49 @@ n/a
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>324</x>
-      <y>639</y>
+      <x>855</x>
+      <y>702</y>
       <w>225</w>
-      <h>234</h>
+      <h>333</h>
     </coordinates>
     <panel_attributes>bg=#DDDDDD
 *Section*
 --
 /------------------ Variables ------------------/
 --
-- name, desc: QString
+/- DEF_COLOR: "#FFFFFF"/
+- name: QString
+- color: QColor
+- doc: QTextDocument*
 - pages: list&lt;Page*&gt;*
 
 --
 */------------------- Methods -------------------/*
 --
 /Methods, Slots/
+- getDoc(): QTextDocument*
 - getName(): QString
 - getDesc(): QString
+- getColor(): QColor
 - setDesc(QString ds): void
 - setName(QString nm): void
+- setDoc(QTD* doc): void
+- setColor(QColor col): void
 - numsPages(): int
 - removePage(int index): void
 - addPage(QString nm, QString dsc): void
-- toString(): char*
+- loadPage(Page* pg): void
+- toString(): QString
 - fromString(char* in): static Section*</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>54</x>
-      <y>639</y>
+      <x>585</x>
+      <y>702</y>
       <w>225</w>
-      <h>270</h>
+      <h>297</h>
     </coordinates>
     <panel_attributes>bg=#DDDDDD
 *Book*
@@ -172,7 +182,9 @@ n/a
 - setDate(QDate dt): void
 - numSections(): int
 - removeSection(int index): void
-- addSection(QString nm, QString dsc): void
+- addSection(QString nm): void
+- loadSection(Section* sec): void
+- loadPage(Section* sec, Page* pg): void
 - toString(): char*
 - fromString(char* in): static Book*</panel_attributes>
     <additional_attributes/>
@@ -180,8 +192,8 @@ n/a
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>288</x>
-      <y>288</y>
+      <x>819</x>
+      <y>351</y>
       <w>207</w>
       <h>54</h>
     </coordinates>
@@ -192,8 +204,8 @@ m2=1..1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>288</x>
-      <y>288</y>
+      <x>819</x>
+      <y>351</y>
       <w>450</w>
       <h>54</h>
     </coordinates>
@@ -204,8 +216,8 @@ m2=1..1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>288</x>
-      <y>288</y>
+      <x>819</x>
+      <y>351</y>
       <w>684</w>
       <h>54</h>
     </coordinates>
@@ -216,20 +228,20 @@ m2=1..1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>153</x>
-      <y>441</y>
+      <x>684</x>
+      <y>531</y>
       <w>45</w>
-      <h>216</h>
+      <h>189</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m2=1..1</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;220.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;190.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>270</x>
-      <y>639</y>
+      <x>801</x>
+      <y>702</y>
       <w>72</w>
       <h>36</h>
     </coordinates>
@@ -240,8 +252,8 @@ m2=1..n</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>594</x>
-      <y>639</y>
+      <x>1125</x>
+      <y>702</y>
       <w>225</w>
       <h>234</h>
     </coordinates>
@@ -263,15 +275,15 @@ m2=1..n</panel_attributes>
 - setName(QString nm): void
 - setDate(QDate dt): void
 - setContent(QTD* con): void
-- toString(): char*
+- toString(): QString
 - fromString(char* in): static Page*</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>540</x>
-      <y>639</y>
+      <x>1071</x>
+      <y>702</y>
       <w>72</w>
       <h>36</h>
     </coordinates>
@@ -282,8 +294,8 @@ m2=1..n</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>351</x>
-      <y>450</y>
+      <x>882</x>
+      <y>513</y>
       <w>225</w>
       <h>45</h>
     </coordinates>
@@ -296,8 +308,8 @@ m2=1..n</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>288</x>
-      <y>288</y>
+      <x>819</x>
+      <y>351</y>
       <w>81</w>
       <h>198</h>
     </coordinates>
@@ -308,8 +320,8 @@ m2=1..1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>351</x>
-      <y>153</y>
+      <x>882</x>
+      <y>216</y>
       <w>225</w>
       <h>117</h>
     </coordinates>
@@ -330,8 +342,8 @@ n/a
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>585</x>
-      <y>153</y>
+      <x>1116</x>
+      <y>216</y>
       <w>225</w>
       <h>117</h>
     </coordinates>
@@ -352,8 +364,8 @@ n/a
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>288</x>
-      <y>261</y>
+      <x>819</x>
+      <y>324</y>
       <w>207</w>
       <h>54</h>
     </coordinates>
@@ -364,8 +376,8 @@ m2=1..1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>288</x>
-      <y>261</y>
+      <x>819</x>
+      <y>324</y>
       <w>450</w>
       <h>54</h>
     </coordinates>
@@ -376,8 +388,8 @@ m2=1..1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>819</x>
-      <y>153</y>
+      <x>1350</x>
+      <y>216</y>
       <w>225</w>
       <h>117</h>
     </coordinates>
@@ -398,8 +410,8 @@ n/a
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>288</x>
-      <y>261</y>
+      <x>819</x>
+      <y>324</y>
       <w>684</w>
       <h>54</h>
     </coordinates>
@@ -410,10 +422,10 @@ m2=1..1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>828</x>
-      <y>639</y>
-      <w>225</w>
-      <h>171</h>
+      <x>1359</x>
+      <y>702</y>
+      <w>243</w>
+      <h>270</h>
     </coordinates>
     <panel_attributes>bg=#DDDDDD
 *Util*
@@ -425,9 +437,18 @@ m2=1..1</panel_attributes>
 n/a
 
 --
+/------------------ Structures ----------------/
+--
+Deck; Event
+--
 */------------------- Methods -------------------/*
 --
 /Methods, Slots/
+- getSectionPage(QTW* tree, QTWItem* it): int*
+- showError(QStr title, QStr msg): static void
+- showMessage(QStr title, QStr msg): static void
+- confirm(QStr title, QStr msg): static bool
+- copyDirectory(QStr from, QStr to): static void
 - find(char* str, char c, int strlen): static int
 - findr(char* str, char c, int strlen): static int
 - QtoCString(QString qstr): static char*</panel_attributes>
@@ -436,8 +457,8 @@ n/a
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>585</x>
-      <y>450</y>
+      <x>1116</x>
+      <y>513</y>
       <w>225</w>
       <h>126</h>
     </coordinates>
@@ -459,8 +480,8 @@ n/a
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>288</x>
-      <y>288</y>
+      <x>819</x>
+      <y>351</y>
       <w>315</w>
       <h>261</h>
     </coordinates>
@@ -471,20 +492,8 @@ m2=1..1</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1296</x>
-      <y>0</y>
-      <w>126</w>
-      <h>63</h>
-    </coordinates>
-    <panel_attributes>Note..
-bg=blue</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>54</x>
-      <y>585</y>
+      <x>585</x>
+      <y>648</y>
       <w>99</w>
       <h>45</h>
     </coordinates>
@@ -493,5 +502,65 @@ fontsize=10
 /Connection to the/
 /MainWindow class/</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1413</x>
+      <y>1089</y>
+      <w>189</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>bg=#DDDDDD
+*Deck*
+/Structure/
+--
+/------------------ Variables ------------------/
+--
+- name: QString
+- front: QStringList
+- back: QStringList</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1413</x>
+      <y>981</y>
+      <w>189</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>bg=#DDDDDD
+*Event*
+/Structure/
+--
+/------------------ Variables ------------------/
+--
+- name: QString
+- date: QString
+- time: QString</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1368</x>
+      <y>963</y>
+      <w>63</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;10.0;40.0;50.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1368</x>
+      <y>990</y>
+      <w>63</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;10.0;130.0;50.0;130.0</additional_attributes>
   </element>
 </diagram>
