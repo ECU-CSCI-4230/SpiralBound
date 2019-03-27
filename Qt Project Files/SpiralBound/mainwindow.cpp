@@ -4,6 +4,12 @@
 #include "addcalendarevent.h"
 #include "deletecalendarevent.h"
 #include "editcalendarevent.h"
+#include "book.h"
+#include "section.h"
+#include "page.h"
+#include "util.h"
+#include "previewpage.h"
+
 #include <QFile>
 #include <QFileDialog>
 #include <QTextStream>
@@ -18,10 +24,7 @@
 #include <QListWidgetItem>
 #include <list>
 #include <qinputdialog.h>
-#include "book.h"
-#include "section.h"
-#include "page.h"
-#include "util.h"
+#include <QWebChannel>
 
 // Constructor
 MainWindow::MainWindow(QWidget *parent) :
@@ -49,6 +52,21 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->treeWidget_sections->topLevelItem(0)->setExpanded(true);
 
     ui->tableWidget_cardsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    ui->preview->setContextMenuPolicy(Qt::NoContextMenu);
+
+    PreviewPage *page = new PreviewPage(this);
+    ui->preview->setPage(page);
+
+    connect(ui->textEdit, &QTextEdit::textChanged,
+            [this]() { m_content.setText(ui->textEdit->toPlainText()); });
+
+    QWebChannel *channel = new QWebChannel(this);
+    channel->registerObject(QStringLiteral("content"), &m_content);
+    page->setWebChannel(channel);
+
+    ui->preview->setUrl(QUrl("qrc:/index.html"));
+
 }
 
 // Destructor
