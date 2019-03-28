@@ -26,6 +26,9 @@
 #include <qinputdialog.h>
 #include <QWebChannel>
 
+//black magic
+#define UNUSED(expr) do { (void)(expr); } while (0)
+
 // Constructor
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -65,7 +68,7 @@ MainWindow::MainWindow(QWidget *parent) :
     channel->registerObject(QStringLiteral("content"), &m_content);
     page->setWebChannel(channel);
 
-    ui->preview->setUrl(QUrl("qrc:/index.html"));
+    ui->preview->setUrl(QUrl("qrc:/resources/index.html"));
 
 }
 
@@ -621,8 +624,9 @@ void MainWindow::on_pushButton_deleteEvent_clicked()
 // Author:       Nicholas
 // Init Date:    19.02.2019
 // Last Updated: 22.03.2019
-void MainWindow::on_tableWidget_eventList_cellChanged(__attribute__((unused)) int row, int column)
+void MainWindow::on_tableWidget_eventList_cellChanged(int row, int column)
 {
+    UNUSED(row);
     if(column == 2)
     {
         ui->tableWidget_eventList->sortByColumn(0, Qt::AscendingOrder);
@@ -711,7 +715,9 @@ void MainWindow::on_treeWidget_sections_itemDoubleClicked(QTreeWidgetItem *item,
 // Author:       Matthew Morgan
 // Init Date:    20.03.2019
 // Last Updated: 20.03.2019
-void MainWindow::on_treeWidget_sections_itemClicked(QTreeWidgetItem* item, __attribute__((unused)) int column) {
+void MainWindow::on_treeWidget_sections_itemClicked(QTreeWidgetItem* item, int column) {
+    UNUSED(column);
+
     // Dynamically update the content being displayed - section info or page content
     int* ind = Util::getSectionPage(ui->treeWidget_sections, item);
 
@@ -798,7 +804,9 @@ void MainWindow::on_pushButton_removePage_clicked()
 // Author:       Matthew Morgan
 // Init Date:    21.03.2019
 // Last Updated: 21.03.2019
-void MainWindow::on_treeWidget_sections_currentItemChanged(QTreeWidgetItem *cur, __attribute__((unused)) QTreeWidgetItem *prev) {
+void MainWindow::on_treeWidget_sections_currentItemChanged(QTreeWidgetItem *cur, QTreeWidgetItem *prev)
+{
+    UNUSED(prev);
     if (cur == nullptr) { return; }
     on_treeWidget_sections_itemClicked(cur, 0);
 }
