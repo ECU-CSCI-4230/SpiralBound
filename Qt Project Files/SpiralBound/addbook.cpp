@@ -22,12 +22,12 @@ void addbook::on_buttonBox_accepted()
 {
     QString bookNm = ui->lineEdit_bookName ->text();
     QString authNm = ui->lineEdit_authorName->text();
-
+    QString date = ui->label_newbook_date->text();
 
     if(!bookNm.isEmpty() && !authNm.isEmpty())
     {
         // Send bookNm and authNm to mainwindow.cpp
-        emit sendBookData(bookNm, authNm);
+        emit sendBookData(bookNm, authNm, date);
     }
 
     else //if one of the field is empty, display error message.

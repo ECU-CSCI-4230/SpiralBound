@@ -77,9 +77,10 @@ void MainWindow::on_action_print_triggered() {}
 // Author:       Ketu Patel
 // Init Date:    23.03.2019
 // Last Updated: 23.03.2019
-void MainWindow::receiveBookData(QString bookNm, QString authNm)
+void MainWindow::receiveBookData(QString bookNm, QString authNm, QString date)
 {
-    qDebug() <<"mainWinow: Received data from addbook window" << bookNm <<authNm  ;
+    ui->label_bookName->setText(bookNm);
+    qDebug() <<"mainWinow: Received data from addbook window" << bookNm <<authNm<< date;
 }
 
 // Author:       Ketu Patel
@@ -91,7 +92,7 @@ void MainWindow::on_action_new_triggered() {
     newBook->setModal(true);
     newBook->show();
 
-    connect(newBook, SIGNAL(sendBookData(QString, QString)), this, SLOT(receiveBookData(QString, QString)));
+    connect(newBook, SIGNAL(sendBookData(QString, QString, QString)), this, SLOT(receiveBookData(QString, QString, QString)));
 }
 
 void MainWindow::on_action_openRecent_triggered() {}
@@ -329,7 +330,8 @@ void MainWindow::on_treeWidget_sections_itemDoubleClicked(QTreeWidgetItem *item,
     if (ind[1] > -1) {
         // Allow renaming of a page if the new name isn't blank
         bool ok;
-        QString text = QInputDialog::getText(nullptr, "Rename Page", "New Name:", QLineEdit::Normal, item->text(column), &ok);
+        QString text = QInputDialog::getText(nullptr, "Rename Page", "New Name:", QLineEdit::Normal, item->text(column), &ok, Qt::MSWindowsFixedSizeDialogHint);
+
 
         if (ok && !text.isEmpty()) {
             Section* sec = book->getSection(ind[0]);

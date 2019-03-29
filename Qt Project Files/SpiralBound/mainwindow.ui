@@ -131,257 +131,6 @@ p, li { white-space: pre-wrap; }
          <string>New Section</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton_bold">
-        <property name="geometry">
-         <rect>
-          <x>480</x>
-          <y>2</y>
-          <width>16</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="toolTip">
-         <string>Bold</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="spiralbound.qrc">
-          <normaloff>:/SpiralBound/images/icon/format_bold.png</normaloff>:/SpiralBound/images/icon/format_bold.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>14</width>
-          <height>14</height>
-         </size>
-        </property>
-        <property name="checkable">
-         <bool>false</bool>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton_italics">
-        <property name="geometry">
-         <rect>
-          <x>500</x>
-          <y>2</y>
-          <width>16</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="toolTip">
-         <string>Italic</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="spiralbound.qrc">
-          <normaloff>:/SpiralBound/images/icon/format_italic.png</normaloff>:/SpiralBound/images/icon/format_italic.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>14</width>
-          <height>14</height>
-         </size>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton_underline">
-        <property name="geometry">
-         <rect>
-          <x>520</x>
-          <y>2</y>
-          <width>16</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="toolTip">
-         <string>Underline</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="spiralbound.qrc">
-          <normaloff>:/SpiralBound/images/icon/format_underline.png</normaloff>:/SpiralBound/images/icon/format_underline.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>14</width>
-          <height>14</height>
-         </size>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton_numbered">
-        <property name="geometry">
-         <rect>
-          <x>572</x>
-          <y>2</y>
-          <width>16</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="toolTip">
-         <string>Numbered List</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="spiralbound.qrc">
-          <normaloff>:/SpiralBound/images/icon/format_list_unorder.png</normaloff>:/SpiralBound/images/icon/format_list_unorder.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>14</width>
-          <height>14</height>
-         </size>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="Line" name="line">
-        <property name="geometry">
-         <rect>
-          <x>554</x>
-          <y>0</y>
-          <width>21</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton_bulleted">
-        <property name="geometry">
-         <rect>
-          <x>595</x>
-          <y>2</y>
-          <width>16</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="toolTip">
-         <string>Bulleted List</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="spiralbound.qrc">
-          <normaloff>:/SpiralBound/images/icon/format_list_order.png</normaloff>:/SpiralBound/images/icon/format_list_order.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>14</width>
-          <height>14</height>
-         </size>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="Line" name="line_2">
-        <property name="geometry">
-         <rect>
-          <x>612</x>
-          <y>0</y>
-          <width>16</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton_strike">
-        <property name="geometry">
-         <rect>
-          <x>540</x>
-          <y>2</y>
-          <width>16</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="toolTip">
-         <string>Strikethrough</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="spiralbound.qrc">
-          <normaloff>:/SpiralBound/images/icon/format_strike.png</normaloff>:/SpiralBound/images/icon/format_strike.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>14</width>
-          <height>14</height>
-         </size>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
        <widget class="QPushButton" name="pushButton_save">
         <property name="geometry">
          <rect>
@@ -440,82 +189,6 @@ p, li { white-space: pre-wrap; }
          </size>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton_indent">
-        <property name="geometry">
-         <rect>
-          <x>627</x>
-          <y>2</y>
-          <width>16</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="toolTip">
-         <string>Bold</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="spiralbound.qrc">
-          <normaloff>:/SpiralBound/images/icon/format_indent.png</normaloff>:/SpiralBound/images/icon/format_indent.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>14</width>
-          <height>14</height>
-         </size>
-        </property>
-        <property name="checkable">
-         <bool>false</bool>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton_undent">
-        <property name="geometry">
-         <rect>
-          <x>650</x>
-          <y>2</y>
-          <width>16</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="toolTip">
-         <string>Bold</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="spiralbound.qrc">
-          <normaloff>:/SpiralBound/images/icon/format_outdent.png</normaloff>:/SpiralBound/images/icon/format_outdent.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>14</width>
-          <height>14</height>
-         </size>
-        </property>
-        <property name="checkable">
-         <bool>false</bool>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
        <widget class="QTreeWidget" name="treeWidget_sections">
         <property name="geometry">
          <rect>
@@ -561,7 +234,7 @@ p, li { white-space: pre-wrap; }
          </item>
         </item>
        </widget>
-       <widget class="QLabel" name="label_Write">
+       <widget class="QLabel" name="label_bookName">
         <property name="geometry">
          <rect>
           <x>4</x>
@@ -577,7 +250,7 @@ p, li { white-space: pre-wrap; }
          </font>
         </property>
         <property name="text">
-         <string>Write Below:</string>
+         <string/>
         </property>
        </widget>
        <widget class="QLabel" name="label_Content">
@@ -599,23 +272,293 @@ p, li { white-space: pre-wrap; }
          <string>Book Contents:</string>
         </property>
        </widget>
-       <zorder>line</zorder>
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>400</x>
+          <y>-6</y>
+          <width>270</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QPushButton" name="pushButton_bold">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>Bold</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="spiralbound.qrc">
+             <normaloff>:/SpiralBound/images/icon/format_bold.png</normaloff>:/SpiralBound/images/icon/format_bold.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>14</width>
+             <height>14</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>false</bool>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_italics">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>Italic</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="spiralbound.qrc">
+             <normaloff>:/SpiralBound/images/icon/format_italic.png</normaloff>:/SpiralBound/images/icon/format_italic.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>14</width>
+             <height>14</height>
+            </size>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_underline">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>Underline</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="spiralbound.qrc">
+             <normaloff>:/SpiralBound/images/icon/format_underline.png</normaloff>:/SpiralBound/images/icon/format_underline.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>14</width>
+             <height>14</height>
+            </size>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_strike">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>Strikethrough</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="spiralbound.qrc">
+             <normaloff>:/SpiralBound/images/icon/format_strike.png</normaloff>:/SpiralBound/images/icon/format_strike.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>14</width>
+             <height>14</height>
+            </size>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="Line" name="line">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_numbered">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>Numbered List</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="spiralbound.qrc">
+             <normaloff>:/SpiralBound/images/icon/format_list_unorder.png</normaloff>:/SpiralBound/images/icon/format_list_unorder.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>14</width>
+             <height>14</height>
+            </size>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_bulleted">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>Bulleted List</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="spiralbound.qrc">
+             <normaloff>:/SpiralBound/images/icon/format_list_order.png</normaloff>:/SpiralBound/images/icon/format_list_order.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>14</width>
+             <height>14</height>
+            </size>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="Line" name="line_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_indent">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>Bold</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="spiralbound.qrc">
+             <normaloff>:/SpiralBound/images/icon/format_indent.png</normaloff>:/SpiralBound/images/icon/format_indent.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>14</width>
+             <height>14</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>false</bool>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_undent">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>Bold</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="spiralbound.qrc">
+             <normaloff>:/SpiralBound/images/icon/format_outdent.png</normaloff>:/SpiralBound/images/icon/format_outdent.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>14</width>
+             <height>14</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>false</bool>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <zorder>layoutWidget</zorder>
        <zorder>textEdit</zorder>
        <zorder>pushButton_addPage</zorder>
        <zorder>pushButton_addSection</zorder>
-       <zorder>pushButton_bold</zorder>
-       <zorder>pushButton_italics</zorder>
-       <zorder>pushButton_underline</zorder>
-       <zorder>pushButton_numbered</zorder>
-       <zorder>pushButton_bulleted</zorder>
-       <zorder>line_2</zorder>
-       <zorder>pushButton_strike</zorder>
        <zorder>pushButton_save</zorder>
        <zorder>pushButton_removePage</zorder>
-       <zorder>pushButton_indent</zorder>
-       <zorder>pushButton_undent</zorder>
        <zorder>treeWidget_sections</zorder>
-       <zorder>label_Write</zorder>
+       <zorder>label_bookName</zorder>
        <zorder>label_Content</zorder>
       </widget>
       <widget class="QWidget" name="tab_2">
