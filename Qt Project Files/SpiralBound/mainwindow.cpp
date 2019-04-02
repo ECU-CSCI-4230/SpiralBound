@@ -22,6 +22,7 @@
 #include "section.h"
 #include "page.h"
 #include "util.h"
+#include "adddeck.h"
 
 // Constructor
 MainWindow::MainWindow(QWidget *parent) :
@@ -804,10 +805,11 @@ void MainWindow::receiveCardData(QString deckName, QString front, QString back)
 {
     // Create row
     ui->tableWidget_cardsTable->insertRow(ui->tableWidget_cardsTable->rowCount() );
+
     // Populate row
-    ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 0, new QTableWidgetItem(deckName));
-    ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 1, new QTableWidgetItem(front));
-    ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 2, new QTableWidgetItem(back));
+    // ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 0, new QTableWidgetItem(deckName));
+    ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 0, new QTableWidgetItem(front));
+    ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 1, new QTableWidgetItem(back));
 }
 
 // Author: Jamie, Nicholas
@@ -820,6 +822,26 @@ void MainWindow::receiveCardDeleteData(bool response)
        // Delete item from table
        ui->tableWidget_cardsTable->removeRow(ui->tableWidget_cardsTable->currentItem()->row());
    }
+}
+
+// Author: Cam, Nick
+// Init Date:    26.03.2019
+// Last Updated: 26.03.2019
+void MainWindow::on_pushButton_addDeck_clicked()
+{
+    addDeckWindow = new adddeck(this);
+    addDeckWindow->setModal(true);
+    addDeckWindow->show();
+
+    connect(addDeckWindow, SIGNAL(sendDeckData(QString)), this, SLOT(receiveDeckData(QString)));
+}
+
+// Author: Cam, Nick
+// Init Date:    26.03.2019
+// Last Updated: 26.03.2019
+void MainWindow::receiveDeckData(QString deck)
+{
+    ui->listWidget_decks->addItem(deck);
 }
 
 // Author: Jamie, Nick
@@ -874,7 +896,6 @@ void MainWindow::on_pushButton_studyCard_clicked()
 // Last Updated: 07.03.2019
 void MainWindow::on_pushButton_import_clicked()
 {
-    //TODO: opens window for importing files
     importCardWindow = new importflashcards(this);
     importCardWindow->setModal(true);
     importCardWindow->show();

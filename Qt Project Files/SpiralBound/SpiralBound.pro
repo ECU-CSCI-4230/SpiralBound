@@ -36,7 +36,8 @@ SOURCES += \
         addcard.cpp \
         deletecard.cpp \
         importflashcards.cpp \
-    editsection.cpp
+    editsection.cpp \
+    adddeck.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -52,7 +53,8 @@ HEADERS += \
         addcard.h \
         deletecard.h \
         importflashcards.h \
-    editsection.h
+    editsection.h \
+    adddeck.h
 
 FORMS += \
         mainwindow.ui \
@@ -63,7 +65,8 @@ FORMS += \
         addcard.ui \
         deletecard.ui \
         importflashcards.ui \
-    editsection.ui
+    editsection.ui \
+    adddeck.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
