@@ -42,8 +42,9 @@ void MarkdownEditor::addMarkupFormatting(const QString &markup)
 }
 
 void MarkdownEditor::bold() { addMarkupFormatting("**"); }
-void MarkdownEditor::italic() { addMarkupFormatting("_"); }
+void MarkdownEditor::italic() { addMarkupFormatting("*"); }
 void MarkdownEditor::strikethough() { addMarkupFormatting("~~"); }
+void MarkdownEditor::underline() { addMarkupFormatting("_"); }
 
 void MarkdownEditor::makeComment() {}
 

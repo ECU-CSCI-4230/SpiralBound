@@ -23,6 +23,7 @@ public:
 public slots:
     void bold();
     void italic();
+    void underline();
     void strikethough();
     void makeComment();
     void indentText();
