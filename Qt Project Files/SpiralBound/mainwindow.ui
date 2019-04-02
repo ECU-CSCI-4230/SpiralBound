@@ -48,7 +48,7 @@
          <rect>
           <x>0</x>
           <y>20</y>
-          <width>671</width>
+          <width>381</width>
           <height>521</height>
          </rect>
         </property>
@@ -510,6 +510,16 @@ p, li { white-space: pre-wrap; }
          <string>Book Contents:</string>
         </property>
        </widget>
+       <widget class="QWebEngineView" name="preview" native="true">
+        <property name="geometry">
+         <rect>
+          <x>380</x>
+          <y>20</y>
+          <width>301</width>
+          <height>521</height>
+         </rect>
+        </property>
+       </widget>
        <zorder>line</zorder>
        <zorder>textEdit</zorder>
        <zorder>pushButton_addPage</zorder>
@@ -527,6 +537,7 @@ p, li { white-space: pre-wrap; }
        <zorder>treeWidget_sections</zorder>
        <zorder>label_Write</zorder>
        <zorder>label_Content</zorder>
+       <zorder>preview</zorder>
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -1001,6 +1012,14 @@ p, li { white-space: pre-wrap; }
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QWebEngineView</class>
+   <extends>QWidget</extends>
+   <header>qwebengineview.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="spiralbound.qrc"/>
  </resources>

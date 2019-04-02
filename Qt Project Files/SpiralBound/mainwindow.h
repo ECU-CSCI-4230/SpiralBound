@@ -1,6 +1,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "document.h"
+#include "markdowneditor.h"
+#include "book.h"
+
 #include <QMainWindow>
 #include <QTableWidget>
 #include <QListWidgetItem>
@@ -13,8 +17,6 @@
 #include <importflashcards.h>
 #include <deletecard.h>
 #include <editsection.h>
-#include "markdowneditor.h"
-#include "book.h"
 
 namespace Ui {
 class MainWindow;
@@ -129,6 +131,8 @@ private:
     editsection* editSectionWindow;
     Book* book;
     MarkdownEditor* me;
+    QString m_filePath;
+    Document m_content;
 };
 
 #endif // MAINWINDOW_H

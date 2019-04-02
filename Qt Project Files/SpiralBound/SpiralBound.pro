@@ -4,7 +4,7 @@
 
 QT += testlib
 QT += core gui
-QT += widgets
+QT += widgets webenginewidgets webchannel
 TEMPLATE = app
 TARGET = SpiralBound
 INCLUDEPATH += .
@@ -36,7 +36,9 @@ SOURCES += \
         addcard.cpp \
         deletecard.cpp \
         importflashcards.cpp \
-    editsection.cpp
+    editsection.cpp \
+    document.cpp \
+    previewpage.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -52,7 +54,9 @@ HEADERS += \
         addcard.h \
         deletecard.h \
         importflashcards.h \
-    editsection.h
+    editsection.h \
+    document.h \
+    previewpage.h
 
 FORMS += \
         mainwindow.ui \

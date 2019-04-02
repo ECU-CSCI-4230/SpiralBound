@@ -28,4 +28,13 @@
         <file>images/icon/op_page_erase.png</file>
         <file>images/icon/op_page_new.png</file>
     </qresource>
+    <qresource prefix="/">
+        <file>resources/index.html</file>
+        <file>resources/default.md</file>
+        <file>resources/3rdparty/markdown.css</file>
+        <file>resources/3rdparty/MARKDOWN-LICENSE.txt</file>
+        <file>resources/3rdparty/marked.js</file>
+        <file>resources/3rdparty/MARKED-LICENSE.txt</file>
+        <file>resources/3rdparty/qt_attribution.json</file>
+    </qresource>
 </RCC>
