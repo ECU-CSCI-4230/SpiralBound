@@ -23,6 +23,7 @@
 #include "page.h"
 #include "util.h"
 #include "adddeck.h"
+#include "deletedeck.h"
 
 // Constructor
 MainWindow::MainWindow(QWidget *parent) :
@@ -847,6 +848,57 @@ void MainWindow::receiveDeckData(QString deck)
     Deck * newDeck = new Deck();
     newDeck->name = last->text();
     deckList.push_back(newDeck);
+
+    // Debugging
+    for (Deck* deck : deckList) {
+        qDebug() << deck->name;
+    }
+}
+
+// Author: Cam, Nick
+// Init Date:    26.03.2019
+// Last Updated: 02.04.2019
+void MainWindow::on_pushButton_deleteDeck_clicked()
+{
+    QListWidgetItem * deck = ui->listWidget_decks->currentItem();
+
+    if (deck == nullptr)
+    {
+        QMessageBox messageBox;
+        messageBox.critical(nullptr,"Error","Select a deck to delete, please try again.");
+        messageBox.setFixedSize(500,200);
+    }
+    else
+    {
+        // Builds deletedeck GUI/window
+        deleteDeckWindow = new deletedeck(this);
+        deleteDeckWindow->setModal(true);
+        deleteDeckWindow->show();
+
+        // Connect mainwindow to addeventwindow
+        connect(deleteDeckWindow, SIGNAL(sendDeleteData(bool)), this, SLOT(receiveDeckDeleteData(bool)));
+    }
+}
+
+// Author: Cam, Nick
+// Init Date:    26.03.2019
+// Last Updated: 02.04.2019
+void MainWindow::receiveDeckDeleteData(bool response)
+{
+    QListWidgetItem * selectedDeck = ui->listWidget_decks->currentItem();
+    QString deckName = selectedDeck->text();
+
+    if(response == true)
+    {
+        delete selectedDeck;
+        for (Deck * deck : deckList)
+        {
+            if (deck->name == deckName)
+            {
+                deckList.remove(deck);
+            }
+        }
+    }
 
     // Debugging
     for (Deck* deck : deckList) {

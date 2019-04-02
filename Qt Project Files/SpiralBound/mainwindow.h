@@ -16,6 +16,7 @@
 #include "markdowneditor.h"
 #include "book.h"
 #include "adddeck.h"
+#include "deletedeck.h"
 
 namespace Ui {
 class MainWindow;
@@ -77,6 +78,7 @@ private slots:
     //=========================
     void on_pushButton_addCard_clicked();
     void on_pushButton_addDeck_clicked();
+    void on_pushButton_deleteDeck_clicked();
     void on_pushButton_deleteCard_clicked();
     void on_pushButton_studyCard_clicked();
     void on_pushButton_import_clicked();
@@ -85,6 +87,7 @@ private slots:
     void receiveCardData(QString, QString, QString);
     void receiveCardDeleteData(bool);
     void receiveDeckData(QString);
+    void receiveDeckDeleteData(bool);
 
     // =========================
     // Notebook
@@ -129,6 +132,7 @@ private:
     addcard *addCardWindow;
     importflashcards *importCardWindow;
     deletecard *deleteCardWindow;
+    deletedeck *deleteDeckWindow;
     list<Deck*> deckList;
 
     editsection* editSectionWindow;
