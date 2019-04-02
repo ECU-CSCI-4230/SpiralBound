@@ -18,11 +18,11 @@ addcard::~addcard()
 void addcard::on_buttonBox_accepted()
 {
     // Deck name
-    QString deckName = ui->lineEdit_deck->text();
+    // QString deckName = ui->lineEdit_deck->text();
     QString front = ui->textEdit_front->toPlainText();
     QString back = ui->textEdit_back->toPlainText();
 
     // Send data to mainwindow.cpp
-    emit sendCardData(deckName, front, back);
+    // emit sendCardData(deckName, front, back);
 
 }

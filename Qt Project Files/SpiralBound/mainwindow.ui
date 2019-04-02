@@ -657,7 +657,7 @@ p, li { white-space: pre-wrap; }
        <widget class="QLabel" name="label_cards">
         <property name="geometry">
          <rect>
-          <x>190</x>
+          <x>310</x>
           <y>20</y>
           <width>191</width>
           <height>41</height>
@@ -684,9 +684,9 @@ p, li { white-space: pre-wrap; }
        <widget class="QTableWidget" name="tableWidget_cardsTable">
         <property name="geometry">
          <rect>
-          <x>190</x>
+          <x>310</x>
           <y>60</y>
-          <width>711</width>
+          <width>591</width>
           <height>411</height>
          </rect>
         </property>
@@ -700,7 +700,7 @@ p, li { white-space: pre-wrap; }
          <bool>true</bool>
         </attribute>
         <attribute name="horizontalHeaderDefaultSectionSize">
-         <number>354</number>
+         <number>294</number>
         </attribute>
         <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
          <bool>false</bool>
@@ -748,7 +748,7 @@ p, li { white-space: pre-wrap; }
          <rect>
           <x>10</x>
           <y>60</y>
-          <width>171</width>
+          <width>291</width>
           <height>411</height>
          </rect>
         </property>
@@ -756,8 +756,8 @@ p, li { white-space: pre-wrap; }
        <widget class="QWidget" name="">
         <property name="geometry">
          <rect>
-          <x>10</x>
-          <y>470</y>
+          <x>11</x>
+          <y>478</y>
           <width>891</width>
           <height>41</height>
          </rect>
@@ -771,6 +771,13 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item row="0" column="1">
+          <widget class="QPushButton" name="pushButton_deleteDeck">
+           <property name="text">
+            <string>Delete Deck</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
           <widget class="QPushButton" name="pushButton_addCard">
            <property name="enabled">
             <bool>true</bool>
@@ -780,7 +787,7 @@ p, li { white-space: pre-wrap; }
            </property>
           </widget>
          </item>
-         <item row="0" column="2">
+         <item row="0" column="3">
           <widget class="QPushButton" name="pushButton_deleteCard">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -789,18 +796,18 @@ p, li { white-space: pre-wrap; }
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Delete</string>
+            <string>Delete Card</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="3">
+         <item row="0" column="4">
           <widget class="QPushButton" name="pushButton_studyCard">
            <property name="text">
             <string>Study</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="4">
+         <item row="0" column="5">
           <widget class="QPushButton" name="pushButton_import">
            <property name="text">
             <string>Import...</string>

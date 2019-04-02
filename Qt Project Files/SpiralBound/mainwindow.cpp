@@ -834,14 +834,24 @@ void MainWindow::on_pushButton_addDeck_clicked()
     addDeckWindow->show();
 
     connect(addDeckWindow, SIGNAL(sendDeckData(QString)), this, SLOT(receiveDeckData(QString)));
+
 }
 
 // Author: Cam, Nick
 // Init Date:    26.03.2019
-// Last Updated: 26.03.2019
+// Last Updated: 02.04.2019
 void MainWindow::receiveDeckData(QString deck)
 {
     ui->listWidget_decks->addItem(deck);
+    QListWidgetItem * last = ui->listWidget_decks->item(ui->listWidget_decks->count() - 1);
+    Deck * newDeck = new Deck();
+    newDeck->name = last->text();
+    deckList.push_back(newDeck);
+
+    // Debugging
+    for (Deck* deck : deckList) {
+        qDebug() << deck->name;
+    }
 }
 
 // Author: Jamie, Nick

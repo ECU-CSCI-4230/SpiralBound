@@ -129,6 +129,7 @@ private:
     addcard *addCardWindow;
     importflashcards *importCardWindow;
     deletecard *deleteCardWindow;
+    list<Deck*> deckList;
 
     editsection* editSectionWindow;
     Book* book;
