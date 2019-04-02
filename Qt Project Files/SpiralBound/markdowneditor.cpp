@@ -6,7 +6,6 @@ MarkdownEditor::MarkdownEditor(QPlainTextEdit* edit)
     editor = edit;
 }
 
-//fuck me sideways
 void MarkdownEditor::addMarkupFormatting(const QString &markup)
 {
     QTextCursor cursor = editor->textCursor();
@@ -75,11 +74,14 @@ void MarkdownEditor::insertNumeral()
     cursor.endEditBlock();
 }
 
-void MarkdownEditor::insertTask() {}
+void MarkdownEditor::insertTask()
+{
+
+}
 
 bool MarkdownEditor::detectEnum()
 {
-    // this code is dogshit
+    // Remove duplicated code and implement better
     QTextCursor cursor = editor->textCursor();
     int currentPosition = cursor.position();
     cursor.beginEditBlock();
@@ -105,7 +107,7 @@ bool MarkdownEditor::detectEnum()
 
 bool MarkdownEditor::detectBullet()
 {
-    // this code is dogshit
+    // Remove duplicated code and implement better
     QTextCursor cursor = editor->textCursor();
     int currentPosition = cursor.position();
     cursor.beginEditBlock();

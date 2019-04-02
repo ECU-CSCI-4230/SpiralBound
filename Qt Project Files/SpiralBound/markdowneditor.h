@@ -30,7 +30,6 @@ public slots:
     void unindentText();
     void insertBullet();
     void insertNumeral();
-    void insertTask();
     bool detectBullet();
     bool detectEnum();
 
