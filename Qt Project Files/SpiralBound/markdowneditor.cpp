@@ -1,7 +1,7 @@
 #include "markdowneditor.h"
 #include "qdebug.h"
 
-MarkdownEditor::MarkdownEditor(QTextEdit* edit)
+MarkdownEditor::MarkdownEditor(QPlainTextEdit* edit)
 {
     editor = edit;
 }
@@ -53,18 +53,32 @@ void MarkdownEditor::unindentText() {}
 
 void MarkdownEditor::insertBullet()
 {
-//    int currentPosition = cursor.position();
-//    cursor.beginEditBlock();
-//    cursor.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor, 1);
-//    cursor.insertText("* ");
-//    cursor.setPosition(currentPosition);
-//    cursor.endEditBlock();
+    QTextCursor cursor = editor->textCursor();
+    int currentPosition = cursor.position();
+    cursor.beginEditBlock();
+    cursor.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor, 1);
+    cursor.insertText("* ");
+    cursor.setPosition(currentPosition);
+    cursor.endEditBlock();
 }
 
-void MarkdownEditor::insertNumeral() {}
+void MarkdownEditor::insertNumeral()
+{
+    QTextCursor cursor = editor->textCursor();
+    int currentPosition = cursor.position();
+    cursor.beginEditBlock();
+    cursor.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor, 1);
+    cursor.insertText("1. ");
+    cursor.setPosition(currentPosition);
+    cursor.endEditBlock();
+}
 
 void MarkdownEditor::insertTask() {}
 
-bool MarkdownEditor::detectEnum() { return false; }
+bool MarkdownEditor::detectEnum()
+{
+    QTextCursor cursor = editor->textCursor();
+    return false;
+}
 
 bool MarkdownEditor::detectBullet() { return false; }

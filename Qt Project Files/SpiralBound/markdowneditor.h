@@ -18,7 +18,7 @@ class MarkdownEditor : QPlainTextEdit
     Q_OBJECT
 
 public:
-    MarkdownEditor(QTextEdit* edit);
+    MarkdownEditor(QPlainTextEdit* edit);
 
 public slots:
     void bold();
@@ -35,7 +35,7 @@ public slots:
 
 private:
     void addMarkupFormatting(const QString& markup);
-    QTextEdit* editor;
+    QPlainTextEdit* editor;
 };
 
 #endif // MARKDOWNEDITOR_H
