@@ -79,11 +79,33 @@ void MarkdownEditor::insertTask() {}
 
 bool MarkdownEditor::detectEnum()
 {
+    // this code is dogshit
+    QTextCursor cursor = editor->textCursor();
+    int currentPosition = cursor.position();
+    cursor.beginEditBlock();
+    cursor.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor, 1);
+    cursor.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor, 1);
+    QString seltext = cursor.selectedText();
+    cursor.setPosition(currentPosition);
+    cursor.endEditBlock();
+
+    //build a regular expression to match against the alleged numeral
+    QRegularExpression re;
+    re.setPattern("^(\\d+)\\. ");
+    QRegularExpressionMatch match = re.match(seltext);
+
+    if (match.hasMatch())
+    {
+        qDebug() << "there's an enumeration";
+        return true;
+    }
+    qDebug() << "there is no enumeration";
     return false;
 }
 
 bool MarkdownEditor::detectBullet()
 {
+    // this code is dogshit
     QTextCursor cursor = editor->textCursor();
     int currentPosition = cursor.position();
     cursor.beginEditBlock();

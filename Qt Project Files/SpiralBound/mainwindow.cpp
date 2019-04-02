@@ -818,7 +818,7 @@ void MainWindow::on_pushButton_bulleted_clicked() { me->insertBullet(); }
 void MainWindow::on_pushButton_numbered_clicked() { me->insertNumeral(); }
 void MainWindow::on_pushButton_strike_clicked() { me->strikethough(); }
 void MainWindow::on_pushButton_undent_clicked() {}
-void MainWindow::on_pushButton_indent_clicked() {}
+void MainWindow::on_pushButton_indent_clicked() { me->detectEnum();}
 
 //-----------------------------------------------------------+
 //                     Flash Card Tab                        |
