@@ -61,6 +61,7 @@ void MarkdownEditor::insertBullet()
     cursor.insertText("* ");
     cursor.setPosition(currentPosition);
     cursor.endEditBlock();
+    detectBullet();
 }
 
 void MarkdownEditor::insertNumeral()
@@ -78,8 +79,22 @@ void MarkdownEditor::insertTask() {}
 
 bool MarkdownEditor::detectEnum()
 {
-    QTextCursor cursor = editor->textCursor();
     return false;
 }
 
-bool MarkdownEditor::detectBullet() { return false; }
+bool MarkdownEditor::detectBullet()
+{
+    QTextCursor cursor = editor->textCursor();
+    int currentPosition = cursor.position();
+    cursor.beginEditBlock();
+    cursor.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor, 1);
+    cursor.movePosition(QTextCursor::Right, QTextCursor::KeepAnchor, 2);
+    QString seltext = cursor.selectedText();
+    cursor.setPosition(currentPosition);
+    cursor.endEditBlock();
+    if (seltext == "* ")
+    {
+        return true;
+    }
+    return false;
+}
