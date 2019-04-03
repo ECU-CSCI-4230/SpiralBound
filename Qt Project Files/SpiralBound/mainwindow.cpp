@@ -38,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->textEdit->setDocument(book->getSection(0)->getPage(0)->getContent());
     ui->treeWidget_sections->setItemSelected(ui->treeWidget_sections->topLevelItem(0)->child(0), true);
     ui->treeWidget_sections->topLevelItem(0)->setExpanded(true);
+    ui->label_bookName->setText("Default");
 
     ui->tableWidget_cardsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
@@ -76,16 +77,17 @@ void MainWindow::on_action_print_triggered() {}
 
 // Author:       Ketu Patel
 // Init Date:    23.03.2019
-// Last Updated: 23.03.2019
+// Last Updated: 02.04.2019
 void MainWindow::receiveBookData(QString bookNm, QString authNm, QString date)
 {
     ui->label_bookName->setText(bookNm);
+    ui->label_bookAuthor->setText(authNm);
     qDebug() <<"mainWinow: Received data from addbook window" << bookNm <<authNm<< date;
 }
 
 // Author:       Ketu Patel
 // Init Date:    23.03.2019
-// Last Updated: 23.03.2019
+// Last Updated: 02.04.2019
 void MainWindow::on_action_new_triggered() {
 
     newBook = new addbook();
