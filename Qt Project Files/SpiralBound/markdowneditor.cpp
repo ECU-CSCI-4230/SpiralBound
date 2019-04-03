@@ -74,11 +74,6 @@ void MarkdownEditor::insertNumeral()
     cursor.endEditBlock();
 }
 
-void MarkdownEditor::insertTask()
-{
-
-}
-
 bool MarkdownEditor::detectEnum()
 {
     // Remove duplicated code and implement better
