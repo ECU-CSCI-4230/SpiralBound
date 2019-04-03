@@ -18,24 +18,24 @@ class MarkdownEditor : QPlainTextEdit
     Q_OBJECT
 
 public:
-    MarkdownEditor(QTextEdit* edit);
+    MarkdownEditor(QPlainTextEdit* edit);
 
 public slots:
     void bold();
     void italic();
+    void underline();
     void strikethough();
     void makeComment();
     void indentText();
     void unindentText();
     void insertBullet();
     void insertNumeral();
-    void insertTask();
     bool detectBullet();
     bool detectEnum();
 
 private:
     void addMarkupFormatting(const QString& markup);
-    QTextEdit* editor;
+    QPlainTextEdit* editor;
 };
 
 #endif // MARKDOWNEDITOR_H

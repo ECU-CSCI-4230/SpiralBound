@@ -37,7 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->tableWidget_eventList->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     book = new Book("Default", "User");
-    me = new MarkdownEditor(ui->textEdit);
+    me = new MarkdownEditor(ui->plainTextEdit);
 
     // Check for the saving directory on startup; create it if it doesnt exist
     QDir save = QDir(QString("%1/.spiralbound/books").arg(QDir::homePath())),
@@ -50,7 +50,7 @@ MainWindow::MainWindow(QWidget *parent) :
     file_path = "";
     book->addSection("Section 01");
     book->getSection(0)->addPage("Untitled Page");
-    ui->textEdit->setDocument(book->getSection(0)->getPage(0)->getContent());
+    ui->plainTextEdit->setDocument(book->getSection(0)->getPage(0)->getContent());
     ui->treeWidget_sections->setItemSelected(ui->treeWidget_sections->topLevelItem(0)->child(0), true);
     ui->treeWidget_sections->topLevelItem(0)->setExpanded(true);
 
@@ -61,8 +61,8 @@ MainWindow::MainWindow(QWidget *parent) :
     PreviewPage *page = new PreviewPage(this);
     ui->preview->setPage(page);
 
-    connect(ui->textEdit, &QTextEdit::textChanged,
-            [this]() { m_content.setText(ui->textEdit->toPlainText()); });
+    connect(ui->plainTextEdit, &QPlainTextEdit::textChanged,
+            [this]() { m_content.setText(ui->plainTextEdit->toPlainText()); });
 
     QWebChannel *channel = new QWebChannel(this);
     channel->registerObject(QStringLiteral("content"), &m_content);
@@ -268,7 +268,7 @@ void MainWindow::on_action_open_triggered() {
         // Select the first section's summary
         ui->treeWidget_sections->topLevelItem(0)->setExpanded(true);
         ui->treeWidget_sections->topLevelItem(0)->child(0)->setSelected(true);
-        ui->textEdit->setDocument(nBook->getSection(0)->getPage(0)->getContent());
+        ui->plainTextEdit->setDocument(nBook->getSection(0)->getPage(0)->getContent());
 
         // Update the list of calendar events and decks
         for(int i=ui->tableWidget_eventList->rowCount(); i>0; i--)
@@ -473,8 +473,8 @@ void MainWindow::on_action_strikethrough_triggered() { me->strikethough(); }
 void MainWindow::on_action_underline_triggered() {}
 void MainWindow::on_action_indent_triggered() {}
 void MainWindow::on_action_unindent_triggered() {}
-void MainWindow::on_action_bulletedList_triggered() {}
-void MainWindow::on_action_numberedList_triggered() {}
+void MainWindow::on_action_bulletedList_triggered() { me->insertBullet(); }
+void MainWindow::on_action_numberedList_triggered() { me->insertNumeral(); }
 void MainWindow::on_action_comment_triggered() {}
 
 void MainWindow::on_action_test_triggered() {}
@@ -722,10 +722,10 @@ void MainWindow::on_treeWidget_sections_itemClicked(QTreeWidgetItem* item, int c
     int* ind = Util::getSectionPage(ui->treeWidget_sections, item);
 
     if (ind[1] == -1) {
-        ui->textEdit->setDocument(book->getSection(ind[0])->getDoc());
+        ui->plainTextEdit->setDocument(book->getSection(ind[0])->getDoc());
     }
     else {
-        ui->textEdit->setDocument(book->getSection(ind[0])->getPage(ind[1])->getContent());
+        ui->plainTextEdit->setDocument(book->getSection(ind[0])->getPage(ind[1])->getContent());
     }
 
     delete ind;
@@ -811,14 +811,14 @@ void MainWindow::on_treeWidget_sections_currentItemChanged(QTreeWidgetItem *cur,
     on_treeWidget_sections_itemClicked(cur, 0);
 }
 
-void MainWindow::on_pushButton_bold_clicked() {}
-void MainWindow::on_pushButton_italics_clicked() {}
+void MainWindow::on_pushButton_bold_clicked() { me->bold(); }
+void MainWindow::on_pushButton_italics_clicked() { me->italic(); }
 void MainWindow::on_pushButton_underline_clicked() {}
-void MainWindow::on_pushButton_bulleted_clicked() {}
-void MainWindow::on_pushButton_numbered_clicked() {}
-void MainWindow::on_pushButton_strike_clicked() {}
+void MainWindow::on_pushButton_bulleted_clicked() { me->insertBullet(); }
+void MainWindow::on_pushButton_numbered_clicked() { me->insertNumeral(); }
+void MainWindow::on_pushButton_strike_clicked() { me->strikethough(); }
 void MainWindow::on_pushButton_undent_clicked() {}
-void MainWindow::on_pushButton_indent_clicked() {}
+void MainWindow::on_pushButton_indent_clicked() { me->detectEnum();}
 
 //-----------------------------------------------------------+
 //                     Flash Card Tab                        |

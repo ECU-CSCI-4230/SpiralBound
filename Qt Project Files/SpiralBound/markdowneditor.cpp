@@ -1,12 +1,11 @@
 #include "markdowneditor.h"
 #include "qdebug.h"
 
-MarkdownEditor::MarkdownEditor(QTextEdit* edit)
+MarkdownEditor::MarkdownEditor(QPlainTextEdit* edit)
 {
     editor = edit;
 }
 
-//fuck me sideways
 void MarkdownEditor::addMarkupFormatting(const QString &markup)
 {
     QTextCursor cursor = editor->textCursor();
@@ -42,8 +41,9 @@ void MarkdownEditor::addMarkupFormatting(const QString &markup)
 }
 
 void MarkdownEditor::bold() { addMarkupFormatting("**"); }
-void MarkdownEditor::italic() { addMarkupFormatting("_"); }
+void MarkdownEditor::italic() { addMarkupFormatting("*"); }
 void MarkdownEditor::strikethough() { addMarkupFormatting("~~"); }
+void MarkdownEditor::underline() { addMarkupFormatting("_"); }
 
 void MarkdownEditor::makeComment() {}
 
@@ -53,18 +53,72 @@ void MarkdownEditor::unindentText() {}
 
 void MarkdownEditor::insertBullet()
 {
-//    int currentPosition = cursor.position();
-//    cursor.beginEditBlock();
-//    cursor.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor, 1);
-//    cursor.insertText("* ");
-//    cursor.setPosition(currentPosition);
-//    cursor.endEditBlock();
+    QTextCursor cursor = editor->textCursor();
+    int currentPosition = cursor.position();
+    cursor.beginEditBlock();
+    cursor.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor, 1);
+    cursor.insertText("* ");
+    cursor.setPosition(currentPosition);
+    cursor.endEditBlock();
+    detectBullet();
 }
 
-void MarkdownEditor::insertNumeral() {}
+void MarkdownEditor::insertNumeral()
+{
+    QTextCursor cursor = editor->textCursor();
+    int currentPosition = cursor.position();
+    cursor.beginEditBlock();
+    cursor.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor, 1);
+    cursor.insertText("1. ");
+    cursor.setPosition(currentPosition);
+    cursor.endEditBlock();
+}
 
-void MarkdownEditor::insertTask() {}
+void MarkdownEditor::insertTask()
+{
 
-bool MarkdownEditor::detectEnum() { return false; }
+}
 
-bool MarkdownEditor::detectBullet() { return false; }
+bool MarkdownEditor::detectEnum()
+{
+    // Remove duplicated code and implement better
+    QTextCursor cursor = editor->textCursor();
+    int currentPosition = cursor.position();
+    cursor.beginEditBlock();
+    cursor.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor, 1);
+    cursor.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor, 1);
+    QString seltext = cursor.selectedText();
+    cursor.setPosition(currentPosition);
+    cursor.endEditBlock();
+
+    //build a regular expression to match against the alleged numeral
+    QRegularExpression re;
+    re.setPattern("^(\\d+)\\. ");
+    QRegularExpressionMatch match = re.match(seltext);
+
+    if (match.hasMatch())
+    {
+        qDebug() << "there's an enumeration";
+        return true;
+    }
+    qDebug() << "there is no enumeration";
+    return false;
+}
+
+bool MarkdownEditor::detectBullet()
+{
+    // Remove duplicated code and implement better
+    QTextCursor cursor = editor->textCursor();
+    int currentPosition = cursor.position();
+    cursor.beginEditBlock();
+    cursor.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor, 1);
+    cursor.movePosition(QTextCursor::Right, QTextCursor::KeepAnchor, 2);
+    QString seltext = cursor.selectedText();
+    cursor.setPosition(currentPosition);
+    cursor.endEditBlock();
+    if (seltext == "* ")
+    {
+        return true;
+    }
+    return false;
+}
