@@ -18,7 +18,6 @@
 #include <QFont>
 #include <QColorDialog>
 #include <QColor>
-#include <QtDebug>
 #include <QItemSelectionModel>
 #include <QTableWidget>
 #include <QListWidgetItem>
@@ -53,6 +52,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->plainTextEdit->setDocument(book->getSection(0)->getPage(0)->getContent());
     ui->treeWidget_sections->setItemSelected(ui->treeWidget_sections->topLevelItem(0)->child(0), true);
     ui->treeWidget_sections->topLevelItem(0)->setExpanded(true);
+    ui->label_bookName->setText("Default");
 
     ui->tableWidget_cardsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
@@ -98,7 +98,29 @@ void MainWindow::on_action_aboutQt_triggered() { QApplication::aboutQt(); }
 
 void MainWindow::on_action_crashCourse_triggered() {}
 void MainWindow::on_action_print_triggered() {}
-void MainWindow::on_action_new_triggered() {}
+
+// Author:       Ketu Patel
+// Init Date:    23.03.2019
+// Last Updated: 02.04.2019
+void MainWindow::receiveBookData(QString bookNm, QString authNm, QString date)
+{
+    ui->label_bookName->setText(bookNm);
+    ui->label_bookAuthor->setText(authNm);
+    qDebug() <<"mainWinow: Received data from addbook window" << bookNm <<authNm<< date;
+}
+
+// Author:       Ketu Patel
+// Init Date:    23.03.2019
+// Last Updated: 02.04.2019
+void MainWindow::on_action_new_triggered() {
+
+    newBook = new addbook();
+    newBook->setModal(true);
+    newBook->show();
+
+    connect(newBook, SIGNAL(sendBookData(QString, QString, QString)), this, SLOT(receiveBookData(QString, QString, QString)));
+}
+
 void MainWindow::on_action_openRecent_triggered() {}
 
 // Author:       Matthew Morgan
@@ -688,7 +710,8 @@ void MainWindow::on_treeWidget_sections_itemDoubleClicked(QTreeWidgetItem *item,
     if (ind[1] > -1) {
         // Allow renaming of a page if the new name isn't blank
         bool ok;
-        QString text = QInputDialog::getText(nullptr, "Rename Page", "New Name:", QLineEdit::Normal, item->text(column), &ok);
+        QString text = QInputDialog::getText(nullptr, "Rename Page", "New Name:", QLineEdit::Normal, item->text(column), &ok, Qt::MSWindowsFixedSizeDialogHint);
+
 
         if (ok && !text.isEmpty()) {
             Section* sec = book->getSection(ind[0]);
@@ -746,6 +769,7 @@ void MainWindow::receiveSectionData(QString nm, QColor col, int ind) {
     pal.setStyle(Qt::BrushStyle::SolidPattern);
     ui->treeWidget_sections->topLevelItem(ind)->setBackground(0, pal);
 }
+
 
 // Author:       Ketu Patel, Matthew Morgan
 // Init Date:    13.03.2019
@@ -907,3 +931,4 @@ void MainWindow::on_pushButton_import_clicked()
 
     connect(importCardWindow, SIGNAL(sendCardData(QString,QString,QString)), this, SLOT(receiveCardData(QString, QString, QString)));
 }
+

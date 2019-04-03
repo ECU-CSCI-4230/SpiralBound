@@ -17,6 +17,7 @@
 #include <importflashcards.h>
 #include <deletecard.h>
 #include <editsection.h>
+#include <addbook.h>
 
 namespace Ui {
 class MainWindow;
@@ -107,6 +108,7 @@ private slots:
 
     // Asynchronous
     void receiveSectionData(QString, QColor, int);
+    void receiveBookData(QString, QString, QString);
 
 signals:
     void sendEditData(QString, QString, QString);  // Send mainwindown data to editcalendarevent
@@ -133,6 +135,8 @@ private:
     MarkdownEditor* me;
     QString m_filePath;
     Document m_content;
+    addbook *newBook;
+
 };
 
 #endif // MAINWINDOW_H
