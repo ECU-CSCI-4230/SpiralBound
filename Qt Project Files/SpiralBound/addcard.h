@@ -2,6 +2,7 @@
 #define ADDCARD_H
 
 #include <QDialog>
+#include "util.h"
 
 namespace Ui {
 class addcard;
@@ -17,6 +18,7 @@ public:
 
 private slots:
     void on_buttonBox_accepted();
+    void populateComboBox(list<Deck>);
 
 signals:
     // Send addcard data to mainwindow
