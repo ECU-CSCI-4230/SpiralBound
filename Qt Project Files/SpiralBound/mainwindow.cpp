@@ -941,11 +941,12 @@ void MainWindow::receiveDeckDeleteData(bool response)
     if(response == true)
     {
         delete selectedDeck;
-        for (Deck * deck : deckList)
+        for (Deck* deck : deckList)
         {
             if (deck->name == deckName)
             {
                 deckList.remove(deck);
+                break;
             }
         }
     }
