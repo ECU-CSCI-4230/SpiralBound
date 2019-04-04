@@ -1,13 +1,15 @@
 #include "page.h"
+#include <QPlainTextDocumentLayout>
 
 // Author:       Ketu Patel, Matthew Morgan
 // Init date:    02-02-2019
-// Last Updated: 03-13-2019
+// Last Updated: 04-03-2019
 Page::Page()
 {
     pageName = "default";
     date = QDate::currentDate();
     content = new QTextDocument();
+    content->setDocumentLayout(new QPlainTextDocumentLayout(content));
 }
 
 // Author:       Ketu Patel, Matthew Morgan
@@ -17,7 +19,8 @@ Page::Page(QString pg)
 {
     pageName = pg;
     date = QDate::currentDate();
-    content =  new QTextDocument();
+    content = new QTextDocument();
+    content->setDocumentLayout(new QPlainTextDocumentLayout(content));
 }
 
 // Author:       Ketu Patel

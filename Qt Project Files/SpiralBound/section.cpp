@@ -1,14 +1,16 @@
 #include "section.h"
+#include <QPlainTextDocumentLayout>
 
 // Author:       Ketu Patel, Matthew Morgan
 // Init date:    02-02-2019
-// Last Updated: 03-21-2019
+// Last Updated: 04-03-2019
 Section::Section(QString nm)
 {
     secName = nm;
     pages = new list<Page*>();
     col = *(new QColor(DEF_COLOR));
     doc = new QTextDocument();
+    doc->setDocumentLayout(new QPlainTextDocumentLayout(doc));
 }
 
 // Author:       Matthew Morgan
