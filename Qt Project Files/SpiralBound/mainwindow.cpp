@@ -962,11 +962,26 @@ void MainWindow::receiveDeckDeleteData(bool response)
 // Last Updated: 26.02.2019
 void MainWindow::on_pushButton_addCard_clicked()
 {
-    addCardWindow = new addcard(this);
-    addCardWindow->setModal(true);
-    addCardWindow->show();
+    list<Deck*> newDeckList = deckList;
 
-    connect(addCardWindow, SIGNAL(sendCardData(QString,QString,QString)), this, SLOT(receiveCardData(QString, QString, QString)));
+    if (deckList.empty())
+    {
+        QMessageBox messageBox;
+        messageBox.critical(nullptr,"Error","No Decks Exist.");
+        messageBox.setFixedSize(500,200);
+        //this->close();
+    }
+    else
+    {
+        addCardWindow = new addcard(this, newDeckList);
+        addCardWindow->setModal(true);
+        addCardWindow->show();
+
+        connect(addCardWindow, SIGNAL(sendCardData(QString,QString,QString)), this, SLOT(receiveCardData(QString, QString, QString)));
+    }
+
+
+
 }
 
 // Author: Jamie

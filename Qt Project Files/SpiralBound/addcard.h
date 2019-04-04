@@ -2,6 +2,7 @@
 #define ADDCARD_H
 
 #include <QDialog>
+#include "util.h"
 
 namespace Ui {
 class addcard;
@@ -12,7 +13,7 @@ class addcard : public QDialog
     Q_OBJECT
 
 public:
-    explicit addcard(QWidget *parent = nullptr);
+    explicit addcard(QWidget *parent = nullptr, list<Deck*> deckList = list<Deck*>());
     ~addcard();
 
 private slots:
