@@ -4,11 +4,30 @@
 #include "util.h"
 #include <QtDebug>
 
-addcard::addcard(QWidget *parent) :
+addcard::addcard(QWidget *parent, list<Deck*> deckList) :
     QDialog(parent),
     ui(new Ui::addcard)
 {
     ui->setupUi(this);
+
+    QStringList list;
+
+    /*if (deckList.empty())
+    {
+        QMessageBox messageBox;
+        messageBox.critical(nullptr,"Error","No Decks Exist.");
+        messageBox.setFixedSize(500,200);
+        this->close();
+    }*/
+    for(Deck* deck : deckList)
+    {
+        list.append(deck->name);
+    }
+
+    for (int i = 0; i < list.length(); i++)
+    {
+        ui->comboBox_deck->addItem(list[i]);
+    }
 }
 
 addcard::~addcard()
@@ -26,26 +45,4 @@ void addcard::on_buttonBox_accepted()
     // Send data to mainwindow.cpp
     // emit sendCardData(deckName, front, back);
 
-}
-
-// Author: Camby
-void addcard::populateComboBox(list<Deck> deckList)
-{
-    QStringList list;
-
-    if (deckList.empty())
-    {
-        QMessageBox messageBox;
-        messageBox.critical(nullptr,"Error","No Decks Exist.");
-        messageBox.setFixedSize(500,200);
-        this->close();
-    }
-    else
-    {
-        for(Deck deck : deckList) {
-            list.append(deck.name);
-        }
-    }
-
-    ui->comboBox_deck->addItems(list);
 }

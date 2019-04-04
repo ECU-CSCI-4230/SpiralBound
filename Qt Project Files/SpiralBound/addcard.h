@@ -13,12 +13,11 @@ class addcard : public QDialog
     Q_OBJECT
 
 public:
-    explicit addcard(QWidget *parent = nullptr);
+    explicit addcard(QWidget *parent = nullptr, list<Deck*> deckList = list<Deck*>());
     ~addcard();
 
 private slots:
     void on_buttonBox_accepted();
-    void populateComboBox(list<Deck>);
 
 signals:
     // Send addcard data to mainwindow
