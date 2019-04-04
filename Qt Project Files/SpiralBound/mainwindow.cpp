@@ -9,6 +9,8 @@
 #include "page.h"
 #include "util.h"
 #include "previewpage.h"
+#include "adddeck.h"
+#include "deletedeck.h"
 
 #include <QFile>
 #include <QFileDialog>
@@ -854,10 +856,11 @@ void MainWindow::receiveCardData(QString deckName, QString front, QString back)
 {
     // Create row
     ui->tableWidget_cardsTable->insertRow(ui->tableWidget_cardsTable->rowCount() );
+
     // Populate row
-    ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 0, new QTableWidgetItem(deckName));
-    ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 1, new QTableWidgetItem(front));
-    ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 2, new QTableWidgetItem(back));
+    // ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 0, new QTableWidgetItem(deckName));
+    ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 0, new QTableWidgetItem(front));
+    ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 1, new QTableWidgetItem(back));
 }
 
 // Author: Jamie, Nicholas
@@ -870,6 +873,87 @@ void MainWindow::receiveCardDeleteData(bool response)
        // Delete item from table
        ui->tableWidget_cardsTable->removeRow(ui->tableWidget_cardsTable->currentItem()->row());
    }
+}
+
+// Author: Cam, Nick
+// Init Date:    26.03.2019
+// Last Updated: 26.03.2019
+void MainWindow::on_pushButton_addDeck_clicked()
+{
+    addDeckWindow = new adddeck(this);
+    addDeckWindow->setModal(true);
+    addDeckWindow->show();
+
+    connect(addDeckWindow, SIGNAL(sendDeckData(QString)), this, SLOT(receiveDeckData(QString)));
+
+}
+
+// Author: Cam, Nick
+// Init Date:    26.03.2019
+// Last Updated: 02.04.2019
+void MainWindow::receiveDeckData(QString deck)
+{
+    ui->listWidget_decks->addItem(deck);
+    QListWidgetItem * last = ui->listWidget_decks->item(ui->listWidget_decks->count() - 1);
+    Deck * newDeck = new Deck();
+    newDeck->name = last->text();
+    deckList.push_back(newDeck);
+
+    // Debugging
+    for (Deck* deck : deckList) {
+        qDebug() << deck->name;
+    }
+}
+
+// Author: Cam, Nick
+// Init Date:    26.03.2019
+// Last Updated: 02.04.2019
+void MainWindow::on_pushButton_deleteDeck_clicked()
+{
+    QListWidgetItem * deck = ui->listWidget_decks->currentItem();
+
+    if (deck == nullptr)
+    {
+        QMessageBox messageBox;
+        messageBox.critical(nullptr,"Error","Select a deck to delete, please try again.");
+        messageBox.setFixedSize(500,200);
+    }
+    else
+    {
+        // Builds deletedeck GUI/window
+        deleteDeckWindow = new deletedeck(this);
+        deleteDeckWindow->setModal(true);
+        deleteDeckWindow->show();
+
+        // Connect mainwindow to addeventwindow
+        connect(deleteDeckWindow, SIGNAL(sendDeleteData(bool)), this, SLOT(receiveDeckDeleteData(bool)));
+    }
+}
+
+// Author: Cam, Nick
+// Init Date:    26.03.2019
+// Last Updated: 02.04.2019
+void MainWindow::receiveDeckDeleteData(bool response)
+{
+    QListWidgetItem * selectedDeck = ui->listWidget_decks->currentItem();
+    QString deckName = selectedDeck->text();
+
+    if(response == true)
+    {
+        delete selectedDeck;
+        for (Deck * deck : deckList)
+        {
+            if (deck->name == deckName)
+            {
+                deckList.remove(deck);
+            }
+        }
+    }
+
+    // Debugging
+    for (Deck* deck : deckList) {
+        qDebug() << deck->name;
+    }
 }
 
 // Author: Jamie, Nick
@@ -924,7 +1008,6 @@ void MainWindow::on_pushButton_studyCard_clicked()
 // Last Updated: 07.03.2019
 void MainWindow::on_pushButton_import_clicked()
 {
-    //TODO: opens window for importing files
     importCardWindow = new importflashcards(this);
     importCardWindow->setModal(true);
     importCardWindow->show();

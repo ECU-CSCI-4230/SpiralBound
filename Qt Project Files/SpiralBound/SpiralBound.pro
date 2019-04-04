@@ -39,7 +39,9 @@ SOURCES += \
         editsection.cpp \
         document.cpp \
         previewpage.cpp \
-        addbook.cpp
+        addbook.cpp \
+        adddeck.cpp \
+        deletedeck.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -58,7 +60,9 @@ HEADERS += \
         editsection.h \
         document.h \
         previewpage.h \
-        addbook.h
+        addbook.h \
+        adddeck.h \
+        deletedeck.h
 
 FORMS += \
         mainwindow.ui \
@@ -69,8 +73,10 @@ FORMS += \
         addcard.ui \
         deletecard.ui \
         importflashcards.ui \
-    editsection.ui \
-    addbook.ui
+        editsection.ui \
+        addbook.ui \
+        adddeck.ui \
+        deletedeck.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
