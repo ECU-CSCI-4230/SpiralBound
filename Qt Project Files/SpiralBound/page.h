@@ -5,6 +5,7 @@
 #include <QString>
 #include <QDate>
 #include <QTextDocument>
+#include <QPlainTextDocumentLayout>
 #include <list>
 
 using namespace std;
@@ -42,6 +43,7 @@ class Page
             pg->setPgName(*(new QString(newName)));
             pg->setDate(*(new QDate(newDate)));
             pg->setContent(new QTextDocument(cont));
+            pg->getContent()->setDocumentLayout(new QPlainTextDocumentLayout(pg->getContent()));
 
             return pg;
         }
