@@ -39,9 +39,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tableWidget_eventList->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableWidget_cardsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    // Book and MarkdownEditor setup
+    // Book and MarkdownEditor setup; set default book path
     book = Book::generateBook("Default", "User");
     me = new MarkdownEditor(ui->plainTextEdit);
+    file_path = QString("%1/.spiralbound/books/%2").arg(QDir::homePath()).arg(book->getName());
 
     // Check for the saving directory on startup; create it if it doesnt exist
     QDir save = QDir(QString("%1/.spiralbound/books").arg(QDir::homePath())),
@@ -50,12 +51,14 @@ MainWindow::MainWindow(QWidget *parent) :
     if (!save.exists()) { save.mkdir(save.path()); } // Returns a bool - do error check?
     if (!back.exists()) { back.mkdir(save.path()); }
 
-    // Change the view to show the default book's first page
+    // Change the view to show the default book's first page; set flag to false so no changes
+    // done during this block impact the loading 'unsaved changes' prompt
     file_path = "";
     ui->plainTextEdit->setDocument(book->getSection(0)->getPage(0)->getContent());
     ui->treeWidget_sections->setItemSelected(ui->treeWidget_sections->topLevelItem(0)->child(0), true);
     ui->treeWidget_sections->topLevelItem(0)->setExpanded(true);
     ui->label_bookInfo->setText(book->getName()+" by "+book->getAuthor());
+    isModified = false;
 
     // Setup webengine for displaying markdown notes
     PreviewPage *page = new PreviewPage(this);
@@ -99,7 +102,7 @@ void MainWindow::on_action_print_triggered() {}
 
 // Author:       Ketu Patel, Matthew Morgan
 // Init Date:    23.03.2019
-// Last Updated: 05.04.2019
+// Last Updated: 06.04.2019
 void MainWindow::receiveBookData(QString bookNm, QString authNm, QString date)
 {
     QTreeWidgetItem *root = new QTreeWidgetItem(), *page = new QTreeWidgetItem();
@@ -128,13 +131,23 @@ void MainWindow::receiveBookData(QString bookNm, QString authNm, QString date)
     on_treeWidget_sections_itemClicked(page, 0);
     ui->label_bookInfo->setText(bookNm+" by "+authNm);
 
-    qDebug() <<"New Book:" << bookNm << authNm << date;
+    // Update isModified and directory for saving
+    isModified = false;
+    file_path = QString("%1/.spiralbound/books/%2").arg(QDir::homePath()).arg(book->getName());
+
+    qDebug() << "New Book:" << bookNm << authNm << date;
 }
 
-// Author:       Ketu Patel
+// Author:       Ketu Patel, Matthew Morgan
 // Init Date:    23.03.2019
-// Last Updated: 02.04.2019
+// Last Updated: 06.04.2019
 void MainWindow::on_action_new_triggered() {
+    // Prompt if there are unsaved changes
+    if (isModified) {
+        if (!Util::confirm("Proceed", "You have unsaved changes. Continue?"))
+            return;
+    }
+
     newBook = new addbook();
     newBook->setModal(true);
     newBook->show();
@@ -146,11 +159,11 @@ void MainWindow::on_action_openRecent_triggered() {}
 
 // Author:       Matthew Morgan
 // Init Date:    21.03.2019
-// Last Updated: 05.04.2019
+// Last Updated: 06.04.2019
 void MainWindow::on_action_open_triggered() {
-    // Prompt the user about whether to load a book if one is already open
-    if (file_path != "") {
-        if (!Util::confirm("Proceed with Load", "You have a notebook already open; any unsaved changes will be lost. Continue?"))
+    // Prompt if there are unsaved changes
+    if (isModified) {
+        if (!Util::confirm("Proceed", "You have unsaved changes. Continue?"))
             return;
     }
 
@@ -338,6 +351,7 @@ void MainWindow::on_action_open_triggered() {
         delete book;
         book = nBook;
         file_path = QString(dir);
+        isModified = false;
         ui->label_bookInfo->setText(book->getName()+" by "+book->getAuthor());
     }
     catch(exception& e) {
@@ -491,8 +505,8 @@ QString save(Book* book, Ui::MainWindow* main, QString dir=QString("%1/.spiralbo
 
 // Author:       Matthew Morgan
 // Init Date:    21.03.2019
-// Last Updated: 22.03.2019
-void MainWindow::on_action_save_triggered() { save(book, ui); }
+// Last Updated: 06.04.2019
+void MainWindow::on_action_save_triggered() { save(book, ui); isModified = false;}
 
 // Author:       Matthew Morgan
 // Init Date:    22.03.2019
@@ -540,7 +554,7 @@ void MainWindow::on_action_quit_triggered() { QApplication::quit(); }
 //-----------------------------------------------------------+
 // Author:       Nicholas, Matthew
 // Init Date:    19.02.2019
-// Last Updated: 22.03.2019
+// Last Updated: 06.04.2019
 void MainWindow::receiveAddData(QString eventName, QString eventDateTime)
 {
     // Seperate date from time
@@ -557,6 +571,7 @@ void MainWindow::receiveAddData(QString eventName, QString eventDateTime)
     ui->tableWidget_eventList->setItem(row, 1, new QTableWidgetItem(eventName));
     ui->tableWidget_eventList->setItem(row, 2, new QTableWidgetItem(time));
     ui->tableWidget_eventList->setSortingEnabled(true);
+    isModified = true;
 }
 
 // Author:       Nicholas, Cam, Jamie
@@ -575,9 +590,9 @@ void MainWindow::on_pushButton_addEvent_clicked()
    connect(addWindow, SIGNAL(sendAddData(QString, QString)), this, SLOT(receiveAddData(QString, QString)));
 }
 
-// Author:       Nicholas
+// Author:       Nicholas, Matthew
 // Init Date:    19.02.2019
-// Last Updated: 22.03.2019
+// Last Updated: 06.04.2019
 void MainWindow::receiveEditData(QString eventName, QString eventDateTime)
 {
     // Seperate date from time
@@ -592,6 +607,7 @@ void MainWindow::receiveEditData(QString eventName, QString eventDateTime)
     ui->tableWidget_eventList->setItem(row, 1, new QTableWidgetItem(eventName));
     ui->tableWidget_eventList->setItem(row, 2, new QTableWidgetItem(time));
     ui->tableWidget_eventList->setSortingEnabled(true);
+    isModified = true;
 }
 
 // Author:       Nicholas
@@ -631,15 +647,16 @@ void MainWindow::on_pushButton_editEvent_clicked()
         connect(editWindow, SIGNAL(sendEditData(QString, QString)), this, SLOT(receiveEditData(QString, QString)));
     }
 }
-// Author:       Nicholas
+// Author:       Nicholas, Matthew
 // Init Date:    09.02.2019
-// Last Updated: 19.02.2019
+// Last Updated: 06.04.2019
 void MainWindow::receiveDeleteData(bool response)
 {
    if(response == true)
    {
        // Delete item from table
        ui->tableWidget_eventList->removeRow(ui->tableWidget_eventList->currentItem()->row());
+       isModified = true;
    }
 }
 
@@ -686,7 +703,7 @@ void MainWindow::on_tableWidget_eventList_cellChanged(int row, int column)
 //-----------------------------------------------------------+
 // Author:       Matthew Morgan
 // Init Date:    10.03.2019
-// Last Updated: 20.03.2019
+// Last Updated: 06.04.2019
 void MainWindow::on_pushButton_addPage_clicked()
 {
     // Add a new page to the section, and activate it as the current
@@ -699,13 +716,14 @@ void MainWindow::on_pushButton_addPage_clicked()
     pg->setText(0, "Untitled Page");
     pg->setSelected(true);
     on_treeWidget_sections_itemClicked(pg, 0);
+    isModified = true;
 
     delete ind;
 }
 
 // Author:       Matthew Morgan
 // Init Date:    10.03.2019
-// Last Updated: 20.03.2019
+// Last Updated: 06.04.2019
 void MainWindow::on_pushButton_addSection_clicked()
 {
     // Add a new section and page, and update the tree to reflect these changes
@@ -725,11 +743,12 @@ void MainWindow::on_pushButton_addSection_clicked()
     ui->treeWidget_sections->clearSelection();
     pg->setSelected(true);
     on_treeWidget_sections_itemClicked(pg, 0);
+    isModified = true;
 }
 
 // Author:       Matthew Morgan
 // Init Date:    20.03.2019
-// Last Updated: 20.03.2019
+// Last Updated: 06.04.2019
 void MainWindow::on_treeWidget_sections_itemDoubleClicked(QTreeWidgetItem *item, int column) {
     int* ind = Util::getSectionPage(ui->treeWidget_sections, item);
 
@@ -743,6 +762,7 @@ void MainWindow::on_treeWidget_sections_itemDoubleClicked(QTreeWidgetItem *item,
             Section* sec = book->getSection(ind[0]);
             sec->getPage(ind[1])->setPgName(text);
             item->setText(column, text);
+            isModified = true;
         }
     }
     else {
@@ -782,12 +802,13 @@ void MainWindow::on_treeWidget_sections_itemClicked(QTreeWidgetItem* item, int c
 
 // Author:       Matthew Morgan
 // Init Date:    20.03.2019
-// Last Updated: 20.03.2019
+// Last Updated: 06.04.2019
 void MainWindow::receiveSectionData(QString nm, QColor col, int ind) {
     // Update the section's color and name
     Section* sec = book->getSection(ind);
     sec->setName(nm);
     sec->setColor(col);
+    isModified = true;
 
     ui->treeWidget_sections->topLevelItem(ind)->setText(0, nm);
     QBrush pal = ui->treeWidget_sections->palette().background();
@@ -799,7 +820,7 @@ void MainWindow::receiveSectionData(QString nm, QColor col, int ind) {
 
 // Author:       Ketu Patel, Matthew Morgan
 // Init Date:    13.03.2019
-// Last Updated: 22.03.2019
+// Last Updated: 06.04.2019
 void MainWindow::on_pushButton_removePage_clicked()
 {
     int* ind = Util::getSectionPage(ui->treeWidget_sections, ui->treeWidget_sections->selectedItems().first());
@@ -848,6 +869,7 @@ void MainWindow::on_pushButton_removePage_clicked()
         }
     }
 
+    isModified = true;
     delete ind;
 }
 
@@ -860,6 +882,11 @@ void MainWindow::on_treeWidget_sections_currentItemChanged(QTreeWidgetItem *cur,
     if (cur == nullptr) { return; }
     on_treeWidget_sections_itemClicked(cur, 0);
 }
+
+// Author:       Matthew Morgan
+// Init Date:    06.04.2019
+// Last Updated: 06.04.2019
+void MainWindow::on_plainTextEdit_textChanged() { isModified = true; }
 
 void MainWindow::on_pushButton_bold_clicked() { me->bold(); }
 void MainWindow::on_pushButton_italics_clicked() { me->italic(); }

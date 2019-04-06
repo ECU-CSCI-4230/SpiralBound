@@ -41,7 +41,7 @@
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
-        <string>TextEditor</string>
+        <string>Notebook</string>
        </attribute>
        <widget class="QPlainTextEdit" name="plainTextEdit">
         <property name="geometry">

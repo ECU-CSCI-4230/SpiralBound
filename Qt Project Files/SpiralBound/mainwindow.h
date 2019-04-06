@@ -101,6 +101,7 @@ private slots:
     void on_treeWidget_sections_itemDoubleClicked(QTreeWidgetItem *item, int column);
     void on_treeWidget_sections_itemClicked(QTreeWidgetItem *item, int column);
     void on_treeWidget_sections_currentItemChanged(QTreeWidgetItem *cur, QTreeWidgetItem* prev);
+    void on_plainTextEdit_textChanged();
 
     // Shortcut bar for Markdown
     void on_pushButton_bold_clicked();
@@ -126,7 +127,6 @@ signals:
 
 private:    
     Ui::MainWindow *ui;
-    QString file_path;
 
     deletecalendarevent *deleteWindow;
     addcalendarevent *addWindow;
@@ -141,6 +141,9 @@ private:
 
     editsection* editSectionWindow;
     Book* book;
+    QString file_path;
+    bool isModified;
+
     MarkdownEditor* me;
     QString m_filePath;
     Document m_content;
