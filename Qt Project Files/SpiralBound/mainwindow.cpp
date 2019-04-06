@@ -97,13 +97,38 @@ void MainWindow::on_action_aboutQt_triggered() { QApplication::aboutQt(); }
 void MainWindow::on_action_crashCourse_triggered() {}
 void MainWindow::on_action_print_triggered() {}
 
-// Author:       Ketu Patel
+// Author:       Ketu Patel, Matthew Morgan
 // Init Date:    23.03.2019
-// Last Updated: 02.04.2019
+// Last Updated: 05.04.2019
 void MainWindow::receiveBookData(QString bookNm, QString authNm, QString date)
 {
+    QTreeWidgetItem *root = new QTreeWidgetItem(), *page = new QTreeWidgetItem();
+    Book* repBook = Book::generateBook(bookNm, authNm, &date), *hold;
+    root->setText(0, repBook->getSection(0)->getSecName());
+    page->setText(0, repBook->getSection(0)->getPage(0)->getPageName());
+
+    hold = book;
+    book = repBook;
+    delete hold;
+
+    // Clear calendar events, card table, and sections
+    // Reset the section view to have only one section and one page
+    // Update interface elements (such as book info label)
+    for(int i=ui->tableWidget_eventList->rowCount(); i>0; i--)
+        ui->tableWidget_eventList->removeRow(0);
+
+    for(int i=ui->tableWidget_cardsTable->rowCount(); i>0; i--)
+        ui->tableWidget_cardsTable->removeRow(0);
+
+    ui->treeWidget_sections->clear();
+    ui->treeWidget_sections->addTopLevelItem(root);
+    root->addChild(page);
+    ui->treeWidget_sections->setItemSelected(page, true);
+    root->setExpanded(true);
+    on_treeWidget_sections_itemClicked(page, 0);
     ui->label_bookInfo->setText(bookNm+" by "+authNm);
-    qDebug() <<"mainWinow: Received data from addbook window" << bookNm <<authNm<< date;
+
+    qDebug() <<"New Book:" << bookNm << authNm << date;
 }
 
 // Author:       Ketu Patel
@@ -121,7 +146,7 @@ void MainWindow::on_action_openRecent_triggered() {}
 
 // Author:       Matthew Morgan
 // Init Date:    21.03.2019
-// Last Updated: 24.03.2019
+// Last Updated: 05.04.2019
 void MainWindow::on_action_open_triggered() {
     // Prompt the user about whether to load a book if one is already open
     if (file_path != "") {
@@ -313,6 +338,7 @@ void MainWindow::on_action_open_triggered() {
         delete book;
         book = nBook;
         file_path = QString(dir);
+        ui->label_bookInfo->setText(book->getName()+" by "+book->getAuthor());
     }
     catch(exception& e) {
         qDebug() << "Woopsie: " << e.what();
@@ -338,10 +364,14 @@ QString save(Book* book, Ui::MainWindow* main, QString dir=QString("%1/.spiralbo
     back.setFilter(QDir::NoDotAndDotDot|QDir::AllEntries);
 
     if (!root.exists()) { root.mkpath(dir); }
+    else {
+        // Create a backup in the backup directory and remove the old one
+        if (back.exists()) { back.removeRecursively(); }
+        Util::copyDirectory(dir, backup);
 
-    // Create a backup in the backup directory and remove the old one
-    if (back.exists()) { back.removeRecursively(); }
-    Util::copyDirectory(dir, backup);
+        QDir(dir).removeRecursively();
+        root.mkpath(dir);
+    }
 
     try {
         // ------------------------------------------
@@ -366,36 +396,36 @@ QString save(Book* book, Ui::MainWindow* main, QString dir=QString("%1/.spiralbo
           **************************************************************************************************************/
 
         // Construct the deck list and write the number of decks down
-        QStringList deckList;
-        for(int i=main->tableWidget_cardsTable->rowCount()-1; i>=0; i--) {
-            QString deck = main->tableWidget_cardsTable->item(i, 0)->text();
-            if (!deckList.contains(deck)) { deckList.push_back(deck); }
-        }
-        bk << endl << deckList.size() << endl;
-        bkFile->close();
-        delete bkFile;
+//        QStringList deckList;
+//        for(int i=main->tableWidget_cardsTable->rowCount()-1; i>=0; i--) {
+//            QString deck = main->tableWidget_cardsTable->item(i, 0)->text();
+//            if (!deckList.contains(deck)) { deckList.push_back(deck); }
+//        }
+//        bk << endl << deckList.size() << endl;
+//        bkFile->close();
+//        delete bkFile;
 
-        // Iterate through every deck, writing the cards for that deck into its file
-        for(int i=deckList.size()-1; i>=0; i--) {
-            QString deck = deckList.takeFirst();
-            QFile* deckFile = new QFile(QString("%1/study/%2.csv").arg(dir).arg(i+1));
+//        // Iterate through every deck, writing the cards for that deck into its file
+//        for(int i=deckList.size()-1; i>=0; i--) {
+//            QString deck = deckList.takeFirst();
+//            QFile* deckFile = new QFile(QString("%1/study/%2.csv").arg(dir).arg(i+1));
 
-            if (!deckFile->open(QFile::WriteOnly))
-                throw "A deck file couldn't be opened for writing!";
+//            if (!deckFile->open(QFile::WriteOnly))
+//                throw "A deck file couldn't be opened for writing!";
 
-            QTextStream dStream(*&deckFile);
-            dStream << deck << "\n";
+//            QTextStream dStream(*&deckFile);
+//            dStream << deck << "\n";
 
-            for(int k=main->tableWidget_cardsTable->rowCount()-1; k>=0; k--) {
-                if (deck == main->tableWidget_cardsTable->item(k, 0)->text())
-                    dStream << main->tableWidget_cardsTable->item(k, 1)->text().length() << ","
-                            << main->tableWidget_cardsTable->item(k, 1)->text() << ","
-                            << main->tableWidget_cardsTable->item(k, 2)->text() << "\n";
-            }
+//            for(int k=main->tableWidget_cardsTable->rowCount()-1; k>=0; k--) {
+//                if (deck == main->tableWidget_cardsTable->item(k, 0)->text())
+//                    dStream << main->tableWidget_cardsTable->item(k, 1)->text().length() << ","
+//                            << main->tableWidget_cardsTable->item(k, 1)->text() << ","
+//                            << main->tableWidget_cardsTable->item(k, 2)->text() << "\n";
+//            }
 
-            deckFile->close();
-            delete deckFile;
-        }
+//            deckFile->close();
+//            delete deckFile;
+//        }
 
         // ************************************************************************************************************
 

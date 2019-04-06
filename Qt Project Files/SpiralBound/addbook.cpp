@@ -5,6 +5,7 @@
 #include <QDateTime>
 #include <QDir>
 #include <qdebug.h>
+#include "util.h"
 
 addbook::addbook(QWidget *parent) :
     QDialog(parent),
@@ -26,38 +27,25 @@ addbook::~addbook()
 // Last Updated: 05.04.2019
 void addbook::on_buttonBox_accepted()
 {
-    QString bookNm = ui->lineEdit_bookName ->text();
+    QString bookNm = ui->lineEdit_bookName->text();
     QString authNm = ui->lineEdit_authorName->text();
     QString date = ui->lbl_NewDate->text();
 
-    QDir dir(QDir::homePath() + "/.spiralbound/books/" + bookNm);
+    // Display a message if a field is empty
+    if (bookNm.isEmpty() || authNm.isEmpty()) {
+        Util::showError("Error", "Please enter both a notebook title and author!");
+        return;
+    }
 
-    if (dir.exists()) {
+    if (QDir(QDir::homePath() + "/.spiralbound/books/" + bookNm).exists()) {
         QMessageBox::StandardButton reply;
-        reply = QMessageBox::question(this, "Notebook", "Already exists, Would you like to overwrite it?",
-                                      QMessageBox::Yes|QMessageBox::No);
-        // Overwrite the notebook
-        if (reply == QMessageBox::Yes) {
-        } else {
-        }
+        reply = QMessageBox::question(this, "Overwrite Confirmation",
+                "A notebook with the given name already exists! Overwrite?");
+
+        // Do nothing if overwrite confirmation was not provided
+        if (reply == QMessageBox::No) { return; }
     }
 
-    // Create new notebook, reset calender and flash cards
-    else{
-
-
-    }
-
-    if(!bookNm.isEmpty() && !authNm.isEmpty())
-    {
-        // Send bookNm and authNm to mainwindow.cpp
-        emit sendBookData(bookNm, authNm, date);
-    }
-
-    else //if one of the field is empty, display error message.
-    {
-        QMessageBox messageBox;
-        messageBox.critical(nullptr,"Error","None of the fields can be empty, please try again.");
-        messageBox.setFixedSize(500,200);
-    }
+    // Send book, author, and date
+    emit sendBookData(bookNm, authNm, date);
 }
