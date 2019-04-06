@@ -11,7 +11,7 @@ addbook::addbook(QWidget *parent) :
     ui(new Ui::addbook)
 {
     ui->setupUi(this);
-    ui->label_newbook_date->setText(QDate::currentDate().toString());
+    ui->lbl_NewDate->setText(QDate::currentDate().toString());
     ui->lineEdit_bookName->setValidator(new QRegExpValidator( QRegExp("^[ A-Za-z0-9_-]+"), this ));
     ui->lineEdit_authorName->setValidator(new QRegExpValidator( QRegExp("^[ A-Za-z0-9_-]+"), this ));
 }
@@ -21,30 +21,28 @@ addbook::~addbook()
     delete ui;
 }
 
-// Author: Ketu Patel
+// Author:       Ketu Patel, Matthew Morgan
 // Init date:    23.03.2019
-// Last Updated: 02.04.2019
+// Last Updated: 05.04.2019
 void addbook::on_buttonBox_accepted()
 {
     QString bookNm = ui->lineEdit_bookName ->text();
     QString authNm = ui->lineEdit_authorName->text();
-    QString date = ui->label_newbook_date->text();
+    QString date = ui->lbl_NewDate->text();
 
     QDir dir(QDir::homePath() + "/.spiralbound/books/" + bookNm);
-    if (dir.exists()){
 
+    if (dir.exists()) {
         QMessageBox::StandardButton reply;
-          reply = QMessageBox::question(this, "Notebook", "Already exists, Would you like to overwrite it?",
-                                        QMessageBox::Yes|QMessageBox::No);
-          // Overwrite the notebook
-          if (reply == QMessageBox::Yes) {
-
-          } else {
-
-          }
+        reply = QMessageBox::question(this, "Notebook", "Already exists, Would you like to overwrite it?",
+                                      QMessageBox::Yes|QMessageBox::No);
+        // Overwrite the notebook
+        if (reply == QMessageBox::Yes) {
+        } else {
+        }
     }
 
-    // Create new notebook, reset calender and flask cards
+    // Create new notebook, reset calender and flash cards
     else{
 
 

@@ -59,6 +59,21 @@ class Book
             return bk;
         }
 
+        // Author:       Matthew Morgan
+        // Init date:    04-05-2019
+        // Last updated: 04-05-2019
+        /** generateBook(title, user, date) creates a new book with the given name,
+          * author, and creation date. */
+
+        static Book* generateBook(QString title, QString user, QString* date = nullptr) {
+            Book* bk = new Book(title, user);
+            if (date != nullptr)
+                bk->setDate(QDate::fromString(*date));
+            bk->addSection("Section 01");
+            bk->getSection(0)->addPage("Untitled Page");
+            return bk;
+        }
+
         void loadSection(Section* sec);
         void loadPage(Section* sec, Page* pg);
 

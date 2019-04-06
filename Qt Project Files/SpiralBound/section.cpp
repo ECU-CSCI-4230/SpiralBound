@@ -3,7 +3,7 @@
 
 // Author:       Ketu Patel, Matthew Morgan
 // Init date:    02-02-2019
-// Last Updated: 04-03-2019
+// Last Updated: 04-05-2019
 Section::Section(QString nm)
 {
     secName = nm;
@@ -11,6 +11,7 @@ Section::Section(QString nm)
     col = *(new QColor(DEF_COLOR));
     doc = new QTextDocument();
     doc->setDocumentLayout(new QPlainTextDocumentLayout(doc));
+    doc->setDefaultFont(QFont("Courier", 10));
 }
 
 // Author:       Matthew Morgan

@@ -46,10 +46,10 @@
        <widget class="QPlainTextEdit" name="plainTextEdit">
         <property name="geometry">
          <rect>
-          <x>0</x>
+          <x>10</x>
           <y>20</y>
-          <width>381</width>
-          <height>521</height>
+          <width>341</width>
+          <height>511</height>
          </rect>
         </property>
         <property name="sizePolicy">
@@ -60,14 +60,18 @@
         </property>
         <property name="font">
          <font>
+          <family>Courier</family>
           <pointsize>10</pointsize>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 0, 0, 255), stop:1 rgba(255, 255, 255, 255));</string>
+         <string notr="true">font: 10pt &quot;Courier&quot;;</string>
         </property>
         <property name="frameShadow">
          <enum>QFrame::Sunken</enum>
+        </property>
+        <property name="placeholderText">
+         <string>Page Content Goes Here...</string>
         </property>
        </widget>
        <widget class="QPushButton" name="pushButton_addPage">
@@ -227,12 +231,12 @@
          </item>
         </item>
        </widget>
-       <widget class="QLabel" name="label_bookName">
+       <widget class="QLabel" name="label_bookInfo">
         <property name="geometry">
          <rect>
-          <x>0</x>
+          <x>10</x>
           <y>0</y>
-          <width>81</width>
+          <width>381</width>
           <height>21</height>
          </rect>
         </property>
@@ -249,7 +253,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Book Name</string>
+         <string>Default by User</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_Content">
@@ -550,33 +554,17 @@
          </item>
         </layout>
        </widget>
-       <widget class="QLabel" name="label_bookAuthor">
-        <property name="geometry">
-         <rect>
-          <x>90</x>
-          <y>0</y>
-          <width>101</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Author</string>
-        </property>
-       </widget>
        <widget class="QWebEngineView" name="preview" native="true">
         <property name="geometry">
          <rect>
-          <x>380</x>
+          <x>360</x>
           <y>20</y>
-          <width>301</width>
-          <height>521</height>
+          <width>311</width>
+          <height>511</height>
          </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: 1px solid black;</string>
         </property>
        </widget>
        <zorder>plainTextEdit</zorder>
@@ -586,9 +574,8 @@
        <zorder>pushButton_save</zorder>
        <zorder>pushButton_removePage</zorder>
        <zorder>treeWidget_sections</zorder>
-       <zorder>label_bookName</zorder>
+       <zorder>label_bookInfo</zorder>
        <zorder>label_Content</zorder>
-       <zorder>label_bookAuthor</zorder>
        <zorder>preview</zorder>
       </widget>
       <widget class="QWidget" name="tab_2">

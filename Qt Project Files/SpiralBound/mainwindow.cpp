@@ -37,7 +37,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->tableWidget_eventList->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    book = new Book("Default", "User");
+    ui->tableWidget_cardsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    // Book and MarkdownEditor setup
+    book = Book::generateBook("Default", "User");
     me = new MarkdownEditor(ui->plainTextEdit);
 
     // Check for the saving directory on startup; create it if it doesnt exist
@@ -47,31 +50,24 @@ MainWindow::MainWindow(QWidget *parent) :
     if (!save.exists()) { save.mkdir(save.path()); } // Returns a bool - do error check?
     if (!back.exists()) { back.mkdir(save.path()); }
 
-    // Add a default section, page, and change to view that page in that section on startup
+    // Change the view to show the default book's first page
     file_path = "";
-    book->addSection("Section 01");
-    book->getSection(0)->addPage("Untitled Page");
     ui->plainTextEdit->setDocument(book->getSection(0)->getPage(0)->getContent());
     ui->treeWidget_sections->setItemSelected(ui->treeWidget_sections->topLevelItem(0)->child(0), true);
     ui->treeWidget_sections->topLevelItem(0)->setExpanded(true);
-    ui->label_bookName->setText("Default");
+    ui->label_bookInfo->setText(book->getName()+" by "+book->getAuthor());
 
-    ui->tableWidget_cardsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    // Setup webengine for displaying markdown notes
+    PreviewPage *page = new PreviewPage(this);
+    QWebChannel *channel = new QWebChannel(this);
 
     ui->preview->setContextMenuPolicy(Qt::NoContextMenu);
-
-    PreviewPage *page = new PreviewPage(this);
     ui->preview->setPage(page);
-
     connect(ui->plainTextEdit, &QPlainTextEdit::textChanged,
             [this]() { m_content.setText(ui->plainTextEdit->toPlainText()); });
-
-    QWebChannel *channel = new QWebChannel(this);
     channel->registerObject(QStringLiteral("content"), &m_content);
     page->setWebChannel(channel);
-
     ui->preview->setUrl(QUrl("qrc:/resources/index.html"));
-
 }
 
 // Destructor
@@ -106,8 +102,7 @@ void MainWindow::on_action_print_triggered() {}
 // Last Updated: 02.04.2019
 void MainWindow::receiveBookData(QString bookNm, QString authNm, QString date)
 {
-    ui->label_bookName->setText(bookNm);
-    ui->label_bookAuthor->setText(authNm);
+    ui->label_bookInfo->setText(bookNm+" by "+authNm);
     qDebug() <<"mainWinow: Received data from addbook window" << bookNm <<authNm<< date;
 }
 
@@ -115,7 +110,6 @@ void MainWindow::receiveBookData(QString bookNm, QString authNm, QString date)
 // Init Date:    23.03.2019
 // Last Updated: 02.04.2019
 void MainWindow::on_action_new_triggered() {
-
     newBook = new addbook();
     newBook->setModal(true);
     newBook->show();
