@@ -837,14 +837,34 @@ void MainWindow::on_treeWidget_sections_currentItemChanged(QTreeWidgetItem *cur,
     on_treeWidget_sections_itemClicked(cur, 0);
 }
 
-void MainWindow::on_pushButton_bold_clicked() { me->bold(); }
-void MainWindow::on_pushButton_italics_clicked() { me->italic(); }
-void MainWindow::on_pushButton_underline_clicked() {}
-void MainWindow::on_pushButton_bulleted_clicked() { me->insertBullet(); }
-void MainWindow::on_pushButton_numbered_clicked() { me->insertNumeral(); }
-void MainWindow::on_pushButton_strike_clicked() { me->strikethough(); }
+void MainWindow::on_pushButton_bold_clicked()
+{
+    ui->plainTextEdit->setTextCursor(me->bold());
+    ui->plainTextEdit->setFocus();
+}
+
+void MainWindow::on_pushButton_italics_clicked()
+{
+    ui->plainTextEdit->setTextCursor(me->italic());
+    ui->plainTextEdit->setFocus();
+}
+
+void MainWindow::on_pushButton_underline_clicked()
+{
+    ui->plainTextEdit->setTextCursor(me->underline());
+    ui->plainTextEdit->setFocus();
+}
+
+void MainWindow::on_pushButton_strike_clicked()
+{
+    ui->plainTextEdit->setTextCursor(me->strikethough());
+    ui->plainTextEdit->setFocus();
+}
+
+void MainWindow::on_pushButton_bulleted_clicked() { me->insertBullet(); ui->plainTextEdit->setFocus();}
+void MainWindow::on_pushButton_numbered_clicked() { me->insertNumeral(); ui->plainTextEdit->setFocus();}
 void MainWindow::on_pushButton_undent_clicked() {}
-void MainWindow::on_pushButton_indent_clicked() { me->detectEnum();}
+void MainWindow::on_pushButton_indent_clicked() { /*me->detectEnum();*/}
 
 //-----------------------------------------------------------+
 //                     Flash Card Tab                        |
