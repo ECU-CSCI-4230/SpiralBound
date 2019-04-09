@@ -50,7 +50,7 @@ class Section
         // Init date:    02-27-2019
         // Last updated: 03-21-2019
         static Section* fromString(const char* str) {
-            int len = strlen(str),
+            int len = int (strlen(str)),
                 ind = Util::find(str, '\n', len),
                 indCon = Util::find(str+ind+1, '\n', len-ind-1);
             QString nm = QString::fromUtf8(str, ind),

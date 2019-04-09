@@ -491,10 +491,10 @@ void MainWindow::on_action_export_triggered() {
     save(book, ui, dir);
 }
 
-void MainWindow::on_action_bold_triggered() { me->bold(); }
-void MainWindow::on_action_italic_triggered() { me->italic(); }
-void MainWindow::on_action_strikethrough_triggered() { me->strikethough(); }
-void MainWindow::on_action_underline_triggered() {}
+void MainWindow::on_action_bold_triggered() { ui->plainTextEdit->setTextCursor(me->bold()); }
+void MainWindow::on_action_italic_triggered() { ui->plainTextEdit->setTextCursor(me->italic()); }
+void MainWindow::on_action_strikethrough_triggered() { ui->plainTextEdit->setTextCursor(me->strikethough()); }
+void MainWindow::on_action_underline_triggered() { ui->plainTextEdit->setTextCursor(me->underline()); }
 void MainWindow::on_action_indent_triggered() {}
 void MainWindow::on_action_unindent_triggered() {}
 void MainWindow::on_action_bulletedList_triggered() { me->insertBullet(); }

@@ -6,7 +6,7 @@ MarkdownEditor::MarkdownEditor(QPlainTextEdit* edit)
     editor = edit;
 }
 
-void MarkdownEditor::addMarkupFormatting(const QString &markup)
+QTextCursor MarkdownEditor::addMarkupFormatting(const QString &markup)
 {
     QTextCursor cursor = editor->textCursor();
     // so we want to add the formatting string to the beginning and the end of the text.
@@ -27,23 +27,27 @@ void MarkdownEditor::addMarkupFormatting(const QString &markup)
         cursor.insertText(markup);
         cursor.setPosition(beginning);
         cursor.insertText(markup);
+        cursor.setPosition(end);
+        cursor.clearSelection();
         cursor.endEditBlock();
+        return cursor;
     }
     else
     {
-        int beginning = cursor.position();
         cursor.beginEditBlock();
         cursor.insertText(markup);
+        int the_right_place = cursor.position();
         cursor.insertText(markup);
-        cursor.setPosition(beginning, QTextCursor::KeepAnchor);
+        cursor.setPosition(the_right_place);
         cursor.endEditBlock();
+        return cursor;
     }
 }
 
-void MarkdownEditor::bold() { addMarkupFormatting("**"); }
-void MarkdownEditor::italic() { addMarkupFormatting("*"); }
-void MarkdownEditor::strikethough() { addMarkupFormatting("~~"); }
-void MarkdownEditor::underline() { addMarkupFormatting("_"); }
+QTextCursor MarkdownEditor::bold() { return addMarkupFormatting("**");}
+QTextCursor MarkdownEditor::italic() { return addMarkupFormatting("*"); }
+QTextCursor MarkdownEditor::strikethough() { return addMarkupFormatting("~~"); }
+QTextCursor MarkdownEditor::underline() { return addMarkupFormatting("_"); }
 
 void MarkdownEditor::makeComment() {}
 
@@ -60,7 +64,6 @@ void MarkdownEditor::insertBullet()
     cursor.insertText("* ");
     cursor.setPosition(currentPosition);
     cursor.endEditBlock();
-    detectBullet();
 }
 
 void MarkdownEditor::insertNumeral()
@@ -116,4 +119,19 @@ bool MarkdownEditor::detectBullet()
         return true;
     }
     return false;
+}
+
+// code comes from:
+// https://www.qtcentre.org/threads/26892-How-get-signal-returnPressed-in-QTextEdit
+void MarkdownEditor::keyPressEvent(QKeyEvent *e)
+{
+    qDebug() << "a key was pressed";
+    QTextCursor cur = textCursor();
+    switch (e->key())
+    {
+        case Qt::Key_Enter:
+        case Qt::Key_Return:
+            qDebug() << "enter was pressed";
+        break;
+    }
 }
