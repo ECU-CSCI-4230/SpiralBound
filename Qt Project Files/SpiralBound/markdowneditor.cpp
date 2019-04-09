@@ -25,10 +25,11 @@ QTextCursor MarkdownEditor::addMarkupFormatting(const QString &markup)
         cursor.beginEditBlock();
         cursor.setPosition(end);
         cursor.insertText(markup);
+        end = cursor.position();
         cursor.setPosition(beginning);
         cursor.insertText(markup);
-        cursor.setPosition(end);
         cursor.clearSelection();
+        cursor.setPosition(end);
         cursor.endEditBlock();
         return cursor;
     }
