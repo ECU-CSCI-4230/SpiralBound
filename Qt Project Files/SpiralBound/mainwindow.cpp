@@ -755,7 +755,7 @@ void MainWindow::on_treeWidget_sections_itemDoubleClicked(QTreeWidgetItem *item,
     if (ind[1] > -1) {
         // Allow renaming of a page if the new name isn't blank
         bool ok;
-        QString text = QInputDialog::getText(nullptr, "Rename Page", "New Name:", QLineEdit::Normal, item->text(column), &ok, Qt::MSWindowsFixedSizeDialogHint);
+        QString text = QInputDialog::getText(this, "Rename Page", "New Name:", QLineEdit::Normal, item->text(column), &ok, Qt::MSWindowsFixedSizeDialogHint);
 
 
         if (ok && !text.isEmpty()) {
