@@ -14,7 +14,7 @@
    <string>SpiralBound</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="spiralbound.qrc">
+   <iconset>
     <normaloff>:/SpiralBound/images/icon.png</normaloff>:/SpiralBound/images/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
@@ -31,7 +31,7 @@
        <enum>QTabWidget::North</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <property name="elideMode">
        <enum>Qt::ElideLeft</enum>
@@ -92,7 +92,7 @@
          <string> Add</string>
         </property>
         <property name="icon">
-         <iconset resource="spiralbound.qrc">
+         <iconset>
           <normaloff>:/SpiralBound/images/icon/op_page_new.png</normaloff>:/SpiralBound/images/icon/op_page_new.png</iconset>
         </property>
         <property name="iconSize">
@@ -140,7 +140,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="spiralbound.qrc">
+         <iconset>
           <normaloff>:/SpiralBound/images/icon/op_save.png</normaloff>:/SpiralBound/images/icon/op_save.png</iconset>
         </property>
         <property name="iconSize">
@@ -172,7 +172,7 @@
          <string> Delete</string>
         </property>
         <property name="icon">
-         <iconset resource="spiralbound.qrc">
+         <iconset>
           <normaloff>:/SpiralBound/images/icon/op_page_erase.png</normaloff>:/SpiralBound/images/icon/op_page_erase.png</iconset>
         </property>
         <property name="iconSize">
@@ -276,7 +276,7 @@
          <rect>
           <x>400</x>
           <y>-6</y>
-          <width>270</width>
+          <width>287</width>
           <height>31</height>
          </rect>
         </property>
@@ -296,7 +296,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="spiralbound.qrc">
+            <iconset>
              <normaloff>:/SpiralBound/images/icon/format_bold.png</normaloff>:/SpiralBound/images/icon/format_bold.png</iconset>
            </property>
            <property name="iconSize">
@@ -328,7 +328,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="spiralbound.qrc">
+            <iconset>
              <normaloff>:/SpiralBound/images/icon/format_italic.png</normaloff>:/SpiralBound/images/icon/format_italic.png</iconset>
            </property>
            <property name="iconSize">
@@ -357,7 +357,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="spiralbound.qrc">
+            <iconset>
              <normaloff>:/SpiralBound/images/icon/format_underline.png</normaloff>:/SpiralBound/images/icon/format_underline.png</iconset>
            </property>
            <property name="iconSize">
@@ -386,7 +386,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="spiralbound.qrc">
+            <iconset>
              <normaloff>:/SpiralBound/images/icon/format_strike.png</normaloff>:/SpiralBound/images/icon/format_strike.png</iconset>
            </property>
            <property name="iconSize">
@@ -428,7 +428,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="spiralbound.qrc">
+            <iconset>
              <normaloff>:/SpiralBound/images/icon/format_list_unorder.png</normaloff>:/SpiralBound/images/icon/format_list_unorder.png</iconset>
            </property>
            <property name="iconSize">
@@ -457,7 +457,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="spiralbound.qrc">
+            <iconset>
              <normaloff>:/SpiralBound/images/icon/format_list_order.png</normaloff>:/SpiralBound/images/icon/format_list_order.png</iconset>
            </property>
            <property name="iconSize">
@@ -499,7 +499,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="spiralbound.qrc">
+            <iconset>
              <normaloff>:/SpiralBound/images/icon/format_indent.png</normaloff>:/SpiralBound/images/icon/format_indent.png</iconset>
            </property>
            <property name="iconSize">
@@ -531,7 +531,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="spiralbound.qrc">
+            <iconset>
              <normaloff>:/SpiralBound/images/icon/format_outdent.png</normaloff>:/SpiralBound/images/icon/format_outdent.png</iconset>
            </property>
            <property name="iconSize">
@@ -717,105 +717,6 @@
        <attribute name="title">
         <string>Flash Cards</string>
        </attribute>
-       <widget class="QLabel" name="label_cards">
-        <property name="geometry">
-         <rect>
-          <x>310</x>
-          <y>20</y>
-          <width>191</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>18</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Cards</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-       <widget class="QTableWidget" name="tableWidget_cardsTable">
-        <property name="geometry">
-         <rect>
-          <x>310</x>
-          <y>60</y>
-          <width>591</width>
-          <height>411</height>
-         </rect>
-        </property>
-        <property name="sortingEnabled">
-         <bool>false</bool>
-        </property>
-        <property name="columnCount">
-         <number>2</number>
-        </property>
-        <attribute name="horizontalHeaderCascadingSectionResizes">
-         <bool>true</bool>
-        </attribute>
-        <attribute name="horizontalHeaderDefaultSectionSize">
-         <number>294</number>
-        </attribute>
-        <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
-         <bool>false</bool>
-        </attribute>
-        <column>
-         <property name="text">
-          <string>Title (Front)</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Body (Back)</string>
-         </property>
-        </column>
-       </widget>
-       <widget class="QLabel" name="label_decks">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>20</y>
-          <width>191</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>18</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Decks</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-       <widget class="QListWidget" name="listWidget_decks">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>60</y>
-          <width>291</width>
-          <height>411</height>
-         </rect>
-        </property>
-       </widget>
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
@@ -879,6 +780,121 @@
          </item>
         </layout>
        </widget>
+       <widget class="QWidget" name="">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>221</width>
+          <height>451</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_4">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_decks">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Decks</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QListWidget" name="listWidget_decks">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+           <property name="sizeAdjustPolicy">
+            <enum>QAbstractScrollArea::AdjustToContents</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>20</y>
+          <width>671</width>
+          <height>451</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_5">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_cards">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Cards</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QTableWidget" name="tableWidget_cardsTable">
+           <property name="font">
+            <font>
+             <pointsize>7</pointsize>
+            </font>
+           </property>
+           <property name="sortingEnabled">
+            <bool>false</bool>
+           </property>
+           <property name="columnCount">
+            <number>2</number>
+           </property>
+           <attribute name="horizontalHeaderCascadingSectionResizes">
+            <bool>true</bool>
+           </attribute>
+           <attribute name="horizontalHeaderDefaultSectionSize">
+            <number>333</number>
+           </attribute>
+           <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+            <bool>false</bool>
+           </attribute>
+           <column>
+            <property name="text">
+             <string>Title (Front)</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Body (Back)</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </widget>
      </widget>
     </item>
@@ -890,7 +906,7 @@
      <x>0</x>
      <y>0</y>
      <width>943</width>
-     <height>20</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -970,7 +986,7 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="action_open">
    <property name="icon">
-    <iconset resource="spiralbound.qrc">
+    <iconset>
      <normaloff>:/SpiralBound/images/icon/op_open.png</normaloff>:/SpiralBound/images/icon/op_open.png</iconset>
    </property>
    <property name="text">
@@ -984,7 +1000,7 @@
   </action>
   <action name="action_save">
    <property name="icon">
-    <iconset resource="spiralbound.qrc">
+    <iconset>
      <normaloff>:/SpiralBound/images/icon/op_save.png</normaloff>:/SpiralBound/images/icon/op_save.png</iconset>
    </property>
    <property name="text">
@@ -1011,7 +1027,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="spiralbound.qrc">
+    <iconset>
      <normaloff>:/SpiralBound/images/icon/op_print.png</normaloff>:/SpiralBound/images/icon/op_print.png</iconset>
    </property>
    <property name="text">
@@ -1020,7 +1036,7 @@
   </action>
   <action name="action_new">
    <property name="icon">
-    <iconset resource="spiralbound.qrc">
+    <iconset>
      <normaloff>:/SpiralBound/images/icon/op_new_notebook.png</normaloff>:/SpiralBound/images/icon/op_new_notebook.png</iconset>
    </property>
    <property name="text">
@@ -1029,7 +1045,7 @@
   </action>
   <action name="action_openRecent">
    <property name="icon">
-    <iconset resource="spiralbound.qrc">
+    <iconset>
      <normaloff>:/SpiralBound/images/icon/op_recent.png</normaloff>:/SpiralBound/images/icon/op_recent.png</iconset>
    </property>
    <property name="text">
@@ -1038,7 +1054,7 @@
   </action>
   <action name="action_saveAs">
    <property name="icon">
-    <iconset resource="spiralbound.qrc">
+    <iconset>
      <normaloff>:/SpiralBound/images/icon/op_saveAs.png</normaloff>:/SpiralBound/images/icon/op_saveAs.png</iconset>
    </property>
    <property name="text">
@@ -1047,7 +1063,7 @@
   </action>
   <action name="action_bold">
    <property name="icon">
-    <iconset resource="spiralbound.qrc">
+    <iconset>
      <normaloff>:/SpiralBound/images/icon/format_bold.png</normaloff>:/SpiralBound/images/icon/format_bold.png</iconset>
    </property>
    <property name="text">
@@ -1056,7 +1072,7 @@
   </action>
   <action name="action_italic">
    <property name="icon">
-    <iconset resource="spiralbound.qrc">
+    <iconset>
      <normaloff>:/SpiralBound/images/icon/format_italic.png</normaloff>:/SpiralBound/images/icon/format_italic.png</iconset>
    </property>
    <property name="text">
@@ -1065,7 +1081,7 @@
   </action>
   <action name="action_underline">
    <property name="icon">
-    <iconset resource="spiralbound.qrc">
+    <iconset>
      <normaloff>:/SpiralBound/images/icon/format_underline.png</normaloff>:/SpiralBound/images/icon/format_underline.png</iconset>
    </property>
    <property name="text">
@@ -1074,7 +1090,7 @@
   </action>
   <action name="action_comment">
    <property name="icon">
-    <iconset resource="spiralbound.qrc">
+    <iconset>
      <normaloff>:/SpiralBound/images/icon/op_comment.png</normaloff>:/SpiralBound/images/icon/op_comment.png</iconset>
    </property>
    <property name="text">
@@ -1083,7 +1099,7 @@
   </action>
   <action name="action_strikethrough">
    <property name="icon">
-    <iconset resource="spiralbound.qrc">
+    <iconset>
      <normaloff>:/SpiralBound/images/icon/format_strike.png</normaloff>:/SpiralBound/images/icon/format_strike.png</iconset>
    </property>
    <property name="text">
@@ -1092,7 +1108,7 @@
   </action>
   <action name="action_indent">
    <property name="icon">
-    <iconset resource="spiralbound.qrc">
+    <iconset>
      <normaloff>:/SpiralBound/images/icon/format_indent.png</normaloff>:/SpiralBound/images/icon/format_indent.png</iconset>
    </property>
    <property name="text">
@@ -1101,7 +1117,7 @@
   </action>
   <action name="action_unindent">
    <property name="icon">
-    <iconset resource="spiralbound.qrc">
+    <iconset>
      <normaloff>:/SpiralBound/images/icon/format_outdent.png</normaloff>:/SpiralBound/images/icon/format_outdent.png</iconset>
    </property>
    <property name="text">
@@ -1110,7 +1126,7 @@
   </action>
   <action name="action_bulletedList">
    <property name="icon">
-    <iconset resource="spiralbound.qrc">
+    <iconset>
      <normaloff>:/SpiralBound/images/icon/format_list_unorder.png</normaloff>:/SpiralBound/images/icon/format_list_unorder.png</iconset>
    </property>
    <property name="text">
@@ -1119,7 +1135,7 @@
   </action>
   <action name="action_numberedList">
    <property name="icon">
-    <iconset resource="spiralbound.qrc">
+    <iconset>
      <normaloff>:/SpiralBound/images/icon/format_list_order.png</normaloff>:/SpiralBound/images/icon/format_list_order.png</iconset>
    </property>
    <property name="text">
@@ -1128,7 +1144,7 @@
   </action>
   <action name="action_taskList">
    <property name="icon">
-    <iconset resource="spiralbound.qrc">
+    <iconset>
      <normaloff>:/SpiralBound/images/icon/op_tasklist.png</normaloff>:/SpiralBound/images/icon/op_tasklist.png</iconset>
    </property>
    <property name="text">
@@ -1142,7 +1158,7 @@
   </action>
   <action name="action_printPreview">
    <property name="icon">
-    <iconset resource="spiralbound.qrc">
+    <iconset>
      <normaloff>:/SpiralBound/images/icon/op_preview.png</normaloff>:/SpiralBound/images/icon/op_preview.png</iconset>
    </property>
    <property name="text">
@@ -1151,7 +1167,7 @@
   </action>
   <action name="action_export">
    <property name="icon">
-    <iconset resource="spiralbound.qrc">
+    <iconset>
      <normaloff>:/SpiralBound/images/icon/op_export.png</normaloff>:/SpiralBound/images/icon/op_export.png</iconset>
    </property>
    <property name="text">
@@ -1163,7 +1179,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="spiralbound.qrc">
+    <iconset>
      <normaloff>:/SpiralBound/images/icon/op_quit.png</normaloff>:/SpiralBound/images/icon/op_quit.png</iconset>
    </property>
    <property name="text">
@@ -1180,8 +1196,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="spiralbound.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

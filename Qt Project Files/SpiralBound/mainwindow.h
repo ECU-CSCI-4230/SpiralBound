@@ -116,6 +116,8 @@ private slots:
     void receiveSectionData(QString, QColor, int);
     void receiveBookData(QString, QString, QString);
 
+    void on_listWidget_decks_currentItemChanged(QListWidgetItem *current);
+
 signals:
     void sendEditData(QString, QString, QString);  // Send mainwindown data to editcalendarevent
     void sendSectionInfo(QString, QColor, int);

@@ -849,18 +849,56 @@ void MainWindow::on_pushButton_indent_clicked() { me->detectEnum();}
 //-----------------------------------------------------------+
 //                     Flash Card Tab                        |
 //-----------------------------------------------------------+
-// Author: Nick
+// Author:       Nick, Cam
 // Init Date:    26.02.2019
-// Last Updated: 22.03.2019
-void MainWindow::receiveCardData(QString deckName, QString front, QString back)
+// Last Updated: 09.04.2019
+void MainWindow::receiveCardData(QString deckName, QString cardFront, QString cardBack)
 {
     // Create row
-    ui->tableWidget_cardsTable->insertRow(ui->tableWidget_cardsTable->rowCount() );
+    //ui->tableWidget_cardsTable->insertRow(ui->tableWidget_cardsTable->rowCount() );
+
+    //ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 0, new QTableWidgetItem(deckName));
 
     // Populate row
-    // ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 0, new QTableWidgetItem(deckName));
-    ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 0, new QTableWidgetItem(front));
-    ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 1, new QTableWidgetItem(back));
+    //ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 0, new QTableWidgetItem(cardFront));
+    //ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 1, new QTableWidgetItem(cardBack));
+
+
+    if (ui->listWidget_decks->currentItem()->text() != deckName)
+    {
+        for (Deck* deck : deckList)
+        {
+            if (deck->name == deckName)
+            {
+                deck->front.append(cardFront);
+                deck->back.append(cardBack);
+                break;
+            }
+        }
+    }
+    else
+    {
+        for (Deck* deck : deckList)
+        {
+            if (deck->name == deckName)
+            {
+                deck->front.append(cardFront);
+                deck->back.append(cardBack);
+                ui->tableWidget_cardsTable->insertRow(ui->tableWidget_cardsTable->rowCount() );
+                ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 0, new QTableWidgetItem(cardFront));
+                ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 1, new QTableWidgetItem(cardBack));
+                break;
+            }
+        }
+
+    }
+
+    // Debugging
+    qDebug() << "Deck contents: ";
+    for (Deck* deck : deckList) {
+        qDebug() << deck->front;
+        qDebug() << deck->back;
+    }
 }
 
 // Author: Jamie, Nicholas
@@ -898,6 +936,7 @@ void MainWindow::receiveDeckData(QString deck)
     Deck * newDeck = new Deck();
     newDeck->name = last->text();
     deckList.push_back(newDeck);
+    ui->listWidget_decks->setCurrentRow(ui->listWidget_decks->count() - 1);
 
     // Debugging
     for (Deck* deck : deckList) {
@@ -952,6 +991,7 @@ void MainWindow::receiveDeckDeleteData(bool response)
     }
 
     // Debugging
+    qDebug() << "Deck List: ";
     for (Deck* deck : deckList) {
         qDebug() << deck->name;
     }
@@ -1030,4 +1070,40 @@ void MainWindow::on_pushButton_import_clicked()
 
     connect(importCardWindow, SIGNAL(sendCardData(QString,QString,QString)), this, SLOT(receiveCardData(QString, QString, QString)));
 }
+
+// Author:       Cam
+// Init Date:    09.04.2019
+// Last Updated: 09.04.2019
+void MainWindow::on_listWidget_decks_currentItemChanged(QListWidgetItem *current)
+{
+    for (int i = 0; i < ui->tableWidget_cardsTable->rowCount(); i++)
+    {
+        ui->tableWidget_cardsTable->removeRow(i);
+    }
+
+    if (current != nullptr)
+    {
+        QString deckName = current->text();
+
+        for (Deck* deck : deckList)
+        {
+            if(deck->name == deckName)
+            {
+                for (int i = 0; i < deck->front.length(); i++)
+                {
+                    ui->tableWidget_cardsTable->insertRow(ui->tableWidget_cardsTable->rowCount() );
+                    ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 0, new QTableWidgetItem(deck->front[i]));
+                    ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 1, new QTableWidgetItem(deck->back[i]));
+                }
+                break;
+            }
+        }
+    }
+}
+
+
+
+
+
+
 
