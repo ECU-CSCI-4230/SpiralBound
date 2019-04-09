@@ -1071,7 +1071,7 @@ void MainWindow::on_pushButton_import_clicked()
     connect(importCardWindow, SIGNAL(sendCardData(QString,QString,QString)), this, SLOT(receiveCardData(QString, QString, QString)));
 }
 
-// Author:       Cam
+// Author:       Cam, Nick, Matt
 // Init Date:    09.04.2019
 // Last Updated: 09.04.2019
 void MainWindow::on_listWidget_decks_currentItemChanged(QListWidgetItem *current)
