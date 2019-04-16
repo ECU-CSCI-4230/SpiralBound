@@ -854,16 +854,7 @@ void MainWindow::on_pushButton_indent_clicked() { me->detectEnum();}
 // Last Updated: 09.04.2019
 void MainWindow::receiveCardData(QString deckName, QString cardFront, QString cardBack)
 {
-    // Create row
-    //ui->tableWidget_cardsTable->insertRow(ui->tableWidget_cardsTable->rowCount() );
-
-    //ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 0, new QTableWidgetItem(deckName));
-
-    // Populate row
-    //ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 0, new QTableWidgetItem(cardFront));
-    //ui->tableWidget_cardsTable->setItem(ui->tableWidget_cardsTable->rowCount()-1, 1, new QTableWidgetItem(cardBack));
-
-
+    // If selected deck is not highlighted add only to backend
     if (ui->listWidget_decks->currentItem()->text() != deckName)
     {
         for (Deck* deck : deckList)
@@ -876,7 +867,7 @@ void MainWindow::receiveCardData(QString deckName, QString cardFront, QString ca
             }
         }
     }
-    else
+    else // If deck is selected add to front and backend
     {
         for (Deck* deck : deckList)
         {
@@ -890,7 +881,6 @@ void MainWindow::receiveCardData(QString deckName, QString cardFront, QString ca
                 break;
             }
         }
-
     }
 
     // Debugging
@@ -901,19 +891,32 @@ void MainWindow::receiveCardData(QString deckName, QString cardFront, QString ca
     }
 }
 
-// Author: Jamie, Nicholas
+// Author:       Jamie, Nicholas, Cam
 // Init Date:    09.02.2019
-// Last Updated: 22.03.2019
+// Last Updated: 15.04.2019
 void MainWindow::receiveCardDeleteData(bool response)
 {
    if(response == true)
    {
-       // Delete item from table
+       int position = ui->tableWidget_cardsTable->currentItem()->row();
+
+       // Delete card from data structure (backend)
+       for (Deck* deck : deckList)
+       {
+           if(ui->listWidget_decks->currentItem()->text() == deck->name)
+           {
+               deck->back.removeAt(position);
+               deck->front.removeAt(position);
+               break;
+           }
+       }
+
+       // Delete card from table (frontend)
        ui->tableWidget_cardsTable->removeRow(ui->tableWidget_cardsTable->currentItem()->row());
    }
 }
 
-// Author: Cam, Nick
+// Author:       Cam, Nick
 // Init Date:    26.03.2019
 // Last Updated: 26.03.2019
 void MainWindow::on_pushButton_addDeck_clicked()
@@ -926,12 +929,26 @@ void MainWindow::on_pushButton_addDeck_clicked()
 
 }
 
-// Author: Cam, Nick
+// Author:       Cam, Nick
 // Init Date:    26.03.2019
-// Last Updated: 02.04.2019
+// Last Updated: 16.04.2019
 void MainWindow::receiveDeckData(QString deck)
 {
-    ui->listWidget_decks->addItem(deck);
+    // Check to see if deck already exists
+    for (Deck* d : deckList)
+    {
+        // If deck already exists, display error message.
+        if (d->name.toLower().trimmed() == deck.toLower().trimmed())
+        {
+            QMessageBox messageBox;
+            messageBox.critical(nullptr,"Error","Deck already exists. \nCannot have duplicates.");
+            messageBox.setFixedSize(500,200);
+            return;
+        }
+    }
+
+    // If deck does not exist already, add deck to deckList.
+    ui->listWidget_decks->addItem(deck.trimmed());
     QListWidgetItem * last = ui->listWidget_decks->item(ui->listWidget_decks->count() - 1);
     Deck * newDeck = new Deck();
     newDeck->name = last->text();
@@ -944,7 +961,7 @@ void MainWindow::receiveDeckData(QString deck)
     }
 }
 
-// Author: Cam, Nick
+// Author:       Cam, Nick
 // Init Date:    26.03.2019
 // Last Updated: 02.04.2019
 void MainWindow::on_pushButton_deleteDeck_clicked()
@@ -969,7 +986,7 @@ void MainWindow::on_pushButton_deleteDeck_clicked()
     }
 }
 
-// Author: Cam, Nick
+// Author:       Cam, Nick
 // Init Date:    26.03.2019
 // Last Updated: 02.04.2019
 void MainWindow::receiveDeckDeleteData(bool response)
@@ -997,7 +1014,7 @@ void MainWindow::receiveDeckDeleteData(bool response)
     }
 }
 
-// Author: Jamie, Nick
+// Author:       Jamie, Nick
 // Init Date:    26.02.2019
 // Last Updated: 26.02.2019
 void MainWindow::on_pushButton_addCard_clicked()
@@ -1024,8 +1041,8 @@ void MainWindow::on_pushButton_addCard_clicked()
 
 }
 
-// Author: Jamie
-// Init Date: 12.03.2019
+// Author:       Jamie
+// Init Date:    12.03.2019
 // Last Updated: 12.03.2019
 void MainWindow::on_pushButton_deleteCard_clicked()
 {
@@ -1059,8 +1076,8 @@ void MainWindow::on_pushButton_studyCard_clicked()
     // TODO: open study window for selected deck.
 }
 
-// Author: Cam
-// Init Date: 02.03.2019
+// Author:       Cam
+// Init Date:    02.03.2019
 // Last Updated: 07.03.2019
 void MainWindow::on_pushButton_import_clicked()
 {
@@ -1076,9 +1093,9 @@ void MainWindow::on_pushButton_import_clicked()
 // Last Updated: 09.04.2019
 void MainWindow::on_listWidget_decks_currentItemChanged(QListWidgetItem *current)
 {
-    for (int i = 0; i < ui->tableWidget_cardsTable->rowCount(); i++)
+    for (int rC = ui->tableWidget_cardsTable->rowCount(); rC >= 0; rC--)
     {
-        ui->tableWidget_cardsTable->removeRow(i);
+        ui->tableWidget_cardsTable->removeRow(rC);
     }
 
     if (current != nullptr)
@@ -1101,9 +1118,66 @@ void MainWindow::on_listWidget_decks_currentItemChanged(QListWidgetItem *current
     }
 }
 
+// Author:       Cam, Matthew
+// Init Date:    16.04.2019
+// Last Updated: 16.04.2019
+void MainWindow::on_listWidget_decks_itemDoubleClicked(QListWidgetItem *item)
+{
+    item->setFlags (item->flags () | Qt::ItemIsEditable);
+    QString oldName = item->text();
+    bool ok;
+    QString text = QInputDialog::getText(nullptr, "Rename Deck", "New Name:", QLineEdit::Normal, item->text(), &ok, Qt::MSWindowsFixedSizeDialogHint);
 
 
+    if (ok && !text.isEmpty()) {
+        // Check to see if deck already exists
+        for (Deck* d : deckList)
+        {
+            // If deck already exists, display error message.
+            if (d->name.toLower().trimmed() == item->text().toLower().trimmed())
+            {
+                QMessageBox messageBox;
+                messageBox.critical(nullptr,"Error","Deck already exists. \nCannot have duplicates.");
+                messageBox.setFixedSize(500,200);
+                return;
+            }
 
+            if (d->name == oldName)
+            {
+                d->name = text.trimmed();
+                break;
+            }
+        }
+    }
+}
+
+// Author:       Cam, Matthew
+// Init Date:    16.04.2019
+// Last Updated: 16.04.2019
+void MainWindow::on_tableWidget_cardsTable_itemDoubleClicked(QTableWidgetItem *item)
+{
+    item->setFlags (item->flags () | Qt::ItemIsEditable);
+    bool ok;
+    QString text = QInputDialog::getText(nullptr, "Rename Card", "New Data:", QLineEdit::Normal, item->text(), &ok, Qt::MSWindowsFixedSizeDialogHint);
+
+    if (ok && !text.isEmpty()) {
+        item->setText(text);
+        for(Deck* deck : deckList)
+        {
+            if(ui->listWidget_decks->currentItem()->text() == deck->name)
+            {
+                if(ui->tableWidget_cardsTable->currentColumn() == 0)
+                {
+                    deck->front[ui->tableWidget_cardsTable->currentRow()] = text;
+                }
+                else if (ui->tableWidget_cardsTable->currentColumn() == 1)
+                {
+                    deck->back[ui->tableWidget_cardsTable->currentRow()] = text;
+                }
+            }
+        }
+    }
+}
 
 
 
