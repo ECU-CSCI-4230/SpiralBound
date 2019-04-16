@@ -133,6 +133,40 @@ void MarkdownEditor::keyPressEvent(QKeyEvent *e)
         case Qt::Key_Enter:
         case Qt::Key_Return:
             qDebug() << "enter was pressed";
+
+            // move cursor up
+            QTextCursor cursor = editor->textCursor();
+            cursor.movePosition(QTextCursor::Up);
+
+            if (detectBullet())
+            {
+                cursor.movePosition(QTextCursor::Down);
+                insertBullet();
+            }
+            else if (detectEnum())
+            {
+                int currentPosition = cursor.position();
+                cursor.beginEditBlock();
+                cursor.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor, 1);
+                cursor.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor, 1);
+                QString seltext = cursor.selectedText();
+                cursor.setPosition(currentPosition);
+                cursor.endEditBlock();
+
+                QRegularExpression re;
+                re.setPattern("^(\\d+)\\. ");
+                QRegularExpressionMatch match = re.match(seltext);
+                QString cap = match.captured(0);
+                int number = cap.toInt();
+                number++;
+                cursor.movePosition(QTextCursor::Down);
+                cursor.insertText(QString(number));
+            }
+            else
+            {
+                // move down a line
+                cursor.movePosition(QTextCursor::Down);
+            }
         break;
     }
 }
