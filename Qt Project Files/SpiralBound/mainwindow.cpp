@@ -1057,6 +1057,32 @@ void MainWindow::on_pushButton_deleteCard_clicked()
 void MainWindow::on_pushButton_studyCard_clicked()
 {
     // TODO: open study window for selected deck.
+    QListWidgetItem * deck = ui->listWidget_decks->currentItem();
+    QString deckName = deck->text();
+
+    if (deck == nullptr)
+    {
+        QMessageBox messageBox;
+        messageBox.critical(nullptr,"Error","Select a deck to study, please try again.");
+        messageBox.setFixedSize(500,200);
+    }
+    else
+    {
+
+        for (Deck* deck : deckList)
+        {
+            if (deck->name == deckName)
+            {
+                // Builds deletedeck GUI/window
+                studyCardWindow = new studycard(this, deck);
+                studyCardWindow->setModal(true);
+                studyCardWindow->show();
+                //studyCardWindow->set(deck);
+                break;
+            }
+        }
+
+    }
 }
 
 // Author: Cam
