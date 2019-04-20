@@ -31,7 +31,7 @@
        <enum>QTabWidget::North</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="elideMode">
        <enum>Qt::ElideLeft</enum>
@@ -877,7 +877,7 @@
      <x>0</x>
      <y>0</y>
      <width>943</width>
-     <height>17</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -901,7 +901,9 @@
     <property name="title">
      <string>Edit</string>
     </property>
-    <addaction name="action_test"/>
+    <addaction name="action_renameNotebook"/>
+    <addaction name="actionAdd_Page"/>
+    <addaction name="actionNew_Section"/>
    </widget>
    <widget class="QMenu" name="menuFormat">
     <property name="title">
@@ -964,9 +966,13 @@
     <string>Open</string>
    </property>
   </action>
-  <action name="action_test">
+  <action name="action_renameNotebook">
+   <property name="icon">
+    <iconset resource="spiralbound.qrc">
+     <normaloff>:/SpiralBound/images/icon/op_rename_notebook.png</normaloff>:/SpiralBound/images/icon/op_rename_notebook.png</iconset>
+   </property>
    <property name="text">
-    <string>Test</string>
+    <string>Rename Notebook</string>
    </property>
   </action>
   <action name="action_save">
@@ -1155,6 +1161,29 @@
    </property>
    <property name="text">
     <string>Quit</string>
+   </property>
+  </action>
+  <action name="actionDelete_Notebook">
+   <property name="text">
+    <string>Delete Notebook</string>
+   </property>
+  </action>
+  <action name="actionAdd_Page">
+   <property name="icon">
+    <iconset resource="spiralbound.qrc">
+     <normaloff>:/SpiralBound/images/icon/op_page_new.png</normaloff>:/SpiralBound/images/icon/op_page_new.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add Page</string>
+   </property>
+  </action>
+  <action name="actionNew_Section">
+   <property name="icon">
+    <iconset resource="spiralbound.qrc">
+     <normaloff>:/SpiralBound/images/icon/op_addSection.png</normaloff>:/SpiralBound/images/icon/op_addSection.png</iconset>
+   </property>
+   <property name="text">
+    <string>New Section</string>
    </property>
   </action>
  </widget>

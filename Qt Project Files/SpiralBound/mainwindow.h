@@ -102,6 +102,9 @@ private slots:
     void on_treeWidget_sections_itemClicked(QTreeWidgetItem *item, int column);
     void on_treeWidget_sections_currentItemChanged(QTreeWidgetItem *cur, QTreeWidgetItem* prev);
     void on_plainTextEdit_textChanged();
+    void on_action_renameNotebook_triggered();
+    void on_actionAdd_Page_triggered();
+    void on_actionNew_Section_triggered();
 
     // Shortcut bar for Markdown
     void on_pushButton_bold_clicked();

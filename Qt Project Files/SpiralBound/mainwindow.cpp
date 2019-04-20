@@ -26,6 +26,7 @@
 #include <list>
 #include <qinputdialog.h>
 #include <QWebChannel>
+#include <regex>
 
 //black magic
 #define UNUSED(expr) do { (void)(expr); } while (0)
@@ -1082,3 +1083,55 @@ void MainWindow::on_pushButton_import_clicked()
     connect(importCardWindow, SIGNAL(sendCardData(QString,QString,QString)), this, SLOT(receiveCardData(QString, QString, QString)));
 }
 
+// Author: Ketu Patel
+// Init Date: 04.12.2019
+// Last Updated: 04.19.2019
+void MainWindow::on_action_renameNotebook_triggered()
+{
+        QString current_name = book->getName();
+        bool ok;
+        QString text = QInputDialog::getText(this, "Rename Notebook", "New Name:", QLineEdit::Normal ,"", &ok, Qt::MSWindowsFixedSizeDialogHint).trimmed();
+
+        while (ok && text.isEmpty()){
+            text = QInputDialog::getText(this, "Rename Notebook", "Can't assign an empty name, enter the name again:", QLineEdit::Normal,"", &ok, Qt::MSWindowsFixedSizeDialogHint).trimmed();
+        }
+
+        QRegExp rx("[a-zA-Z0-9-_ ]+");
+        QRegExpValidator v(rx, 0);
+        QString s;
+        int pos = 0;
+
+        // String validation
+        if (v.validate(text, pos) == QValidator::Acceptable){
+
+            if (QDir(QDir::homePath() + "/.spiralbound/books/" + text).exists()) {
+                Util::showMessage("Error", "Notebook with given name already exists!");
+             }
+            else {
+            file_path = QString(QDir::homePath() + "/.spiralbound/books/" + book->getName());
+            book->setName(text);
+            ui->label_bookInfo->setText(book->getName() +" by "+book->getAuthor());
+            isModified = true;
+            }
+        }
+
+        else {
+            Util::showMessage("Error", "Only characters in ([a-zA-Z-_0-9 ]) class allowed!");
+        }
+}
+
+// Author: Ketu Patel
+// Init Date: 04.12.2019
+// Last Updated: 04.19.2019
+void MainWindow::on_actionAdd_Page_triggered()
+{
+    on_pushButton_addPage_clicked();
+}
+
+// Author: Ketu Patel
+// Init Date: 04.12.2019
+// Last Updated: 04.19.2019
+void MainWindow::on_actionNew_Section_triggered()
+{
+    on_pushButton_addSection_clicked();
+}
