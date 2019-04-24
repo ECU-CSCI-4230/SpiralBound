@@ -365,12 +365,12 @@ void MainWindow::on_action_open_triggered() {
 // Author:       Matthew Morgan
 // Init Date:    22.03.2019
 // Last Updated: 24.04.2019
-/** save(book, main, <dir>) saves the current Book instance, and flash cards/calendar information, to the
+/** save(book, main, decks, <dir>) saves the current Book instance, and flash cards/calendar information, to the
   * directory selected, using the MainWindow interface - main - to perform fetching of needed data. It
-  * returns the directory of the saved book.
+  * returns the directory of the saved book. It further requires the list of decks for saving flash cards.
   *
   * The default directory for dir is <home>/.spiralbound/books/. */
-QString save(Book* book, Ui::MainWindow* main, QString dir=QString("%1/.spiralbound/books/").arg(QDir::homePath())) {
+QString save(Book* book, Ui::MainWindow* main, list<Deck*> decks, QString dir=QString("%1/.spiralbound/books/").arg(QDir::homePath())) {
     QString backup = QDir::homePath() + "/.spiralbound/backup/" + book->getName();
     dir = dir + book->getName();
 
@@ -411,6 +411,28 @@ QString save(Book* book, Ui::MainWindow* main, QString dir=QString("%1/.spiralbo
           * there is a means of better accessing decks. It generates a list of decks, and then linearly scans the entire
           * card set to filter out which cards belong to the deck being searched.
           **************************************************************************************************************/
+
+        int i=1;
+        for(Deck* deck : decks) {
+            QFile* deckFile = new QFile(QString("%1/study/%2.csv").arg(dir).arg(1));
+
+            if (!deckFile->open(QFile::WriteOnly))
+                throw "A deck file couldn't be opened for writing!";
+
+            QTextStream dStream(*&deckFile);
+            dStream << deck->name << "\n";
+
+            for(int k=deck->front.size(); k>0; k--) {
+                QString card_fr = deck->front.takeFirst(), card_bk = deck->back.takeFirst();
+                dStream << card_fr.length() << "," << card_fr << "," << card_bk << "\n";
+                deck->front.push_back(card_fr);
+                deck->back.push_back(card_bk);
+            }
+
+            deckFile->close();
+            delete deckFile;
+            i++;
+        }
 
         // Construct the deck list and write the number of decks down
 //        QStringList deckList;
@@ -509,7 +531,7 @@ QString save(Book* book, Ui::MainWindow* main, QString dir=QString("%1/.spiralbo
 // Author:       Matthew Morgan
 // Init Date:    21.03.2019
 // Last Updated: 06.04.2019
-void MainWindow::on_action_save_triggered() { save(book, ui); isModified = false;}
+void MainWindow::on_action_save_triggered() { save(book, ui, deckList); isModified = false;}
 
 // Author:       Matthew Morgan
 // Init Date:    22.03.2019
@@ -529,7 +551,7 @@ void MainWindow::on_action_export_triggered() {
         if (!Util::confirm("Overwrite", "A notebook is detected in this directory. Overwrite?"))
             return;
 
-    save(book, ui, dir);
+    save(book, ui, deckList, dir);
 }
 
 void MainWindow::on_action_bold_triggered() { me->bold(); }
