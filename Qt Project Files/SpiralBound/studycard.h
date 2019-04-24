@@ -7,7 +7,8 @@
 #include <util.h>
 #include <QListWidgetItem>
 
-extern int x;
+// extern int side;
+// extern Deck* copyDeck;
 
 namespace Ui {
 class studycard;
@@ -26,10 +27,17 @@ public:
 private slots:
     void on_pushButton_flip_clicked();
 
+    void on_pushButton_ok_clicked();
+
+    void on_pushButton_previous_clicked();
+
+    void on_pushButton_next_clicked();
+
 private:
     Ui::studycard *ui;
-    int x;
-
+    int side = 0;
+    int index = 0;
+    Deck* copyDeck = nullptr;
 };
 
 #endif // STUDYCARD_H
