@@ -883,12 +883,12 @@ void MainWindow::receiveCardData(QString deckName, QString cardFront, QString ca
         }
     }
 
-    // Debugging
+    /*// Debugging
     qDebug() << "Deck contents: ";
     for (Deck* deck : deckList) {
         qDebug() << deck->front;
         qDebug() << deck->back;
-    }
+    }*/
 }
 
 // Author:       Jamie, Nicholas, Cam
@@ -1081,11 +1081,22 @@ void MainWindow::on_pushButton_studyCard_clicked()
 // Last Updated: 07.03.2019
 void MainWindow::on_pushButton_import_clicked()
 {
-    importCardWindow = new importflashcards(this);
-    importCardWindow->setModal(true);
-    importCardWindow->show();
+    list<Deck*> newDeckList = deckList;
 
-    connect(importCardWindow, SIGNAL(sendCardData(QString,QString,QString)), this, SLOT(receiveCardData(QString, QString, QString)));
+    if (deckList.empty())
+    {
+        QMessageBox messageBox;
+        messageBox.critical(nullptr,"Error","No Decks Exist.");
+        messageBox.setFixedSize(500,200);
+    }
+    else
+    {
+        importCardWindow = new importflashcards(this, newDeckList);
+        importCardWindow->setModal(true);
+        importCardWindow->show();
+
+        connect(importCardWindow, SIGNAL(sendCardData(QString,QString,QString)), this, SLOT(receiveCardData(QString, QString, QString)));
+    }
 }
 
 // Author:       Cam, Nick, Matt

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>136</height>
+    <height>181</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>11</x>
-     <y>43</y>
+     <y>82</y>
      <width>31</width>
      <height>50</height>
     </rect>
@@ -33,7 +33,7 @@
    <property name="geometry">
     <rect>
      <x>11</x>
-     <y>100</y>
+     <y>139</y>
      <width>185</width>
      <height>25</height>
     </rect>
@@ -46,7 +46,7 @@
    <property name="geometry">
     <rect>
      <x>207</x>
-     <y>100</y>
+     <y>139</y>
      <width>185</width>
      <height>25</height>
     </rect>
@@ -59,7 +59,7 @@
    <property name="geometry">
     <rect>
      <x>45</x>
-     <y>43</y>
+     <y>82</y>
      <width>341</width>
      <height>50</height>
     </rect>
@@ -72,13 +72,36 @@
    <property name="geometry">
     <rect>
      <x>11</x>
-     <y>11</y>
+     <y>50</y>
      <width>378</width>
      <height>25</height>
     </rect>
    </property>
    <property name="text">
     <string>Browse...</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_deckName">
+   <property name="geometry">
+    <rect>
+     <x>11</x>
+     <y>20</y>
+     <width>70</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Deck Name:</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_decks">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>15</y>
+     <width>298</width>
+     <height>24</height>
+    </rect>
    </property>
   </widget>
  </widget>
