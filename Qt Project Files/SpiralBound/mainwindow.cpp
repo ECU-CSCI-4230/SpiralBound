@@ -334,12 +334,16 @@ void MainWindow::on_action_open_triggered() {
         for(int i=ui->tableWidget_cardsTable->rowCount(); i>0; i--)
             ui->tableWidget_cardsTable->removeRow(0);
 
+        for(int i=ui->listWidget_decks->count(); i>0; i--) {
+            ui->listWidget_decks->takeItem(0);
+        }
+
         connect(this, SIGNAL(loadCard(QString, QString, QString)), this, SLOT(receiveCardData(QString, QString, QString)));
         for(Deck* d : decks) {
-            for(int i=0; i<d->front.size(); i++)
-                emit loadCard(d->name, d->front.at(i), d->back.at(i));
-            delete d;
+            ui->listWidget_decks->addItem(d->name);
         }
+        for(Deck* d : deckList) { delete d; }
+        deckList = decks;
         disconnect(this, SIGNAL(loadCard(QString, QString, QString)), this, SLOT(receiveCardData(QString, QString, QString)));
 
         connect(this, SIGNAL(loadEvent(QString, QString)), this, SLOT(receiveAddData(QString, QString)));
@@ -354,6 +358,7 @@ void MainWindow::on_action_open_triggered() {
         file_path = QString(dir);
         isModified = false;
         ui->label_bookInfo->setText(book->getName()+" by "+book->getAuthor());
+        ui->listWidget_decks->setCurrentRow(0);
     }
     catch(exception& e) {
         qDebug() << "Woopsie: " << e.what();
@@ -406,15 +411,11 @@ QString save(Book* book, Ui::MainWindow* main, list<Deck*> decks, QString dir=QS
         QDir study = QDir(QString("%1/study").arg(dir));
         if (!study.exists()) { study.mkdir(study.path()); }
 
-        /***************************************************************************************************************
-          * This algorithm will be highly inefficient for larger-scale deck sizes; as such, it only persists here until
-          * there is a means of better accessing decks. It generates a list of decks, and then linearly scans the entire
-          * card set to filter out which cards belong to the deck being searched.
-          **************************************************************************************************************/
+        bk << endl << decks.size() << endl;
 
         int i=1;
         for(Deck* deck : decks) {
-            QFile* deckFile = new QFile(QString("%1/study/%2.csv").arg(dir).arg(1));
+            QFile* deckFile = new QFile(QString("%1/study/%2.csv").arg(dir).arg(i));
 
             if (!deckFile->open(QFile::WriteOnly))
                 throw "A deck file couldn't be opened for writing!";
@@ -433,38 +434,6 @@ QString save(Book* book, Ui::MainWindow* main, list<Deck*> decks, QString dir=QS
             delete deckFile;
             i++;
         }
-
-        // Construct the deck list and write the number of decks down
-//        QStringList deckList;
-//        for(int i=main->tableWidget_cardsTable->rowCount()-1; i>=0; i--) {
-//            QString deck = main->tableWidget_cardsTable->item(i, 0)->text();
-//            if (!deckList.contains(deck)) { deckList.push_back(deck); }
-//        }
-//        bk << endl << deckList.size() << endl;
-//        bkFile->close();
-//        delete bkFile;
-
-//        // Iterate through every deck, writing the cards for that deck into its file
-//        for(int i=deckList.size()-1; i>=0; i--) {
-//            QString deck = deckList.takeFirst();
-//            QFile* deckFile = new QFile(QString("%1/study/%2.csv").arg(dir).arg(i+1));
-
-//            if (!deckFile->open(QFile::WriteOnly))
-//                throw "A deck file couldn't be opened for writing!";
-
-//            QTextStream dStream(*&deckFile);
-//            dStream << deck << "\n";
-
-//            for(int k=main->tableWidget_cardsTable->rowCount()-1; k>=0; k--) {
-//                if (deck == main->tableWidget_cardsTable->item(k, 0)->text())
-//                    dStream << main->tableWidget_cardsTable->item(k, 1)->text().length() << ","
-//                            << main->tableWidget_cardsTable->item(k, 1)->text() << ","
-//                            << main->tableWidget_cardsTable->item(k, 2)->text() << "\n";
-//            }
-
-//            deckFile->close();
-//            delete deckFile;
-//        }
 
         // ************************************************************************************************************
 
