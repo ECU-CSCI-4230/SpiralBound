@@ -103,7 +103,7 @@ void MainWindow::on_action_print_triggered() {}
 
 // Author:       Ketu Patel, Matthew Morgan
 // Init Date:    23.03.2019
-// Last Updated: 06.04.2019
+// Last Updated: 24.04.2019
 void MainWindow::receiveBookData(QString bookNm, QString authNm, QString date)
 {
     QTreeWidgetItem *root = new QTreeWidgetItem(), *page = new QTreeWidgetItem();
@@ -123,6 +123,12 @@ void MainWindow::receiveBookData(QString bookNm, QString authNm, QString date)
 
     for(int i=ui->tableWidget_cardsTable->rowCount(); i>0; i--)
         ui->tableWidget_cardsTable->removeRow(0);
+
+    for(int i=ui->listWidget_decks->count(); i>0; i--)
+        ui->listWidget_decks->takeItem(0);
+
+    for(Deck* d : deckList) { delete d; }
+    deckList.clear();
 
     ui->treeWidget_sections->clear();
     ui->treeWidget_sections->addTopLevelItem(root);
@@ -160,7 +166,7 @@ void MainWindow::on_action_openRecent_triggered() {}
 
 // Author:       Matthew Morgan
 // Init Date:    21.03.2019
-// Last Updated: 06.04.2019
+// Last Updated: 24.04.2019
 void MainWindow::on_action_open_triggered() {
     // Prompt if there are unsaved changes
     if (isModified) {
@@ -893,9 +899,9 @@ void MainWindow::on_pushButton_indent_clicked() { me->detectEnum();}
 //-----------------------------------------------------------+
 //                     Flash Card Tab                        |
 //-----------------------------------------------------------+
-// Author:       Nick, Cam
+// Author:       Nick, Cam, Matthew
 // Init Date:    26.02.2019
-// Last Updated: 09.04.2019
+// Last Updated: 24.04.2019
 void MainWindow::receiveCardData(QString deckName, QString cardFront, QString cardBack)
 {
     // If selected deck is not highlighted add only to backend
@@ -927,6 +933,8 @@ void MainWindow::receiveCardData(QString deckName, QString cardFront, QString ca
         }
     }
 
+    isModified = true;
+
     // Debugging
     qDebug() << "Deck contents: ";
     for (Deck* deck : deckList) {
@@ -935,9 +943,9 @@ void MainWindow::receiveCardData(QString deckName, QString cardFront, QString ca
     }
 }
 
-// Author:       Jamie, Nicholas, Cam
+// Author:       Jamie, Nicholas, Cam, Matthew
 // Init Date:    09.02.2019
-// Last Updated: 15.04.2019
+// Last Updated: 24.04.2019
 void MainWindow::receiveCardDeleteData(bool response)
 {
    if(response == true)
@@ -957,6 +965,7 @@ void MainWindow::receiveCardDeleteData(bool response)
 
        // Delete card from table (frontend)
        ui->tableWidget_cardsTable->removeRow(ui->tableWidget_cardsTable->currentItem()->row());
+       isModified = true;
    }
 }
 
@@ -970,12 +979,11 @@ void MainWindow::on_pushButton_addDeck_clicked()
     addDeckWindow->show();
 
     connect(addDeckWindow, SIGNAL(sendDeckData(QString)), this, SLOT(receiveDeckData(QString)));
-
 }
 
-// Author:       Cam, Nick
+// Author:       Cam, Nick, Matthew
 // Init Date:    26.03.2019
-// Last Updated: 16.04.2019
+// Last Updated: 24.04.2019
 void MainWindow::receiveDeckData(QString deck)
 {
     // Check to see if deck already exists
@@ -998,6 +1006,7 @@ void MainWindow::receiveDeckData(QString deck)
     newDeck->name = last->text();
     deckList.push_back(newDeck);
     ui->listWidget_decks->setCurrentRow(ui->listWidget_decks->count() - 1);
+    isModified = true;
 
     // Debugging
     for (Deck* deck : deckList) {
@@ -1032,7 +1041,7 @@ void MainWindow::on_pushButton_deleteDeck_clicked()
 
 // Author:       Cam, Nick
 // Init Date:    26.03.2019
-// Last Updated: 02.04.2019
+// Last Updated: 24.04.2019
 void MainWindow::receiveDeckDeleteData(bool response)
 {
     QListWidgetItem * selectedDeck = ui->listWidget_decks->currentItem();
@@ -1050,6 +1059,7 @@ void MainWindow::receiveDeckDeleteData(bool response)
             }
         }
     }
+    isModified = true;
 
     // Debugging
     qDebug() << "Deck List: ";
@@ -1195,6 +1205,7 @@ void MainWindow::on_actionNew_Section_triggered()
 {
     on_pushButton_addSection_clicked();
 }
+
 // Author:       Cam, Nick, Matt
 // Init Date:    09.04.2019
 // Last Updated: 09.04.2019
@@ -1252,6 +1263,7 @@ void MainWindow::on_listWidget_decks_itemDoubleClicked(QListWidgetItem *item)
             if (d->name == oldName)
             {
                 d->name = text.trimmed();
+                isModified = true;
                 break;
             }
         }
@@ -1283,6 +1295,7 @@ void MainWindow::on_tableWidget_cardsTable_itemDoubleClicked(QTableWidgetItem *i
                 }
             }
         }
+        isModified = true;
     }
 }
 
