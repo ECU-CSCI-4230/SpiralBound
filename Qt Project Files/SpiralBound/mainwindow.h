@@ -38,7 +38,6 @@ private slots:
     // Menu Bar Buttons
     // =========================
     void on_action_open_triggered();
-    void on_action_test_triggered();
     void on_action_save_triggered();
     void on_action_about_triggered();
     void on_action_aboutQt_triggered();

@@ -364,7 +364,7 @@ void MainWindow::on_action_open_triggered() {
 
 // Author:       Matthew Morgan
 // Init Date:    22.03.2019
-// Last Updated: 22.03.2019
+// Last Updated: 24.04.2019
 /** save(book, main, <dir>) saves the current Book instance, and flash cards/calendar information, to the
   * directory selected, using the MainWindow interface - main - to perform fetching of needed data. It
   * returns the directory of the saved book.
@@ -384,7 +384,9 @@ QString save(Book* book, Ui::MainWindow* main, QString dir=QString("%1/.spiralbo
         if (back.exists()) { back.removeRecursively(); }
         Util::copyDirectory(dir, backup);
 
-        QDir(dir).removeRecursively();
+        if (!QDir(dir).removeRecursively()) {
+            qDebug() << "ERROR: Couldn't delete old notebook (save).";
+        }
         root.mkpath(dir);
     }
 
@@ -540,7 +542,6 @@ void MainWindow::on_action_bulletedList_triggered() { me->insertBullet(); }
 void MainWindow::on_action_numberedList_triggered() { me->insertNumeral(); }
 void MainWindow::on_action_comment_triggered() {}
 
-void MainWindow::on_action_test_triggered() {}
 void MainWindow::on_action_taskList_triggered() {}
 void MainWindow::on_action_preferences_triggered() {}
 void MainWindow::on_action_printPreview_triggered() {}
@@ -1083,41 +1084,52 @@ void MainWindow::on_pushButton_import_clicked()
     connect(importCardWindow, SIGNAL(sendCardData(QString,QString,QString)), this, SLOT(receiveCardData(QString, QString, QString)));
 }
 
-// Author: Ketu Patel
-// Init Date: 04.12.2019
-// Last Updated: 04.19.2019
+// Author:       Ketu Patel, Matthew Morgan
+// Init Date:    04.12.2019
+// Last Updated: 04.24.2019
 void MainWindow::on_action_renameNotebook_triggered()
 {
-        QString current_name = book->getName();
-        bool ok;
-        QString text = QInputDialog::getText(this, "Rename Notebook", "New Name:", QLineEdit::Normal ,"", &ok, Qt::MSWindowsFixedSizeDialogHint).trimmed();
+    QString current_name = book->getName();
+    bool ok;
+    QString text = QInputDialog::getText(this, "Rename Notebook", "New Name:", QLineEdit::Normal ,"", &ok, Qt::MSWindowsFixedSizeDialogHint).trimmed();
 
-        while (ok && text.isEmpty()){
-            text = QInputDialog::getText(this, "Rename Notebook", "Can't assign an empty name, enter the name again:", QLineEdit::Normal,"", &ok, Qt::MSWindowsFixedSizeDialogHint).trimmed();
-        }
+    while (ok && text.isEmpty()){
+        text = QInputDialog::getText(this, "Rename Notebook", "Can't assign an empty name, enter the name again:", QLineEdit::Normal,"", &ok, Qt::MSWindowsFixedSizeDialogHint).trimmed();
+    }
 
+    if (ok) {
         QRegExp rx("[a-zA-Z0-9-_ ]+");
-        QRegExpValidator v(rx, 0);
+        QRegExpValidator v(rx, nullptr);
         QString s;
         int pos = 0;
 
         // String validation
-        if (v.validate(text, pos) == QValidator::Acceptable){
+        if (v.validate(text, pos) == QValidator::Acceptable) {
 
             if (QDir(QDir::homePath() + "/.spiralbound/books/" + text).exists()) {
                 Util::showMessage("Error", "Notebook with given name already exists!");
-             }
+            }
             else {
-            file_path = QString(QDir::homePath() + "/.spiralbound/books/" + book->getName());
-            book->setName(text);
-            ui->label_bookInfo->setText(book->getName() +" by "+book->getAuthor());
-            isModified = true;
+                // Copy the present notebook to the backup directory
+                // Save the new book
+                // Destroy the old book
+                QString old_name = QString(book->getName());
+                file_path = QString(QDir::homePath() + "/.spiralbound/books/" + text);
+                book->setName(text);
+
+                on_action_save_triggered();
+                Util::copyDirectory(file_path, QDir::homePath()+"/.spiralbound/backup/"+old_name);
+                if (!QDir(QString("%1/.spiralbound/books/%2").arg(QDir::homePath()).arg(old_name)).removeRecursively()) {
+                    qDebug() << "ERROR: Couldn't delete old directory";
+                }
+
+                ui->label_bookInfo->setText(book->getName() +" by "+book->getAuthor());
             }
         }
-
         else {
-            Util::showMessage("Error", "Only characters in ([a-zA-Z-_0-9 ]) class allowed!");
+            Util::showMessage("Error", "Only alphabetic and numeric characters, hyphens, underscores, and spaces may be used in a name!");
         }
+    }
 }
 
 // Author: Ketu Patel
