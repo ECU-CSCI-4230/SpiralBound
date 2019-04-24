@@ -19,6 +19,8 @@ public:
 private slots:
     void on_buttonBox_accepted();
 
+    void on_buttonBox_rejected();
+
 signals:
     // Send addcard data to mainwindow
     void sendCardData(QString,QString,QString);

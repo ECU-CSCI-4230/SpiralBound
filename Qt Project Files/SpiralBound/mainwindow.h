@@ -84,6 +84,9 @@ private slots:
     void on_pushButton_deleteCard_clicked();
     void on_pushButton_studyCard_clicked();
     void on_pushButton_import_clicked();
+    void on_listWidget_decks_currentItemChanged(QListWidgetItem *current);
+    void on_listWidget_decks_itemDoubleClicked(QListWidgetItem *item);
+    void on_tableWidget_cardsTable_itemDoubleClicked(QTableWidgetItem *item);
 
     // Receive addCard data to mainwindow
     void receiveCardData(QString, QString, QString);

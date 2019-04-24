@@ -12,13 +12,7 @@ addcard::addcard(QWidget *parent, list<Deck*> deckList) :
 
     QStringList list;
 
-    /*if (deckList.empty())
-    {
-        QMessageBox messageBox;
-        messageBox.critical(nullptr,"Error","No Decks Exist.");
-        messageBox.setFixedSize(500,200);
-        this->close();
-    }*/
+    // Populate comboBox
     for(Deck* deck : deckList)
     {
         list.append(deck->name);
@@ -37,6 +31,7 @@ addcard::~addcard()
 
 void addcard::on_buttonBox_accepted()
 {
+    // LEGACY CODE
     // Deck name
     // QString deckName = ui->lineEdit_deck->text();
     // QString front = ui->textEdit_front->toPlainText();
@@ -45,4 +40,27 @@ void addcard::on_buttonBox_accepted()
     // Send data to mainwindow.cpp
     // emit sendCardData(deckName, front, back);
 
+    if (ui->textEdit_front->toPlainText().isEmpty())
+    {
+        QMessageBox messageBox;
+        messageBox.critical(nullptr,"Error","Front of card cannot be blank.");
+        messageBox.setFixedSize(500,200);
+        this->close();
+    }
+    else
+    {
+        QString deckName = ui->comboBox_deck->currentText();
+        QString front = ui->textEdit_front->toPlainText();
+        QString back = ui->textEdit_back->toPlainText();
+
+        emit sendCardData(deckName, front, back);
+    }
+}
+
+// Author:       Cam
+// Init Date:    09.04.2019
+// Last Updated: 09.04.2019
+void addcard::on_buttonBox_rejected()
+{
+    this->close();
 }
