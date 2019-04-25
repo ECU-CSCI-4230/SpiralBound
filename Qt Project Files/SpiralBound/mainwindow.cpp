@@ -26,6 +26,7 @@
 #include <list>
 #include <qinputdialog.h>
 #include <QWebChannel>
+#include <regex>
 
 //black magic
 #define UNUSED(expr) do { (void)(expr); } while (0)
@@ -37,8 +38,12 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->tableWidget_eventList->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    book = new Book("Default", "User");
+    ui->tableWidget_cardsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    // Book and MarkdownEditor setup; set default book path
+    book = Book::generateBook("Default", "User");
     me = new MarkdownEditor(ui->plainTextEdit);
+    file_path = QString("%1/.spiralbound/books/%2").arg(QDir::homePath()).arg(book->getName());
 
     // Check for the saving directory on startup; create it if it doesnt exist
     QDir save = QDir(QString("%1/.spiralbound/books").arg(QDir::homePath())),
@@ -47,31 +52,26 @@ MainWindow::MainWindow(QWidget *parent) :
     if (!save.exists()) { save.mkdir(save.path()); } // Returns a bool - do error check?
     if (!back.exists()) { back.mkdir(save.path()); }
 
-    // Add a default section, page, and change to view that page in that section on startup
+    // Change the view to show the default book's first page; set flag to false so no changes
+    // done during this block impact the loading 'unsaved changes' prompt
     file_path = "";
-    book->addSection("Section 01");
-    book->getSection(0)->addPage("Untitled Page");
     ui->plainTextEdit->setDocument(book->getSection(0)->getPage(0)->getContent());
     ui->treeWidget_sections->setItemSelected(ui->treeWidget_sections->topLevelItem(0)->child(0), true);
     ui->treeWidget_sections->topLevelItem(0)->setExpanded(true);
-    ui->label_bookName->setText("Default");
+    ui->label_bookInfo->setText(book->getName()+" by "+book->getAuthor());
+    isModified = false;
 
-    ui->tableWidget_cardsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    // Setup webengine for displaying markdown notes
+    PreviewPage *page = new PreviewPage(this);
+    QWebChannel *channel = new QWebChannel(this);
 
     ui->preview->setContextMenuPolicy(Qt::NoContextMenu);
-
-    PreviewPage *page = new PreviewPage(this);
     ui->preview->setPage(page);
-
     connect(ui->plainTextEdit, &QPlainTextEdit::textChanged,
             [this]() { m_content.setText(ui->plainTextEdit->toPlainText()); });
-
-    QWebChannel *channel = new QWebChannel(this);
     channel->registerObject(QStringLiteral("content"), &m_content);
     page->setWebChannel(channel);
-
     ui->preview->setUrl(QUrl("qrc:/resources/index.html"));
-
 }
 
 // Destructor
@@ -101,20 +101,59 @@ void MainWindow::on_action_aboutQt_triggered() { QApplication::aboutQt(); }
 void MainWindow::on_action_crashCourse_triggered() {}
 void MainWindow::on_action_print_triggered() {}
 
-// Author:       Ketu Patel
+// Author:       Ketu Patel, Matthew Morgan
 // Init Date:    23.03.2019
-// Last Updated: 02.04.2019
+// Last Updated: 24.04.2019
 void MainWindow::receiveBookData(QString bookNm, QString authNm, QString date)
 {
-    ui->label_bookName->setText(bookNm);
-    ui->label_bookAuthor->setText(authNm);
-    qDebug() <<"mainWinow: Received data from addbook window" << bookNm <<authNm<< date;
+    QTreeWidgetItem *root = new QTreeWidgetItem(), *page = new QTreeWidgetItem();
+    Book* repBook = Book::generateBook(bookNm, authNm, &date), *hold;
+    root->setText(0, repBook->getSection(0)->getSecName());
+    page->setText(0, repBook->getSection(0)->getPage(0)->getPageName());
+
+    hold = book;
+    book = repBook;
+    delete hold;
+
+    // Clear calendar events, card table, and sections
+    // Reset the section view to have only one section and one page
+    // Update interface elements (such as book info label)
+    for(int i=ui->tableWidget_eventList->rowCount(); i>0; i--)
+        ui->tableWidget_eventList->removeRow(0);
+
+    for(int i=ui->tableWidget_cardsTable->rowCount(); i>0; i--)
+        ui->tableWidget_cardsTable->removeRow(0);
+
+    for(int i=ui->listWidget_decks->count(); i>0; i--)
+        ui->listWidget_decks->takeItem(0);
+
+    for(Deck* d : deckList) { delete d; }
+    deckList.clear();
+
+    ui->treeWidget_sections->clear();
+    ui->treeWidget_sections->addTopLevelItem(root);
+    root->addChild(page);
+    ui->treeWidget_sections->setItemSelected(page, true);
+    root->setExpanded(true);
+    on_treeWidget_sections_itemClicked(page, 0);
+    ui->label_bookInfo->setText(bookNm+" by "+authNm);
+
+    // Update isModified and directory for saving
+    isModified = false;
+    file_path = QString("%1/.spiralbound/books/%2").arg(QDir::homePath()).arg(book->getName());
+
+    qDebug() << "New Book:" << bookNm << authNm << date;
 }
 
-// Author:       Ketu Patel
+// Author:       Ketu Patel, Matthew Morgan
 // Init Date:    23.03.2019
-// Last Updated: 02.04.2019
+// Last Updated: 06.04.2019
 void MainWindow::on_action_new_triggered() {
+    // Prompt if there are unsaved changes
+    if (isModified) {
+        if (!Util::confirm("Proceed", "You have unsaved changes. Continue?"))
+            return;
+    }
 
     newBook = new addbook();
     newBook->setModal(true);
@@ -127,11 +166,11 @@ void MainWindow::on_action_openRecent_triggered() {}
 
 // Author:       Matthew Morgan
 // Init Date:    21.03.2019
-// Last Updated: 24.03.2019
+// Last Updated: 24.04.2019
 void MainWindow::on_action_open_triggered() {
-    // Prompt the user about whether to load a book if one is already open
-    if (file_path != "") {
-        if (!Util::confirm("Proceed with Load", "You have a notebook already open; any unsaved changes will be lost. Continue?"))
+    // Prompt if there are unsaved changes
+    if (isModified) {
+        if (!Util::confirm("Proceed", "You have unsaved changes. Continue?"))
             return;
     }
 
@@ -301,12 +340,16 @@ void MainWindow::on_action_open_triggered() {
         for(int i=ui->tableWidget_cardsTable->rowCount(); i>0; i--)
             ui->tableWidget_cardsTable->removeRow(0);
 
+        for(int i=ui->listWidget_decks->count(); i>0; i--) {
+            ui->listWidget_decks->takeItem(0);
+        }
+
         connect(this, SIGNAL(loadCard(QString, QString, QString)), this, SLOT(receiveCardData(QString, QString, QString)));
         for(Deck* d : decks) {
-            for(int i=0; i<d->front.size(); i++)
-                emit loadCard(d->name, d->front.at(i), d->back.at(i));
-            delete d;
+            ui->listWidget_decks->addItem(d->name);
         }
+        for(Deck* d : deckList) { delete d; }
+        deckList = decks;
         disconnect(this, SIGNAL(loadCard(QString, QString, QString)), this, SLOT(receiveCardData(QString, QString, QString)));
 
         connect(this, SIGNAL(loadEvent(QString, QString)), this, SLOT(receiveAddData(QString, QString)));
@@ -319,6 +362,9 @@ void MainWindow::on_action_open_triggered() {
         delete book;
         book = nBook;
         file_path = QString(dir);
+        isModified = false;
+        ui->label_bookInfo->setText(book->getName()+" by "+book->getAuthor());
+        ui->listWidget_decks->setCurrentRow(0);
     }
     catch(exception& e) {
         qDebug() << "Woopsie: " << e.what();
@@ -329,13 +375,13 @@ void MainWindow::on_action_open_triggered() {
 
 // Author:       Matthew Morgan
 // Init Date:    22.03.2019
-// Last Updated: 22.03.2019
-/** save(book, main, <dir>) saves the current Book instance, and flash cards/calendar information, to the
+// Last Updated: 24.04.2019
+/** save(book, main, decks, <dir>) saves the current Book instance, and flash cards/calendar information, to the
   * directory selected, using the MainWindow interface - main - to perform fetching of needed data. It
-  * returns the directory of the saved book.
+  * returns the directory of the saved book. It further requires the list of decks for saving flash cards.
   *
   * The default directory for dir is <home>/.spiralbound/books/. */
-QString save(Book* book, Ui::MainWindow* main, QString dir=QString("%1/.spiralbound/books/").arg(QDir::homePath())) {
+QString save(Book* book, Ui::MainWindow* main, list<Deck*> decks, QString dir=QString("%1/.spiralbound/books/").arg(QDir::homePath())) {
     QString backup = QDir::homePath() + "/.spiralbound/backup/" + book->getName();
     dir = dir + book->getName();
 
@@ -344,10 +390,16 @@ QString save(Book* book, Ui::MainWindow* main, QString dir=QString("%1/.spiralbo
     back.setFilter(QDir::NoDotAndDotDot|QDir::AllEntries);
 
     if (!root.exists()) { root.mkpath(dir); }
+    else {
+        // Create a backup in the backup directory and remove the old one
+        if (back.exists()) { back.removeRecursively(); }
+        Util::copyDirectory(dir, backup);
 
-    // Create a backup in the backup directory and remove the old one
-    if (back.exists()) { back.removeRecursively(); }
-    Util::copyDirectory(dir, backup);
+        if (!QDir(dir).removeRecursively()) {
+            qDebug() << "ERROR: Couldn't delete old notebook (save).";
+        }
+        root.mkpath(dir);
+    }
 
     try {
         // ------------------------------------------
@@ -365,42 +417,28 @@ QString save(Book* book, Ui::MainWindow* main, QString dir=QString("%1/.spiralbo
         QDir study = QDir(QString("%1/study").arg(dir));
         if (!study.exists()) { study.mkdir(study.path()); }
 
-        /***************************************************************************************************************
-          * This algorithm will be highly inefficient for larger-scale deck sizes; as such, it only persists here until
-          * there is a means of better accessing decks. It generates a list of decks, and then linearly scans the entire
-          * card set to filter out which cards belong to the deck being searched.
-          **************************************************************************************************************/
+        bk << endl << decks.size() << endl;
 
-        // Construct the deck list and write the number of decks down
-        QStringList deckList;
-        for(int i=main->tableWidget_cardsTable->rowCount()-1; i>=0; i--) {
-            QString deck = main->tableWidget_cardsTable->item(i, 0)->text();
-            if (!deckList.contains(deck)) { deckList.push_back(deck); }
-        }
-        bk << endl << deckList.size() << endl;
-        bkFile->close();
-        delete bkFile;
-
-        // Iterate through every deck, writing the cards for that deck into its file
-        for(int i=deckList.size()-1; i>=0; i--) {
-            QString deck = deckList.takeFirst();
-            QFile* deckFile = new QFile(QString("%1/study/%2.csv").arg(dir).arg(i+1));
+        int i=1;
+        for(Deck* deck : decks) {
+            QFile* deckFile = new QFile(QString("%1/study/%2.csv").arg(dir).arg(i));
 
             if (!deckFile->open(QFile::WriteOnly))
                 throw "A deck file couldn't be opened for writing!";
 
             QTextStream dStream(*&deckFile);
-            dStream << deck << "\n";
+            dStream << deck->name << "\n";
 
-            for(int k=main->tableWidget_cardsTable->rowCount()-1; k>=0; k--) {
-                if (deck == main->tableWidget_cardsTable->item(k, 0)->text())
-                    dStream << main->tableWidget_cardsTable->item(k, 1)->text().length() << ","
-                            << main->tableWidget_cardsTable->item(k, 1)->text() << ","
-                            << main->tableWidget_cardsTable->item(k, 2)->text() << "\n";
+            for(int k=deck->front.size(); k>0; k--) {
+                QString card_fr = deck->front.takeFirst(), card_bk = deck->back.takeFirst();
+                dStream << card_fr.length() << "," << card_fr << "," << card_bk << "\n";
+                deck->front.push_back(card_fr);
+                deck->back.push_back(card_bk);
             }
 
             deckFile->close();
             delete deckFile;
+            i++;
         }
 
         // ************************************************************************************************************
@@ -467,8 +505,8 @@ QString save(Book* book, Ui::MainWindow* main, QString dir=QString("%1/.spiralbo
 
 // Author:       Matthew Morgan
 // Init Date:    21.03.2019
-// Last Updated: 22.03.2019
-void MainWindow::on_action_save_triggered() { save(book, ui); }
+// Last Updated: 06.04.2019
+void MainWindow::on_action_save_triggered() { save(book, ui, deckList); isModified = false;}
 
 // Author:       Matthew Morgan
 // Init Date:    22.03.2019
@@ -488,7 +526,7 @@ void MainWindow::on_action_export_triggered() {
         if (!Util::confirm("Overwrite", "A notebook is detected in this directory. Overwrite?"))
             return;
 
-    save(book, ui, dir);
+    save(book, ui, deckList, dir);
 }
 
 void MainWindow::on_action_bold_triggered() { ui->plainTextEdit->setTextCursor(me->bold()); }
@@ -501,7 +539,6 @@ void MainWindow::on_action_bulletedList_triggered() { me->insertBullet(); }
 void MainWindow::on_action_numberedList_triggered() { me->insertNumeral(); }
 void MainWindow::on_action_comment_triggered() {}
 
-void MainWindow::on_action_test_triggered() {}
 void MainWindow::on_action_taskList_triggered() {}
 void MainWindow::on_action_preferences_triggered() {}
 void MainWindow::on_action_printPreview_triggered() {}
@@ -516,7 +553,7 @@ void MainWindow::on_action_quit_triggered() { QApplication::quit(); }
 //-----------------------------------------------------------+
 // Author:       Nicholas, Matthew
 // Init Date:    19.02.2019
-// Last Updated: 22.03.2019
+// Last Updated: 06.04.2019
 void MainWindow::receiveAddData(QString eventName, QString eventDateTime)
 {
     // Seperate date from time
@@ -533,6 +570,7 @@ void MainWindow::receiveAddData(QString eventName, QString eventDateTime)
     ui->tableWidget_eventList->setItem(row, 1, new QTableWidgetItem(eventName));
     ui->tableWidget_eventList->setItem(row, 2, new QTableWidgetItem(time));
     ui->tableWidget_eventList->setSortingEnabled(true);
+    isModified = true;
 }
 
 // Author:       Nicholas, Cam, Jamie
@@ -551,9 +589,9 @@ void MainWindow::on_pushButton_addEvent_clicked()
    connect(addWindow, SIGNAL(sendAddData(QString, QString)), this, SLOT(receiveAddData(QString, QString)));
 }
 
-// Author:       Nicholas
+// Author:       Nicholas, Matthew
 // Init Date:    19.02.2019
-// Last Updated: 22.03.2019
+// Last Updated: 06.04.2019
 void MainWindow::receiveEditData(QString eventName, QString eventDateTime)
 {
     // Seperate date from time
@@ -568,6 +606,7 @@ void MainWindow::receiveEditData(QString eventName, QString eventDateTime)
     ui->tableWidget_eventList->setItem(row, 1, new QTableWidgetItem(eventName));
     ui->tableWidget_eventList->setItem(row, 2, new QTableWidgetItem(time));
     ui->tableWidget_eventList->setSortingEnabled(true);
+    isModified = true;
 }
 
 // Author:       Nicholas
@@ -607,15 +646,16 @@ void MainWindow::on_pushButton_editEvent_clicked()
         connect(editWindow, SIGNAL(sendEditData(QString, QString)), this, SLOT(receiveEditData(QString, QString)));
     }
 }
-// Author:       Nicholas
+// Author:       Nicholas, Matthew
 // Init Date:    09.02.2019
-// Last Updated: 19.02.2019
+// Last Updated: 06.04.2019
 void MainWindow::receiveDeleteData(bool response)
 {
    if(response == true)
    {
        // Delete item from table
        ui->tableWidget_eventList->removeRow(ui->tableWidget_eventList->currentItem()->row());
+       isModified = true;
    }
 }
 
@@ -662,7 +702,7 @@ void MainWindow::on_tableWidget_eventList_cellChanged(int row, int column)
 //-----------------------------------------------------------+
 // Author:       Matthew Morgan
 // Init Date:    10.03.2019
-// Last Updated: 20.03.2019
+// Last Updated: 06.04.2019
 void MainWindow::on_pushButton_addPage_clicked()
 {
     // Add a new page to the section, and activate it as the current
@@ -675,13 +715,14 @@ void MainWindow::on_pushButton_addPage_clicked()
     pg->setText(0, "Untitled Page");
     pg->setSelected(true);
     on_treeWidget_sections_itemClicked(pg, 0);
+    isModified = true;
 
     delete ind;
 }
 
 // Author:       Matthew Morgan
 // Init Date:    10.03.2019
-// Last Updated: 20.03.2019
+// Last Updated: 06.04.2019
 void MainWindow::on_pushButton_addSection_clicked()
 {
     // Add a new section and page, and update the tree to reflect these changes
@@ -701,24 +742,26 @@ void MainWindow::on_pushButton_addSection_clicked()
     ui->treeWidget_sections->clearSelection();
     pg->setSelected(true);
     on_treeWidget_sections_itemClicked(pg, 0);
+    isModified = true;
 }
 
 // Author:       Matthew Morgan
 // Init Date:    20.03.2019
-// Last Updated: 20.03.2019
+// Last Updated: 06.04.2019
 void MainWindow::on_treeWidget_sections_itemDoubleClicked(QTreeWidgetItem *item, int column) {
     int* ind = Util::getSectionPage(ui->treeWidget_sections, item);
 
     if (ind[1] > -1) {
         // Allow renaming of a page if the new name isn't blank
         bool ok;
-        QString text = QInputDialog::getText(nullptr, "Rename Page", "New Name:", QLineEdit::Normal, item->text(column), &ok, Qt::MSWindowsFixedSizeDialogHint);
+        QString text = QInputDialog::getText(this, "Rename Page", "New Name:", QLineEdit::Normal, item->text(column), &ok, Qt::MSWindowsFixedSizeDialogHint);
 
 
         if (ok && !text.isEmpty()) {
             Section* sec = book->getSection(ind[0]);
             sec->getPage(ind[1])->setPgName(text);
             item->setText(column, text);
+            isModified = true;
         }
     }
     else {
@@ -758,12 +801,13 @@ void MainWindow::on_treeWidget_sections_itemClicked(QTreeWidgetItem* item, int c
 
 // Author:       Matthew Morgan
 // Init Date:    20.03.2019
-// Last Updated: 20.03.2019
+// Last Updated: 06.04.2019
 void MainWindow::receiveSectionData(QString nm, QColor col, int ind) {
     // Update the section's color and name
     Section* sec = book->getSection(ind);
     sec->setName(nm);
     sec->setColor(col);
+    isModified = true;
 
     ui->treeWidget_sections->topLevelItem(ind)->setText(0, nm);
     QBrush pal = ui->treeWidget_sections->palette().background();
@@ -775,7 +819,7 @@ void MainWindow::receiveSectionData(QString nm, QColor col, int ind) {
 
 // Author:       Ketu Patel, Matthew Morgan
 // Init Date:    13.03.2019
-// Last Updated: 22.03.2019
+// Last Updated: 06.04.2019
 void MainWindow::on_pushButton_removePage_clicked()
 {
     int* ind = Util::getSectionPage(ui->treeWidget_sections, ui->treeWidget_sections->selectedItems().first());
@@ -824,6 +868,7 @@ void MainWindow::on_pushButton_removePage_clicked()
         }
     }
 
+    isModified = true;
     delete ind;
 }
 
@@ -836,6 +881,11 @@ void MainWindow::on_treeWidget_sections_currentItemChanged(QTreeWidgetItem *cur,
     if (cur == nullptr) { return; }
     on_treeWidget_sections_itemClicked(cur, 0);
 }
+
+// Author:       Matthew Morgan
+// Init Date:    06.04.2019
+// Last Updated: 06.04.2019
+void MainWindow::on_plainTextEdit_textChanged() { isModified = true; }
 
 void MainWindow::on_pushButton_bold_clicked()
 {
@@ -869,9 +919,9 @@ void MainWindow::on_pushButton_indent_clicked() { /*me->detectEnum();*/}
 //-----------------------------------------------------------+
 //                     Flash Card Tab                        |
 //-----------------------------------------------------------+
-// Author:       Nick, Cam
+// Author:       Nick, Cam, Matthew
 // Init Date:    26.02.2019
-// Last Updated: 09.04.2019
+// Last Updated: 24.04.2019
 void MainWindow::receiveCardData(QString deckName, QString cardFront, QString cardBack)
 {
     // If selected deck is not highlighted add only to backend
@@ -903,7 +953,9 @@ void MainWindow::receiveCardData(QString deckName, QString cardFront, QString ca
         }
     }
 
-    /*// Debugging
+    isModified = true;
+
+    // Debugging
     qDebug() << "Deck contents: ";
     for (Deck* deck : deckList) {
         qDebug() << deck->front;
@@ -911,9 +963,9 @@ void MainWindow::receiveCardData(QString deckName, QString cardFront, QString ca
     }*/
 }
 
-// Author:       Jamie, Nicholas, Cam
+// Author:       Jamie, Nicholas, Cam, Matthew
 // Init Date:    09.02.2019
-// Last Updated: 15.04.2019
+// Last Updated: 24.04.2019
 void MainWindow::receiveCardDeleteData(bool response)
 {
    if(response == true)
@@ -933,6 +985,7 @@ void MainWindow::receiveCardDeleteData(bool response)
 
        // Delete card from table (frontend)
        ui->tableWidget_cardsTable->removeRow(ui->tableWidget_cardsTable->currentItem()->row());
+       isModified = true;
    }
 }
 
@@ -946,12 +999,11 @@ void MainWindow::on_pushButton_addDeck_clicked()
     addDeckWindow->show();
 
     connect(addDeckWindow, SIGNAL(sendDeckData(QString)), this, SLOT(receiveDeckData(QString)));
-
 }
 
-// Author:       Cam, Nick
+// Author:       Cam, Nick, Matthew
 // Init Date:    26.03.2019
-// Last Updated: 16.04.2019
+// Last Updated: 24.04.2019
 void MainWindow::receiveDeckData(QString deck)
 {
     // Check to see if deck already exists
@@ -974,6 +1026,7 @@ void MainWindow::receiveDeckData(QString deck)
     newDeck->name = last->text();
     deckList.push_back(newDeck);
     ui->listWidget_decks->setCurrentRow(ui->listWidget_decks->count() - 1);
+    isModified = true;
 
     // Debugging
     for (Deck* deck : deckList) {
@@ -1008,7 +1061,7 @@ void MainWindow::on_pushButton_deleteDeck_clicked()
 
 // Author:       Cam, Nick
 // Init Date:    26.03.2019
-// Last Updated: 02.04.2019
+// Last Updated: 24.04.2019
 void MainWindow::receiveDeckDeleteData(bool response)
 {
     QListWidgetItem * selectedDeck = ui->listWidget_decks->currentItem();
@@ -1026,6 +1079,7 @@ void MainWindow::receiveDeckDeleteData(bool response)
             }
         }
     }
+    isModified = true;
 
     // Debugging
     qDebug() << "Deck List: ";
@@ -1145,6 +1199,70 @@ void MainWindow::on_pushButton_import_clicked()
     }
 }
 
+// Author:       Ketu Patel, Matthew Morgan
+// Init Date:    04.12.2019
+// Last Updated: 04.24.2019
+void MainWindow::on_action_renameNotebook_triggered()
+{
+    QString current_name = book->getName();
+    bool ok;
+    QString text = QInputDialog::getText(this, "Rename Notebook", "New Name:", QLineEdit::Normal ,"", &ok, Qt::MSWindowsFixedSizeDialogHint).trimmed();
+
+    while (ok && text.isEmpty()){
+        text = QInputDialog::getText(this, "Rename Notebook", "Can't assign an empty name, enter the name again:", QLineEdit::Normal,"", &ok, Qt::MSWindowsFixedSizeDialogHint).trimmed();
+    }
+
+    if (ok) {
+        QRegExp rx("[a-zA-Z0-9-_ ]+");
+        QRegExpValidator v(rx, nullptr);
+        QString s;
+        int pos = 0;
+
+        // String validation
+        if (v.validate(text, pos) == QValidator::Acceptable) {
+
+            if (QDir(QDir::homePath() + "/.spiralbound/books/" + text).exists()) {
+                Util::showMessage("Error", "Notebook with given name already exists!");
+            }
+            else {
+                // Copy the present notebook to the backup directory
+                // Save the new book
+                // Destroy the old book
+                QString old_name = QString(book->getName());
+                file_path = QString(QDir::homePath() + "/.spiralbound/books/" + text);
+                book->setName(text);
+
+                on_action_save_triggered();
+                Util::copyDirectory(file_path, QDir::homePath()+"/.spiralbound/backup/"+old_name);
+                if (!QDir(QString("%1/.spiralbound/books/%2").arg(QDir::homePath()).arg(old_name)).removeRecursively()) {
+                    qDebug() << "ERROR: Couldn't delete old directory";
+                }
+
+                ui->label_bookInfo->setText(book->getName() +" by "+book->getAuthor());
+            }
+        }
+        else {
+            Util::showMessage("Error", "Only alphabetic and numeric characters, hyphens, underscores, and spaces may be used in a name!");
+        }
+    }
+}
+
+// Author: Ketu Patel
+// Init Date: 04.12.2019
+// Last Updated: 04.19.2019
+void MainWindow::on_actionAdd_Page_triggered()
+{
+    on_pushButton_addPage_clicked();
+}
+
+// Author: Ketu Patel
+// Init Date: 04.12.2019
+// Last Updated: 04.19.2019
+void MainWindow::on_actionNew_Section_triggered()
+{
+    on_pushButton_addSection_clicked();
+}
+
 // Author:       Cam, Nick, Matt
 // Init Date:    09.04.2019
 // Last Updated: 09.04.2019
@@ -1202,6 +1320,7 @@ void MainWindow::on_listWidget_decks_itemDoubleClicked(QListWidgetItem *item)
             if (d->name == oldName)
             {
                 d->name = text.trimmed();
+                isModified = true;
                 break;
             }
         }
@@ -1233,6 +1352,7 @@ void MainWindow::on_tableWidget_cardsTable_itemDoubleClicked(QTableWidgetItem *i
                 }
             }
         }
+        isModified = true;
     }
 }
 

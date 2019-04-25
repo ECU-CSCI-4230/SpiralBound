@@ -5,15 +5,16 @@
 #include <QDateTime>
 #include <QDir>
 #include <qdebug.h>
+#include "util.h"
 
 addbook::addbook(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::addbook)
 {
     ui->setupUi(this);
-    ui->label_newbook_date->setText(QDate::currentDate().toString());
-    ui->lineEdit_bookName->setValidator(new QRegExpValidator( QRegExp("^[ A-Za-z0-9_-]+"), this ));
-    ui->lineEdit_authorName->setValidator(new QRegExpValidator( QRegExp("^[ A-Za-z0-9_-]+"), this ));
+    ui->lbl_NewDate->setText(QDate::currentDate().toString());
+    ui->lineEdit_bookName->setValidator(new QRegExpValidator( QRegExp("^[A-Za-z0-9_- ]+"), this ));
+    ui->lineEdit_authorName->setValidator(new QRegExpValidator( QRegExp("^[A-Za-z0-9_- ]+"), this ));
 }
 
 addbook::~addbook()
@@ -21,45 +22,35 @@ addbook::~addbook()
     delete ui;
 }
 
-// Author: Ketu Patel
+
+// Author:       Ketu Patel, Matthew Morgan
 // Init date:    23.03.2019
-// Last Updated: 02.04.2019
+// Last Updated: 05.04.2019
 void addbook::on_buttonBox_accepted()
 {
-    QString bookNm = ui->lineEdit_bookName ->text();
+    QString bookNm = ui->lineEdit_bookName->text();
     QString authNm = ui->lineEdit_authorName->text();
-    QString date = ui->label_newbook_date->text();
+    QString date = ui->lbl_NewDate->text();
 
-    QDir dir(QDir::homePath() + "/.spiralbound/books/" + bookNm);
-    if (dir.exists()){
+    bookNm = bookNm.trimmed();
+    authNm = authNm.trimmed();
 
+
+    // Display a message if a field is empty
+    if (bookNm.isEmpty() || authNm.isEmpty()) {
+        Util::showError("Error", "Please enter both a notebook title and author!");
+        return;
+    }
+
+    if (QDir(QDir::homePath() + "/.spiralbound/books/" + bookNm).exists()) {
         QMessageBox::StandardButton reply;
-          reply = QMessageBox::question(this, "Notebook", "Already exists, Would you like to overwrite it?",
-                                        QMessageBox::Yes|QMessageBox::No);
-          // Overwrite the notebook
-          if (reply == QMessageBox::Yes) {
+        reply = QMessageBox::question(this, "Overwrite Confirmation",
+                "A notebook with the given name already exists! Overwrite?");
 
-          } else {
-
-          }
+        // Do nothing if overwrite confirmation was not provided
+        if (reply == QMessageBox::No) { return; }
     }
 
-    // Create new notebook, reset calender and flask cards
-    else{
-
-
-    }
-
-    if(!bookNm.isEmpty() && !authNm.isEmpty())
-    {
-        // Send bookNm and authNm to mainwindow.cpp
-        emit sendBookData(bookNm, authNm, date);
-    }
-
-    else //if one of the field is empty, display error message.
-    {
-        QMessageBox messageBox;
-        messageBox.critical(nullptr,"Error","None of the fields can be empty, please try again.");
-        messageBox.setFixedSize(500,200);
-    }
+    // Send book, author, and date
+    emit sendBookData(bookNm, authNm, date);
 }

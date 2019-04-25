@@ -39,7 +39,6 @@ private slots:
     // Menu Bar Buttons
     // =========================
     void on_action_open_triggered();
-    void on_action_test_triggered();
     void on_action_save_triggered();
     void on_action_about_triggered();
     void on_action_aboutQt_triggered();
@@ -105,6 +104,10 @@ private slots:
     void on_treeWidget_sections_itemDoubleClicked(QTreeWidgetItem *item, int column);
     void on_treeWidget_sections_itemClicked(QTreeWidgetItem *item, int column);
     void on_treeWidget_sections_currentItemChanged(QTreeWidgetItem *cur, QTreeWidgetItem* prev);
+    void on_plainTextEdit_textChanged();
+    void on_action_renameNotebook_triggered();
+    void on_actionAdd_Page_triggered();
+    void on_actionNew_Section_triggered();
 
     // Shortcut bar for Markdown
     void on_pushButton_bold_clicked();
@@ -130,7 +133,6 @@ signals:
 
 private:    
     Ui::MainWindow *ui;
-    QString file_path;
 
     deletecalendarevent *deleteWindow;
     addcalendarevent *addWindow;
@@ -146,6 +148,9 @@ private:
 
     editsection* editSectionWindow;
     Book* book;
+    QString file_path;
+    bool isModified;
+
     MarkdownEditor* me;
     QString m_filePath;
     Document m_content;

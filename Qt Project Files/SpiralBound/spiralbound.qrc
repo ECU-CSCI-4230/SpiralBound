@@ -33,6 +33,8 @@
         <file>images/icon/op_recent.png</file>
         <file>images/icon/op_tasklist.png</file>
         <file>images/icon/op_comment.png</file>
+        <file>images/icon/op_addSection.png</file>
+        <file>images/icon/op_rename_notebook.png</file>
     </qresource>
     <qresource prefix="/">
         <file>resources/index.html</file>

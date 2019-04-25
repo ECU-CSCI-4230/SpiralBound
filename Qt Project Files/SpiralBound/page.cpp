@@ -3,24 +3,26 @@
 
 // Author:       Ketu Patel, Matthew Morgan
 // Init date:    02-02-2019
-// Last Updated: 04-03-2019
+// Last Updated: 04-05-2019
 Page::Page()
 {
     pageName = "default";
     date = QDate::currentDate();
     content = new QTextDocument();
     content->setDocumentLayout(new QPlainTextDocumentLayout(content));
+    content->setDefaultFont(QFont("Courier", 10));
 }
 
 // Author:       Ketu Patel, Matthew Morgan
 // Init date:    02-02-2019
-// Last Updated: 03-13-2019
+// Last Updated: 04-05-2019
 Page::Page(QString pg)
 {
     pageName = pg;
     date = QDate::currentDate();
     content = new QTextDocument();
     content->setDocumentLayout(new QPlainTextDocumentLayout(content));
+    content->setDefaultFont(QFont("Courier", 10));
 }
 
 // Author:       Ketu Patel
