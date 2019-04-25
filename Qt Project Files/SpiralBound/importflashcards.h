@@ -2,6 +2,7 @@
 #define IMPORTFLASHCARDS_H
 
 #include <QDialog>
+#include "util.h"
 
 namespace Ui {
 class importflashcards;
@@ -12,7 +13,7 @@ class importflashcards : public QDialog
     Q_OBJECT
 
 public:
-    explicit importflashcards(QWidget *parent = nullptr);
+    explicit importflashcards(QWidget *parent = nullptr, list<Deck*> deckList = list<Deck*>());
     ~importflashcards();
 
 private slots:
