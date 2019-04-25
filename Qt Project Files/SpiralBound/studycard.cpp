@@ -15,6 +15,7 @@ studycard::studycard(QWidget *parent, Deck* deck) :
 
     ui->label_deckName->setText(deck->name);
     ui->textBrowser->setText(deck->front[0]);
+    ui->pushButton_previous->hide();
     copyDeck = deck;
 
     if (index == copyDeck->front.length())
@@ -63,41 +64,37 @@ void studycard::on_pushButton_ok_clicked()
 void studycard::on_pushButton_previous_clicked()
 {
     side = 0;
+    index--;
     if (index == 0)
     {
         ui->pushButton_previous->hide();
-        ui->textBrowser->clear();
-        index--;
-        ui->textBrowser->setText(copyDeck->front[index]);
-        qDebug() << "Index: " << index;
+        ui->pushButton_next->show();
     }
     else
     {
         ui->pushButton_previous->show();
-        ui->textBrowser->clear();
-        index--;
-        ui->textBrowser->setText(copyDeck->front[index]);
-        qDebug() << "Index: " << index;
+        ui->pushButton_next->show();
     }
+    ui->textBrowser->clear();
+    ui->textBrowser->setText(copyDeck->front[index]);
+    qDebug() << "Index: " << index;
 }
 
 void studycard::on_pushButton_next_clicked()
 {
     side = 0;
+    index++;
     if (index == copyDeck->front.length() - 1)
     {
         ui->pushButton_next->hide();
-        ui->textBrowser->clear();
-        index++;
-        ui->textBrowser->setText(copyDeck->front[index]);
-        qDebug() << "Index: " << index;
+        ui->pushButton_previous->show();
     }
     else
     {
         ui->pushButton_next->show();
-        ui->textBrowser->clear();
-        index++;
-        ui->textBrowser->setText(copyDeck->front[index]);
-        qDebug() << "Index: " << index;
+        ui->pushButton_previous->show();
     }
+    ui->textBrowser->clear();
+    ui->textBrowser->setText(copyDeck->front[index]);
+    qDebug() << "Index: " << index;
 }
