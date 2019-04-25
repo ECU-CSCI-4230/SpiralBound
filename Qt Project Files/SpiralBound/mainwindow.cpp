@@ -960,7 +960,7 @@ void MainWindow::receiveCardData(QString deckName, QString cardFront, QString ca
     for (Deck* deck : deckList) {
         qDebug() << deck->front;
         qDebug() << deck->back;
-    }*/
+    }
 }
 
 // Author:       Jamie, Nicholas, Cam, Matthew
