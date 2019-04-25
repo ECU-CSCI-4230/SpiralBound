@@ -20,11 +20,17 @@ class MarkdownEditor : QPlainTextEdit
 public:
     MarkdownEditor(QPlainTextEdit* edit);
 
+signals:
+  void keyCaught(QKeyEvent *e);
+
+protected:
+  virtual void keyPressEvent(QKeyEvent *event);
+
 public slots:
-    void bold();
-    void italic();
-    void underline();
-    void strikethough();
+    QTextCursor bold();
+    QTextCursor italic();
+    QTextCursor underline();
+    QTextCursor strikethough();
     void makeComment();
     void indentText();
     void unindentText();
@@ -34,7 +40,7 @@ public slots:
     bool detectEnum();
 
 private:
-    void addMarkupFormatting(const QString& markup);
+    QTextCursor addMarkupFormatting(const QString& markup);
     QPlainTextEdit* editor;
 };
 
