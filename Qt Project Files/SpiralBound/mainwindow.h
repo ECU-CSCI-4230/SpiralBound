@@ -20,6 +20,7 @@
 #include <addbook.h>
 #include "adddeck.h"
 #include "deletedeck.h"
+#include <studycard.h>
 
 namespace Ui {
 class MainWindow;
@@ -143,6 +144,7 @@ private:
     deletecard *deleteCardWindow;
     deletedeck *deleteDeckWindow;
     list<Deck*> deckList;
+    studycard *studyCardWindow;
 
     editsection* editSectionWindow;
     Book* book;

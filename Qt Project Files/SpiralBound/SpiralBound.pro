@@ -41,7 +41,8 @@ SOURCES += \
         previewpage.cpp \
         addbook.cpp \
         adddeck.cpp \
-        deletedeck.cpp
+        deletedeck.cpp \
+        studycard.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -62,7 +63,8 @@ HEADERS += \
         previewpage.h \
         addbook.h \
         adddeck.h \
-        deletedeck.h
+        deletedeck.h \
+        studycard.h
 
 FORMS += \
         mainwindow.ui \
@@ -76,7 +78,8 @@ FORMS += \
         editsection.ui \
         addbook.ui \
         adddeck.ui \
-        deletedeck.ui
+        deletedeck.ui \
+        studycard.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
