@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
   <help_text>fontfamily=Monospaced</help_text>
-  <zoom_level>10</zoom_level>
+  <zoom_level>9</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>170</x>
-      <y>710</y>
-      <w>130</w>
-      <h>80</h>
+      <x>180</x>
+      <y>441</y>
+      <w>117</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>fontsize=12
 bg=#6666FF
@@ -23,10 +23,10 @@ _Calendar_</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>450</x>
-      <y>710</y>
-      <w>140</w>
-      <h>80</h>
+      <x>477</x>
+      <y>441</y>
+      <w>126</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>fontsize=12
 bg=#6666FF
@@ -41,10 +41,10 @@ _Note-Taking_</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>450</x>
-      <y>580</y>
-      <w>140</w>
-      <h>90</h>
+      <x>477</x>
+      <y>324</y>
+      <w>126</w>
+      <h>81</h>
     </coordinates>
     <panel_attributes>fontsize=12
 bg=blue
@@ -60,10 +60,10 @@ Flash Card Decks</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>510</x>
-      <y>660</y>
-      <w>30</w>
-      <h>70</h>
+      <x>531</x>
+      <y>396</y>
+      <w>27</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
@@ -71,32 +71,32 @@ Flash Card Decks</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>210</x>
-      <y>660</y>
-      <w>320</w>
-      <h>70</h>
+      <x>216</x>
+      <y>396</y>
+      <w>333</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>300.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>350.0;10.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>530</x>
-      <y>470</y>
-      <w>90</w>
-      <h>130</h>
+      <x>549</x>
+      <y>162</y>
+      <w>81</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>lt=.&gt;&gt;</panel_attributes>
-    <additional_attributes>70.0;10.0;10.0;110.0</additional_attributes>
+    <additional_attributes>70.0;10.0;10.0;180.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>600</x>
-      <y>460</y>
-      <w>130</w>
-      <h>210</h>
+      <x>612</x>
+      <y>171</y>
+      <w>117</w>
+      <h>162</h>
     </coordinates>
     <panel_attributes>fontsize=12
 bg=#DDDDDD
@@ -116,10 +116,10 @@ Book
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>310</x>
-      <y>460</y>
-      <w>130</w>
-      <h>210</h>
+      <x>351</x>
+      <y>180</y>
+      <w>117</w>
+      <h>162</h>
     </coordinates>
     <panel_attributes>fontsize=12
 bg=#DDDDDD
@@ -142,21 +142,21 @@ Event List
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>430</x>
-      <y>470</y>
-      <w>80</w>
-      <h>130</h>
+      <x>459</x>
+      <y>171</y>
+      <w>72</w>
+      <h>171</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>60.0;110.0;10.0;10.0</additional_attributes>
+    <additional_attributes>60.0;170.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>820</y>
-      <w>100</w>
-      <h>70</h>
+      <x>90</x>
+      <y>540</y>
+      <w>90</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>fontsize=12
 bg=#DDDDDD
@@ -171,50 +171,32 @@ _Add Event_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>120</x>
-      <y>780</y>
-      <w>100</w>
-      <h>60</h>
+      <x>135</x>
+      <y>504</y>
+      <w>90</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>80.0;10.0;10.0;40.0</additional_attributes>
   </element>
   <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>400</x>
-      <y>820</y>
-      <w>110</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>fontsize=12
-bg=#DDDDDD
-halign=center
-*VC 2-1*
---
-
-Prompt:
-_Del Section_</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
-      <x>440</x>
-      <y>780</y>
-      <w>80</w>
-      <h>60</h>
+      <x>423</x>
+      <y>504</y>
+      <w>117</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>60.0;10.0;10.0;40.0</additional_attributes>
+    <additional_attributes>110.0;10.0;10.0;40.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>180</x>
-      <y>820</y>
-      <w>100</w>
-      <h>70</h>
+      <x>189</x>
+      <y>540</y>
+      <w>90</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>fontsize=12
 bg=#DDDDDD
@@ -229,10 +211,10 @@ _Edit Event_</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>290</x>
-      <y>820</y>
-      <w>100</w>
-      <h>70</h>
+      <x>288</x>
+      <y>540</y>
+      <w>90</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>fontsize=12
 bg=#DDDDDD
@@ -247,10 +229,10 @@ _Delete Event_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>220</x>
-      <y>780</y>
-      <w>30</w>
-      <h>60</h>
+      <x>225</x>
+      <y>504</y>
+      <w>27</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
@@ -258,10 +240,10 @@ _Delete Event_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>250</x>
-      <y>780</y>
-      <w>110</w>
-      <h>60</h>
+      <x>252</x>
+      <y>504</y>
+      <w>99</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;90.0;40.0</additional_attributes>
@@ -269,10 +251,10 @@ _Delete Event_</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>530</x>
-      <y>820</y>
-      <w>110</w>
-      <h>70</h>
+      <x>495</x>
+      <y>540</y>
+      <w>99</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>fontsize=12
 bg=#DDDDDD
@@ -281,27 +263,27 @@ halign=center
 --
 
 Prompt:
-_Del Page_</panel_attributes>
+_Rename Section_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>520</x>
-      <y>780</y>
-      <w>80</w>
-      <h>60</h>
+      <x>531</x>
+      <y>504</y>
+      <w>27</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;60.0;40.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>750</x>
-      <y>710</y>
-      <w>130</w>
-      <h>80</h>
+      <x>801</x>
+      <y>441</y>
+      <w>117</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>fontsize=12
 bg=#6666FF
@@ -316,10 +298,10 @@ _Flash Card_</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>650</x>
-      <y>820</y>
-      <w>100</w>
-      <h>70</h>
+      <x>711</x>
+      <y>540</y>
+      <w>90</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>fontsize=12
 bg=#DDDDDD
@@ -334,10 +316,10 @@ _Add Card_</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>760</x>
-      <y>820</y>
-      <w>100</w>
-      <h>70</h>
+      <x>810</x>
+      <y>540</y>
+      <w>90</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>fontsize=12
 bg=#DDDDDD
@@ -352,10 +334,10 @@ _Delete Card_</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>870</x>
-      <y>820</y>
-      <w>100</w>
-      <h>70</h>
+      <x>909</x>
+      <y>540</y>
+      <w>90</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>fontsize=12
 bg=#DDDDDD
@@ -370,10 +352,10 @@ _Import Deck_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>840</x>
-      <y>780</y>
-      <w>100</w>
-      <h>60</h>
+      <x>882</x>
+      <y>504</y>
+      <w>90</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;80.0;40.0</additional_attributes>
@@ -381,10 +363,10 @@ _Import Deck_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>800</x>
-      <y>780</y>
-      <w>30</w>
-      <h>60</h>
+      <x>846</x>
+      <y>504</y>
+      <w>27</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
@@ -392,10 +374,10 @@ _Import Deck_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>690</x>
-      <y>780</y>
-      <w>100</w>
-      <h>60</h>
+      <x>747</x>
+      <y>504</y>
+      <w>90</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>80.0;10.0;10.0;40.0</additional_attributes>
@@ -403,21 +385,21 @@ _Import Deck_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>520</x>
-      <y>660</y>
-      <w>320</w>
-      <h>70</h>
+      <x>540</x>
+      <y>396</y>
+      <w>342</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;300.0;50.0</additional_attributes>
+    <additional_attributes>10.0;10.0;360.0;50.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>450</x>
-      <y>270</y>
-      <w>130</w>
-      <h>210</h>
+      <x>477</x>
+      <y>54</y>
+      <w>117</w>
+      <h>162</h>
     </coordinates>
     <panel_attributes>fontsize=12
 bg=#DDDDDD
@@ -440,12 +422,145 @@ Deck List
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>510</x>
-      <y>470</y>
-      <w>30</w>
-      <h>130</h>
+      <x>531</x>
+      <y>207</y>
+      <w>27</w>
+      <h>135</h>
     </coordinates>
     <panel_attributes>lt=.&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>387</x>
+      <y>540</y>
+      <w>99</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>fontsize=12
+bg=#DDDDDD
+halign=center
+*VC 2-1*
+--
+
+Prompt:
+_Rename Book_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>603</x>
+      <y>540</y>
+      <w>99</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>fontsize=12
+bg=#DDDDDD
+halign=center
+*VC 2-3*
+--
+
+Prompt:
+_Rename Page_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>549</x>
+      <y>504</y>
+      <w>126</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>693</x>
+      <y>450</y>
+      <w>90</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>fontsize=12
+bg=#DDDDDD
+halign=center
+*VC 3-4*
+--
+
+Window:
+_Create Deck_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>774</x>
+      <y>477</y>
+      <w>45</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>30.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>936</x>
+      <y>450</y>
+      <w>90</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>fontsize=12
+bg=#DDDDDD
+halign=center
+*VC 3-5*
+--
+
+Window:
+_Delete Deck_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>909</x>
+      <y>477</y>
+      <w>45</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>30.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>801</x>
+      <y>333</y>
+      <w>117</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>fontsize=12
+bg=#6666FF
+halign=center
+*View 4 \ Control*
+--
+
+_Study Window_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>594</x>
+      <y>360</y>
+      <w>225</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>230.0;10.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
